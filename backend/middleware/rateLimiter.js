@@ -36,7 +36,7 @@ const rateLimit = (options = {}) => {
     const data = rateLimitMap.get(key);
 
     // Reset window if expired
-    if (now - data.firstRequest > windowMs) {
+    if (now - data.firstRequest > data.windowMs) {
       rateLimitMap.set(key, {
         count: 1,
         firstRequest: now,
@@ -50,7 +50,7 @@ const rateLimit = (options = {}) => {
       return res.status(429).json({
         error: 'Rate limit exceeded',
         message: message,
-        retryAfter: Math.ceil((data.firstRequest + windowMs - now) / 1000)
+        retryAfter: Math.ceil((data.firstRequest + data.windowMs - now) / 1000)
       });
     }
 
@@ -65,7 +65,7 @@ const rateLimit = (options = {}) => {
 // Specific rate limiters for different endpoints
 const authRateLimit = rateLimit({
   windowMs: 15 * 60 * 1000, // 15 minutes
-  max: 5, // limit each IP to 5 requests per windowMs
+  max: 10, // limit each IP to 10 requests per windowMs
   message: 'Too many authentication attempts, please try again later.'
 });
 
