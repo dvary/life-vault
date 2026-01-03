@@ -411,6 +411,14 @@ const MemberPage = () => {
   });
   const [showProfileUploadModal, setShowProfileUploadModal] = useState(false);
 
+  // Decode HTML entities in text
+  const decodeHtmlEntities = (text) => {
+    if (!text) return text;
+    const textarea = document.createElement('textarea');
+    textarea.innerHTML = text;
+    return textarea.value;
+  };
+
   // Date formatting utility
   const formatDate = (dateString) => {
     if (!dateString) return '';
@@ -2129,7 +2137,7 @@ const MemberPage = () => {
                             </div>
                             <div className="flex items-center space-x-2">
                               <p className={`text-lg font-bold ${vitalStatus.color}`}>
-                                {latestBMI.value} {latestBMI.unit}
+                                {latestBMI.value} {decodeHtmlEntities(latestBMI.unit)}
                               </p>
                               {vitalConfig.ranges && (
                                 <span className="text-xs bg-green-100 text-green-800 px-2 py-1 rounded-full">
@@ -2152,7 +2160,7 @@ const MemberPage = () => {
                                     <div className="flex-1">
                                       <div className="flex items-center space-x-2 mb-1">
                                         <p className={`font-medium ${recordStatus.color}`}>
-                                          {bmiRecord.value} {bmiRecord.unit}
+                                          {bmiRecord.value} {decodeHtmlEntities(bmiRecord.unit)}
                                         </p>
                                         {recordStatus.status && (
                                           <span className={`text-xs px-2 py-1 rounded-full ${recordStatus.bgColor} ${recordStatus.color}`}>
@@ -2227,7 +2235,7 @@ const MemberPage = () => {
                             </div>
                             <div className="flex items-center space-x-2">
                               <p className={`text-lg font-bold ${vitalStatus.color}`}>
-                                {latestVital.value} {latestVital.unit}
+                                {latestVital.value} {decodeHtmlEntities(latestVital.unit)}
                               </p>
                               {vitalConfig.ranges && (
                                 <span className="text-xs bg-green-100 text-green-800 px-2 py-1 rounded-full">
@@ -2262,7 +2270,7 @@ const MemberPage = () => {
                                   <div className="flex-1">
                                     <div className="flex items-center space-x-2 mb-1">
                                       <p className={`text-sm font-medium ${recordStatus.color}`}>
-                                      {vital.value} {vital.unit}
+                                      {vital.value} {decodeHtmlEntities(vital.unit)}
                                     </p>
                                       {recordStatus.status && (
                                         <span className={`text-xs px-1.5 py-0.5 rounded-full ${recordStatus.bgColor} ${recordStatus.color}`}>
