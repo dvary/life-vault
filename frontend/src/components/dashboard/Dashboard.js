@@ -285,6 +285,7 @@ const Dashboard = () => {
   const [reportFormData, setReportFormData] = useState({
     reportType: '',
     reportSubType: '',
+    title: '',
     description: '',
     reportDate: new Date().toISOString().split('T')[0],
     file: null
@@ -495,9 +496,13 @@ const Dashboard = () => {
 
   // File change handler
   const handleFileChange = (e) => {
+    const file = e.target.files[0];
+    // Auto-fill title with filename (without extension) if title is empty
+    const fileNameWithoutExt = file ? file.name.replace(/\.[^/.]+$/, '') : '';
     setReportFormData({
       ...reportFormData,
-      file: e.target.files[0]
+      file: file,
+      title: reportFormData.title || fileNameWithoutExt
     });
   };
 
@@ -821,6 +826,7 @@ const Dashboard = () => {
       formData.append('memberId', selectedMember.id);
       formData.append('reportType', reportFormData.reportType);
       formData.append('reportSubType', reportFormData.reportSubType || '');
+      formData.append('title', reportFormData.title || reportFormData.file?.name?.replace(/\.[^/.]+$/, '') || '');
       formData.append('description', reportFormData.description);
       formData.append('reportDate', reportFormData.reportDate);
       formData.append('file', reportFormData.file);
@@ -1480,9 +1486,20 @@ const Dashboard = () => {
                       )) : []
                     )
                   )}
-                </select>
+                  </select>
+                </div>
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-1">File Name <span className="text-red-500">*</span></label>
+                <input
+                  type="text"
+                  value={reportFormData.title}
+                  onChange={(e) => setReportFormData({...reportFormData, title: e.target.value})}
+                  className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-500"
+                  placeholder={reportFormData.file ? reportFormData.file.name.replace(/\.[^/.]+$/, '') : 'Enter file name'}
+                  required
+                />
+                <p className="text-xs text-gray-500 mt-1">Name for this report (without extension)</p>
               </div>
-
               <div>
                 <label className="block text-sm font-medium text-gray-700 mb-1">Report Date</label>
                 <input

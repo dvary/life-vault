@@ -18,8 +18,15 @@ const storage = multer.diskStorage({
     cb(null, uploadDir);
   },
   filename: (req, file, cb) => {
+    // Sanitize original filename and preserve it with unique suffix to avoid conflicts
     const uniqueSuffix = Date.now() + '-' + Math.round(Math.random() * 1E9);
-    cb(null, file.fieldname + '-' + uniqueSuffix + path.extname(file.originalname));
+    const sanitizedName = file.originalname
+      .replace(/[^a-zA-Z0-9._-]/g, '_') // Replace special chars with underscore
+      .replace(/_{2,}/g, '_') // Replace multiple underscores with single
+      .substring(0, 200); // Limit length
+    const ext = path.extname(file.originalname);
+    const nameWithoutExt = path.basename(sanitizedName, ext);
+    cb(null, `${nameWithoutExt}-${uniqueSuffix}${ext}`);
   }
 });
 
@@ -356,6 +363,7 @@ router.post('/reports', [
   body('memberId').isUUID(),
   body('reportType').isIn(['lab_report', 'prescription_consultation', 'vaccination', 'hospital_records']),
   body('reportSubType').optional().isString(),
+  body('title').optional().trim(),
   body('description').optional().trim(),
   body('reportDate').optional().isISO8601()
 ], async (req, res) => {
@@ -375,7 +383,7 @@ router.post('/reports', [
       });
     }
 
-    const { memberId, reportType, reportSubType, description, reportDate } = req.body;
+    const { memberId, reportType, reportSubType, title, description, reportDate } = req.body;
 
     // Check if member belongs to family
     const memberCheck = await query(
@@ -390,6 +398,14 @@ router.post('/reports', [
       });
     }
 
+    // Use provided title or fall back to original filename without extension
+    const reportTitle = title && title.trim() 
+      ? title.trim() 
+      : req.file.originalname.replace(/\.[^/.]+$/, '');
+    
+    // Preserve original filename for download
+    const originalFileName = req.file.originalname;
+
     const result = await query(
       `INSERT INTO medical_reports 
         (member_id, report_type, report_sub_type, title, description, file_path, file_name, file_size, report_date) 
@@ -399,10 +415,10 @@ router.post('/reports', [
         memberId, 
         reportType, 
         reportSubType || null, 
-        req.file.originalname.replace(/\.[^/.]+$/, ''), 
+        reportTitle, 
         description, 
         req.file.filename, 
-        req.file.originalname, 
+        originalFileName, 
         req.file.size, 
         reportDate || new Date()
       ]
@@ -610,7 +626,9 @@ router.get('/reports/:reportId/view', authenticateToken, async (req, res) => {
     const ext = path.extname(originalName).toLowerCase();
     if (ext === '.pdf') {
       res.setHeader('Content-Type', 'application/pdf');
-      res.setHeader('Content-Disposition', `inline; filename="${originalName}"`);
+      // Properly encode filename for Content-Disposition header
+      const encodedFilename = encodeURIComponent(originalName);
+      res.setHeader('Content-Disposition', `inline; filename="${originalName}"; filename*=UTF-8''${encodedFilename}`);
       res.setHeader('X-Frame-Options', 'SAMEORIGIN');
       return res.sendFile(filePath);
     }
@@ -660,7 +678,9 @@ router.get('/reports/:reportId/download', authenticateToken, async (req, res) =>
     const ext = path.extname(originalName).toLowerCase();
     if (ext === '.pdf') {
       res.setHeader('Content-Type', 'application/pdf');
-      res.setHeader('Content-Disposition', `inline; filename="${originalName}"`);
+      // Properly encode filename for Content-Disposition header
+      const encodedFilename = encodeURIComponent(originalName);
+      res.setHeader('Content-Disposition', `attachment; filename="${originalName}"; filename*=UTF-8''${encodedFilename}`);
       return res.sendFile(filePath);
     }
     return res.download(filePath, originalName);
@@ -911,7 +931,9 @@ router.get('/documents/file/:documentId', [
     const ext = path.extname(document.file_name).toLowerCase();
     if (ext === '.pdf') {
       res.setHeader('Content-Type', 'application/pdf');
-      res.setHeader('Content-Disposition', `attachment; filename="${document.file_name}"`);
+      // Properly encode filename for Content-Disposition header
+      const encodedFilename = encodeURIComponent(document.file_name);
+      res.setHeader('Content-Disposition', `attachment; filename="${document.file_name}"; filename*=UTF-8''${encodedFilename}`);
       return res.sendFile(filePath);
     }
     return res.download(filePath, document.file_name);
