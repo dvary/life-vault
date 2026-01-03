@@ -689,13 +689,13 @@ const MemberPage = () => {
     switch (status.level) {
       case 'high':
       case 'low':
-        return 'bg-gradient-to-br from-rose-50 via-rose-25 to-white';
+        return 'bg-gradient-to-br from-rose-50 to-white';
       case 'warning':
-        return 'bg-gradient-to-br from-amber-50 via-amber-25 to-white';
+        return 'bg-gradient-to-br from-amber-50 to-white';
       case 'normal':
-        return 'bg-gradient-to-br from-green-50 via-green-25 to-white';
+        return 'bg-gradient-to-br from-green-50 to-white';
       default:
-        return 'bg-gradient-to-br from-gray-50 via-gray-25 to-white';
+        return 'bg-gradient-to-br from-gray-50 to-white';
     }
   };
 
@@ -719,13 +719,13 @@ const MemberPage = () => {
     switch (status.level) {
       case 'high':
       case 'low':
-        return 'bg-gradient-to-br from-orange-50 via-orange-25 to-white';
+        return 'bg-gradient-to-br from-orange-50 to-white';
       case 'warning':
-        return 'bg-gradient-to-br from-orange-50 via-orange-25 to-white';
+        return 'bg-gradient-to-br from-orange-50 to-white';
       case 'normal':
-        return 'bg-gradient-to-br from-orange-50 via-orange-25 to-white';
+        return 'bg-gradient-to-br from-orange-50 to-white';
       default:
-        return 'bg-gradient-to-br from-gray-50 via-gray-25 to-white';
+        return 'bg-gradient-to-br from-gray-50 to-white';
     }
   };
 
@@ -2100,13 +2100,13 @@ const MemberPage = () => {
                       switch (status.level) {
                         case 'high':
                         case 'low':
-                          return 'bg-gradient-to-br from-rose-50 via-rose-25 to-white';
+                          return 'bg-gradient-to-br from-rose-50 to-white';
                         case 'warning':
-                          return 'bg-gradient-to-br from-amber-50 via-amber-25 to-white';
+                          return 'bg-gradient-to-br from-amber-50 to-white';
                         case 'normal':
-                          return 'bg-gradient-to-br from-green-50 via-green-25 to-white';
+                          return 'bg-gradient-to-br from-green-50 to-white';
                         default:
-                          return 'bg-gradient-to-br from-gray-50 via-gray-25 to-white';
+                          return 'bg-gradient-to-br from-gray-50 to-white';
                       }
                     };
                     
@@ -2198,13 +2198,13 @@ const MemberPage = () => {
                     switch (status.level) {
                       case 'high':
                       case 'low':
-                        return 'bg-gradient-to-br from-rose-50 via-rose-25 to-white';
+                        return 'bg-gradient-to-br from-rose-50 to-white';
                       case 'warning':
-                        return 'bg-gradient-to-br from-amber-50 via-amber-25 to-white';
+                        return 'bg-gradient-to-br from-amber-50 to-white';
                       case 'normal':
-                        return 'bg-gradient-to-br from-green-50 via-green-25 to-white';
+                        return 'bg-gradient-to-br from-green-50 to-white';
                       default:
-                        return 'bg-gradient-to-br from-gray-50 via-gray-25 to-white';
+                        return 'bg-gradient-to-br from-gray-50 to-white';
                     }
                   };
                   
