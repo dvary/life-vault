@@ -2965,16 +2965,6 @@ const MemberPage = () => {
                   />
                   <p className="text-xs text-gray-500 mt-1">Only PDF files are accepted (max 20MB)</p>
                 </div>
-                <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-1">Description (Optional)</label>
-                  <textarea
-                    value={reportFormData.description}
-                    onChange={(e) => setReportFormData({...reportFormData, description: e.target.value})}
-                    className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-500"
-                    rows="3"
-                    placeholder="Report description..."
-                  />
-                </div>
                 <div className="flex space-x-3">
                   <button 
                     type="submit" 
@@ -3058,15 +3048,16 @@ const MemberPage = () => {
                   </div>
                 )}
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-1">Title</label>
+                  <label className="block text-sm font-medium text-gray-700 mb-1">File Name <span className="text-red-500">*</span></label>
                   <input
                     type="text"
                     value={editReportFormData.title}
                     onChange={(e) => setEditReportFormData({...editReportFormData, title: e.target.value})}
                     className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-500"
-                    placeholder="Report title"
+                    placeholder="File name (without extension)"
                     required
                   />
+                  <p className="text-xs text-gray-500 mt-1">Name for this report (without extension)</p>
                 </div>
                 <div>
                   <label className="block text-sm font-medium text-gray-700 mb-1">Report Date</label>
@@ -3173,15 +3164,16 @@ const MemberPage = () => {
               <h2 className="text-lg font-semibold mb-4">Upload Document</h2>
               <form onSubmit={handleUploadDocument} className="space-y-4">
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-1">Title <span className="text-red-500">*</span></label>
+                  <label className="block text-sm font-medium text-gray-700 mb-1">File Name <span className="text-red-500">*</span></label>
                   <input
                     type="text"
                     value={documentFormData.title}
                     onChange={(e) => setDocumentFormData({...documentFormData, title: e.target.value})}
                     className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-500"
-                    placeholder="Document title"
+                    placeholder="File name (without extension)"
                     required
                   />
+                  <p className="text-xs text-gray-500 mt-1">Name for this document (without extension)</p>
                 </div>
                 <div>
                   <label className="block text-sm font-medium text-gray-700 mb-1">Upload Date <span className="text-red-500">*</span></label>
@@ -3243,16 +3235,6 @@ const MemberPage = () => {
                   />
                   <p className="text-xs text-gray-500 mt-1">Only PDF files are accepted (max 20MB)</p>
                 </div>
-                <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-1">Description (Optional)</label>
-                  <textarea
-                    value={documentFormData.description}
-                    onChange={(e) => setDocumentFormData({...documentFormData, description: e.target.value})}
-                    className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-500"
-                    rows="3"
-                    placeholder="Document description..."
-                  />
-                </div>
                 <div className="flex space-x-3">
                   <button 
                     type="submit" 
@@ -3304,15 +3286,16 @@ const MemberPage = () => {
               <h2 className="text-lg font-semibold mb-4">Edit Document</h2>
               <form onSubmit={handleUpdateDocument} className="space-y-4">
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-1">Title</label>
+                  <label className="block text-sm font-medium text-gray-700 mb-1">File Name <span className="text-red-500">*</span></label>
                   <input
                     type="text"
                     value={editDocumentFormData.title}
                     onChange={(e) => setEditDocumentFormData({...editDocumentFormData, title: e.target.value})}
                     className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-500"
-                    placeholder="Document title"
+                    placeholder="File name (without extension)"
                     required
                   />
+                  <p className="text-xs text-gray-500 mt-1">Name for this document (without extension)</p>
                 </div>
                 <div>
                   <label className="block text-sm font-medium text-gray-700 mb-1">Upload Date</label>

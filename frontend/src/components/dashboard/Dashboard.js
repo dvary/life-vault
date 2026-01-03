@@ -1528,16 +1528,6 @@ const Dashboard = () => {
                 />
                 <p className="text-xs text-gray-500 mt-1">Accepted formats: PDF, DOC, DOCX, JPG, PNG, GIF (max 10MB)</p>
               </div>
-              <div>
-                <label className="block text-sm font-medium text-gray-700 mb-1">Description (Optional)</label>
-                <textarea
-                  value={reportFormData.description}
-                  onChange={(e) => setReportFormData({...reportFormData, description: e.target.value})}
-                  className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-500"
-                  rows="3"
-                  placeholder="Report description..."
-                />
-              </div>
               <div className="flex space-x-3">
                 <button 
                   type="submit" 
@@ -1585,15 +1575,16 @@ const Dashboard = () => {
             <h2 className="text-lg font-semibold mb-4">Upload Document for {selectedMember.name}</h2>
             <form onSubmit={handleUploadDocument} className="space-y-4">
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-1">Title</label>
+                <label className="block text-sm font-medium text-gray-700 mb-1">File Name <span className="text-red-500">*</span></label>
                 <input
                   type="text"
                   value={documentFormData.title}
                   onChange={(e) => setDocumentFormData({...documentFormData, title: e.target.value})}
                   className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-500"
-                  placeholder="Document title"
+                  placeholder="File name (without extension)"
                   required
                 />
+                <p className="text-xs text-gray-500 mt-1">Name for this document (without extension)</p>
               </div>
               <div>
                 <label className="block text-sm font-medium text-gray-700 mb-1">Upload Date</label>
@@ -1622,16 +1613,6 @@ const Dashboard = () => {
                   required
                 />
                 <p className="text-xs text-gray-500 mt-1">Only PDF files are accepted (max 10MB)</p>
-              </div>
-              <div>
-                <label className="block text-sm font-medium text-gray-700 mb-1">Description (Optional)</label>
-                <textarea
-                  value={documentFormData.description}
-                  onChange={(e) => setDocumentFormData({...documentFormData, description: e.target.value})}
-                  className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-500"
-                  rows="3"
-                  placeholder="Document description..."
-                />
               </div>
               <div className="flex space-x-3">
                 <button 
