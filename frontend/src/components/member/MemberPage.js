@@ -932,7 +932,6 @@ const MemberPage = () => {
         const vitalsResponse = await axios.get(`/health/vitals/${foundMember.id}`);
         setHealthVitals(vitalsResponse.data.vitals || []);
       } catch (error) {
-        console.log('No health vitals found');
         setHealthVitals([]);
       }
       
@@ -941,7 +940,6 @@ const MemberPage = () => {
         const reportsResponse = await axios.get(`/health/reports/${foundMember.id}`);
         setMedicalReports(reportsResponse.data.reports || []);
       } catch (error) {
-        console.log('No medical reports found');
         setMedicalReports([]);
       }
 
@@ -950,7 +948,6 @@ const MemberPage = () => {
         const documentsResponse = await axios.get(`/health/documents/${foundMember.id}`);
         setDocuments(documentsResponse.data || []);
       } catch (error) {
-        console.log('No documents found');
         setDocuments([]);
       }
       

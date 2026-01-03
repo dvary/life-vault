@@ -54,17 +54,12 @@ const Login = () => {
     
     setLoading(true);
     
-    console.log('Login form submitted');
     const result = await login(formData.email, formData.password);
     
-    console.log('Login result:', result);
-    
     if (result.success) {
-      console.log('Login successful - triggering confetti...');
       // Trigger confetti on successful login
       setShowConfetti(true);
       setConfettiKey(prev => prev + 1);
-      console.log('Confetti triggered, will navigate in 3 seconds...');
       
       // Clear any existing timeout
       if (timeoutRef.current) {

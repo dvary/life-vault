@@ -93,11 +93,8 @@ router.post('/login', [
   body('password').notEmpty()
 ], async (req, res) => {
   try {
-    console.log('Login attempt for email:', req.body.email);
-    
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
-      console.log('Validation errors:', errors.array());
       return res.status(400).json({ 
         error: 'Validation failed', 
         details: errors.array() 
@@ -117,10 +114,7 @@ router.post('/login', [
       [email]
     );
 
-    console.log('User query result:', userResult.rows.length, 'rows found');
-
     if (userResult.rows.length === 0) {
-      console.log('No user found for email:', email);
       return res.status(401).json({ 
         error: 'Invalid credentials', 
         message: 'Email or password is incorrect' 
@@ -143,15 +137,11 @@ router.post('/login', [
       firstName = user.first_name;
       lastName = user.last_name;
     }
-    
-    console.log('User found:', { id: user.id, email: user.email, firstName: firstName });
 
     // Check password
     const isValidPassword = await bcrypt.compare(password, user.password);
-    console.log('Password validation:', isValidPassword);
     
     if (!isValidPassword) {
-      console.log('Invalid password for user:', email);
       return res.status(401).json({ 
         error: 'Invalid credentials', 
         message: 'Email or password is incorrect' 
@@ -178,12 +168,6 @@ router.post('/login', [
       },
       token
     };
-
-    console.log('Sending login response:', { 
-      message: responseData.message,
-      userId: responseData.user.id,
-      tokenPresent: !!responseData.token
-    });
 
     res.json(responseData);
   } catch (error) {

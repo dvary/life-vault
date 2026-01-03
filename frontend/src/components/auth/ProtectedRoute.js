@@ -5,8 +5,6 @@ import { useAuth } from '../../contexts/AuthContext';
 const ProtectedRoute = () => {
   const { user, loading } = useAuth();
   
-  console.log('ProtectedRoute - user:', user, 'loading:', loading);
-  
   if (loading) {
     return (
       <div className="min-h-screen flex items-center justify-center">

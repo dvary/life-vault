@@ -26,7 +26,6 @@ export const AuthProvider = ({ children }) => {
     // Set base URL for axios - use relative URL to work with Cloudflare tunnel
     const apiUrl = '/api';
     axios.defaults.baseURL = apiUrl;
-    console.log('API Base URL set to:', apiUrl);
   }, []);
 
   // Check if user is logged in on app start
@@ -51,14 +50,12 @@ export const AuthProvider = ({ children }) => {
 
   const login = async (email, password) => {
     try {
-      console.log('Attempting login with:', email);
       const response = await axios.post('/auth/login', {
         email,
         password
       });
 
       const { token, user } = response.data;
-      console.log('Login response:', { token: token ? 'present' : 'missing', user });
       
       // Check if we have the required data
       if (!token || !user) {
@@ -72,8 +69,6 @@ export const AuthProvider = ({ children }) => {
       
       // Ensure user state is set synchronously
       setUser(user);
-      
-      console.log('User state set to:', user);
       toast.success('Login successful!');
       
       // Force a re-render by updating loading state
