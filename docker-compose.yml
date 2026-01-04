@@ -34,7 +34,7 @@ services:
       DB_USER: postgres
       DB_PASSWORD: postgres
       JWT_SECRET: your-super-secret-jwt-key-change-this-in-production
-      API_URL: https://family.labratindia.org/api
+      API_URL: http://localhost:5000/api
       TZ: Asia/Kolkata
     volumes:
       - life-vault_uploads_data:/app/uploads
