@@ -1445,49 +1445,35 @@ const MemberPage = () => {
     }
   };
 
-  // Improved handleViewDocument to open PDF in a new tab with the correct filename (no forced download) and only show popup error if truly blocked
+  // New handleViewDocument approach using just a blob URL (no forced download, no blank tab DOM manipulation)
   const handleViewDocument = async (documentObj) => {
     try {
-      // Step 1: Open a blank window/tab first to guarantee popup isn't blocked
-      const fileName = (documentObj.file_name || 'document.pdf').replace(/[^a-zA-Z0-9_\-\.]/g, '_');
-      const win = window.open("", "_blank", "noopener,noreferrer");
-
-      if (!win) {
-        // Only show the popup error if the blank tab itself cannot be opened
-        toast.error("Unable to open the report. Please allow popups.");
-        return;
-      }
-
-      // Step 2: Fetch the PDF blob
+      // Fetch the PDF blob
       const response = await axios.get(`/health/documents/file/${documentObj.id}`, {
-        responseType: "blob",
+        responseType: "blob"
       });
       const blob = new Blob([response.data], { type: "application/pdf" });
       const url = URL.createObjectURL(blob);
 
-      // Use JS in opened tab to set correct fileName in Content-Disposition for embedded PDF (browsers ignore file name on inline)
-      // To give filename as tab title and let user download if they want with correct name:
-      win.document.title = fileName;
-      win.document.body.style.margin = "0";
-      // Embed the PDF in the new tab, do NOT force download
-      win.document.body.innerHTML = `
-        <iframe
-          src="${url}#toolbar=1"
-          type="application/pdf"
-          style="width:100vw; height:100vh; border:none;"
-          frameborder="0"
-          allow="autoplay"
-        ></iframe>
-      `;
-      // Set up cleanup for blob URL
-      win.addEventListener("beforeunload", () => {
+      // Try to open the PDF in a new tab using blob URL (should not force download in modern browsers)
+      const win = window.open(url, "_blank", "noopener,noreferrer");
+      if (!win) {
+        toast.error("Unable to open the report. Please allow popups.");
         URL.revokeObjectURL(url);
-      });
+        return;
+      }
+      // Optional: revoke blob URL when tab closes (not always possible reliably)
+      const cleanupListener = () => {
+        URL.revokeObjectURL(url);
+        win.removeEventListener("beforeunload", cleanupListener);
+      };
+      win.addEventListener("beforeunload", cleanupListener);
     } catch (error) {
       console.error("Error viewing document:", error);
       toast.error("Failed to view document");
     }
   };
+
 
 
 
@@ -1633,13 +1619,14 @@ const MemberPage = () => {
 
   const handleViewReport = async (report) => {
     try {
-      // Open a blank tab immediately to avoid popup blockers
+      // Open a blank tab (may remain blank if PDF fails to load)
       const viewer = window.open('', '_blank', 'noopener,noreferrer');
       if (!viewer) {
         toast.info('Unable to open the report. Please allow popups.');
         return;
       }
 
+      // Try to fetch the PDF as a blob
       const response = await axios.get(`/health/reports/${report.id}/download`, {
         responseType: 'blob'
       });
@@ -1647,29 +1634,10 @@ const MemberPage = () => {
       const pdfBlob = new Blob([response.data], { type: 'application/pdf' });
       const pdfUrl = URL.createObjectURL(pdfBlob);
 
-      // Attempt to extract filename from the Content-Disposition header if it exists
-      let filename = 'report.pdf';
-      const disposition = response.headers && response.headers['content-disposition'];
-      if (disposition && disposition.includes('filename=')) {
-        const filenameMatch = disposition.match(/filename\*?=([^;]+)/i);
-        if (filenameMatch) {
-          // decode RFC 5987 encoding for filename*, or use direct for filename=
-          let value = filenameMatch[1].trim();
-          if (value.toLowerCase().startsWith("utf-8''")) {
-            value = decodeURIComponent(value.substr(7));
-          }
-          // Remove surrounding quotes if present
-          filename = value.replace(/^["']|["']$/g, '');
-        }
-      } else if (report.file_name) {
-        filename = report.file_name;
-      }
+      // Try to give a filename hint, but DO NOT force download, and simply open the blob in the tab
+      viewer.location.href = pdfUrl;
 
-      // Use PDF.js's built-in filename download hint in the URL (won't force download, just as a hint in browser tab)
-      const urlWithName = pdfUrl + `#toolbar=0&filename=${encodeURIComponent(filename)}`;
-
-      viewer.location.href = urlWithName;
-
+      // Revoke after load (give it a few seconds to resolve in browser)
       setTimeout(() => {
         URL.revokeObjectURL(pdfUrl);
       }, 5000);
@@ -1679,6 +1647,7 @@ const MemberPage = () => {
       toast.error('Failed to load PDF');
     }
   };
+
 
 
 
