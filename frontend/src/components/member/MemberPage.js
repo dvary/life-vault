@@ -1614,11 +1614,19 @@ const MemberPage = () => {
       const response = await axios.get(`/health/reports/${report.id}/download`, {
         responseType: 'blob',
       });
-      // Try to open as PDF if possible
       const file = new Blob([response.data], { type: 'application/pdf' });
+
+      // Use the actual filename if available, otherwise fallback
+      let fileName = (report.file_name && typeof report.file_name === 'string')
+        ? report.file_name
+        : `report_${report.id}.pdf`;
+
+      // Open in new tab as an attachment with the right file name (if browser supports it)
       const fileURL = URL.createObjectURL(file);
+
       window.open(fileURL, '_blank', 'noopener,noreferrer');
-      // Release URL object after a short time (not critical if tab remains open)
+
+      // Clean up the object URL after some time
       setTimeout(() => URL.revokeObjectURL(fileURL), 60000);
     } catch (err) {
       toast.error('Could not preview PDF. Try downloading instead.');
@@ -1626,6 +1634,7 @@ const MemberPage = () => {
       console.error('Error opening PDF:', err);
     }
   };
+
 
   const handleDeleteReport = async (report) => {
     if (!isAdmin()) {
