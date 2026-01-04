@@ -1446,9 +1446,22 @@ const MemberPage = () => {
   };
 
 
-  const handleViewDocument = (documentObj) => {
-    // Just open the PDF in a new tab
-    window.open(`/health/documents/file/${documentObj.id}`, '_blank', 'noopener,noreferrer');
+  const handleViewDocument = async (documentObj) => {
+    try {
+      const response = await axios.get(`/health/documents/file/${documentObj.id}`, {
+        responseType: 'blob',
+      });
+      // Try to open as PDF if possible
+      const file = new Blob([response.data], { type: 'application/pdf' });
+      const fileURL = URL.createObjectURL(file);
+      window.open(fileURL, '_blank', 'noopener,noreferrer');
+      // Release URL object after short time (not critical if tab remains open)
+      setTimeout(() => URL.revokeObjectURL(fileURL), 60000);
+    } catch (err) {
+      toast.error('Could not preview PDF. Try downloading instead.');
+      // eslint-disable-next-line no-console
+      console.error('Error opening PDF:', err);
+    }
   };
 
 
@@ -1597,17 +1610,15 @@ const MemberPage = () => {
   };
 
   const handleViewReport = (report) => {
-    // Just open the download endpoint in a new tab as a normal PDF viewer
-    const viewer = window.open(`/health/reports/${report.id}/download`, '_blank', 'noopener,noreferrer');
-    if (!viewer) {
+    // Instead of just opening the download URL, open a proper PDF viewer page with the file
+    const pdfUrl = `/health/reports/${report.id}/download`;
+    // Use Google Docs viewer as a fallback to ensure PDF is viewable in browser
+    const viewerUrl = `https://docs.google.com/gview?url=${encodeURIComponent(window.location.origin + pdfUrl)}&embedded=true`;
+    const win = window.open(viewerUrl, '_blank', 'noopener,noreferrer');
+    if (!win) {
       toast.info('Unable to open the report. Please allow popups.');
     }
   };
-
-
-
-
-
 
   const handleDeleteReport = async (report) => {
     if (!isAdmin()) {
