@@ -1445,11 +1445,10 @@ const MemberPage = () => {
     }
   };
 
+  // Updated to mimic handleViewReport for improved popup experience
   const handleViewDocument = async (documentObj) => {
     try {
-      // Open the window immediately to avoid popup blockers
-      const win = window.open('', '_blank', 'noopener,noreferrer');
-
+      // Step 1: Make the request first
       const response = await axios.get(`/health/documents/file/${documentObj.id}`, {
         responseType: 'blob'
       });
@@ -1459,14 +1458,11 @@ const MemberPage = () => {
 
       // Use the original PDF file name (falling back to generic if missing)
       const fileName = (documentObj.file_name || 'document.pdf').replace(/[^a-zA-Z0-9_\-\.]/g, '_');
-      
-      if (win) {
-        win.document.title = fileName;
-        win.document.body.innerHTML = `
-          <style>body,html{margin:0;padding:0;height:100vh;width:100vw;}</style>
-          <iframe src="${url}" type="application/pdf" style="border:none;width:100vw;height:100vh;" title="${fileName}"></iframe>
-        `;
-      } else {
+
+      // Step 2: Open the window/navigate after the blob is ready
+      const win = window.open(url, '_blank', 'noopener,noreferrer');
+
+      if (!win) {
         toast.error('Unable to open new window. Please allow popups.');
       }
 
@@ -1479,6 +1475,7 @@ const MemberPage = () => {
       toast.error('Failed to view document');
     }
   };
+
 
 
   const handleEditDocument = (document) => {
@@ -1632,6 +1629,7 @@ const MemberPage = () => {
 
       // Try to open the PDF directly in a new tab (allow browser to natively display PDF)
       const win = window.open(pdfUrl, '_blank', 'noopener,noreferrer');
+      const fileName = (report.file_name || 'report.pdf').replace(/[^a-zA-Z0-9_\-\.]/g, '_');
 
       if (!win) {
         toast.error('Unable to open the report. Please allow popups.');
