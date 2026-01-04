@@ -1614,6 +1614,7 @@ const MemberPage = () => {
       const response = await axios.get(`/health/reports/${report.id}/download`, {
         responseType: 'blob',
       });
+
       const file = new Blob([response.data], { type: 'application/pdf' });
 
       // Use the actual filename if available, otherwise fallback
@@ -1621,15 +1622,12 @@ const MemberPage = () => {
         ? report.file_name
         : `report_${report.id}.pdf`;
 
-      // We'll try to open in a new tab with a special `filename` hint in the URL fragment
+      // Open in new tab as an attachment with the right file name (if browser supports it)
       const fileURL = URL.createObjectURL(file);
 
+      window.open(fileURL, '_blank', 'noopener,noreferrer');
 
-      const filenameFragment = encodeURIComponent(fileName);
-      const urlWithName = `${fileURL}#name=${filenameFragment}`;
-
-      window.open(urlWithName, '_blank', 'noopener,noreferrer');
-
+      // Clean up the object URL after some time
       setTimeout(() => URL.revokeObjectURL(fileURL), 60000);
     } catch (err) {
       toast.error('Could not preview PDF. Try downloading instead.');
@@ -1637,6 +1635,7 @@ const MemberPage = () => {
       console.error('Error opening PDF:', err);
     }
   };
+
 
 
 
