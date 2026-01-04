@@ -1621,12 +1621,15 @@ const MemberPage = () => {
         ? report.file_name
         : `report_${report.id}.pdf`;
 
-      // Open in new tab as an attachment with the right file name (if browser supports it)
+      // We'll try to open in a new tab with a special `filename` hint in the URL fragment
       const fileURL = URL.createObjectURL(file);
 
-      window.open(fileURL, '_blank', 'noopener,noreferrer');
 
-      // Clean up the object URL after some time
+      const filenameFragment = encodeURIComponent(fileName);
+      const urlWithName = `${fileURL}#name=${filenameFragment}`;
+
+      window.open(urlWithName, '_blank', 'noopener,noreferrer');
+
       setTimeout(() => URL.revokeObjectURL(fileURL), 60000);
     } catch (err) {
       toast.error('Could not preview PDF. Try downloading instead.');
@@ -1634,6 +1637,7 @@ const MemberPage = () => {
       console.error('Error opening PDF:', err);
     }
   };
+
 
 
   const handleDeleteReport = async (report) => {
