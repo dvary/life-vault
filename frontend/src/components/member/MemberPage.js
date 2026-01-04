@@ -1445,44 +1445,23 @@ const MemberPage = () => {
     }
   };
 
-  const handleViewDocument = async (document) => {
+  const handleViewDocument = async (documentObj) => {
     try {
-      const response = await axios.get(`/health/documents/file/${document.id}`, {
+      const response = await axios.get(`/health/documents/file/${documentObj.id}`, {
         responseType: 'blob'
       });
-      
-      // Extract filename from Content-Disposition header or use document file_name
-      let filename = document.file_name || 'document.pdf';
-      const contentDisposition = response.headers['content-disposition'];
-      if (contentDisposition) {
-        const filenameMatch = contentDisposition.match(/filename[^;=\n]*=((['"]).*?\2|[^;\n]*)/);
-        if (filenameMatch && filenameMatch[1]) {
-          filename = filenameMatch[1].replace(/['"]/g, '');
-        }
-      }
-      
+
       const blob = new Blob([response.data], { type: 'application/pdf' });
       const url = URL.createObjectURL(blob);
 
-      // Make sure to not shadow the `document` global with the parameter in handleViewDocument
-      // Create a temporary anchor element to download with proper filename
-      const link = window.document.createElement('a');
-      link.href = url;
-      link.download = filename;
-      link.target = '_blank';
-      window.document.body.appendChild(link);
-      link.click();
-      window.document.body.removeChild(link);
-
-      // Also open in new tab for viewing
-      setTimeout(() => {
-        window.open(url, '_blank', 'noopener,noreferrer');
-      }, 100);
+      // Only open in a new tab for viewing. No download.
+      window.open(url, '_blank', 'noopener,noreferrer');
     } catch (error) {
       console.error('Error viewing document:', error);
       toast.error('Failed to view document');
     }
   };
+
 
 
 
@@ -1627,16 +1606,22 @@ const MemberPage = () => {
 
   const handleViewReport = async (report) => {
     try {
-      // Fetch PDF as blob to create object URL for new tab
+      // Fetch PDF as blob to create object URL for viewing
       const response = await axios.get(`/health/reports/${report.id}/download`, {
         responseType: 'blob'
       });
-      
+
       const pdfBlob = new Blob([response.data], { type: 'application/pdf' });
       const pdfUrl = URL.createObjectURL(pdfBlob);
-      
-      // Always open in new tab
+
+      // Open the PDF in a new tab, do NOT trigger download
       window.open(pdfUrl, '_blank', 'noopener,noreferrer');
+
+      // Clean up object URL after a short delay (allow enough time for browser to load)
+      setTimeout(() => {
+        URL.revokeObjectURL(pdfUrl);
+      }, 5000);
+
     } catch (error) {
       console.error('Error loading PDF:', error);
       toast.error('Failed to load PDF');
