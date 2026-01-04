@@ -1446,52 +1446,11 @@ const MemberPage = () => {
   };
 
 
-  const handleViewDocument = async (documentObj) => {
-    try {
-      // Try to open a blank tab immediately to avoid popup blockers
-      const newTab = window.open("", "_blank", "noreferrer");
-      if (!newTab) {
-        toast.error("Unable to open the report. Please allow popups.");
-        return;
-      }
-      // Fetch the PDF blob in the background
-      const response = await axios.get(`/health/documents/file/${documentObj.id}`, {
-        responseType: "blob"
-      });
-      const fileName = documentObj.file_name || documentObj.title || "document.pdf";
-      const blob = new Blob([response.data], { type: "application/pdf" });
-      const url = URL.createObjectURL(blob);
-
-      // Write an HTML doc in the new tab that embeds the PDF and suggests the real file name to the browser
-      // Most modern browsers show the filename when the user tries to "download" from the PDF viewer.
-      const escapedFileName = fileName.replace(/"/g, ""); // avoid breaking Content-Disposition
-      newTab.document.write(`
-        <html>
-          <head>
-            <title>${escapedFileName}</title>
-          </head>
-          <body style="margin:0;overflow:hidden;">
-            <embed src="${url}" type="application/pdf" width="100%" height="100%" style="position:fixed;top:0;left:0;width:100vw;height:100vh;"/>
-            <script>
-              // Set suggested filename for downloading within PDF viewer
-              document.title = "${escapedFileName}";
-              // Optional: try to set Content-Disposition if download triggered
-              // This is a visual PDF view only, download will use default filename shown above
-              window.addEventListener("beforeunload", function cleanup() {
-                window.URL.revokeObjectURL('${url}');
-              });
-            </script>
-          </body>
-        </html>
-      `);
-      newTab.document.close();
-      // Clean up blob URL either when the tab is closed or navigated away
-      newTab.addEventListener("beforeunload", () => URL.revokeObjectURL(url));
-    } catch (error) {
-      console.error("Error viewing document:", error);
-      toast.error("Failed to view document");
-    }
+  const handleViewDocument = (documentObj) => {
+    // Just open the PDF in a new tab
+    window.open(`/health/documents/file/${documentObj.id}`, '_blank', 'noopener,noreferrer');
   };
+
 
 
 
@@ -1637,45 +1596,14 @@ const MemberPage = () => {
     }
   };
 
-  const handleViewReport = async (report) => {
-    try {
-      // Try to fetch the PDF as a blob first (don't open tab yet!)
-      const response = await axios.get(`/health/reports/${report.id}/download`, {
-        responseType: 'blob'
-      });
-
-      const pdfBlob = new Blob([response.data], { type: 'application/pdf' });
-      const pdfUrl = URL.createObjectURL(pdfBlob);
-
-      // Open a new tab with the PDF blob URL
-      const viewer = window.open(pdfUrl, '_blank', 'noopener,noreferrer');
-      if (!viewer) {
-        toast.info('Unable to open the report. Please allow popups.');
-        URL.revokeObjectURL(pdfUrl); // clean up
-        return;
-      }
-
-      // Try to set the PDF document title to the file name (for display, not download)
-      // This will only work for some browsers
-      viewer.onload = () => {
-        try {
-          // Set the tab title to the filename without altering file opening/download
-          viewer.document.title = report.file_name || "Medical Report";
-        } catch (e) {
-          // best-effort, ignore errors
-        }
-      };
-
-      // Revoke the blob URL after a short delay for browser to finish loading
-      setTimeout(() => {
-        URL.revokeObjectURL(pdfUrl);
-      }, 5000);
-
-    } catch (error) {
-      console.error('Error loading PDF:', error);
-      toast.error('Failed to load PDF');
+  const handleViewReport = (report) => {
+    // Just open the download endpoint in a new tab as a normal PDF viewer
+    const viewer = window.open(`/health/reports/${report.id}/download`, '_blank', 'noopener,noreferrer');
+    if (!viewer) {
+      toast.info('Unable to open the report. Please allow popups.');
     }
   };
+
 
 
 
