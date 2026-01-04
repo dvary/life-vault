@@ -13,12 +13,12 @@ if (process.env.DATABASE_URL) {
 } else {
   // Fall back to individual connection parameters
   poolConfig = {
-    host: process.env.DB_HOST || 'localhost',
-    port: process.env.DB_PORT || 5432,
-    database: process.env.DB_NAME || 'family_health_tracker',
-    user: process.env.DB_USER || 'postgres',
-    password: process.env.DB_PASSWORD || 'postgres',
-    ssl: false, // Disable SSL for local Docker deployment
+  host: process.env.DB_HOST || 'localhost',
+  port: process.env.DB_PORT || 5432,
+  database: process.env.DB_NAME || 'family_health_tracker',
+  user: process.env.DB_USER || 'postgres',
+  password: process.env.DB_PASSWORD || 'postgres',
+  ssl: false, // Disable SSL for local Docker deployment
   };
 }
 
