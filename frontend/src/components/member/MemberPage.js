@@ -1447,6 +1447,9 @@ const MemberPage = () => {
 
   const handleViewDocument = async (documentObj) => {
     try {
+      // Open the window immediately to avoid popup blockers
+      const win = window.open('', '_blank', 'noopener,noreferrer');
+
       const response = await axios.get(`/health/documents/file/${documentObj.id}`, {
         responseType: 'blob'
       });
@@ -1456,15 +1459,17 @@ const MemberPage = () => {
 
       // Use the original PDF file name (falling back to generic if missing)
       const fileName = (documentObj.file_name || 'document.pdf').replace(/[^a-zA-Z0-9_\-\.]/g, '_');
-      // Open a new tab and inject an iframe to show the PDF (to control the tab title and avoid auto-download)
-      const win = window.open('', '_blank', 'noopener,noreferrer');
+      
       if (win) {
         win.document.title = fileName;
         win.document.body.innerHTML = `
           <style>body,html{margin:0;padding:0;height:100vh;width:100vw;}</style>
           <iframe src="${url}" type="application/pdf" style="border:none;width:100vw;height:100vh;" title="${fileName}"></iframe>
         `;
+      } else {
+        toast.error('Unable to open new window. Please allow popups.');
       }
+
       // Clean up blob URL after a short delay
       setTimeout(() => {
         URL.revokeObjectURL(url);
@@ -1625,23 +1630,14 @@ const MemberPage = () => {
       const pdfBlob = new Blob([response.data], { type: 'application/pdf' });
       const pdfUrl = URL.createObjectURL(pdfBlob);
 
-      // To set filename of PDF tab (not trigger download):
-      // Open an about:blank window, then inject an <iframe> with desired name in URL fragment
-      const fileName = (report.file_name || 'report.pdf').replace(/[^a-zA-Z0-9_\-\.]/g, '_');
-      const win = window.open('', '_blank', 'noopener,noreferrer');
+      // Try to open the PDF directly in a new tab (allow browser to natively display PDF)
+      const win = window.open(pdfUrl, '_blank', 'noopener,noreferrer');
 
-      if (win) {
-        // Optional: set window title to file name (not always shown by browser, but best effort)
-        win.document.title = fileName;
-
-        // Clear window and inject iframe with blob URL
-        win.document.body.innerHTML = `
-          <style>body,html{margin:0;padding:0;height:100vh;width:100vw;}</style>
-          <iframe src="${pdfUrl}" type="application/pdf" style="border:none;width:100vw;height:100vh;" title="${fileName}"></iframe>
-        `;
+      if (!win) {
+        toast.error('Unable to open the report. Please allow popups.');
       }
 
-      // Clean up object URL after a short delay (allow enough time for browser to load)
+      // Optionally revoke URL after a delay to prevent memory leaks
       setTimeout(() => {
         URL.revokeObjectURL(pdfUrl);
       }, 5000);
@@ -1651,6 +1647,7 @@ const MemberPage = () => {
       toast.error('Failed to load PDF');
     }
   };
+
 
 
   const handleDeleteReport = async (report) => {
