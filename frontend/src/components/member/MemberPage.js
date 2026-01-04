@@ -1463,16 +1463,17 @@ const MemberPage = () => {
       
       const blob = new Blob([response.data], { type: 'application/pdf' });
       const url = URL.createObjectURL(blob);
-      
+
+      // Make sure to not shadow the `document` global with the parameter in handleViewDocument
       // Create a temporary anchor element to download with proper filename
-      const link = document.createElement('a');
+      const link = window.document.createElement('a');
       link.href = url;
       link.download = filename;
       link.target = '_blank';
-      document.body.appendChild(link);
+      window.document.body.appendChild(link);
       link.click();
-      document.body.removeChild(link);
-      
+      window.document.body.removeChild(link);
+
       // Also open in new tab for viewing
       setTimeout(() => {
         window.open(url, '_blank', 'noopener,noreferrer');
@@ -2508,7 +2509,7 @@ const MemberPage = () => {
 
         {activeTab === 'documents' && (
             <div>
-            
+
             {documents.length > 0 ? (
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 w-full max-w-full">
                 {documents.map((document) => {
@@ -2517,7 +2518,25 @@ const MemberPage = () => {
                     <div 
                       key={document.id} 
                       className={`rounded-lg border border-gray-200 hover:shadow-md transition-shadow card-consistent-height flex flex-col w-full max-w-full ${getGradientClass(documentStatus)} cursor-pointer`}
-                      onClick={() => handleViewDocument(document)}
+                      onClick={(e) => {
+                        // Prevent bubbling if user clicks buttons inside card!
+                        if (
+                          e.target.closest("button") ||
+                          e.target.tagName === "BUTTON" ||
+                          e.target.closest("svg")
+                        ) {
+                          return;
+                        }
+                        try {
+                          handleViewDocument(document);
+                        } catch (err) {
+                          // Fallback for rendering errors, maybe to prevent e.createElement misuse
+                          // Optionally you can use a toast/alert here
+                          // alert("Error viewing document");
+                          // eslint-disable-next-line no-console
+                          console.error("Error viewing document:", err);
+                        }
+                      }}
                     >
                       <div className="p-3 card-content">
                         <div className="flex items-center justify-between mb-2">
