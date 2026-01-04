@@ -3143,16 +3143,6 @@ const MemberPage = () => {
                   <p className="text-xs text-gray-500 mt-1">Current file: {editingReport?.file_name}</p>
                   <p className="text-xs text-gray-500">Only PDF files are accepted (max 20MB)</p>
                 </div>
-                <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-1">Description (Optional)</label>
-                  <textarea
-                    value={editReportFormData.description}
-                    onChange={(e) => setEditReportFormData({...editReportFormData, description: e.target.value})}
-                    className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-500"
-                    rows="3"
-                    placeholder="Report description..."
-                  />
-                </div>
                 <div className="flex space-x-3">
                   <button type="submit" className="bg-teal-600 hover:bg-teal-700 text-white px-4 py-2 rounded-lg font-medium">
                     Update Report
@@ -3380,16 +3370,6 @@ const MemberPage = () => {
                   />
                   <p className="text-xs text-gray-500 mt-1">Current file: {editingDocument?.file_name}</p>
                   <p className="text-xs text-gray-500">Only PDF files are accepted (max 20MB)</p>
-                </div>
-                <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-1">Description (Optional)</label>
-                  <textarea
-                    value={editDocumentFormData.description}
-                    onChange={(e) => setEditDocumentFormData({...editDocumentFormData, description: e.target.value})}
-                    className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-500"
-                    rows="3"
-                    placeholder="Document description..."
-                  />
                 </div>
                 <div className="flex space-x-3">
                   <button type="submit" className="bg-teal-600 hover:bg-teal-700 text-white px-4 py-2 rounded-lg font-medium">
