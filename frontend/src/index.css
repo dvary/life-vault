@@ -10,11 +10,11 @@
     scroll-behavior: smooth;
     -webkit-tap-highlight-color: transparent;
   }
-  
+
   body {
     @apply bg-background-primary text-neutral-800 antialiased min-h-screen font-sans;
     font-feature-settings: 'cv02', 'cv03', 'cv04', 'cv11';
-    background-image: 
+    background-image:
       radial-gradient(at 0% 0%, rgba(99, 102, 241, 0.1) 0px, transparent 50%),
       radial-gradient(at 100% 0%, rgba(20, 184, 166, 0.1) 0px, transparent 50%),
       radial-gradient(at 100% 100%, rgba(244, 63, 94, 0.1) 0px, transparent 50%),
@@ -22,30 +22,52 @@
     background-attachment: fixed;
   }
 
-  h1, h2, h3, h4, h5, h6 {
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
     @apply font-display font-semibold text-neutral-900 tracking-tight;
   }
 
-  h1 { @apply text-3xl md:text-5xl lg:text-6xl; }
-  h2 { @apply text-2xl md:text-4xl; }
-  h3 { @apply text-xl md:text-3xl; }
-  h4 { @apply text-lg md:text-2xl; }
-  
-  p { @apply text-neutral-600 leading-relaxed; }
+  h1 {
+    @apply text-3xl md:text-5xl lg:text-6xl;
+  }
+
+  h2 {
+    @apply text-2xl md:text-4xl;
+  }
+
+  h3 {
+    @apply text-xl md:text-3xl;
+  }
+
+  h4 {
+    @apply text-lg md:text-2xl;
+  }
+
+  p {
+    @apply text-neutral-600 leading-relaxed;
+  }
 
   /* Smooth transitions */
-  button, a, input, select, textarea {
+  button,
+  a,
+  input,
+  select,
+  textarea {
     @apply transition-all duration-300 ease-out;
   }
 }
 
 @layer components {
   /* --- Glassmorphism Components --- */
-  
+
   .glass-panel {
     @apply bg-white/70 backdrop-blur-md border border-white/50 shadow-glass rounded-2xl;
   }
-  
+
   .glass-card {
     @apply relative overflow-hidden bg-white/60 backdrop-blur-md border border-white/40 shadow-glass rounded-2xl transition-all duration-300 hover:shadow-glass-hover hover:-translate-y-1 hover:bg-white/70;
   }
@@ -55,7 +77,7 @@
   }
 
   /* --- Button System --- */
-  
+
   .btn {
     @apply inline-flex items-center justify-center px-4 py-3 md:py-2.5 text-sm md:text-base font-semibold rounded-xl transition-all duration-300 transform active:scale-95 focus:outline-none focus:ring-2 focus:ring-offset-2 disabled:opacity-50 disabled:cursor-not-allowed shadow-sm;
   }
@@ -79,27 +101,27 @@
   .btn-ghost {
     @apply btn bg-transparent text-neutral-600 hover:bg-neutral-100/50 hover:text-neutral-900 shadow-none;
   }
-  
+
   /* --- Form Elements --- */
-  
+
   .input-group {
     @apply space-y-2;
   }
-  
+
   .input-label {
     @apply block text-sm font-medium text-neutral-700 ml-1;
   }
-  
+
   .form-input {
     @apply glass-input w-full;
   }
 
   /* --- Layout & Utilities --- */
-  
+
   .container-safe {
     @apply w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8;
   }
-  
+
   .page-transition {
     @apply animate-fade-in;
   }
@@ -123,19 +145,21 @@
   .text-gradient-primary {
     @apply bg-clip-text text-transparent bg-gradient-to-r from-primary-600 to-secondary-500;
   }
-  
+
   .text-shadow {
-    text-shadow: 0 1px 2px rgba(0,0,0,0.1);
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
   }
 
   .scrollbar-hide {
     -ms-overflow-style: none;
     scrollbar-width: none;
   }
+
   .scrollbar-hide::-webkit-scrollbar {
     display: none;
   }
 }
+
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
 
 @layer base {
@@ -143,7 +167,7 @@
     font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
     scroll-behavior: smooth;
   }
-  
+
   body {
     @apply bg-background-primary text-neutral-800 antialiased;
     font-feature-settings: 'cv02', 'cv03', 'cv04', 'cv11';
@@ -154,7 +178,12 @@
   }
 
   /* Typography improvements */
-  h1, h2, h3, h4, h5, h6 {
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
     @apply font-semibold text-neutral-900 tracking-tight;
   }
 
@@ -192,27 +221,37 @@
   }
 
   /* Smooth transitions for interactive elements */
-  button, a, input, select, textarea {
+  button,
+  a,
+  input,
+  select,
+  textarea {
     @apply transition-all duration-200 ease-in-out;
   }
 
   /* Mobile-specific improvements */
   @media (max-width: 640px) {
+
     /* Increase touch targets on mobile */
-    button, a, input, select, textarea {
+    button,
+    a,
+    input,
+    select,
+    textarea {
       min-height: 44px;
     }
-    
+
     /* Improve text readability on mobile */
     body {
-      font-size: 16px; /* Prevent zoom on iOS */
+      font-size: 16px;
+      /* Prevent zoom on iOS */
     }
-    
+
     /* Better spacing for mobile */
     .container-fluid {
       @apply px-2;
     }
-    
+
     /* PDF viewer improvements for mobile */
     .pdf-viewer-iframe {
       -webkit-overflow-scrolling: touch;
@@ -222,7 +261,7 @@
       -moz-user-select: none;
       -ms-user-select: none;
     }
-    
+
     /* Prevent zoom on PDF viewer */
     .pdf-viewer-container {
       touch-action: pan-x pan-y;
@@ -233,327 +272,328 @@
       -ms-user-select: none;
       user-select: none;
     }
-    
+
     /* Date picker mobile fixes */
     input[type="date"] {
       min-height: 44px;
-      font-size: 16px; /* Prevent zoom on iOS */
+      font-size: 16px;
+      /* Prevent zoom on iOS */
       max-width: 100%;
       box-sizing: border-box;
     }
-    
+
     /* Modal mobile improvements */
     .modal-container {
       padding: 0.5rem;
     }
-    
+
     /* Mobile-specific modal improvements */
     .mobile-modal {
       margin: 0.5rem;
       max-height: calc(100vh - 1rem);
       border-radius: 1rem;
     }
-    
+
     /* Mobile grid improvements */
     .mobile-grid {
       grid-template-columns: 1fr;
       gap: 0.75rem;
     }
-    
+
     /* Mobile card improvements */
     .mobile-card {
       padding: 1rem;
       margin-bottom: 0.75rem;
     }
-    
+
     /* Mobile form improvements */
     .mobile-form {
       padding: 1rem;
     }
-    
+
     /* Mobile button improvements */
     .mobile-btn {
       min-height: 48px;
       font-size: 16px;
       padding: 0.75rem 1rem;
     }
-    
+
     /* Mobile input improvements */
     .mobile-input {
       min-height: 48px;
       font-size: 16px;
       padding: 0.75rem;
     }
-    
+
     /* Mobile navigation improvements */
     .mobile-nav {
       padding: 0.75rem 1rem;
     }
-    
+
     /* Mobile spacing improvements */
     .mobile-spacing {
       margin: 0.75rem 0;
     }
-    
+
     /* Mobile text improvements */
     .mobile-text {
       font-size: 14px;
       line-height: 1.4;
     }
-    
+
     /* Mobile header improvements */
     .mobile-header {
       padding: 1rem;
       font-size: 1.25rem;
     }
-    
+
     /* Mobile footer improvements */
     .mobile-footer {
       padding: 1rem;
       margin-top: auto;
     }
-    
+
     /* Mobile list improvements */
     .mobile-list {
       padding: 0;
       margin: 0;
     }
-    
+
     .mobile-list-item {
       padding: 0.75rem 1rem;
       border-bottom: 1px solid #e5e7eb;
     }
-    
+
     /* Mobile table improvements */
     .mobile-table {
       font-size: 14px;
     }
-    
+
     .mobile-table th,
     .mobile-table td {
       padding: 0.5rem;
     }
-    
+
     /* Mobile image improvements */
     .mobile-image {
       max-width: 100%;
       height: auto;
     }
-    
+
     /* Mobile video improvements */
     .mobile-video {
       max-width: 100%;
       height: auto;
     }
-    
+
     /* Mobile iframe improvements */
     .mobile-iframe {
       max-width: 100%;
       height: auto;
     }
-    
+
     /* Mobile scroll improvements */
     .mobile-scroll {
       -webkit-overflow-scrolling: touch;
       scroll-behavior: smooth;
     }
-    
+
     /* Mobile touch improvements */
     .mobile-touch {
       touch-action: manipulation;
       -webkit-tap-highlight-color: transparent;
     }
-    
+
     /* Mobile animation improvements */
     .mobile-animate {
       transition: all 0.2s ease-in-out;
     }
-    
+
     /* Mobile shadow improvements */
     .mobile-shadow {
       box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
     }
-    
+
     /* Mobile border improvements */
     .mobile-border {
       border-radius: 0.5rem;
     }
-    
+
     /* Mobile color improvements */
     .mobile-bg {
       background-color: #ffffff;
     }
-    
+
     .mobile-text-color {
       color: #374151;
     }
-    
+
     /* Mobile layout improvements */
     .mobile-layout {
       display: flex;
       flex-direction: column;
       min-height: 100vh;
     }
-    
+
     .mobile-content {
       flex: 1;
       padding: 1rem;
     }
-    
+
     /* Mobile responsive text */
     .mobile-responsive-text {
       font-size: clamp(14px, 4vw, 16px);
     }
-    
+
     /* Mobile responsive spacing */
     .mobile-responsive-spacing {
       padding: clamp(0.5rem, 2vw, 1rem);
     }
-    
+
     /* Mobile responsive grid */
     .mobile-responsive-grid {
       grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
       gap: clamp(0.5rem, 2vw, 1rem);
     }
-    
+
     /* Mobile responsive container */
     .mobile-responsive-container {
       max-width: 100%;
       margin: 0 auto;
       padding: 0 clamp(0.5rem, 2vw, 1rem);
     }
-    
+
     /* Mobile responsive card */
     .mobile-responsive-card {
       padding: clamp(0.75rem, 3vw, 1.5rem);
       margin-bottom: clamp(0.5rem, 2vw, 1rem);
     }
-    
+
     /* Mobile responsive button */
     .mobile-responsive-button {
       padding: clamp(0.5rem, 2vw, 0.75rem) clamp(1rem, 4vw, 1.5rem);
       font-size: clamp(14px, 4vw, 16px);
       min-height: clamp(40px, 8vw, 48px);
     }
-    
+
     /* Mobile responsive input */
     .mobile-responsive-input {
       padding: clamp(0.5rem, 2vw, 0.75rem);
       font-size: clamp(14px, 4vw, 16px);
       min-height: clamp(40px, 8vw, 48px);
     }
-    
+
     /* Mobile responsive modal */
     .mobile-responsive-modal {
       margin: clamp(0.25rem, 1vw, 0.5rem);
       max-height: calc(100vh - clamp(0.5rem, 2vw, 1rem));
       border-radius: clamp(0.5rem, 2vw, 1rem);
     }
-    
+
     /* Mobile responsive navigation */
     .mobile-responsive-nav {
       padding: clamp(0.5rem, 2vw, 0.75rem) clamp(0.75rem, 3vw, 1rem);
     }
-    
+
     /* Mobile responsive header */
     .mobile-responsive-header {
       padding: clamp(0.75rem, 3vw, 1rem);
       font-size: clamp(1.125rem, 5vw, 1.25rem);
     }
-    
+
     /* Mobile responsive footer */
     .mobile-responsive-footer {
       padding: clamp(0.75rem, 3vw, 1rem);
       margin-top: auto;
     }
-    
+
     /* Mobile responsive list */
     .mobile-responsive-list {
       padding: 0;
       margin: 0;
     }
-    
+
     .mobile-responsive-list-item {
       padding: clamp(0.5rem, 2vw, 0.75rem) clamp(0.75rem, 3vw, 1rem);
       border-bottom: 1px solid #e5e7eb;
     }
-    
+
     /* Mobile responsive table */
     .mobile-responsive-table {
       font-size: clamp(12px, 3vw, 14px);
     }
-    
+
     .mobile-responsive-table th,
     .mobile-responsive-table td {
       padding: clamp(0.25rem, 1vw, 0.5rem);
     }
-    
+
     /* Mobile responsive image */
     .mobile-responsive-image {
       max-width: 100%;
       height: auto;
     }
-    
+
     /* Mobile responsive video */
     .mobile-responsive-video {
       max-width: 100%;
       height: auto;
     }
-    
+
     /* Mobile responsive iframe */
     .mobile-responsive-iframe {
       max-width: 100%;
       height: auto;
     }
-    
+
     /* Mobile responsive scroll */
     .mobile-responsive-scroll {
       -webkit-overflow-scrolling: touch;
       scroll-behavior: smooth;
     }
-    
+
     /* Mobile responsive touch */
     .mobile-responsive-touch {
       touch-action: manipulation;
       -webkit-tap-highlight-color: transparent;
     }
-    
+
     /* Mobile responsive animation */
     .mobile-responsive-animate {
       transition: all 0.2s ease-in-out;
     }
-    
+
     /* Mobile responsive shadow */
     .mobile-responsive-shadow {
       box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
     }
-    
+
     /* Mobile responsive border */
     .mobile-responsive-border {
       border-radius: clamp(0.25rem, 1vw, 0.5rem);
     }
-    
+
     /* Mobile responsive color */
     .mobile-responsive-bg {
       background-color: #ffffff;
     }
-    
+
     .mobile-responsive-text-color {
       color: #374151;
     }
-    
+
     /* Mobile responsive layout */
     .mobile-responsive-layout {
       display: flex;
       flex-direction: column;
       min-height: 100vh;
     }
-    
+
     .mobile-responsive-content {
       flex: 1;
       padding: clamp(0.75rem, 3vw, 1rem);
     }
-    
+
     @media (max-width: 640px) {
       .modal-container {
         padding: 0.25rem;
@@ -563,26 +603,28 @@
 }
 
 @layer components {
+
   /* Button System */
   .btn {
     @apply inline-flex items-center justify-center px-4 py-2.5 text-sm font-medium rounded-xl transition-all duration-200 ease-in-out focus:outline-none focus:ring-2 focus:ring-offset-2 disabled:opacity-50 disabled:cursor-not-allowed;
-    min-height: 44px; /* Accessibility: minimum touch target */
+    min-height: 44px;
+    /* Accessibility: minimum touch target */
   }
 
   .btn-primary {
-    @apply btn bg-primary-600 text-white shadow-soft hover:bg-primary-700 hover:shadow-medium focus:ring-primary-500 active:bg-primary-800;
+    @apply btn bg-primary-600 text-white shadow-soft hover:bg-primary-700 hover:shadow-lg focus:ring-primary-500 active:bg-primary-800;
   }
 
   .btn-secondary {
-    @apply btn bg-surface-secondary text-neutral-700 border border-neutral-300 shadow-soft hover:bg-neutral-100 hover:shadow-medium focus:ring-neutral-500 active:bg-neutral-200;
+    @apply btn bg-background-secondary text-neutral-700 border border-neutral-300 shadow-soft hover:bg-neutral-100 hover:shadow-lg focus:ring-neutral-500 active:bg-neutral-200;
   }
 
   .btn-success {
-    @apply btn bg-secondary-600 text-white shadow-soft hover:bg-secondary-700 hover:shadow-medium focus:ring-secondary-500 active:bg-secondary-800;
+    @apply btn bg-secondary-600 text-white shadow-soft hover:bg-secondary-700 hover:shadow-lg focus:ring-secondary-500 active:bg-secondary-800;
   }
 
   .btn-danger {
-    @apply btn bg-health-danger text-white shadow-soft hover:bg-red-700 hover:shadow-medium focus:ring-red-500 active:bg-red-800;
+    @apply btn bg-health-danger text-white shadow-soft hover:bg-red-700 hover:shadow-lg focus:ring-red-500 active:bg-red-800;
   }
 
   .btn-ghost {
@@ -600,7 +642,8 @@
   /* Input System */
   .input {
     @apply block w-full px-3 sm:px-4 py-2.5 sm:py-3 text-sm border border-neutral-300 rounded-xl bg-white shadow-soft transition-all duration-200 ease-in-out placeholder:text-neutral-400 focus:border-primary-500 focus:ring-2 focus:ring-primary-500 focus:ring-offset-2 focus:shadow-glow disabled:opacity-50 disabled:cursor-not-allowed;
-    min-height: 44px; /* Slightly reduced for mobile */
+    min-height: 44px;
+    /* Slightly reduced for mobile */
   }
 
   .input-error {
@@ -613,7 +656,7 @@
 
   /* Card System */
   .card {
-    @apply bg-surface-primary rounded-2xl shadow-soft border border-neutral-200/50 overflow-hidden transition-all duration-200 ease-in-out;
+    @apply bg-background-primary rounded-2xl shadow-soft border border-neutral-200/50 overflow-hidden transition-all duration-200 ease-in-out;
   }
 
   .card-hover {
@@ -805,7 +848,7 @@
   }
 
   .modal-content {
-    @apply bg-surface-primary rounded-2xl shadow-large max-w-md w-full max-h-[90vh] overflow-y-auto;
+    @apply bg-background-primary rounded-2xl shadow-lg max-w-md w-full max-h-[90vh] overflow-y-auto;
   }
 
   .modal-header {
@@ -856,7 +899,7 @@
     .no-print {
       @apply hidden;
     }
-    
+
     .print-break {
       @apply break-before-page;
     }
@@ -864,6 +907,7 @@
 }
 
 @layer utilities {
+
   /* Custom utilities */
   .text-balance {
     text-wrap: balance;
