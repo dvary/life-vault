@@ -1,7 +1,7 @@
 import React from 'react';
 import { Outlet, Link, useLocation } from 'react-router-dom';
 import { useAuth } from '../../contexts/AuthContext';
-import MobileNav from './MobileNav';
+
 
 const Layout = () => {
   const { user, logout } = useAuth();
@@ -77,15 +77,12 @@ const Layout = () => {
         </div>
       </nav>
 
-      {/* Main content - with responsive padding for top header and bottom nav */}
-      <main className="pt-20 pb-24 md:pb-8 container-safe">
+      {/* Main content */}
+      <main className="pt-20 pb-8 container-safe">
         <div className="animate-fade-in">
           <Outlet />
         </div>
       </main>
-
-      {/* Mobile Bottom Navigation */}
-      <MobileNav />
     </div>
   );
 };

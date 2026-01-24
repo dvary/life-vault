@@ -10,9 +10,6 @@ import Register from './components/auth/Register';
 import Layout from './components/layout/Layout';
 import Dashboard from './components/dashboard/Dashboard';
 import MemberPage from './components/member/MemberPage';
-import Health from './components/pages/Health';
-import Reports from './components/pages/Reports';
-import Profile from './components/pages/Profile';
 
 function App() {
   return (
@@ -29,9 +26,6 @@ function App() {
           <Route path="/" element={<ProtectedRoute />}>
             <Route element={<Layout />}>
               <Route path="dashboard" element={<Dashboard />} />
-              <Route path="health" element={<Health />} />
-              <Route path="reports" element={<Reports />} />
-              <Route path="profile" element={<Profile />} />
               <Route path=":memberName" element={<MemberPage />} />
             </Route>
           </Route>
