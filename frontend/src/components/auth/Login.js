@@ -12,7 +12,7 @@ const Login = () => {
   const [showConfetti, setShowConfetti] = useState(false);
   const [confettiKey, setConfettiKey] = useState(0);
   const timeoutRef = useRef(null);
-  
+
   const { login } = useAuth();
   const navigate = useNavigate();
 
@@ -34,7 +34,7 @@ const Login = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    
+
     // Frontend validation to match backend
     if (!formData.email || formData.email.trim() === '') {
       alert('Email address is required');
@@ -44,28 +44,28 @@ const Login = () => {
       alert('Password is required');
       return;
     }
-    
+
     // Email format validation
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     if (!emailRegex.test(formData.email)) {
       alert('Please enter a valid email address');
       return;
     }
-    
+
     setLoading(true);
-    
+
     const result = await login(formData.email, formData.password);
-    
+
     if (result.success) {
       // Trigger confetti on successful login
       setShowConfetti(true);
       setConfettiKey(prev => prev + 1);
-      
+
       // Clear any existing timeout
       if (timeoutRef.current) {
         clearTimeout(timeoutRef.current);
       }
-      
+
       // Set new timeout with proper cleanup
       timeoutRef.current = setTimeout(() => {
         setShowConfetti(false);
@@ -73,7 +73,7 @@ const Login = () => {
         navigate('/dashboard', { replace: true });
       }, 3000);
     }
-    
+
     setLoading(false);
   };
 
@@ -86,103 +86,110 @@ const Login = () => {
           height={window.innerHeight}
           recycle={false}
           numberOfPieces={300}
-          colors={['#10B981', '#34D399', '#6EE7B7', '#A7F3D0', '#D1FAE5', '#059669', '#047857']}
+          colors={['#6366f1', '#8b5cf6', '#ec4899', '#14b8a6']}
           gravity={0.2}
           wind={0.1}
           tweenDuration={8000}
         />
       )}
-      <div className="min-h-screen flex items-center justify-center bg-background-primary py-12 px-4 sm:px-6 lg:px-8">
-        <div className="max-w-md w-full space-y-8 animate-fade-in">
-        {/* Header */}
-        <div className="text-center">
-          <div className="mx-auto w-16 h-16 bg-gradient-to-br from-primary-500 to-secondary-500 rounded-2xl flex items-center justify-center shadow-soft mb-6">
-            <svg className="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
-            </svg>
-          </div>
-          <h1 className="text-3xl font-bold text-neutral-900 mb-2">
-            Welcome Back
-          </h1>
-          <p className="text-neutral-600">
-            Sign in to your Life Vault account
-          </p>
+      <div className="min-h-screen flex items-center justify-center p-4 sm:px-6 lg:px-8 relative overflow-hidden">
+        {/* Animated Background Blobs */}
+        <div className="absolute top-0 left-0 w-full h-full overflow-hidden -z-10 pointer-events-none">
+          <div className="absolute top-1/4 left-1/4 w-64 h-64 bg-primary-500/30 rounded-full blur-3xl animate-float" style={{ animationDelay: '0s' }}></div>
+          <div className="absolute bottom-1/4 right-1/4 w-80 h-80 bg-secondary-500/30 rounded-full blur-3xl animate-float" style={{ animationDelay: '2s' }}></div>
+          <div className="absolute top-3/4 left-1/2 w-72 h-72 bg-accent-500/30 rounded-full blur-3xl animate-float" style={{ animationDelay: '4s' }}></div>
         </div>
-        
-        {/* Form */}
-        <div className="card responsive-padding">
-          <form className="space-y-6" onSubmit={handleSubmit}>
-            <div className="space-y-4">
-              <div className="form-group">
-                <label htmlFor="email" className="form-label">
-                  Email address <span className="text-red-500">*</span>
-                </label>
-                <input
-                  id="email"
-                  name="email"
-                  type="email"
-                  autoComplete="email"
-                  required
-                  className="input"
-                  placeholder="Enter your email"
-                  value={formData.email}
-                  onChange={handleChange}
-                />
+
+        <div className="max-w-md w-full animate-scale-in">
+          <div className="glass-card p-8 sm:p-10 shadow-2xl">
+            {/* Header */}
+            <div className="text-center mb-8">
+              <div className="mx-auto w-16 h-16 bg-gradient-to-br from-primary-500 to-accent-500 rounded-2xl flex items-center justify-center shadow-lg shadow-primary-500/30 mb-4 transform rotate-3 hover:rotate-0 transition-transform duration-300">
+                <svg className="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
+                </svg>
               </div>
-              
-              <div className="form-group">
-                <label htmlFor="password" className="form-label">
-                  Password <span className="text-red-500">*</span>
-                </label>
-                <input
-                  id="password"
-                  name="password"
-                  type="password"
-                  autoComplete="current-password"
-                  required
-                  className="input"
-                  placeholder="Enter your password"
-                  value={formData.password}
-                  onChange={handleChange}
-                />
-              </div>
+              <h1 className="text-3xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-primary-600 to-secondary-600 mb-2">
+                Welcome Back
+              </h1>
+              <p className="text-neutral-500 font-medium">
+                Sign in to your Life Vault
+              </p>
             </div>
 
-            <button
-              type="submit"
-              disabled={loading}
-              className="btn-primary w-full"
-            >
-              {loading ? (
-                <div className="flex items-center justify-center space-x-2">
-                  <div className="loading-spinner"></div>
-                  <span>Signing in...</span>
+            {/* Form */}
+            <form className="space-y-6" onSubmit={handleSubmit}>
+              <div className="space-y-5">
+                <div className="input-group">
+                  <label htmlFor="email" className="input-label">
+                    Email address
+                  </label>
+                  <input
+                    id="email"
+                    name="email"
+                    type="email"
+                    autoComplete="email"
+                    required
+                    className="glass-input w-full"
+                    placeholder="Enter your email"
+                    value={formData.email}
+                    onChange={handleChange}
+                  />
                 </div>
-              ) : (
-                'Sign in'
-              )}
-            </button>
-          </form>
-        </div>
 
-        {/* Footer */}
-        <div className="text-center">
-          <p className="text-sm text-neutral-600">
-            Don't have an account?{' '}
-            <Link 
-              to="/register" 
-              className="font-medium text-primary-600 hover:text-primary-700 transition-colors duration-200"
-            >
-              Create one here
-            </Link>
-          </p>
-        </div>
+                <div className="input-group">
+                  <label htmlFor="password" className="input-label">
+                    Password
+                  </label>
+                  <input
+                    id="password"
+                    name="password"
+                    type="password"
+                    autoComplete="current-password"
+                    required
+                    className="glass-input w-full"
+                    placeholder="Enter your password"
+                    value={formData.password}
+                    onChange={handleChange}
+                  />
+                </div>
+              </div>
 
-        {/* Decorative elements */}
-        <div className="absolute inset-0 overflow-hidden pointer-events-none">
-          <div className="absolute -top-40 -right-40 w-80 h-80 bg-gradient-to-br from-primary-100 to-secondary-100 rounded-full opacity-20"></div>
-          <div className="absolute -bottom-40 -left-40 w-80 h-80 bg-gradient-to-br from-secondary-100 to-accent-100 rounded-full opacity-20"></div>
-        </div>
+              <div className="pt-2">
+                <button
+                  type="submit"
+                  disabled={loading}
+                  className="w-full btn-primary group relative overflow-hidden"
+                >
+                  <span className={`flex items-center justify-center transition-all duration-300 ${loading ? 'opacity-0' : 'opacity-100'}`}>
+                    Sign in
+                    <svg className="w-5 h-5 ml-2 -mr-1 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7l5 5m0 0l-5 5m5-5H6" />
+                    </svg>
+                  </span>
+
+                  {loading && (
+                    <div className="absolute inset-0 flex items-center justify-center">
+                      <div className="w-5 h-5 border-2 border-white border-t-transparent rounded-full animate-spin"></div>
+                    </div>
+                  )}
+                </button>
+              </div>
+            </form>
+
+            {/* Footer */}
+            <div className="mt-8 text-center">
+              <p className="text-sm text-neutral-600">
+                Don't have an account?{' '}
+                <Link
+                  to="/register"
+                  className="font-semibold text-primary-600 hover:text-primary-700 transition-colors duration-200"
+                >
+                  Create one here
+                </Link>
+              </p>
+            </div>
+          </div>
         </div>
       </div>
     </>

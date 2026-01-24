@@ -8,8 +8,8 @@ import ProfilePictureUpload from '../common/ProfilePictureUpload';
 
 // Vital types configuration with units and reference ranges
 const VITAL_TYPES = {
-    height: { 
-    label: 'Height', 
+  height: {
+    label: 'Height',
     unit: 'cm',
     placeholder: '170',
     ranges: {
@@ -17,19 +17,19 @@ const VITAL_TYPES = {
       display: '0-200'
     }
   },
-  weight: { 
-    label: 'Weight', 
-    unit: 'kg', 
+  weight: {
+    label: 'Weight',
+    unit: 'kg',
     placeholder: '70',
     ranges: {
       normal: { min: 0, max: 120 },
       display: '0-120'
     }
   },
-  bmi: { 
-    label: 'BMI', 
-    unit: 'kg/m²', 
-    placeholder: '24.2', 
+  bmi: {
+    label: 'BMI',
+    unit: 'kg/m²',
+    placeholder: '24.2',
     calculated: true,
     ranges: {
       underweight: { min: 0, max: 18.4 },
@@ -39,9 +39,9 @@ const VITAL_TYPES = {
       display: '18.5-24.9'
     }
   },
-  cholesterol: { 
-    label: 'Cholesterol', 
-    unit: 'mg/dL', 
+  cholesterol: {
+    label: 'Cholesterol',
+    unit: 'mg/dL',
     placeholder: '200',
     ranges: {
       optimal: { min: 0, max: 199 },
@@ -50,9 +50,9 @@ const VITAL_TYPES = {
       display: '<200'
     }
   },
-  hemoglobin: { 
-    label: 'Hemoglobin', 
-    unit: 'g/dL', 
+  hemoglobin: {
+    label: 'Hemoglobin',
+    unit: 'g/dL',
     placeholder: '14',
     ranges: {
       male: { min: 13.8, max: 17.2 },
@@ -60,27 +60,27 @@ const VITAL_TYPES = {
       display: 'M: 13.8-17.2, F: 12.1-15.1'
     }
   },
-  sgpt: { 
-    label: 'S.G.P.T.', 
-    unit: 'U/L', 
+  sgpt: {
+    label: 'S.G.P.T.',
+    unit: 'U/L',
     placeholder: '40',
     ranges: {
       normal: { min: 7, max: 56 },
       display: '7-56'
     }
   },
-  sgot: { 
-    label: 'S.G.O.T.', 
-    unit: 'U/L', 
+  sgot: {
+    label: 'S.G.O.T.',
+    unit: 'U/L',
     placeholder: '40',
     ranges: {
       normal: { min: 10, max: 40 },
       display: '10-40'
     }
   },
-  vitamin_d: { 
-    label: 'Vitamin D', 
-    unit: 'ng/mL', 
+  vitamin_d: {
+    label: 'Vitamin D',
+    unit: 'ng/mL',
     placeholder: '30',
     ranges: {
       deficient: { min: 0, max: 19 },
@@ -89,36 +89,36 @@ const VITAL_TYPES = {
       display: '30-100'
     }
   },
-  thyroid_tsh: { 
-    label: 'Thyroid TSH', 
-    unit: 'μIU/mL', 
+  thyroid_tsh: {
+    label: 'Thyroid TSH',
+    unit: 'μIU/mL',
     placeholder: '2.5',
     ranges: {
       normal: { min: 0.27, max: 4.2 },
       display: '0.27-4.2'
     }
   },
-  thyroid_t3: { 
-    label: 'Thyroid T3', 
-    unit: 'ng/dL', 
+  thyroid_t3: {
+    label: 'Thyroid T3',
+    unit: 'ng/dL',
     placeholder: '120',
     ranges: {
       normal: { min: 80, max: 200 },
       display: '80-200'
     }
   },
-  thyroid_t4: { 
-    label: 'Thyroid T4', 
-    unit: 'μg/dL', 
+  thyroid_t4: {
+    label: 'Thyroid T4',
+    unit: 'μg/dL',
     placeholder: '1.2',
     ranges: {
       normal: { min: 5.1, max: 14.1 },
       display: '5.1-14.1'
     }
   },
-  vitamin_b12: { 
-    label: 'Vitamin B12', 
-    unit: 'pg/mL', 
+  vitamin_b12: {
+    label: 'Vitamin B12',
+    unit: 'pg/mL',
     placeholder: '500',
     ranges: {
       deficient: { min: 0, max: 199 },
@@ -127,18 +127,18 @@ const VITAL_TYPES = {
       display: '300-900'
     }
   },
-  calcium: { 
-    label: 'Calcium', 
-    unit: 'mg/dL', 
+  calcium: {
+    label: 'Calcium',
+    unit: 'mg/dL',
     placeholder: '9.5',
     ranges: {
       normal: { min: 8.5, max: 10.2 },
       display: '8.5-10.2'
     }
   },
-  hba1c: { 
-    label: 'HbA1c', 
-    unit: '%', 
+  hba1c: {
+    label: 'HbA1c',
+    unit: '%',
     placeholder: '5.7',
     ranges: {
       normal: { min: 0, max: 5.6 },
@@ -147,18 +147,18 @@ const VITAL_TYPES = {
       display: '<5.7'
     }
   },
-  urea: { 
-    label: 'Urea', 
-    unit: 'mg/dL', 
+  urea: {
+    label: 'Urea',
+    unit: 'mg/dL',
     placeholder: '20',
     ranges: {
       normal: { min: 6, max: 24 },
       display: '6-24'
     }
   },
-  fasting_blood_glucose: { 
-    label: 'Fasting Blood Glucose', 
-    unit: 'mg/dL', 
+  fasting_blood_glucose: {
+    label: 'Fasting Blood Glucose',
+    unit: 'mg/dL',
     placeholder: '100',
     ranges: {
       normal: { min: 70, max: 99 },
@@ -167,9 +167,9 @@ const VITAL_TYPES = {
       display: '70-99'
     }
   },
-  creatinine: { 
-    label: 'Creatinine', 
-    unit: 'mg/dL', 
+  creatinine: {
+    label: 'Creatinine',
+    unit: 'mg/dL',
     placeholder: '1.0',
     ranges: {
       normal: { min: 0.6, max: 1.4 },
@@ -180,8 +180,8 @@ const VITAL_TYPES = {
 
 // Report types configuration
 const REPORT_TYPES = {
-  lab_report: { 
-    label: 'Lab Report', 
+  lab_report: {
+    label: 'Lab Report',
     subTypes: [
       { value: 'blood_report', label: 'Blood Report' },
       { value: 'xray', label: 'X-Ray' },
@@ -194,7 +194,7 @@ const REPORT_TYPES = {
       { value: 'general_lab', label: 'General Lab Report' }
     ]
   },
-  prescription_consultation: { 
+  prescription_consultation: {
     label: 'Prescription/Consultation',
     subTypes: [
       { value: 'prescription', label: 'Prescription' },
@@ -203,7 +203,7 @@ const REPORT_TYPES = {
       { value: 'emergency_visit', label: 'Emergency Visit' }
     ]
   },
-  vaccination: { 
+  vaccination: {
     label: 'Vaccination',
     subTypes: [
       { value: 'covid_19', label: 'COVID-19' },
@@ -214,7 +214,7 @@ const REPORT_TYPES = {
       { value: 'other_vaccine', label: 'Other Vaccine' }
     ]
   },
-  hospital_records: { 
+  hospital_records: {
     label: 'Hospital Records',
     subTypes: [
       { value: 'admission', label: 'Admission Record' },
@@ -229,7 +229,7 @@ const REPORT_TYPES = {
 
 const Dashboard = () => {
   const { isAdmin } = useAuth();
-  
+
   // Get current date components
   const getCurrentDateComponents = () => {
     const now = new Date();
@@ -271,7 +271,7 @@ const Dashboard = () => {
     password: '',
     role: 'user'
   });
-  
+
   // Date component states
   const [dateComponents, setDateComponents] = useState(getCurrentDateComponents());
   const [editDateComponents, setEditDateComponents] = useState(getCurrentDateComponents());
@@ -310,9 +310,9 @@ const Dashboard = () => {
     if (!dateOfBirth) return null;
     const today = new Date();
     const birthDate = new Date(dateOfBirth);
-    const ageInMonths = (today.getFullYear() - birthDate.getFullYear()) * 12 + 
-                       (today.getMonth() - birthDate.getMonth());
-    
+    const ageInMonths = (today.getFullYear() - birthDate.getFullYear()) * 12 +
+      (today.getMonth() - birthDate.getMonth());
+
     if (ageInMonths < 12) {
       return { age: ageInMonths, unit: 'month', display: `${ageInMonths} Month${ageInMonths !== 1 ? 's' : ''} old` };
     } else {
@@ -329,14 +329,14 @@ const Dashboard = () => {
   // Get age group and color coding
   const getAgeGroupInfo = useCallback((ageData) => {
     if (ageData === null || ageData === undefined) return { group: 'Unknown', color: '#6B7280', bgColor: '#F3F4F6', icon: '👤' };
-    
+
     const age = ageData.age;
     const unit = ageData.unit;
-    
+
     // Calculate birth year based on age
     const currentYear = new Date().getFullYear();
     const birthYear = currentYear - age;
-    
+
     if (unit === 'month' || (unit === 'year' && age < 18)) {
       if (birthYear >= 2013) {
         return { group: 'Generation Alpha', color: '#10B981', bgColor: '#D1FAE5', icon: '👶' };
@@ -469,7 +469,7 @@ const Dashboard = () => {
     if (!dateString) return { day: '', month: '', year: '' };
     const date = new Date(dateString);
     if (isNaN(date.getTime())) return { day: '', month: '', year: '' };
-    
+
     return {
       day: date.getDate().toString().padStart(2, '0'),
       month: (date.getMonth() + 1).toString().padStart(2, '0'),
@@ -553,12 +553,12 @@ const Dashboard = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    
+
     // Prevent multiple submissions
     if (isSubmittingMember) {
       return;
     }
-    
+
     // Frontend validation to match backend
     if (!editingMember) {
       // Validation for adding new member
@@ -582,14 +582,14 @@ const Dashboard = () => {
         toast.error('Role is required');
         return;
       }
-      
+
       // Email format validation
       const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
       if (!emailRegex.test(formData.email)) {
         toast.error('Please enter a valid email address');
         return;
       }
-      
+
       // Mobile number validation (if provided)
       if (formData.mobileNumber && formData.mobileNumber.trim() !== '') {
         if (!/^\d{10}$/.test(formData.mobileNumber)) {
@@ -607,7 +607,7 @@ const Dashboard = () => {
         toast.error('Gender is required');
         return;
       }
-      
+
       // Email format validation (if provided)
       if (editFormData.email && editFormData.email.trim() !== '') {
         const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -616,7 +616,7 @@ const Dashboard = () => {
           return;
         }
       }
-      
+
       // Password validation (if provided)
       if (editFormData.password && editFormData.password.trim() !== '') {
         if (editFormData.password.length < 6) {
@@ -624,7 +624,7 @@ const Dashboard = () => {
           return;
         }
       }
-      
+
       // Mobile number validation (if provided)
       if (editFormData.mobileNumber && editFormData.mobileNumber.trim() !== '') {
         if (!/^\d{10}$/.test(editFormData.mobileNumber)) {
@@ -633,9 +633,9 @@ const Dashboard = () => {
         }
       }
     }
-    
+
     setIsSubmittingMember(true);
-    
+
     try {
       if (editingMember) {
         // For editing, use editFormData and only send non-empty fields
@@ -645,7 +645,7 @@ const Dashboard = () => {
             updateData[key] = editFormData[key];
           }
         });
-        
+
         await axios.put(`/family/members/${editingMember.id}`, updateData);
         toast.success('Family member updated successfully');
         setEditingMember(null);
@@ -670,7 +670,7 @@ const Dashboard = () => {
             password: formData.password,
             role: formData.role
           };
-          
+
           // Add optional fields only if they have values
           if (formData.dateOfBirth && formData.dateOfBirth.trim() !== '') {
             memberData.dateOfBirth = formData.dateOfBirth;
@@ -681,7 +681,7 @@ const Dashboard = () => {
           if (formData.mobileNumber && formData.mobileNumber.trim() !== '') {
             memberData.mobileNumber = formData.mobileNumber;
           }
-          
+
           await axios.post('/family/members', memberData);
           toast.success('Family member added successfully');
         }
@@ -690,7 +690,7 @@ const Dashboard = () => {
       setFormData({ name: '', dateOfBirth: '', gender: '', email: '', password: '' });
       fetchMembers();
     } catch (error) {
-      const errorMessage = error.response?.data?.message || 
+      const errorMessage = error.response?.data?.message ||
         (editingMember ? 'Failed to update family member' : 'Failed to add family member');
       toast.error(errorMessage);
     } finally {
@@ -710,14 +710,14 @@ const Dashboard = () => {
       password: '', // Don't populate password for security
       role: member.role || 'non_admin'
     });
-    
+
     // Populate date components for editing
     if (member.date_of_birth) {
       const components = parseDateComponents(member.date_of_birth);
       setEditDateComponents(components);
-          } else {
-        setEditDateComponents(getCurrentDateComponents());
-      }
+    } else {
+      setEditDateComponents(getCurrentDateComponents());
+    }
   };
 
   const handleCancel = () => {
@@ -755,9 +755,9 @@ const Dashboard = () => {
   };
 
   const handleProfileUploadSuccess = (updatedMember) => {
-    setMembers(prevMembers => 
-      prevMembers.map(member => 
-        member.id === updatedMember.id 
+    setMembers(prevMembers =>
+      prevMembers.map(member =>
+        member.id === updatedMember.id
           ? { ...member, profile_picture: updatedMember.profile_picture }
           : member
       )
@@ -773,14 +773,14 @@ const Dashboard = () => {
 
   const handleAddVital = async (e) => {
     e.preventDefault();
-    
+
     // Prevent multiple submissions
     if (isSubmittingVital) {
       return;
     }
-    
+
     setIsSubmittingVital(true);
-    
+
     try {
       await axios.post('/health/vitals', {
         memberId: selectedMember.id,
@@ -813,14 +813,14 @@ const Dashboard = () => {
 
   const handleUploadReport = async (e) => {
     e.preventDefault();
-    
+
     // Prevent multiple submissions
     if (isSubmittingReport) {
       return;
     }
-    
+
     setIsSubmittingReport(true);
-    
+
     try {
       const formData = new FormData();
       formData.append('memberId', selectedMember.id);
@@ -856,14 +856,14 @@ const Dashboard = () => {
 
   const handleUploadDocument = async (e) => {
     e.preventDefault();
-    
+
     // Prevent multiple submissions
     if (isSubmittingDocument) {
       return;
     }
-    
+
     setIsSubmittingDocument(true);
-    
+
     try {
       const formData = new FormData();
       formData.append('title', documentFormData.title);
@@ -927,7 +927,7 @@ const Dashboard = () => {
           {isAdmin() && (
             <button
               onClick={() => setShowAddForm(true)}
-              className="bg-primary-600 hover:bg-primary-700 text-white px-4 py-2 rounded-lg font-medium transition-colors"
+              className="btn-primary"
             >
               Add Family Member
             </button>
@@ -936,734 +936,720 @@ const Dashboard = () => {
 
         {/* Add/Edit Form */}
         {(showAddForm || editingMember) && (
-        <div className="bg-white shadow-lg rounded-lg p-4 sm:p-6 border border-gray-200 max-w-full overflow-hidden">
-          <h2 className="text-lg font-semibold mb-4 text-gray-900">
-            {editingMember ? 'Edit Family Member' : 'Add Family Member'}
-          </h2>
-          <form onSubmit={handleSubmit} className="space-y-4">
-            <div className="grid grid-cols-1 gap-4">
-              <div>
-                <label className="block text-sm font-medium text-gray-700 mb-1">
-                  Full Name <span className="text-red-500">*</span>
-                </label>
-                <input
-                  type="text"
-                  placeholder="Enter full name"
-                  value={editingMember ? editFormData.name : formData.name}
-                  onChange={(e) => editingMember 
-                    ? setEditFormData({...editFormData, name: e.target.value})
-                    : setFormData({...formData, name: e.target.value})
-                  }
-                  className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-500"
-                  required
-                />
-              </div>
-              {/* Date of Birth Dropdowns */}
-              <div className="space-y-2">
-                <label className="block text-sm font-medium text-gray-700">Date of Birth (Optional)</label>
-                <div className="grid grid-cols-3 gap-2 sm:flex sm:space-x-2">
-                <select
-                  value={editingMember ? editDateComponents.day : dateComponents.day}
-                  onChange={(e) => {
-                    const value = e.target.value;
-                    if (editingMember) {
-                      const newComponents = { ...editDateComponents, day: value };
-                      setEditDateComponents(newComponents);
-                      const combinedDate = combineDateComponents(newComponents.day, newComponents.month, newComponents.year);
-                      setEditFormData({...editFormData, dateOfBirth: combinedDate});
-                    } else {
-                      const newComponents = { ...dateComponents, day: value };
-                      setDateComponents(newComponents);
-                      const combinedDate = combineDateComponents(newComponents.day, newComponents.month, newComponents.year);
-                      setFormData({...formData, dateOfBirth: combinedDate});
+          <div className="glass-panel p-4 sm:p-6 mb-8 animate-fade-in">
+            <h2 className="text-xl font-bold mb-6 bg-clip-text text-transparent bg-gradient-to-r from-primary-600 to-secondary-600">
+              {editingMember ? 'Edit Family Member' : 'Add Family Member'}
+            </h2>
+            <form onSubmit={handleSubmit} className="space-y-4">
+              <div className="grid grid-cols-1 gap-4">
+                <div>
+                  <label className="block text-sm font-medium text-gray-700 mb-1">
+                    Full Name <span className="text-red-500">*</span>
+                  </label>
+                  <input
+                    type="text"
+                    placeholder="Enter full name"
+                    value={editingMember ? editFormData.name : formData.name}
+                    onChange={(e) => editingMember
+                      ? setEditFormData({ ...editFormData, name: e.target.value })
+                      : setFormData({ ...formData, name: e.target.value })
                     }
-                  }}
-                  className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-500 text-sm"
-                >
-                  <option value="">Day</option>
-                  {generateDateOptions()}
-                </select>
-                
-                <select
-                  value={editingMember ? editDateComponents.month : dateComponents.month}
-                  onChange={(e) => {
-                    const value = e.target.value;
-                    if (editingMember) {
-                      const newComponents = { ...editDateComponents, month: value };
-                      setEditDateComponents(newComponents);
-                      const combinedDate = combineDateComponents(newComponents.day, newComponents.month, newComponents.year);
-                      setEditFormData({...editFormData, dateOfBirth: combinedDate});
-                    } else {
-                      const newComponents = { ...dateComponents, month: value };
-                      setDateComponents(newComponents);
-                      const combinedDate = combineDateComponents(newComponents.day, newComponents.month, newComponents.year);
-                      setFormData({...formData, dateOfBirth: combinedDate});
-                    }
-                  }}
-                  className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-500 text-sm"
-                >
-                  <option value="">Month</option>
-                  {generateMonthOptions()}
-                </select>
-                
-                <select
-                  value={editingMember ? editDateComponents.year : dateComponents.year}
-                  onChange={(e) => {
-                    const value = e.target.value;
-                    if (editingMember) {
-                      const newComponents = { ...editDateComponents, year: value };
-                      setEditDateComponents(newComponents);
-                      const combinedDate = combineDateComponents(newComponents.day, newComponents.month, newComponents.year);
-                      setEditFormData({...editFormData, dateOfBirth: combinedDate});
-                    } else {
-                      const newComponents = { ...dateComponents, year: value };
-                      setDateComponents(newComponents);
-                      const combinedDate = combineDateComponents(newComponents.day, newComponents.month, newComponents.year);
-                      setFormData({...formData, dateOfBirth: combinedDate});
-                    }
-                  }}
-                  className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-500 text-sm"
-                >
-                  <option value="">Year</option>
-                  {generateYearOptions()}
-                </select>
+                    className="glass-input w-full"
+                    required
+                  />
                 </div>
-              </div>
-              <div>
-                <label className="block text-sm font-medium text-gray-700 mb-1">
-                  Gender <span className="text-red-500">*</span>
-                </label>
-                <select
-                  value={editingMember ? editFormData.gender : formData.gender}
-                  onChange={(e) => editingMember 
-                    ? setEditFormData({...editFormData, gender: e.target.value})
-                    : setFormData({...formData, gender: e.target.value})
-                  }
-                  className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-500"
-                  required
-                >
-                  <option value="">Select Gender</option>
-                  <option value="male">Male</option>
-                  <option value="female">Female</option>
-                  <option value="other">Other</option>
-                  <option value="prefer_not_to_say">Prefer not to say</option>
-                </select>
-              </div>
-              <div>
-                <label className="block text-sm font-medium text-gray-700 mb-1">
-                  Blood Group (Optional)
-                </label>
-                <select
-                  value={editingMember ? editFormData.bloodGroup : formData.bloodGroup}
-                  onChange={(e) => editingMember 
-                    ? setEditFormData({...editFormData, bloodGroup: e.target.value})
-                    : setFormData({...formData, bloodGroup: e.target.value})
-                  }
-                  className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-500"
-                >
-                  <option value="">Select Blood Group</option>
-                  <option value="A+">A+</option>
-                  <option value="A-">A-</option>
-                  <option value="B+">B+</option>
-                  <option value="B-">B-</option>
-                  <option value="AB+">AB+</option>
-                  <option value="AB-">AB-</option>
-                  <option value="O+">O+</option>
-                  <option value="O-">O-</option>
-                </select>
-              </div>
-              <div>
-                <label className="block text-sm font-medium text-gray-700 mb-1">
-                  Mobile Number (Optional)
-                </label>
-                <input
-                  type="tel"
-                  placeholder="Enter 10-digit mobile number"
-                  value={editingMember ? editFormData.mobileNumber : formData.mobileNumber}
-                  onChange={(e) => {
-                    // Only allow numeric input and limit to 10 digits
-                    const value = e.target.value.replace(/\D/g, '').slice(0, 10);
-                    if (editingMember) {
-                      setEditFormData({...editFormData, mobileNumber: value});
-                    } else {
-                      setFormData({...formData, mobileNumber: value});
-                    }
-                  }}
-                  pattern="[0-9]{10}"
-                  title="Please enter a 10-digit mobile number"
-                  className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-500"
-                />
-                <p className="text-xs text-gray-500 mt-1">Enter 10 digits only (e.g., 9876543210)</p>
-              </div>
-              <div>
-                <label className="block text-sm font-medium text-gray-700 mb-1">
-                  Email <span className="text-red-500">*</span>
-                </label>
-                <input
-                  type="email"
-                  placeholder="Enter email address"
-                  value={editingMember ? editFormData.email : formData.email}
-                  onChange={(e) => editingMember 
-                    ? setEditFormData({...editFormData, email: e.target.value})
-                    : setFormData({...formData, email: e.target.value})
-                  }
-                  className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-500"
-                  required={!editingMember}
-                />
-              </div>
-              <div>
-                <label className="block text-sm font-medium text-gray-700 mb-1">
-                  Password {!editingMember && <span className="text-red-500">*</span>}
-                </label>
-                <input
-                  type="password"
-                  placeholder={editingMember ? "New Password (leave blank to keep current)" : "Enter password"}
-                  value={editingMember ? editFormData.password : formData.password}
-                  onChange={(e) => editingMember 
-                    ? setEditFormData({...editFormData, password: e.target.value})
-                    : setFormData({...formData, password: e.target.value})
-                  }
-                  className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-500"
-                  required={!editingMember}
-                />
-              </div>
-              <div>
-                <label className="block text-sm font-medium text-gray-700 mb-1">
-                  Role <span className="text-red-500">*</span>
-                </label>
-                <select
-                  value={editingMember ? editFormData.role : formData.role}
-                  onChange={(e) => editingMember 
-                    ? setEditFormData({...editFormData, role: e.target.value})
-                    : setFormData({...formData, role: e.target.value})
-                  }
-                  className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-500"
-                  required
-                >
-                  <option value="">Select Role</option>
-                  <option value="non_admin">Family Member</option>
-                  <option value="admin">Admin</option>
-                </select>
-              </div>
-            </div>
-
-            {/* Profile Picture Upload Section - Only show when editing */}
-            {editingMember && (
-              <div className="border-t pt-4 mt-4">
-                <h3 className="text-md font-medium text-gray-900 mb-3">Profile Picture</h3>
-                <div className="flex items-center space-x-4">
-                  <div className="flex-shrink-0">
-                    <ProfilePicture
-                      member={editingMember}
-                      size="lg"
-                      showUploadButton={false}
-                    />
-                  </div>
-                  <div className="flex-1">
-                    <button
-                      type="button"
-                      onClick={() => handleProfilePictureUpload(editingMember)}
-                      className="bg-teal-600 hover:bg-teal-700 text-white px-4 py-2 rounded-lg font-medium text-sm"
+                {/* Date of Birth Dropdowns */}
+                <div className="space-y-2">
+                  <label className="block text-sm font-medium text-gray-700">Date of Birth (Optional)</label>
+                  <div className="grid grid-cols-3 gap-2 sm:flex sm:space-x-2">
+                    <select
+                      value={editingMember ? editDateComponents.day : dateComponents.day}
+                      onChange={(e) => {
+                        const value = e.target.value;
+                        if (editingMember) {
+                          const newComponents = { ...editDateComponents, day: value };
+                          setEditDateComponents(newComponents);
+                          const combinedDate = combineDateComponents(newComponents.day, newComponents.month, newComponents.year);
+                          setEditFormData({ ...editFormData, dateOfBirth: combinedDate });
+                        } else {
+                          const newComponents = { ...dateComponents, day: value };
+                          setDateComponents(newComponents);
+                          const combinedDate = combineDateComponents(newComponents.day, newComponents.month, newComponents.year);
+                          setFormData({ ...formData, dateOfBirth: combinedDate });
+                        }
+                      }}
+                      className="glass-input w-full text-sm"
                     >
-                      Upload New Picture
-                    </button>
-                    <p className="text-xs text-gray-500 mt-1">
-                      Supported formats: JPEG, PNG, GIF (max 15MB)
-                    </p>
+                      <option value="">Day</option>
+                      {generateDateOptions()}
+                    </select>
+
+                    <select
+                      value={editingMember ? editDateComponents.month : dateComponents.month}
+                      onChange={(e) => {
+                        const value = e.target.value;
+                        if (editingMember) {
+                          const newComponents = { ...editDateComponents, month: value };
+                          setEditDateComponents(newComponents);
+                          const combinedDate = combineDateComponents(newComponents.day, newComponents.month, newComponents.year);
+                          setEditFormData({ ...editFormData, dateOfBirth: combinedDate });
+                        } else {
+                          const newComponents = { ...dateComponents, month: value };
+                          setDateComponents(newComponents);
+                          const combinedDate = combineDateComponents(newComponents.day, newComponents.month, newComponents.year);
+                          setFormData({ ...formData, dateOfBirth: combinedDate });
+                        }
+                      }}
+                      className="glass-input w-full text-sm"
+                    >
+                      <option value="">Month</option>
+                      {generateMonthOptions()}
+                    </select>
+
+                    <select
+                      value={editingMember ? editDateComponents.year : dateComponents.year}
+                      onChange={(e) => {
+                        const value = e.target.value;
+                        if (editingMember) {
+                          const newComponents = { ...editDateComponents, year: value };
+                          setEditDateComponents(newComponents);
+                          const combinedDate = combineDateComponents(newComponents.day, newComponents.month, newComponents.year);
+                          setEditFormData({ ...editFormData, dateOfBirth: combinedDate });
+                        } else {
+                          const newComponents = { ...dateComponents, year: value };
+                          setDateComponents(newComponents);
+                          const combinedDate = combineDateComponents(newComponents.day, newComponents.month, newComponents.year);
+                          setFormData({ ...formData, dateOfBirth: combinedDate });
+                        }
+                      }}
+                      className="glass-input w-full text-sm"
+                    >
+                      <option value="">Year</option>
+                      {generateYearOptions()}
+                    </select>
                   </div>
                 </div>
+                <div>
+                  <label className="block text-sm font-medium text-gray-700 mb-1">
+                    Gender <span className="text-red-500">*</span>
+                  </label>
+                  <select
+                    value={editingMember ? editFormData.gender : formData.gender}
+                    onChange={(e) => editingMember
+                      ? setEditFormData({ ...editFormData, gender: e.target.value })
+                      : setFormData({ ...formData, gender: e.target.value })
+                    }
+                    className="glass-input w-full"
+                    required
+                  >
+                    <option value="">Select Gender</option>
+                    <option value="male">Male</option>
+                    <option value="female">Female</option>
+                    <option value="other">Other</option>
+                    <option value="prefer_not_to_say">Prefer not to say</option>
+                  </select>
+                </div>
+                <div>
+                  <label className="block text-sm font-medium text-gray-700 mb-1">
+                    Blood Group (Optional)
+                  </label>
+                  <select
+                    value={editingMember ? editFormData.bloodGroup : formData.bloodGroup}
+                    onChange={(e) => editingMember
+                      ? setEditFormData({ ...editFormData, bloodGroup: e.target.value })
+                      : setFormData({ ...formData, bloodGroup: e.target.value })
+                    }
+                    className="glass-input w-full"
+                  >
+                    <option value="">Select Blood Group</option>
+                    <option value="A+">A+</option>
+                    <option value="A-">A-</option>
+                    <option value="B+">B+</option>
+                    <option value="B-">B-</option>
+                    <option value="AB+">AB+</option>
+                    <option value="AB-">AB-</option>
+                    <option value="O+">O+</option>
+                    <option value="O-">O-</option>
+                  </select>
+                </div>
+                <div>
+                  <label className="block text-sm font-medium text-gray-700 mb-1">
+                    Mobile Number (Optional)
+                  </label>
+                  <input
+                    type="tel"
+                    placeholder="Enter 10-digit mobile number"
+                    value={editingMember ? editFormData.mobileNumber : formData.mobileNumber}
+                    onChange={(e) => {
+                      // Only allow numeric input and limit to 10 digits
+                      const value = e.target.value.replace(/\D/g, '').slice(0, 10);
+                      if (editingMember) {
+                        setEditFormData({ ...editFormData, mobileNumber: value });
+                      } else {
+                        setFormData({ ...formData, mobileNumber: value });
+                      }
+                    }}
+                    pattern="[0-9]{10}"
+                    title="Please enter a 10-digit mobile number"
+                    className="glass-input w-full"
+                  />
+                  <p className="text-xs text-gray-500 mt-1">Enter 10 digits only (e.g., 9876543210)</p>
+                </div>
+                <div>
+                  <label className="block text-sm font-medium text-gray-700 mb-1">
+                    Email <span className="text-red-500">*</span>
+                  </label>
+                  <input
+                    type="email"
+                    placeholder="Enter email address"
+                    value={editingMember ? editFormData.email : formData.email}
+                    onChange={(e) => editingMember
+                      ? setEditFormData({ ...editFormData, email: e.target.value })
+                      : setFormData({ ...formData, email: e.target.value })
+                    }
+                    className="glass-input w-full"
+                    required={!editingMember}
+                  />
+                </div>
+                <div>
+                  <label className="block text-sm font-medium text-gray-700 mb-1">
+                    Password {!editingMember && <span className="text-red-500">*</span>}
+                  </label>
+                  <input
+                    type="password"
+                    placeholder={editingMember ? "New Password (leave blank to keep current)" : "Enter password"}
+                    value={editingMember ? editFormData.password : formData.password}
+                    onChange={(e) => editingMember
+                      ? setEditFormData({ ...editFormData, password: e.target.value })
+                      : setFormData({ ...formData, password: e.target.value })
+                    }
+                    className="glass-input w-full"
+                    required={!editingMember}
+                  />
+                </div>
+                <div>
+                  <label className="block text-sm font-medium text-gray-700 mb-1">
+                    Role <span className="text-red-500">*</span>
+                  </label>
+                  <select
+                    value={editingMember ? editFormData.role : formData.role}
+                    onChange={(e) => editingMember
+                      ? setEditFormData({ ...editFormData, role: e.target.value })
+                      : setFormData({ ...formData, role: e.target.value })
+                    }
+                    className="glass-input w-full"
+                    required
+                  >
+                    <option value="">Select Role</option>
+                    <option value="non_admin">Family Member</option>
+                    <option value="admin">Admin</option>
+                  </select>
+                </div>
               </div>
-            )}
 
-            <div className="flex space-x-3">
-              <button 
-                type="submit" 
-                disabled={isSubmittingMember}
-                className={`px-4 py-2 rounded-lg font-medium transition-colors duration-200 ${
-                  isSubmittingMember 
-                    ? 'bg-gray-400 cursor-not-allowed text-white' 
-                    : 'bg-teal-600 hover:bg-teal-700 text-white'
-                }`}
-              >
-                {isSubmittingMember ? (editingMember ? 'Updating...' : 'Adding...') : (editingMember ? 'Update Member' : 'Add Member')}
-              </button>
-              <button
-                type="button"
-                disabled={isSubmittingMember}
-                onClick={handleCancel}
-                className={`px-4 py-2 rounded-lg font-medium transition-colors duration-200 ${
-                  isSubmittingMember 
-                    ? 'bg-gray-400 cursor-not-allowed text-white' 
-                    : 'bg-gray-500 hover:bg-gray-600 text-white'
-                }`}
-              >
-                Cancel
-              </button>
+              {/* Profile Picture Upload Section - Only show when editing */}
               {editingMember && (
+                <div className="border-t pt-4 mt-4">
+                  <h3 className="text-md font-medium text-gray-900 mb-3">Profile Picture</h3>
+                  <div className="flex items-center space-x-4">
+                    <div className="flex-shrink-0">
+                      <ProfilePicture
+                        member={editingMember}
+                        size="lg"
+                        showUploadButton={false}
+                      />
+                    </div>
+                    <div className="flex-1">
+                      <button
+                        type="button"
+                        onClick={() => handleProfilePictureUpload(editingMember)}
+                        className="bg-teal-600 hover:bg-teal-700 text-white px-4 py-2 rounded-lg font-medium text-sm"
+                      >
+                        Upload New Picture
+                      </button>
+                      <p className="text-xs text-gray-500 mt-1">
+                        Supported formats: JPEG, PNG, GIF (max 15MB)
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              )}
+
+              <div className="flex space-x-3">
+                <button
+                  type="submit"
+                  disabled={isSubmittingMember}
+                  className={`btn-primary ${isSubmittingMember ? 'opacity-70 cursor-not-allowed' : ''}`}
+                >
+                  {isSubmittingMember ? (editingMember ? 'Updating...' : 'Adding...') : (editingMember ? 'Update Member' : 'Add Member')}
+                </button>
                 <button
                   type="button"
-                  onClick={() => handleDeleteMember(editingMember.id)}
-                  className="bg-red-600 hover:bg-red-700 text-white px-4 py-2 rounded-lg font-medium"
+                  disabled={isSubmittingMember}
+                  onClick={handleCancel}
+                  className="btn-ghost"
                 >
-                  Delete Member
+                  Cancel
                 </button>
-              )}
-            </div>
-          </form>
-        </div>
-      )}
+                {editingMember && (
+                  <button
+                    type="button"
+                    onClick={() => handleDeleteMember(editingMember.id)}
+                    className="btn bg-red-500 text-white hover:bg-red-600"
+                  >
+                    Delete Member
+                  </button>
+                )}
+              </div>
+            </form>
+          </div>
+        )}
 
         {/* Family Members by Age Group */}
         {members.length > 0 ? (
-        <div className="space-y-8">
-          {ageGroupOrder.map(groupName => {
-            const groupMembers = groupedMembers[groupName];
-            if (!groupMembers || groupMembers.length === 0) return null;
+          <div className="space-y-8">
+            {ageGroupOrder.map(groupName => {
+              const groupMembers = groupedMembers[groupName];
+              if (!groupMembers || groupMembers.length === 0) return null;
 
-            const ageGroupInfo = getAgeGroupInfo(groupMembers[0]?.ageData);
-            
-            return (
-              <div key={groupName} className="space-y-4">
-                <div className="flex items-center space-x-2 sm:space-x-3">
-                  <span className="text-xl sm:text-2xl">{ageGroupInfo.icon}</span>
-                  <h2 className="text-lg sm:text-xl font-semibold text-gray-900">{groupName}s</h2>
-                  <span className="text-xs sm:text-sm text-gray-500">({groupMembers.length} member{groupMembers.length !== 1 ? 's' : ''})</span>
+              const ageGroupInfo = getAgeGroupInfo(groupMembers[0]?.ageData);
+
+              return (
+                <div key={groupName} className="space-y-4">
+                  <div className="flex items-center space-x-2 sm:space-x-3">
+                    <span className="text-xl sm:text-2xl">{ageGroupInfo.icon}</span>
+                    <h2 className="text-lg sm:text-xl font-semibold text-gray-900">{groupName}s</h2>
+                    <span className="text-xs sm:text-sm text-gray-500">({groupMembers.length} member{groupMembers.length !== 1 ? 's' : ''})</span>
+                  </div>
+
+                  <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-3 sm:gap-4 md:gap-6">
+                    {groupMembers.map((member) => {
+                      const ageData = member.ageData;
+                      const ageGroupInfo = getAgeGroupInfo(ageData);
+                      const genderIcon = getGenderIcon(member.gender);
+
+                      return (
+                        <div
+                          key={member.id}
+                          className="glass-card hover:scale-[1.02] p-4 cursor-pointer"
+                          onClick={() => handleMemberClick(member)}
+                        >
+                          <div className="flex items-center space-x-4">
+                            {/* Square Profile Picture on the Left */}
+                            <div className="flex-shrink-0">
+                              {member.profile_picture ? (
+                                <img
+                                  src={member.profile_picture}
+                                  alt={`${member.name}'s profile`}
+                                  className="w-16 h-16 rounded-lg object-cover border-2 border-gray-200"
+                                />
+                              ) : (
+                                <div className="w-16 h-16 rounded-lg bg-gradient-to-br from-blue-100 to-purple-100 border-2 border-gray-200 flex items-center justify-center">
+                                  <span className="text-2xl text-gray-400">
+                                    {member.gender === 'male' ? '👨' : member.gender === 'female' ? '👩' : '👤'}
+                                  </span>
+                                </div>
+                              )}
+                            </div>
+
+                            {/* Content on the Right */}
+                            <div className="flex-1 min-w-0">
+                              {/* Line 1: Name */}
+                              <div className="font-bold text-gray-900 text-base sm:text-lg group-hover:text-primary-700 transition-colors truncate mb-1">
+                                {member.name}
+                              </div>
+
+                              {/* Line 2: Age */}
+                              <div className="text-xs text-gray-600 mb-1">
+                                {member.date_of_birth ? calculateAge(member.date_of_birth)?.display || 'Age not specified' : 'Age not specified'}
+                              </div>
+
+                              {/* Line 3: Mobile Number */}
+                              <div className="text-xs text-blue-600 mb-1">
+                                📱 {member.mobile_number || 'No mobile'}
+                              </div>
+
+                              {/* Line 4: Blood Group */}
+                              <div className="text-xs text-red-600">
+                                🩸 {member.blood_group || 'No blood group'}
+                              </div>
+                            </div>
+
+                            {/* Right side indicators */}
+                            <div className="flex items-center space-x-2">
+                              {/* Admin indicator */}
+                              {member.role === 'admin' && (
+                                <div className="flex-shrink-0 w-6 h-6 bg-yellow-500 rounded-full flex items-center justify-center">
+                                  <svg className="w-4 h-4 text-white" fill="currentColor" viewBox="0 0 20 20">
+                                    <path fillRule="evenodd" d="M5 9V7a5 5 0 0110 0v2a2 2 0 012 2v5a2 2 0 01-2 2H5a2 2 0 01-2-2v-5a2 2 0 012-2zm8-2v2H7V7a3 3 0 016 0z" clipRule="evenodd" />
+                                  </svg>
+                                </div>
+                              )}
+
+                              {/* Arrow indicator */}
+                              <div className="flex-shrink-0 text-gray-400 group-hover:text-primary-500 transition-colors">
+                                <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                                </svg>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      );
+                    })}
+                  </div>
                 </div>
-                
-                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-3 sm:gap-4 md:gap-6">
-                  {groupMembers.map((member) => {
-                     const ageData = member.ageData;
-                     const ageGroupInfo = getAgeGroupInfo(ageData);
-                     const genderIcon = getGenderIcon(member.gender);
-                     
-                     return (
-                       <div
-                         key={member.id}
-                         className="bg-gradient-to-br from-white to-gray-50 rounded-xl shadow-soft border border-gray-100 hover:shadow-medium transition-all duration-300 cursor-pointer hover:border-primary-200 transform hover:scale-[1.02] group p-4"
-                         onClick={() => handleMemberClick(member)}
-                       >
-                         <div className="flex items-center space-x-4">
-                           {/* Square Profile Picture on the Left */}
-                           <div className="flex-shrink-0">
-                             {member.profile_picture ? (
-                               <img
-                                 src={member.profile_picture}
-                                 alt={`${member.name}'s profile`}
-                                 className="w-16 h-16 rounded-lg object-cover border-2 border-gray-200"
-                               />
-                             ) : (
-                               <div className="w-16 h-16 rounded-lg bg-gradient-to-br from-blue-100 to-purple-100 border-2 border-gray-200 flex items-center justify-center">
-                                 <span className="text-2xl text-gray-400">
-                                   {member.gender === 'male' ? '👨' : member.gender === 'female' ? '👩' : '👤'}
-                                 </span>
-                               </div>
-                             )}
-                           </div>
-                           
-                           {/* Content on the Right */}
-                           <div className="flex-1 min-w-0">
-                             {/* Line 1: Name */}
-                             <div className="font-bold text-gray-900 text-base sm:text-lg group-hover:text-primary-700 transition-colors truncate mb-1">
-                               {member.name}
-                             </div>
-                             
-                             {/* Line 2: Age */}
-                             <div className="text-xs text-gray-600 mb-1">
-                               {member.date_of_birth ? calculateAge(member.date_of_birth)?.display || 'Age not specified' : 'Age not specified'}
-                             </div>
-                             
-                             {/* Line 3: Mobile Number */}
-                             <div className="text-xs text-blue-600 mb-1">
-                               📱 {member.mobile_number || 'No mobile'}
-                             </div>
-                             
-                             {/* Line 4: Blood Group */}
-                             <div className="text-xs text-red-600">
-                               🩸 {member.blood_group || 'No blood group'}
-                             </div>
-                           </div>
-                           
-                           {/* Right side indicators */}
-                           <div className="flex items-center space-x-2">
-                             {/* Admin indicator */}
-                             {member.role === 'admin' && (
-                               <div className="flex-shrink-0 w-6 h-6 bg-yellow-500 rounded-full flex items-center justify-center">
-                                 <svg className="w-4 h-4 text-white" fill="currentColor" viewBox="0 0 20 20">
-                                   <path fillRule="evenodd" d="M5 9V7a5 5 0 0110 0v2a2 2 0 012 2v5a2 2 0 01-2 2H5a2 2 0 01-2-2v-5a2 2 0 012-2zm8-2v2H7V7a3 3 0 016 0z" clipRule="evenodd" />
-                                 </svg>
-                               </div>
-                             )}
-                             
-                             {/* Arrow indicator */}
-                             <div className="flex-shrink-0 text-gray-400 group-hover:text-primary-500 transition-colors">
-                               <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-                               </svg>
-                             </div>
-                           </div>
-                         </div>
-                       </div>
-                     );
-                   })}
-                </div>
-              </div>
-            );
-          })}
-        </div>
-      ) : (
-        <div className="text-center py-12">
-          <div className="text-6xl mb-4">👨‍👩‍👧‍👦</div>
-          <h3 className="text-xl font-medium text-gray-900 mb-2">
-            No family members yet
-          </h3>
-          <p className="text-gray-600 mb-6">
-            Add your first family member to start building your Life Vault profile.
-          </p>
-          {isAdmin() && (
-            <button
-              onClick={() => setShowAddForm(true)}
-              className="bg-primary-600 hover:bg-primary-700 text-white px-6 py-3 rounded-lg font-medium"
-            >
-              Add Family Member
-            </button>
-          )}
-        </div>
-      )}
+              );
+            })}
+          </div>
+        ) : (
+          <div className="text-center py-12">
+            <div className="text-6xl mb-4">👨‍👩‍👧‍👦</div>
+            <h3 className="text-xl font-medium text-gray-900 mb-2">
+              No family members yet
+            </h3>
+            <p className="text-gray-600 mb-6">
+              Add your first family member to start building your Life Vault profile.
+            </p>
+            {isAdmin() && (
+              <button
+                onClick={() => setShowAddForm(true)}
+                className="btn-primary px-6 py-3"
+              >
+                Add Family Member
+              </button>
+            )}
+          </div>
+        )}
 
         {/* Add Vital Modal */}
         {showAddVitalModal && selectedMember && (
-        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
-          <div className="bg-white rounded-lg p-6 w-full max-w-md">
-            <h2 className="text-lg font-semibold mb-4">Add Health Vital for {selectedMember.name}</h2>
-            <form onSubmit={handleAddVital} className="space-y-4">
-              <div>
-                <label className="block text-sm font-medium text-gray-700 mb-1">Vital Type</label>
-                <select
-                  value={vitalFormData.vitalType}
-                  onChange={(e) => handleVitalTypeChange(e.target.value)}
-                  className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-500"
-                  required
-                >
-                  <option value="">Select Vital Type</option>
-                  {Object.entries(VITAL_TYPES).map(([key, config]) => (
-                    <option key={key} value={key}>{config.label}</option>
-                  ))}
-                </select>
-              </div>
-              <div>
-                <label className="block text-sm font-medium text-gray-700 mb-1">Value</label>
-                <input
-                  type="number"
-                  step="0.01"
-                  value={vitalFormData.value}
-                  onChange={(e) => setVitalFormData({...vitalFormData, value: e.target.value})}
-                  className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-500"
-                  placeholder={vitalFormData.vitalType ? VITAL_TYPES[vitalFormData.vitalType]?.placeholder : ''}
-                  required
-                />
-              </div>
-              <div>
-                <label className="block text-sm font-medium text-gray-700 mb-1">Unit</label>
-                <input
-                  type="text"
-                  value={vitalFormData.unit}
-                  onChange={(e) => setVitalFormData({...vitalFormData, unit: e.target.value})}
-                  className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-500"
-                  placeholder={vitalFormData.vitalType ? VITAL_TYPES[vitalFormData.vitalType]?.unit : ''}
-                  required
-                />
-              </div>
-              <div>
-                <label className="block text-sm font-medium text-gray-700 mb-1">Date Recorded</label>
-                <input
-                  type="text"
-                  placeholder="dd-mm-yyyy"
-                  value={vitalFormData.recordedAt ? formatDate(vitalFormData.recordedAt) : ''}
-                  onChange={(e) => {
-                    const value = e.target.value;
-                    if (/^[\d-]*$/.test(value)) {
-                      setVitalFormData({...vitalFormData, recordedAt: parseDateFromDisplay(value)});
-                    }
-                  }}
-                  className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-500"
-                  required
-                />
-                <p className="text-xs text-gray-500 mt-1">Format: dd-mm-yyyy</p>
-              </div>
-              <div>
-                <label className="block text-sm font-medium text-gray-700 mb-1">Notes (Optional)</label>
-                <textarea
-                  value={vitalFormData.notes}
-                  onChange={(e) => setVitalFormData({...vitalFormData, notes: e.target.value})}
-                  className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-500"
-                  rows="3"
-                  placeholder="Any additional notes..."
-                />
-              </div>
-              <div className="flex space-x-3">
-                <button 
-                  type="submit" 
-                  disabled={isSubmittingVital}
-                  className={`px-4 py-2 rounded-lg font-medium transition-colors duration-200 ${
-                    isSubmittingVital 
-                      ? 'bg-gray-400 cursor-not-allowed text-white' 
-                      : 'bg-teal-600 hover:bg-teal-700 text-white'
-                  }`}
-                >
-                  {isSubmittingVital ? 'Adding Vital...' : 'Add Vital'}
-                </button>
-                <button
-                  type="button"
-                  disabled={isSubmittingVital}
-                  onClick={() => {
-                    setShowAddVitalModal(false);
-                    setSelectedMember(null);
-                    setVitalFormData({
-                      vitalType: '',
-                      value: '',
-                      unit: '',
-                      notes: '',
-                      recordedAt: new Date().toISOString().split('T')[0]
-                    });
-                  }}
-                  className={`px-4 py-2 rounded-lg font-medium transition-colors duration-200 ${
-                    isSubmittingVital 
-                      ? 'bg-gray-400 cursor-not-allowed text-white' 
-                      : 'bg-gray-500 hover:bg-gray-600 text-white'
-                  }`}
-                >
-                  Cancel
-                </button>
-              </div>
-            </form>
-          </div>
-        </div>
-      )}
-
-      {/* Upload Report Modal */}
-        {showUploadReportModal && selectedMember && (
-        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
-          <div className="bg-white rounded-lg p-6 w-full max-w-md max-h-[90vh] overflow-y-auto">
-            <h2 className="text-lg font-semibold mb-4">Upload Medical Report for {selectedMember.name}</h2>
-            <form onSubmit={handleUploadReport} className="space-y-4">
-              <div>
-                <label className="block text-sm font-medium text-gray-700 mb-1">Report Type</label>
-                <select
-                  value={reportFormData.reportType}
-                  onChange={(e) => {
-                    setReportFormData({
-                      ...reportFormData, 
-                      reportType: e.target.value,
-                      reportSubType: ''
-                    });
-                  }}
-                  className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-500"
-                  required
-                >
-                  <option value="">Select Report Type</option>
-                  {Object.entries(REPORT_TYPES).map(([key, config]) => (
-                    <option key={key} value={key}>{config.label}</option>
-                  ))}
-                </select>
-              </div>
-              <div>
-                <label className="block text-sm font-medium text-gray-700 mb-1">Report Sub-Type <span className="text-red-500">*</span></label>
-                <select
-                  value={reportFormData.reportSubType}
-                  onChange={(e) => setReportFormData({...reportFormData, reportSubType: e.target.value})}
-                  className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-500"
-                  required
-                >
-                  <option value="">Select Sub-Type</option>
-                  {reportFormData.reportType && REPORT_TYPES[reportFormData.reportType]?.subTypes ? (
-                    REPORT_TYPES[reportFormData.reportType].subTypes.map((subType) => (
-                      <option key={subType.value} value={subType.value}>{subType.label}</option>
-                    ))
-                  ) : (
-                    Object.values(REPORT_TYPES).flatMap(config => 
-                      config.subTypes ? config.subTypes.map((subType) => (
-                        <option key={subType.value} value={subType.value}>{subType.label}</option>
-                      )) : []
-                    )
-                  )}
+          <div className="fixed inset-0 bg-black/50 backdrop-blur-sm flex items-center justify-center z-50 p-4">
+            <div className="glass-panel p-6 w-full max-w-md">
+              <h2 className="text-lg font-semibold mb-4">Add Health Vital for {selectedMember.name}</h2>
+              <form onSubmit={handleAddVital} className="space-y-4">
+                <div>
+                  <label className="block text-sm font-medium text-gray-700 mb-1">Vital Type</label>
+                  <select
+                    value={vitalFormData.vitalType}
+                    onChange={(e) => handleVitalTypeChange(e.target.value)}
+                    className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-500"
+                    required
+                  >
+                    <option value="">Select Vital Type</option>
+                    {Object.entries(VITAL_TYPES).map(([key, config]) => (
+                      <option key={key} value={key}>{config.label}</option>
+                    ))}
                   </select>
                 </div>
-              <div>
-                <label className="block text-sm font-medium text-gray-700 mb-1">File Name <span className="text-red-500">*</span></label>
-                <input
-                  type="text"
-                  value={reportFormData.title}
-                  onChange={(e) => setReportFormData({...reportFormData, title: e.target.value})}
-                  className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-500"
-                  placeholder={reportFormData.file ? reportFormData.file.name.replace(/\.[^/.]+$/, '') : 'Enter file name'}
-                  required
-                />
-                <p className="text-xs text-gray-500 mt-1">Name for this report (without extension)</p>
-              </div>
-              <div>
-                <label className="block text-sm font-medium text-gray-700 mb-1">Report Date</label>
-                <input
-                  type="text"
-                  placeholder="dd-mm-yyyy"
-                  value={reportFormData.reportDate ? formatDate(reportFormData.reportDate) : ''}
-                  onChange={(e) => {
-                    const value = e.target.value;
-                    if (/^[\d-]*$/.test(value)) {
-                      setReportFormData({...reportFormData, reportDate: parseDateFromDisplay(value)});
-                    }
-                  }}
-                  className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-500"
-                  required
-                />
-                <p className="text-xs text-gray-500 mt-1">Format: dd-mm-yyyy</p>
-              </div>
-              <div>
-                <label className="block text-sm font-medium text-gray-700 mb-1">File</label>
-                <input
-                  type="file"
-                  onChange={handleFileChange}
-                  className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-500"
-                  accept=".pdf,.doc,.docx,.jpg,.jpeg,.png,.gif"
-                  required
-                />
-                <p className="text-xs text-gray-500 mt-1">Accepted formats: PDF, DOC, DOCX, JPG, PNG, GIF (max 10MB)</p>
-              </div>
-              <div className="flex space-x-3">
-                <button 
-                  type="submit" 
-                  disabled={isSubmittingReport}
-                  className={`px-4 py-2 rounded-lg font-medium transition-colors duration-200 ${
-                    isSubmittingReport 
-                      ? 'bg-gray-400 cursor-not-allowed text-white' 
+                <div>
+                  <label className="block text-sm font-medium text-gray-700 mb-1">Value</label>
+                  <input
+                    type="number"
+                    step="0.01"
+                    value={vitalFormData.value}
+                    onChange={(e) => setVitalFormData({ ...vitalFormData, value: e.target.value })}
+                    className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-500"
+                    placeholder={vitalFormData.vitalType ? VITAL_TYPES[vitalFormData.vitalType]?.placeholder : ''}
+                    required
+                  />
+                </div>
+                <div>
+                  <label className="block text-sm font-medium text-gray-700 mb-1">Unit</label>
+                  <input
+                    type="text"
+                    value={vitalFormData.unit}
+                    onChange={(e) => setVitalFormData({ ...vitalFormData, unit: e.target.value })}
+                    className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-500"
+                    placeholder={vitalFormData.vitalType ? VITAL_TYPES[vitalFormData.vitalType]?.unit : ''}
+                    required
+                  />
+                </div>
+                <div>
+                  <label className="block text-sm font-medium text-gray-700 mb-1">Date Recorded</label>
+                  <input
+                    type="text"
+                    placeholder="dd-mm-yyyy"
+                    value={vitalFormData.recordedAt ? formatDate(vitalFormData.recordedAt) : ''}
+                    onChange={(e) => {
+                      const value = e.target.value;
+                      if (/^[\d-]*$/.test(value)) {
+                        setVitalFormData({ ...vitalFormData, recordedAt: parseDateFromDisplay(value) });
+                      }
+                    }}
+                    className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-500"
+                    required
+                  />
+                  <p className="text-xs text-gray-500 mt-1">Format: dd-mm-yyyy</p>
+                </div>
+                <div>
+                  <label className="block text-sm font-medium text-gray-700 mb-1">Notes (Optional)</label>
+                  <textarea
+                    value={vitalFormData.notes}
+                    onChange={(e) => setVitalFormData({ ...vitalFormData, notes: e.target.value })}
+                    className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-500"
+                    rows="3"
+                    placeholder="Any additional notes..."
+                  />
+                </div>
+                <div className="flex space-x-3">
+                  <button
+                    type="submit"
+                    disabled={isSubmittingVital}
+                    className={`px-4 py-2 rounded-lg font-medium transition-colors duration-200 ${isSubmittingVital
+                      ? 'bg-gray-400 cursor-not-allowed text-white'
                       : 'bg-teal-600 hover:bg-teal-700 text-white'
-                  }`}
-                >
-                  {isSubmittingReport ? 'Uploading...' : 'Upload Report'}
-                </button>
-                <button
-                  type="button"
-                  disabled={isSubmittingReport}
-                  onClick={() => {
-                    setShowUploadReportModal(false);
-                    setSelectedMember(null);
-                    setReportFormData({
-                      reportType: '',
-                      reportSubType: '',
-                      description: '',
-                      reportDate: new Date().toISOString().split('T')[0],
-                      file: null
-                    });
-                  }}
-                  className={`px-4 py-2 rounded-lg font-medium transition-colors duration-200 ${
-                    isSubmittingReport 
-                      ? 'bg-gray-400 cursor-not-allowed text-white' 
+                      }`}
+                  >
+                    {isSubmittingVital ? 'Adding Vital...' : 'Add Vital'}
+                  </button>
+                  <button
+                    type="button"
+                    disabled={isSubmittingVital}
+                    onClick={() => {
+                      setShowAddVitalModal(false);
+                      setSelectedMember(null);
+                      setVitalFormData({
+                        vitalType: '',
+                        value: '',
+                        unit: '',
+                        notes: '',
+                        recordedAt: new Date().toISOString().split('T')[0]
+                      });
+                    }}
+                    className={`px-4 py-2 rounded-lg font-medium transition-colors duration-200 ${isSubmittingVital
+                      ? 'bg-gray-400 cursor-not-allowed text-white'
                       : 'bg-gray-500 hover:bg-gray-600 text-white'
-                  }`}
-                >
-                  Cancel
-                </button>
-              </div>
-            </form>
+                      }`}
+                  >
+                    Cancel
+                  </button>
+                </div>
+              </form>
+            </div>
           </div>
-        </div>
-      )}
+        )}
+
+        {/* Upload Report Modal */}
+        {showUploadReportModal && selectedMember && (
+          <div className="fixed inset-0 bg-black/50 backdrop-blur-sm flex items-center justify-center z-50 p-4">
+            <div className="glass-panel p-6 w-full max-w-md max-h-[90vh] overflow-y-auto">
+              <h2 className="text-lg font-semibold mb-4">Upload Medical Report for {selectedMember.name}</h2>
+              <form onSubmit={handleUploadReport} className="space-y-4">
+                <div>
+                  <label className="block text-sm font-medium text-gray-700 mb-1">Report Type</label>
+                  <select
+                    value={reportFormData.reportType}
+                    onChange={(e) => {
+                      setReportFormData({
+                        ...reportFormData,
+                        reportType: e.target.value,
+                        reportSubType: ''
+                      });
+                    }}
+                    className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-500"
+                    required
+                  >
+                    <option value="">Select Report Type</option>
+                    {Object.entries(REPORT_TYPES).map(([key, config]) => (
+                      <option key={key} value={key}>{config.label}</option>
+                    ))}
+                  </select>
+                </div>
+                <div>
+                  <label className="block text-sm font-medium text-gray-700 mb-1">Report Sub-Type <span className="text-red-500">*</span></label>
+                  <select
+                    value={reportFormData.reportSubType}
+                    onChange={(e) => setReportFormData({ ...reportFormData, reportSubType: e.target.value })}
+                    className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-500"
+                    required
+                  >
+                    <option value="">Select Sub-Type</option>
+                    {reportFormData.reportType && REPORT_TYPES[reportFormData.reportType]?.subTypes ? (
+                      REPORT_TYPES[reportFormData.reportType].subTypes.map((subType) => (
+                        <option key={subType.value} value={subType.value}>{subType.label}</option>
+                      ))
+                    ) : (
+                      Object.values(REPORT_TYPES).flatMap(config =>
+                        config.subTypes ? config.subTypes.map((subType) => (
+                          <option key={subType.value} value={subType.value}>{subType.label}</option>
+                        )) : []
+                      )
+                    )}
+                  </select>
+                </div>
+                <div>
+                  <label className="block text-sm font-medium text-gray-700 mb-1">File Name <span className="text-red-500">*</span></label>
+                  <input
+                    type="text"
+                    value={reportFormData.title}
+                    onChange={(e) => setReportFormData({ ...reportFormData, title: e.target.value })}
+                    className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-500"
+                    placeholder={reportFormData.file ? reportFormData.file.name.replace(/\.[^/.]+$/, '') : 'Enter file name'}
+                    required
+                  />
+                  <p className="text-xs text-gray-500 mt-1">Name for this report (without extension)</p>
+                </div>
+                <div>
+                  <label className="block text-sm font-medium text-gray-700 mb-1">Report Date</label>
+                  <input
+                    type="text"
+                    placeholder="dd-mm-yyyy"
+                    value={reportFormData.reportDate ? formatDate(reportFormData.reportDate) : ''}
+                    onChange={(e) => {
+                      const value = e.target.value;
+                      if (/^[\d-]*$/.test(value)) {
+                        setReportFormData({ ...reportFormData, reportDate: parseDateFromDisplay(value) });
+                      }
+                    }}
+                    className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-500"
+                    required
+                  />
+                  <p className="text-xs text-gray-500 mt-1">Format: dd-mm-yyyy</p>
+                </div>
+                <div>
+                  <label className="block text-sm font-medium text-gray-700 mb-1">File</label>
+                  <input
+                    type="file"
+                    onChange={handleFileChange}
+                    className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-500"
+                    accept=".pdf,.doc,.docx,.jpg,.jpeg,.png,.gif"
+                    required
+                  />
+                  <p className="text-xs text-gray-500 mt-1">Accepted formats: PDF, DOC, DOCX, JPG, PNG, GIF (max 10MB)</p>
+                </div>
+                <div className="flex space-x-3">
+                  <button
+                    type="submit"
+                    disabled={isSubmittingReport}
+                    className={`px-4 py-2 rounded-lg font-medium transition-colors duration-200 ${isSubmittingReport
+                      ? 'bg-gray-400 cursor-not-allowed text-white'
+                      : 'bg-teal-600 hover:bg-teal-700 text-white'
+                      }`}
+                  >
+                    {isSubmittingReport ? 'Uploading...' : 'Upload Report'}
+                  </button>
+                  <button
+                    type="button"
+                    disabled={isSubmittingReport}
+                    onClick={() => {
+                      setShowUploadReportModal(false);
+                      setSelectedMember(null);
+                      setReportFormData({
+                        reportType: '',
+                        reportSubType: '',
+                        description: '',
+                        reportDate: new Date().toISOString().split('T')[0],
+                        file: null
+                      });
+                    }}
+                    className={`px-4 py-2 rounded-lg font-medium transition-colors duration-200 ${isSubmittingReport
+                      ? 'bg-gray-400 cursor-not-allowed text-white'
+                      : 'bg-gray-500 hover:bg-gray-600 text-white'
+                      }`}
+                  >
+                    Cancel
+                  </button>
+                </div>
+              </form>
+            </div>
+          </div>
+        )}
 
         {/* Upload Document Modal */}
         {showUploadDocumentModal && selectedMember && (
-        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
-          <div className="bg-white rounded-lg p-6 w-full max-w-md">
-            <h2 className="text-lg font-semibold mb-4">Upload Document for {selectedMember.name}</h2>
-            <form onSubmit={handleUploadDocument} className="space-y-4">
-              <div>
-                <label className="block text-sm font-medium text-gray-700 mb-1">File Name <span className="text-red-500">*</span></label>
-                <input
-                  type="text"
-                  value={documentFormData.title}
-                  onChange={(e) => setDocumentFormData({...documentFormData, title: e.target.value})}
-                  className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-500"
-                  placeholder="File name (without extension)"
-                  required
-                />
-                <p className="text-xs text-gray-500 mt-1">Name for this document (without extension)</p>
-              </div>
-              <div>
-                <label className="block text-sm font-medium text-gray-700 mb-1">Upload Date</label>
-                <input
-                  type="text"
-                  placeholder="dd-mm-yyyy"
-                  value={documentFormData.uploadDate ? formatDate(documentFormData.uploadDate) : ''}
-                  onChange={(e) => {
-                    const value = e.target.value;
-                    if (/^[\d-]*$/.test(value)) {
-                      setDocumentFormData({...documentFormData, uploadDate: parseDateFromDisplay(value)});
-                    }
-                  }}
-                  className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-500"
-                  required
-                />
-                <p className="text-xs text-gray-500 mt-1">Format: dd-mm-yyyy</p>
-              </div>
-              <div>
-                <label className="block text-sm font-medium text-gray-700 mb-1">File</label>
-                <input
-                  type="file"
-                  onChange={(e) => setDocumentFormData({...documentFormData, file: e.target.files[0]})}
-                  className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-500"
-                  accept=".pdf"
-                  required
-                />
-                <p className="text-xs text-gray-500 mt-1">Only PDF files are accepted (max 10MB)</p>
-              </div>
-              <div className="flex space-x-3">
-                <button 
-                  type="submit" 
-                  disabled={isSubmittingDocument}
-                  className={`px-4 py-2 rounded-lg font-medium transition-colors duration-200 ${
-                    isSubmittingDocument 
-                      ? 'bg-gray-400 cursor-not-allowed text-white' 
+          <div className="fixed inset-0 bg-black/50 backdrop-blur-sm flex items-center justify-center z-50 p-4">
+            <div className="glass-panel p-6 w-full max-w-md">
+              <h2 className="text-lg font-semibold mb-4">Upload Document for {selectedMember.name}</h2>
+              <form onSubmit={handleUploadDocument} className="space-y-4">
+                <div>
+                  <label className="block text-sm font-medium text-gray-700 mb-1">File Name <span className="text-red-500">*</span></label>
+                  <input
+                    type="text"
+                    value={documentFormData.title}
+                    onChange={(e) => setDocumentFormData({ ...documentFormData, title: e.target.value })}
+                    className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-500"
+                    placeholder="File name (without extension)"
+                    required
+                  />
+                  <p className="text-xs text-gray-500 mt-1">Name for this document (without extension)</p>
+                </div>
+                <div>
+                  <label className="block text-sm font-medium text-gray-700 mb-1">Upload Date</label>
+                  <input
+                    type="text"
+                    placeholder="dd-mm-yyyy"
+                    value={documentFormData.uploadDate ? formatDate(documentFormData.uploadDate) : ''}
+                    onChange={(e) => {
+                      const value = e.target.value;
+                      if (/^[\d-]*$/.test(value)) {
+                        setDocumentFormData({ ...documentFormData, uploadDate: parseDateFromDisplay(value) });
+                      }
+                    }}
+                    className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-500"
+                    required
+                  />
+                  <p className="text-xs text-gray-500 mt-1">Format: dd-mm-yyyy</p>
+                </div>
+                <div>
+                  <label className="block text-sm font-medium text-gray-700 mb-1">File</label>
+                  <input
+                    type="file"
+                    onChange={(e) => setDocumentFormData({ ...documentFormData, file: e.target.files[0] })}
+                    className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-500"
+                    accept=".pdf"
+                    required
+                  />
+                  <p className="text-xs text-gray-500 mt-1">Only PDF files are accepted (max 10MB)</p>
+                </div>
+                <div className="flex space-x-3">
+                  <button
+                    type="submit"
+                    disabled={isSubmittingDocument}
+                    className={`px-4 py-2 rounded-lg font-medium transition-colors duration-200 ${isSubmittingDocument
+                      ? 'bg-gray-400 cursor-not-allowed text-white'
                       : 'bg-teal-600 hover:bg-teal-700 text-white'
-                  }`}
-                >
-                  {isSubmittingDocument ? 'Uploading...' : 'Upload Document'}
-                </button>
-                <button
-                  type="button"
-                  disabled={isSubmittingDocument}
-                  onClick={() => {
-                    setShowUploadDocumentModal(false);
-                    setSelectedMember(null);
-                    setDocumentFormData({
-                      title: '',
-                      description: '',
-                      uploadDate: new Date().toISOString().split('T')[0],
-                      file: null
-                    });
-                  }}
-                  className={`px-4 py-2 rounded-lg font-medium transition-colors duration-200 ${
-                    isSubmittingDocument 
-                      ? 'bg-gray-400 cursor-not-allowed text-white' 
+                      }`}
+                  >
+                    {isSubmittingDocument ? 'Uploading...' : 'Upload Document'}
+                  </button>
+                  <button
+                    type="button"
+                    disabled={isSubmittingDocument}
+                    onClick={() => {
+                      setShowUploadDocumentModal(false);
+                      setSelectedMember(null);
+                      setDocumentFormData({
+                        title: '',
+                        description: '',
+                        uploadDate: new Date().toISOString().split('T')[0],
+                        file: null
+                      });
+                    }}
+                    className={`px-4 py-2 rounded-lg font-medium transition-colors duration-200 ${isSubmittingDocument
+                      ? 'bg-gray-400 cursor-not-allowed text-white'
                       : 'bg-gray-500 hover:bg-gray-600 text-white'
-                  }`}
-                >
-                  Cancel
-                </button>
-              </div>
-            </form>
+                      }`}
+                  >
+                    Cancel
+                  </button>
+                </div>
+              </form>
+            </div>
           </div>
-        </div>
-      )}
+        )}
 
         {/* Profile Picture Upload Modal */}
         {showProfileUploadModal && selectedMemberForProfile && (
-        <ProfilePictureUpload
-          member={selectedMemberForProfile}
-          onUploadSuccess={handleProfileUploadSuccess}
-          onClose={() => {
-            setShowProfileUploadModal(false);
-            setSelectedMemberForProfile(null);
-          }}
-        />
-      )}
+          <ProfilePictureUpload
+            member={selectedMemberForProfile}
+            onUploadSuccess={handleProfileUploadSuccess}
+            onClose={() => {
+              setShowProfileUploadModal(false);
+              setSelectedMemberForProfile(null);
+            }}
+          />
+        )}
       </div>
     </div>
   );
