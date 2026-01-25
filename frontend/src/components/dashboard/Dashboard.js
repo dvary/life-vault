@@ -929,13 +929,9 @@ const Dashboard = () => {
 
           <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center relative z-10 gap-4">
             <div>
-              <h1 className="text-3xl font-bold text-gray-900">
-                Health Dashboard
+              <h1 className="text-xl font-bold text-gray-800">
+                Welcome back, {user?.firstName || 'User'}
               </h1>
-              <p className="text-gray-600 mt-1 max-w-md">
-                Welcome back, <span className="font-semibold text-primary-600">{user?.firstName || 'User'}</span>.
-                Here is the overview of your family's health vault.
-              </p>
             </div>
 
             {isAdmin() && (
