@@ -3366,7 +3366,6 @@ const MemberPage = () => {
               onClose={() => setShowProfileUploadModal(false)}
             />
           )}
-        )}
         </div>
       </div>
     </div>
