@@ -3368,46 +3368,46 @@ const MemberPage = () => {
           )}
         </div>
       </div>
-    </div>
 
-       {/* Fixed Bottom Navigation */ }
-  <div className="fixed bottom-0 left-0 right-0 bg-white/80 backdrop-blur-md border-t border-gray-200 shadow-lg z-50 pb-safe">
-    <div className="flex justify-around items-center h-16 max-w-lg mx-auto">
-      <button
-        onClick={() => setActiveTab('vitals')}
-        className={`flex flex-col items-center justify-center w-full h-full space-y-1 ${activeTab === 'vitals' ? 'text-primary-600' : 'text-gray-400 hover:text-gray-600'}`}
-      >
-        <div className="p-1 rounded-full">
-          <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
-          </svg>
+      {/* Fixed Bottom Navigation */}
+      <div className="fixed bottom-0 left-0 right-0 bg-white/80 backdrop-blur-md border-t border-gray-200 shadow-lg z-50 pb-safe">
+        <div className="flex justify-around items-center h-16 max-w-lg mx-auto">
+          <button
+            onClick={() => setActiveTab('vitals')}
+            className={`flex flex-col items-center justify-center w-full h-full space-y-1 ${activeTab === 'vitals' ? 'text-primary-600' : 'text-gray-400 hover:text-gray-600'}`}
+          >
+            <div className="p-1 rounded-full">
+              <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
+              </svg>
+            </div>
+            <span className="text-xs font-medium">Vitals</span>
+          </button>
+          <button
+            onClick={() => setActiveTab('reports')}
+            className={`flex flex-col items-center justify-center w-full h-full space-y-1 ${activeTab === 'reports' ? 'text-primary-600' : 'text-gray-400 hover:text-gray-600'}`}
+          >
+            <div className="p-1 rounded-full">
+              <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+              </svg>
+            </div>
+            <span className="text-xs font-medium">Reports</span>
+          </button>
+          <button
+            onClick={() => setActiveTab('documents')}
+            className={`flex flex-col items-center justify-center w-full h-full space-y-1 ${activeTab === 'documents' ? 'text-primary-600' : 'text-gray-400 hover:text-gray-600'}`}
+          >
+            <div className="p-1 rounded-full">
+              <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M7 21h10a2 2 0 002-2V9.414a1 1 0 00-.293-.707l-5.414-5.414A1 1 0 0012.586 3H7a2 2 0 00-2 2v14a2 2 0 002 2z" />
+              </svg>
+            </div>
+            <span className="text-xs font-medium">Documents</span>
+          </button>
         </div>
-        <span className="text-xs font-medium">Vitals</span>
-      </button>
-      <button
-        onClick={() => setActiveTab('reports')}
-        className={`flex flex-col items-center justify-center w-full h-full space-y-1 ${activeTab === 'reports' ? 'text-primary-600' : 'text-gray-400 hover:text-gray-600'}`}
-      >
-        <div className="p-1 rounded-full">
-          <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
-          </svg>
-        </div>
-        <span className="text-xs font-medium">Reports</span>
-      </button>
-      <button
-        onClick={() => setActiveTab('documents')}
-        className={`flex flex-col items-center justify-center w-full h-full space-y-1 ${activeTab === 'documents' ? 'text-primary-600' : 'text-gray-400 hover:text-gray-600'}`}
-      >
-        <div className="p-1 rounded-full">
-          <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M7 21h10a2 2 0 002-2V9.414a1 1 0 00-.293-.707l-5.414-5.414A1 1 0 0012.586 3H7a2 2 0 00-2 2v14a2 2 0 002 2z" />
-          </svg>
-        </div>
-        <span className="text-xs font-medium">Documents</span>
-      </button>
+      </div>
     </div>
-  </div>
   );
 };
 
