@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useCallback } from 'react';
-import { useParams, useNavigate, useSearchParams } from 'react-router-dom';
+import { useParams, useNavigate, useSearchParams, Link } from 'react-router-dom';
 import axios from 'axios';
 import toast from 'react-hot-toast';
 import Confetti from 'react-confetti';
@@ -1708,7 +1708,7 @@ const MemberPage = () => {
       )}
 
       {/* Floating Action Button for Mobile */}
-      <div className="fixed bottom-6 right-6 z-50 sm:hidden">
+      <div className="fixed bottom-24 right-6 z-50 sm:hidden">
         <div className="relative group">
           {/* Pulse ring effect for empty states */}
           {((activeTab === 'vitals' && healthVitals.length === 0) ||
@@ -3372,6 +3372,17 @@ const MemberPage = () => {
       {/* Fixed Bottom Navigation */}
       <div className="fixed bottom-0 left-0 right-0 bg-white/80 backdrop-blur-md border-t border-gray-200 shadow-lg z-50 pb-safe">
         <div className="flex justify-around items-center h-16 max-w-lg mx-auto">
+          <Link
+            to="/dashboard"
+            className="flex flex-col items-center justify-center w-full h-full space-y-1 text-gray-400 hover:text-gray-600"
+          >
+            <div className="p-1 rounded-full">
+              <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" />
+              </svg>
+            </div>
+            <span className="text-xs font-medium">Home</span>
+          </Link>
           <button
             onClick={() => setActiveTab('vitals')}
             className={`flex flex-col items-center justify-center w-full h-full space-y-1 ${activeTab === 'vitals' ? 'text-primary-600' : 'text-gray-400 hover:text-gray-600'}`}
