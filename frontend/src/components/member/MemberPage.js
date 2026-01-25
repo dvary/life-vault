@@ -9,6 +9,19 @@ import ProfilePictureUpload from '../common/ProfilePictureUpload';
 
 
 // Icon components
+const getGenderIcon = (gender) => {
+  switch (gender) {
+    case 'male':
+      return '👨';
+    case 'female':
+      return '👩';
+    case 'other':
+      return '👤';
+    default:
+      return '👤';
+  }
+};
+
 const EyeIcon = () => (
   <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
@@ -2014,8 +2027,8 @@ const MemberPage = () => {
                 type="submit"
                 disabled={isSubmittingMember}
                 className={`px-4 py-2 rounded-lg font-medium transition-colors duration-200 ${isSubmittingMember
-                    ? 'bg-gray-400 cursor-not-allowed text-white'
-                    : 'bg-teal-600 hover:bg-teal-700 text-white'
+                  ? 'bg-gray-400 cursor-not-allowed text-white'
+                  : 'bg-teal-600 hover:bg-teal-700 text-white'
                   }`}
               >
                 {isSubmittingMember ? 'Updating...' : 'Update Member'}
@@ -2025,8 +2038,8 @@ const MemberPage = () => {
                 disabled={isSubmittingMember}
                 onClick={handleCancel}
                 className={`px-4 py-2 rounded-lg font-medium transition-colors duration-200 ${isSubmittingMember
-                    ? 'bg-gray-400 cursor-not-allowed text-white'
-                    : 'bg-gray-500 hover:bg-gray-600 text-white'
+                  ? 'bg-gray-400 cursor-not-allowed text-white'
+                  : 'bg-gray-500 hover:bg-gray-600 text-white'
                   }`}
               >
                 Cancel
@@ -2047,8 +2060,8 @@ const MemberPage = () => {
               data-tab={activeTab === tab ? 'active' : 'inactive'}
               data-tab-name={tab}
               className={`flex-1 py-2 px-3 rounded-lg text-sm font-medium transition-all duration-200 capitalize ${activeTab === tab
-                  ? 'bg-white text-primary-600 shadow-sm'
-                  : 'text-gray-500 hover:text-gray-700 hover:bg-white/50'
+                ? 'bg-white text-primary-600 shadow-sm'
+                : 'text-gray-500 hover:text-gray-700 hover:bg-white/50'
                 }`}
             >
               {tab}
@@ -2276,8 +2289,8 @@ const MemberPage = () => {
                                             }
                                           }}
                                           className={`p-1.5 rounded transition-colors ${isAdmin()
-                                              ? 'text-red-600 hover:text-red-800 bg-red-50 hover:bg-red-100'
-                                              : 'text-gray-400 bg-gray-50 cursor-not-allowed'
+                                            ? 'text-red-600 hover:text-red-800 bg-red-50 hover:bg-red-100'
+                                            : 'text-gray-400 bg-gray-50 cursor-not-allowed'
                                             }`}
                                           title={isAdmin() ? "Delete" : "Only admins can delete"}
                                           disabled={!isAdmin()}
@@ -2437,8 +2450,8 @@ const MemberPage = () => {
                                             }
                                           }}
                                           className={`p-1.5 rounded transition-colors ${isAdmin()
-                                              ? 'text-red-600 hover:text-red-800 bg-red-50 hover:bg-red-100'
-                                              : 'text-gray-400 bg-gray-50 cursor-not-allowed'
+                                            ? 'text-red-600 hover:text-red-800 bg-red-50 hover:bg-red-100'
+                                            : 'text-gray-400 bg-gray-50 cursor-not-allowed'
                                             }`}
                                           title={isAdmin() ? "Delete" : "Only admins can delete"}
                                           disabled={!isAdmin()}
@@ -2538,8 +2551,8 @@ const MemberPage = () => {
                                 }
                               }}
                               className={`p-1.5 rounded transition-colors ${isAdmin()
-                                  ? 'text-red-600 hover:text-red-800 bg-red-50 hover:bg-red-100'
-                                  : 'text-gray-400 bg-gray-50 cursor-not-allowed'
+                                ? 'text-red-600 hover:text-red-800 bg-red-50 hover:bg-red-100'
+                                : 'text-gray-400 bg-gray-50 cursor-not-allowed'
                                 }`}
                               title={isAdmin() ? "Delete" : "Only admins can delete"}
                               disabled={!isAdmin()}
@@ -2684,8 +2697,8 @@ const MemberPage = () => {
                     type="submit"
                     disabled={isSubmittingVital}
                     className={`px-4 py-2 rounded-lg font-medium transition-colors duration-200 ${isSubmittingVital
-                        ? 'bg-gray-400 cursor-not-allowed text-white'
-                        : 'bg-teal-600 hover:bg-teal-700 text-white'
+                      ? 'bg-gray-400 cursor-not-allowed text-white'
+                      : 'bg-teal-600 hover:bg-teal-700 text-white'
                       }`}
                   >
                     {isSubmittingVital ? 'Adding Vital...' : 'Add Vital'}
@@ -2695,8 +2708,8 @@ const MemberPage = () => {
                     disabled={isSubmittingVital}
                     onClick={() => setShowAddVitalModal(false)}
                     className={`px-4 py-2 rounded-lg font-medium transition-colors duration-200 ${isSubmittingVital
-                        ? 'bg-gray-400 cursor-not-allowed text-white'
-                        : 'bg-gray-500 hover:bg-gray-600 text-white'
+                      ? 'bg-gray-400 cursor-not-allowed text-white'
+                      : 'bg-gray-500 hover:bg-gray-600 text-white'
                       }`}
                   >
                     Cancel
@@ -2961,8 +2974,8 @@ const MemberPage = () => {
                     type="submit"
                     disabled={isUploading || isSubmittingReport}
                     className={`px-4 py-2 rounded-lg font-medium relative overflow-hidden transition-colors duration-200 ${(isUploading || isSubmittingReport)
-                        ? 'bg-gray-400 cursor-not-allowed text-white'
-                        : 'bg-teal-600 hover:bg-teal-700 text-white'
+                      ? 'bg-gray-400 cursor-not-allowed text-white'
+                      : 'bg-teal-600 hover:bg-teal-700 text-white'
                       }`}
                   >
                     {isUploading ? (
@@ -2984,8 +2997,8 @@ const MemberPage = () => {
                     disabled={isUploading || isSubmittingReport}
                     onClick={() => setShowUploadReportModal(false)}
                     className={`px-4 py-2 rounded-lg font-medium transition-colors duration-200 ${(isUploading || isSubmittingReport)
-                        ? 'bg-gray-400 cursor-not-allowed text-white'
-                        : 'bg-gray-500 hover:bg-gray-600 text-white'
+                      ? 'bg-gray-400 cursor-not-allowed text-white'
+                      : 'bg-gray-500 hover:bg-gray-600 text-white'
                       }`}
                   >
                     {(isUploading || isSubmittingReport) ? 'Please wait...' : 'Cancel'}
@@ -3219,8 +3232,8 @@ const MemberPage = () => {
                     type="submit"
                     disabled={isUploading || isSubmittingDocument}
                     className={`px-4 py-2 rounded-lg font-medium relative overflow-hidden transition-colors duration-200 ${(isUploading || isSubmittingDocument)
-                        ? 'bg-gray-400 cursor-not-allowed text-white'
-                        : 'bg-teal-600 hover:bg-teal-700 text-white'
+                      ? 'bg-gray-400 cursor-not-allowed text-white'
+                      : 'bg-teal-600 hover:bg-teal-700 text-white'
                       }`}
                   >
                     {isUploading ? (
@@ -3242,8 +3255,8 @@ const MemberPage = () => {
                     disabled={isUploading || isSubmittingDocument}
                     onClick={() => setShowUploadDocumentModal(false)}
                     className={`px-4 py-2 rounded-lg font-medium transition-colors duration-200 ${(isUploading || isSubmittingDocument)
-                        ? 'bg-gray-400 cursor-not-allowed text-white'
-                        : 'bg-gray-500 hover:bg-gray-600 text-white'
+                      ? 'bg-gray-400 cursor-not-allowed text-white'
+                      : 'bg-gray-500 hover:bg-gray-600 text-white'
                       }`}
                   >
                     {(isUploading || isSubmittingDocument) ? 'Please wait...' : 'Cancel'}

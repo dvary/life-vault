@@ -923,15 +923,33 @@ const Dashboard = () => {
     <div className="relative z-10 w-full min-h-screen">
       <div className="p-1 sm:p-2 space-y-4">
         {/* Header */}
-        <div className="flex justify-end">
-          {isAdmin() && (
-            <button
-              onClick={() => setShowAddForm(true)}
-              className="btn-primary"
-            >
-              Add Family Member
-            </button>
-          )}
+        {/* Hero Header Section */}
+        <div className="glass-panel p-6 mb-8 relative overflow-hidden bg-gradient-to-r from-primary-500/10 to-secondary-500/10 border-primary-100/50">
+          <div className="absolute top-0 right-0 -mr-16 -mt-16 w-64 h-64 rounded-full bg-primary-500/10 blur-3xl"></div>
+
+          <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center relative z-10 gap-4">
+            <div>
+              <h1 className="text-3xl font-bold text-gray-900">
+                Health Dashboard
+              </h1>
+              <p className="text-gray-600 mt-1 max-w-md">
+                Welcome back, <span className="font-semibold text-primary-600">{user?.firstName || 'User'}</span>.
+                Here is the overview of your family's health vault.
+              </p>
+            </div>
+
+            {isAdmin() && (
+              <button
+                onClick={() => setShowAddForm(true)}
+                className="btn-primary flex items-center space-x-2 shadow-lg hover:shadow-primary-500/30 transform hover:-translate-y-0.5 transition-all"
+              >
+                <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 4v16m8-8H4" />
+                </svg>
+                <span>Add Family Member</span>
+              </button>
+            )}
+          </div>
         </div>
 
         {/* Add/Edit Form */}
