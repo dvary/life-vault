@@ -228,7 +228,7 @@ const REPORT_TYPES = {
 };
 
 const Dashboard = () => {
-  const { isAdmin } = useAuth();
+  const { user, isAdmin } = useAuth();
 
   // Get current date components
   const getCurrentDateComponents = () => {
