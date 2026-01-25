@@ -1718,25 +1718,16 @@ const MemberPage = () => {
             )}
           <button
             onClick={() => {
-              // Show quick action menu
-              const activeTab = document.querySelector('[data-tab="active"]');
-              if (activeTab) {
-                const tabName = activeTab.getAttribute('data-tab-name');
-                switch (tabName) {
-                  case 'vitals':
-                    setShowAddVitalModal(true);
-                    break;
-                  case 'reports':
-                    setShowUploadReportModal(true);
-                    break;
-                  case 'documents':
-                    setShowUploadDocumentModal(true);
-                    break;
-                  default:
-                    setShowAddVitalModal(true);
-                }
-              } else {
-                setShowAddVitalModal(true);
+              switch (activeTab) {
+                case 'reports':
+                  setShowUploadReportModal(true);
+                  break;
+                case 'documents':
+                  setShowUploadDocumentModal(true);
+                  break;
+                case 'vitals':
+                default:
+                  setShowAddVitalModal(true);
               }
             }}
             className="bg-teal-600 hover:bg-teal-700 text-white w-14 h-14 rounded-full shadow-lg flex items-center justify-center transition-all duration-200 transform hover:scale-110 relative z-10"
