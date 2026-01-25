@@ -50,60 +50,60 @@ const ChevronRightIcon = () => (
 
 // New icons
 const UploadIcon = () => (
-	<svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-		<path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 16v2a2 2 0 002 2h12a2 2 0 002-2v-2M7 10l5-5m0 0l5 5m-5-5v12" />
-	</svg>
+  <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 16v2a2 2 0 002 2h12a2 2 0 002-2v-2M7 10l5-5m0 0l5 5m-5-5v12" />
+  </svg>
 );
 
 const PlusIcon = () => (
-	<svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-		<path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 4v16m8-8H4" />
-	</svg>
+  <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 4v16m8-8H4" />
+  </svg>
 );
 
 // Thumbs up/down icons for vital status
 const ThumbsUpIcon = () => (
   <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
-    <path d="M2.76 20.2a2.76 2.76 0 0 0 2.74 2.74h13.8a2.76 2.76 0 0 0 2.74-2.74V13.5a2.76 2.76 0 0 0-2.74-2.74h-3.93l1.81-8.57a.69.69 0 0 0-.67-.84.7.7 0 0 0-.66.47L15.49 10.8H4.5a2.76 2.76 0 0 0-2.74 2.74v6.66Z"/>
+    <path d="M2.76 20.2a2.76 2.76 0 0 0 2.74 2.74h13.8a2.76 2.76 0 0 0 2.74-2.74V13.5a2.76 2.76 0 0 0-2.74-2.74h-3.93l1.81-8.57a.69.69 0 0 0-.67-.84.7.7 0 0 0-.66.47L15.49 10.8H4.5a2.76 2.76 0 0 0-2.74 2.74v6.66Z" />
   </svg>
 );
 
 const ThumbsDownIcon = () => (
   <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
-    <path d="M21.24 3.8a2.76 2.76 0 0 0-2.74-2.74H4.7a2.76 2.76 0 0 0-2.74 2.74v6.66a2.76 2.76 0 0 0 2.74 2.74h3.93l-1.81 8.57a.69.69 0 0 0 .67.84.7.7 0 0 0 .66-.47L8.51 13.2h10.99a2.76 2.76 0 0 0 2.74-2.74V3.8Z"/>
+    <path d="M21.24 3.8a2.76 2.76 0 0 0-2.74-2.74H4.7a2.76 2.76 0 0 0-2.74 2.74v6.66a2.76 2.76 0 0 0 2.74 2.74h3.93l-1.81 8.57a.69.69 0 0 0 .67.84.7.7 0 0 0 .66-.47L8.51 13.2h10.99a2.76 2.76 0 0 0 2.74-2.74V3.8Z" />
   </svg>
 );
 
 const NeutralIcon = () => (
   <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
-    <path d="M8 12a1 1 0 1 0 0-2 1 1 0 0 0 0 2Zm8 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2ZM12 16a1 1 0 1 0 0-2 1 1 0 0 0 0 2Z"/>
+    <path d="M8 12a1 1 0 1 0 0-2 1 1 0 0 0 0 2Zm8 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2ZM12 16a1 1 0 1 0 0-2 1 1 0 0 0 0 2Z" />
   </svg>
 );
 
 // Vital types configuration with units and reference ranges
 const VITAL_TYPES = {
-  height: { 
-    label: 'Height', 
-    unit: 'cm', 
+  height: {
+    label: 'Height',
+    unit: 'cm',
     placeholder: '170',
     ranges: {
       normal: { min: 0, max: 200 },
       display: '0-200'
     }
   },
-  weight: { 
-    label: 'Weight', 
-    unit: 'kg', 
+  weight: {
+    label: 'Weight',
+    unit: 'kg',
     placeholder: '70',
     ranges: {
       normal: { min: 0, max: 120 },
       display: '0-120'
     }
   },
-  bmi: { 
-    label: 'BMI', 
-    unit: 'kg/m²', 
-    placeholder: '24.2', 
+  bmi: {
+    label: 'BMI',
+    unit: 'kg/m²',
+    placeholder: '24.2',
     calculated: true,
     ranges: {
       underweight: { min: 0, max: 18.4 },
@@ -113,9 +113,9 @@ const VITAL_TYPES = {
       display: '18.5-24.9'
     }
   },
-  cholesterol: { 
-    label: 'Cholesterol', 
-    unit: 'mg/dL', 
+  cholesterol: {
+    label: 'Cholesterol',
+    unit: 'mg/dL',
     placeholder: '200',
     ranges: {
       optimal: { min: 0, max: 199 },
@@ -124,9 +124,9 @@ const VITAL_TYPES = {
       display: '<200'
     }
   },
-  hemoglobin: { 
-    label: 'Hemoglobin', 
-    unit: 'g/dL', 
+  hemoglobin: {
+    label: 'Hemoglobin',
+    unit: 'g/dL',
     placeholder: '14',
     ranges: {
       male: { min: 13.8, max: 17.2 },
@@ -134,27 +134,27 @@ const VITAL_TYPES = {
       display: 'M: 13.8-17.2, F: 12.1-15.1'
     }
   },
-  sgpt: { 
-    label: 'S.G.P.T.', 
-    unit: 'U/L', 
+  sgpt: {
+    label: 'S.G.P.T.',
+    unit: 'U/L',
     placeholder: '40',
     ranges: {
       normal: { min: 7, max: 56 },
       display: '7-56'
     }
   },
-  sgot: { 
-    label: 'S.G.O.T.', 
-    unit: 'U/L', 
+  sgot: {
+    label: 'S.G.O.T.',
+    unit: 'U/L',
     placeholder: '40',
     ranges: {
       normal: { min: 10, max: 40 },
       display: '10-40'
     }
   },
-  vitamin_d: { 
-    label: 'Vitamin D', 
-    unit: 'ng/mL', 
+  vitamin_d: {
+    label: 'Vitamin D',
+    unit: 'ng/mL',
     placeholder: '30',
     ranges: {
       deficient: { min: 0, max: 19 },
@@ -163,36 +163,36 @@ const VITAL_TYPES = {
       display: '30-100'
     }
   },
-  thyroid_tsh: { 
-    label: 'Thyroid TSH', 
-    unit: 'μIU/mL', 
+  thyroid_tsh: {
+    label: 'Thyroid TSH',
+    unit: 'μIU/mL',
     placeholder: '2.5',
     ranges: {
       normal: { min: 0.27, max: 4.2 },
       display: '0.27-4.2'
     }
   },
-  thyroid_t3: { 
-    label: 'Thyroid T3', 
-    unit: 'ng/dL', 
+  thyroid_t3: {
+    label: 'Thyroid T3',
+    unit: 'ng/dL',
     placeholder: '120',
     ranges: {
       normal: { min: 80, max: 200 },
       display: '80-200'
     }
   },
-  thyroid_t4: { 
-    label: 'Thyroid T4', 
-    unit: 'μg/dL', 
+  thyroid_t4: {
+    label: 'Thyroid T4',
+    unit: 'μg/dL',
     placeholder: '1.2',
     ranges: {
       normal: { min: 5.1, max: 14.1 },
       display: '5.1-14.1'
     }
   },
-  vitamin_b12: { 
-    label: 'Vitamin B12', 
-    unit: 'pg/mL', 
+  vitamin_b12: {
+    label: 'Vitamin B12',
+    unit: 'pg/mL',
     placeholder: '500',
     ranges: {
       deficient: { min: 0, max: 199 },
@@ -201,18 +201,18 @@ const VITAL_TYPES = {
       display: '300-900'
     }
   },
-  calcium: { 
-    label: 'Calcium', 
-    unit: 'mg/dL', 
+  calcium: {
+    label: 'Calcium',
+    unit: 'mg/dL',
     placeholder: '9.5',
     ranges: {
       normal: { min: 8.5, max: 10.2 },
       display: '8.5-10.2'
     }
   },
-  hba1c: { 
-    label: 'HbA1c', 
-    unit: '%', 
+  hba1c: {
+    label: 'HbA1c',
+    unit: '%',
     placeholder: '5.7',
     ranges: {
       normal: { min: 0, max: 5.6 },
@@ -221,18 +221,18 @@ const VITAL_TYPES = {
       display: '<5.7'
     }
   },
-  urea: { 
-    label: 'Urea', 
-    unit: 'mg/dL', 
+  urea: {
+    label: 'Urea',
+    unit: 'mg/dL',
     placeholder: '20',
     ranges: {
       normal: { min: 6, max: 24 },
       display: '6-24'
     }
   },
-  fasting_blood_glucose: { 
-    label: 'Fasting Blood Glucose', 
-    unit: 'mg/dL', 
+  fasting_blood_glucose: {
+    label: 'Fasting Blood Glucose',
+    unit: 'mg/dL',
     placeholder: '100',
     ranges: {
       normal: { min: 70, max: 99 },
@@ -241,9 +241,9 @@ const VITAL_TYPES = {
       display: '70-99'
     }
   },
-  creatinine: { 
-    label: 'Creatinine', 
-    unit: 'mg/dL', 
+  creatinine: {
+    label: 'Creatinine',
+    unit: 'mg/dL',
     placeholder: '1.0',
     ranges: {
       normal: { min: 0.6, max: 1.4 },
@@ -254,8 +254,8 @@ const VITAL_TYPES = {
 
 // Report types configuration
 const REPORT_TYPES = {
-  lab_report: { 
-    label: 'Lab Report', 
+  lab_report: {
+    label: 'Lab Report',
     subTypes: [
       { value: 'blood_report', label: 'Blood Report' },
       { value: 'xray', label: 'X-Ray' },
@@ -268,7 +268,7 @@ const REPORT_TYPES = {
       { value: 'general_lab', label: 'General Lab Report' }
     ]
   },
-  prescription_consultation: { 
+  prescription_consultation: {
     label: 'Prescription/Consultation',
     subTypes: [
       { value: 'prescription', label: 'Prescription' },
@@ -277,7 +277,7 @@ const REPORT_TYPES = {
       { value: 'emergency_visit', label: 'Emergency Visit' }
     ]
   },
-  vaccination: { 
+  vaccination: {
     label: 'Vaccination',
     subTypes: [
       { value: 'covid_19', label: 'COVID-19' },
@@ -288,7 +288,7 @@ const REPORT_TYPES = {
       { value: 'other_vaccine', label: 'Other Vaccine' }
     ]
   },
-  hospital_records: { 
+  hospital_records: {
     label: 'Hospital Records',
     subTypes: [
       { value: 'admission', label: 'Admission Record' },
@@ -308,7 +308,7 @@ const MemberPage = () => {
   const navigate = useNavigate();
   const [searchParams] = useSearchParams();
   const { user, isAdmin, updateUser } = useAuth();
-  
+
   // Get current date components
   const getCurrentDateComponents = () => {
     const now = new Date();
@@ -344,22 +344,22 @@ const MemberPage = () => {
     password: '',
     role: ''
   });
-  
+
   // Date component states for edit form
   const [editDateComponents, setEditDateComponents] = useState(getCurrentDateComponents());
-  
+
   // Date component states for vitals
   const [vitalDateComponents, setVitalDateComponents] = useState(getCurrentDateComponents());
   const [editVitalDateComponents, setEditVitalDateComponents] = useState(getCurrentDateComponents());
-  
+
   // Date component states for reports
   const [reportDateComponents, setReportDateComponents] = useState(getCurrentDateComponents());
   const [editReportDateComponents, setEditReportDateComponents] = useState(getCurrentDateComponents());
-  
+
   // Date component states for documents
   const [documentDateComponents, setDocumentDateComponents] = useState(getCurrentDateComponents());
   const [editDocumentDateComponents, setEditDocumentDateComponents] = useState(getCurrentDateComponents());
-  
+
   const [vitalFormData, setVitalFormData] = useState({
     vitalType: '',
     value: '',
@@ -497,7 +497,7 @@ const MemberPage = () => {
     if (!dateString) return { day: '', month: '', year: '' };
     const date = new Date(dateString);
     if (isNaN(date.getTime())) return { day: '', month: '', year: '' };
-    
+
     return {
       day: date.getDate().toString().padStart(2, '0'),
       month: (date.getMonth() + 1).toString().padStart(2, '0'),
@@ -588,12 +588,12 @@ const MemberPage = () => {
   const getBMIRecords = () => {
     const heightRecords = healthVitals.filter(vital => vital.vital_type === 'height');
     const weightRecords = healthVitals.filter(vital => vital.vital_type === 'weight');
-    
+
     if (heightRecords.length === 0 || weightRecords.length === 0) return [];
-    
+
     // Get the latest height
     const latestHeight = heightRecords.sort((a, b) => new Date(b.recorded_at) - new Date(a.recorded_at))[0];
-    
+
     // Calculate BMI for each weight record
     return weightRecords
       .sort((a, b) => new Date(b.recorded_at) - new Date(a.recorded_at))
@@ -618,16 +618,16 @@ const MemberPage = () => {
     return vitals.sort((a, b) => {
       const aStatus = getVitalStatus(a.vital_type, a.value, member?.gender);
       const bStatus = getVitalStatus(b.vital_type, b.value, member?.gender);
-      
+
       // BMI always comes first
       if (a.vital_type === 'bmi') return -1;
       if (b.vital_type === 'bmi') return 1;
-      
+
       // Then sort by priority (high to low)
       if (aStatus.priority !== bStatus.priority) {
         return bStatus.priority - aStatus.priority;
       }
-      
+
       // If same priority, sort alphabetically
       return a.vital_type.localeCompare(b.vital_type);
     });
@@ -642,39 +642,39 @@ const MemberPage = () => {
       }
       grouped[vital.vital_type].push(vital);
     });
-    
+
     // Sort each group by date (newest first)
     Object.keys(grouped).forEach(type => {
       grouped[type].sort((a, b) => new Date(b.recorded_at) - new Date(a.recorded_at));
     });
-    
+
     return grouped;
   };
 
   // Sort grouped vitals by latest record status priority
   const sortGroupedVitalsByStatus = (groupedVitals) => {
     const vitalTypes = Object.keys(groupedVitals);
-    
+
     return vitalTypes.sort((a, b) => {
       const aVitals = groupedVitals[a];
       const bVitals = groupedVitals[b];
-      
+
       // BMI always comes first
       if (a === 'bmi') return -1;
       if (b === 'bmi') return 1;
-      
+
       // Get the latest record status for each vital type
       const aLatestVital = aVitals[0]; // First one is the latest due to sorting
       const bLatestVital = bVitals[0];
-      
+
       const aStatus = getVitalStatus(a, aLatestVital.value, member?.gender);
       const bStatus = getVitalStatus(b, bLatestVital.value, member?.gender);
-      
+
       // Sort by priority (high to low)
       if (aStatus.priority !== bStatus.priority) {
         return bStatus.priority - aStatus.priority;
       }
-      
+
       // If same priority, sort alphabetically
       return a.localeCompare(b);
     });
@@ -748,7 +748,7 @@ const MemberPage = () => {
     if (!records || records.length === 0) {
       return { color: 'text-gray-600', bgColor: 'bg-gray-100', status: 'Unknown', level: 'unknown', priority: 0 };
     }
-    
+
     // Get the latest record (first in the array since they're sorted by date)
     const latestRecord = records[0];
     return statusFunction(latestRecord);
@@ -770,18 +770,18 @@ const MemberPage = () => {
     const grouped = {};
     reports.forEach(report => {
       const key = report.report_type;
-      
+
       if (!grouped[key]) {
         grouped[key] = [];
       }
       grouped[key].push(report);
     });
-    
+
     // Sort each group by date (newest first)
     Object.keys(grouped).forEach(key => {
       grouped[key].sort((a, b) => new Date(b.report_date) - new Date(a.report_date));
     });
-    
+
     return grouped;
   };
 
@@ -796,39 +796,39 @@ const MemberPage = () => {
     });
   };
 
-	// Open Add Vital modal pre-filled for a type
-	const openAddVitalForType = (vitalType) => {
-		const vitalConfig = VITAL_TYPES[vitalType];
-		setVitalFormData({
-			vitalType,
-			value: '',
-			unit: vitalConfig ? vitalConfig.unit : '',
-			notes: '',
-			recordedAt: new Date().toISOString().split('T')[0]
-		});
-		setShowAddVitalModal(true);
-	};
+  // Open Add Vital modal pre-filled for a type
+  const openAddVitalForType = (vitalType) => {
+    const vitalConfig = VITAL_TYPES[vitalType];
+    setVitalFormData({
+      vitalType,
+      value: '',
+      unit: vitalConfig ? vitalConfig.unit : '',
+      notes: '',
+      recordedAt: new Date().toISOString().split('T')[0]
+    });
+    setShowAddVitalModal(true);
+  };
 
-	// Open Upload Report modal pre-filled for a report type
-	const openUploadForReportType = (reportType, reportSubType = '') => {
-		setReportFormData({
-			reportType,
-			reportSubType: reportSubType || '',
-			description: '',
-			reportDate: new Date().toISOString().split('T')[0],
-			file: null
-		});
-		setShowUploadReportModal(true);
-	};
+  // Open Upload Report modal pre-filled for a report type
+  const openUploadForReportType = (reportType, reportSubType = '') => {
+    setReportFormData({
+      reportType,
+      reportSubType: reportSubType || '',
+      description: '',
+      reportDate: new Date().toISOString().split('T')[0],
+      file: null
+    });
+    setShowUploadReportModal(true);
+  };
 
   // Age calculation with months for < 1 year
   const calculateAge = (dateOfBirth) => {
     if (!dateOfBirth) return null;
     const today = new Date();
     const birthDate = new Date(dateOfBirth);
-    const ageInMonths = (today.getFullYear() - birthDate.getFullYear()) * 12 + 
-                       (today.getMonth() - birthDate.getMonth());
-    
+    const ageInMonths = (today.getFullYear() - birthDate.getFullYear()) * 12 +
+      (today.getMonth() - birthDate.getMonth());
+
     if (ageInMonths < 12) {
       return `${ageInMonths} Month${ageInMonths !== 1 ? 's' : ''}`;
     } else {
@@ -849,7 +849,7 @@ const MemberPage = () => {
     const recordDateTime = new Date(recordDate);
     const diffTime = Math.abs(today - recordDateTime);
     const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
-    
+
     if (diffDays === 0) {
       return 'Today';
     } else if (diffDays === 1) {
@@ -873,14 +873,14 @@ const MemberPage = () => {
   const [medicalReports, setMedicalReports] = useState([]);
   // Initialize activeTab based on URL parameter
   const tabParam = searchParams.get('tab');
-  const initialTab = tabParam === 'medical-reports' ? 'reports' : 
-                    tabParam === 'documents' ? 'documents' : 
-                    tabParam === 'health-vitals' ? 'vitals' : 'vitals';
+  const initialTab = tabParam === 'medical-reports' ? 'reports' :
+    tabParam === 'documents' ? 'documents' :
+      tabParam === 'health-vitals' ? 'vitals' : 'vitals';
   const [activeTab, setActiveTab] = useState(initialTab);
   const [activeVitalSubTab, setActiveVitalSubTab] = useState('all');
   const [activeReportSubTab, setActiveReportSubTab] = useState('all');
   const [documents, setDocuments] = useState([]);
-  
+
   // Confetti and animation states
   const [showConfetti, setShowConfetti] = useState(false);
   const [confettiKey, setConfettiKey] = useState(0);
@@ -898,23 +898,23 @@ const MemberPage = () => {
   const fetchMemberData = async () => {
     try {
       setLoading(true);
-      
+
       // Fetch all members to find the one by name
       const membersResponse = await axios.get('/family/members');
       const members = membersResponse.data.members;
       setAllMembers(members);
-      
+
       // Find member by name (case-insensitive)
-      const foundMember = members.find(m => 
+      const foundMember = members.find(m =>
         m.name.toLowerCase().replace(/\s+/g, '-') === memberName
       );
-      
+
       if (!foundMember) {
         toast.error('Member not found');
         navigate('/dashboard');
         return;
       }
-      
+
       setMember(foundMember);
       setFormData({
         name: foundMember.name,
@@ -926,7 +926,7 @@ const MemberPage = () => {
         password: '', // Don't populate password for security
         role: foundMember.role || 'non_admin'
       });
-      
+
       // Populate date components for editing
       if (foundMember.date_of_birth) {
         const components = parseDateComponents(foundMember.date_of_birth);
@@ -934,7 +934,7 @@ const MemberPage = () => {
       } else {
         setEditDateComponents(getCurrentDateComponents());
       }
-      
+
       // Fetch health vitals
       try {
         const vitalsResponse = await axios.get(`/health/vitals/${foundMember.id}`);
@@ -942,7 +942,7 @@ const MemberPage = () => {
       } catch (error) {
         setHealthVitals([]);
       }
-      
+
       // Fetch medical reports
       try {
         const reportsResponse = await axios.get(`/health/reports/${foundMember.id}`);
@@ -958,7 +958,7 @@ const MemberPage = () => {
       } catch (error) {
         setDocuments([]);
       }
-      
+
     } catch (error) {
       toast.error('Failed to fetch member data');
       navigate('/dashboard');
@@ -1034,14 +1034,14 @@ const MemberPage = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    
+
     // Prevent multiple submissions
     if (isSubmittingMember) {
       return;
     }
-    
+
     setIsSubmittingMember(true);
-    
+
     try {
       // Only send non-empty fields
       const updateData = {};
@@ -1050,12 +1050,12 @@ const MemberPage = () => {
           updateData[key] = formData[key];
         }
       });
-      
+
       await axios.put(`/family/members/${member.id}`, updateData);
       toast.success('Member updated successfully');
       setShowEditForm(false);
       fetchMemberData();
-      
+
       // If the updated member is the current user, refresh user profile data
       if (user && member && user.email === member.user_email) {
         try {
@@ -1123,12 +1123,12 @@ const MemberPage = () => {
 
   const handleAddVital = async (e) => {
     e.preventDefault();
-    
+
     // Prevent multiple submissions
     if (isSubmittingVital) {
       return;
     }
-    
+
     // Frontend validation to match backend
     if (!vitalFormData.vitalType || vitalFormData.vitalType === '') {
       toast.error('Vital Type is required');
@@ -1150,9 +1150,9 @@ const MemberPage = () => {
       toast.error('Date Recorded is required');
       return;
     }
-    
+
     setIsSubmittingVital(true);
-    
+
     try {
       await axios.post('/health/vitals', {
         memberId: member.id,
@@ -1193,15 +1193,15 @@ const MemberPage = () => {
       notes: vital.notes || '',
       recordedAt: vital.recorded_at ? vital.recorded_at.split('T')[0] : new Date().toISOString().split('T')[0]
     });
-    
+
     // Populate date components for editing
     if (vital.recorded_at) {
       const components = parseDateComponents(vital.recorded_at);
-              setEditVitalDateComponents(components);
-      } else {
-        setEditVitalDateComponents(getCurrentDateComponents());
-      }
-    
+      setEditVitalDateComponents(components);
+    } else {
+      setEditVitalDateComponents(getCurrentDateComponents());
+    }
+
     setShowEditVitalModal(true);
   };
 
@@ -1236,7 +1236,7 @@ const MemberPage = () => {
       toast.error('Only admins can delete health vitals');
       return;
     }
-    
+
     if (window.confirm('Are you sure you want to delete this health vital?')) {
       try {
         await axios.delete(`/health/vitals/${vital.id}`);
@@ -1250,12 +1250,12 @@ const MemberPage = () => {
 
   const handleUploadReport = async (e) => {
     e.preventDefault();
-    
+
     // Prevent multiple submissions
     if (isSubmittingReport) {
       return;
     }
-    
+
     // Frontend validation to match backend
     if (!reportFormData.reportType || reportFormData.reportType === '') {
       toast.error('Report Type is required');
@@ -1273,25 +1273,25 @@ const MemberPage = () => {
       toast.error('File is required');
       return;
     }
-    
+
     // Check file type
     if (reportFormData.file.type !== 'application/pdf') {
       toast.error('Only PDF files are allowed');
       return;
     }
-    
+
     // Check file size (20MB limit)
     if (reportFormData.file.size > 20 * 1024 * 1024) {
       toast.error('File size must be less than 20MB');
       return;
     }
-    
+
     setIsSubmittingReport(true);
-    
+
     try {
       setIsUploading(true);
       setUploadProgress(0);
-      
+
       const formData = new FormData();
       formData.append('memberId', member.id);
       formData.append('reportType', reportFormData.reportType);
@@ -1311,7 +1311,7 @@ const MemberPage = () => {
           setUploadProgress(percentCompleted);
         }
       });
-      
+
       toast.success('Medical report uploaded successfully');
       triggerConfetti(); // Trigger confetti animation
       setShowUploadReportModal(false);
@@ -1361,12 +1361,12 @@ const MemberPage = () => {
 
   const handleUploadDocument = async (e) => {
     e.preventDefault();
-    
+
     // Prevent multiple submissions
     if (isSubmittingDocument) {
       return;
     }
-    
+
     // Frontend validation to match backend
     if (!documentFormData.title || documentFormData.title.trim() === '') {
       toast.error('Title is required');
@@ -1380,25 +1380,25 @@ const MemberPage = () => {
       toast.error('File is required');
       return;
     }
-    
+
     // Check file type
     if (documentFormData.file.type !== 'application/pdf') {
       toast.error('Only PDF files are allowed');
       return;
     }
-    
+
     // Check file size (20MB limit)
     if (documentFormData.file.size > 20 * 1024 * 1024) {
       toast.error('File size must be less than 20MB');
       return;
     }
-    
+
     setIsSubmittingDocument(true);
-    
+
     try {
       setIsUploading(true);
       setUploadProgress(0);
-      
+
       const formData = new FormData();
       formData.append('title', documentFormData.title);
       formData.append('description', documentFormData.description);
@@ -1478,15 +1478,15 @@ const MemberPage = () => {
       uploadDate: document.upload_date ? document.upload_date.split('T')[0] : new Date().toISOString().split('T')[0],
       file: null
     });
-    
+
     // Populate date components for editing
     if (document.upload_date) {
       const components = parseDateComponents(document.upload_date);
-              setEditDocumentDateComponents(components);
-      } else {
-        setEditDocumentDateComponents(getCurrentDateComponents());
-      }
-    
+      setEditDocumentDateComponents(components);
+    } else {
+      setEditDocumentDateComponents(getCurrentDateComponents());
+    }
+
     setShowEditDocumentModal(true);
   };
 
@@ -1535,7 +1535,7 @@ const MemberPage = () => {
       toast.error('Only admins can delete documents');
       return;
     }
-    
+
     if (window.confirm('Are you sure you want to delete this document?')) {
       try {
         await axios.delete(`/health/documents/${document.id}`);
@@ -1558,15 +1558,15 @@ const MemberPage = () => {
       reportDate: report.report_date ? report.report_date.split('T')[0] : new Date().toISOString().split('T')[0],
       file: null
     });
-    
+
     // Populate date components for editing
     if (report.report_date) {
       const components = parseDateComponents(report.report_date);
-              setEditReportDateComponents(components);
-      } else {
-        setEditReportDateComponents(getCurrentDateComponents());
-      }
-    
+      setEditReportDateComponents(components);
+    } else {
+      setEditReportDateComponents(getCurrentDateComponents());
+    }
+
     setShowEditReportModal(true);
   };
 
@@ -1644,7 +1644,7 @@ const MemberPage = () => {
       toast.error('Only admins can delete medical reports');
       return;
     }
-    
+
     if (window.confirm('Are you sure you want to delete this medical report?')) {
       try {
         await axios.delete(`/health/reports/${report.id}`);
@@ -1701,8 +1701,8 @@ const MemberPage = () => {
           {((activeTab === 'vitals' && healthVitals.length === 0) ||
             (activeTab === 'reports' && medicalReports.length === 0) ||
             (activeTab === 'documents' && documents.length === 0)) && (
-            <div className="absolute inset-0 rounded-full bg-teal-400 animate-ping opacity-20"></div>
-          )}
+              <div className="absolute inset-0 rounded-full bg-teal-400 animate-ping opacity-20"></div>
+            )}
           <button
             onClick={() => {
               // Show quick action menu
@@ -1733,75 +1733,78 @@ const MemberPage = () => {
           </button>
         </div>
       </div>
-      {/* Header with Edit button prominently displayed */}
-      <div className="bg-white shadow rounded-lg p-3 sm:p-4 md:p-6 w-full max-w-full">
-        <div className="flex justify-between items-center mb-4">
-          <h1 className="text-xl sm:text-2xl font-bold text-gray-900">{member.name}</h1>
-          <div className="flex space-x-2">
-            {isAdmin() ? (
-              <>
-                <button
-                  onClick={() => setShowEditForm(true)}
-                  className="p-2 bg-primary-600 hover:bg-primary-700 text-white rounded-lg transition-colors"
-                  title="Edit Member"
-                >
-                  <EditIcon />
-                </button>
-                <button
-                  onClick={handleDeleteMember}
-                  className="p-2 bg-health-danger hover:bg-red-700 text-white rounded-lg transition-colors"
-                  title="Delete Member"
-                >
-                  <DeleteIcon />
-                </button>
-              </>
-            ) : (
-              <>
-                <button
-                  disabled
-                  className="p-2 bg-gray-400 text-white rounded-lg cursor-not-allowed opacity-50"
-                  title="Edit Member (Admin only)"
-                >
-                  <EditIcon />
-                </button>
-                <button
-                  disabled
-                  className="p-2 bg-gray-400 text-white rounded-lg cursor-not-allowed opacity-50"
-                  title="Delete Member (Admin only)"
-                >
-                  <DeleteIcon />
-                </button>
-              </>
-            )}
-          </div>
-        </div>
+      {/* Compact Glassmorphic Header */}
+      <div className="glass-panel p-4 w-full max-w-full relative overflow-hidden">
+        {/* Decorative background blur element */}
+        <div className="absolute top-0 right-0 -mr-4 -mt-4 w-24 h-24 rounded-full bg-primary-500/10 blur-xl"></div>
 
-        {/* Member basic info */}
-        <div className="flex flex-col sm:flex-row sm:items-center space-y-4 sm:space-y-0 sm:space-x-6 w-full max-w-full">
-          <div className="relative flex justify-center sm:justify-start">
+        <div className="flex items-center space-x-4 relative z-10">
+          <div className="flex-shrink-0">
             <ProfilePicture
               member={member}
-              size="2xl"
+              size="xl"
               showUploadButton={false}
             />
           </div>
-          <div className="text-center sm:text-left space-y-1 sm:space-y-2">
-            {/* Line 1: Age */}
-            <p className="text-gray-600 text-sm sm:text-base">
-              {age ? `Age ${age}` : 'Age not specified'}
-            </p>
-            {/* Line 2: Mobile Number */}
-            <p className="text-blue-600 text-sm sm:text-base font-medium">
-              📱 {member.mobile_number || 'No mobile'}
-            </p>
-            {/* Line 3: Blood Group */}
-            <p className="text-red-600 text-sm sm:text-base font-medium">
-              🩸 {member.blood_group || 'No blood group'}
-            </p>
-            {/* Line 4: Gender */}
-            <p className="text-gray-600 capitalize text-sm sm:text-base">
-              {member.gender || 'Gender not specified'}
-            </p>
+
+          <div className="flex-1 min-w-0">
+            <div className="flex justify-between items-start">
+              <div>
+                <h1 className="text-xl sm:text-2xl font-bold text-gray-900 leading-tight truncate pr-2">
+                  {member.name}
+                </h1>
+                <p className="text-sm text-gray-500 mb-1">{member.role === 'admin' ? 'Administrator' : 'Family Member'}</p>
+              </div>
+
+              {/* Admin Actions - Compact */}
+              <div className="flex space-x-1">
+                {isAdmin() ? (
+                  <>
+                    <button
+                      onClick={() => setShowEditForm(true)}
+                      className="p-1.5 bg-primary-100 text-primary-600 hover:bg-primary-200 rounded-lg transition-colors"
+                      title="Edit Member"
+                    >
+                      <EditIcon />
+                    </button>
+                    <button
+                      onClick={handleDeleteMember}
+                      className="p-1.5 bg-red-100 text-red-600 hover:bg-red-200 rounded-lg transition-colors"
+                      title="Delete Member"
+                    >
+                      <DeleteIcon />
+                    </button>
+                  </>
+                ) : null}
+              </div>
+            </div>
+
+            {/* Compact Info Grid */}
+            <div className="flex flex-wrap items-center gap-x-4 gap-y-1 mt-1 text-sm">
+              <span className="inline-flex items-center px-2 py-0.5 rounded-md bg-gray-100/80 text-gray-700 border border-gray-200/50 backdrop-blur-sm">
+                <span className="mr-1.5 opacity-70">🎂</span>
+                {age ? age.display : 'N/A'}
+              </span>
+
+              {member.blood_group && (
+                <span className="inline-flex items-center px-2 py-0.5 rounded-md bg-red-50/80 text-red-700 border border-red-100/50 backdrop-blur-sm">
+                  <span className="mr-1.5 opacity-70">🩸</span>
+                  {member.blood_group}
+                </span>
+              )}
+
+              {member.mobile_number && (
+                <span className="inline-flex items-center px-2 py-0.5 rounded-md bg-blue-50/80 text-blue-700 border border-blue-100/50 backdrop-blur-sm">
+                  <span className="mr-1.5 opacity-70">📱</span>
+                  {member.mobile_number}
+                </span>
+              )}
+
+              <span className="inline-flex items-center px-2 py-0.5 rounded-md bg-gray-50/80 text-gray-600 border border-gray-200/50 backdrop-blur-sm capitalize">
+                <span className="mr-1.5 opacity-70">{getGenderIcon(member.gender)}</span>
+                {member.gender || 'Unknown'}
+              </span>
+            </div>
           </div>
         </div>
       </div>
@@ -1821,7 +1824,7 @@ const MemberPage = () => {
                   type="text"
                   placeholder="Enter full name"
                   value={formData.name}
-                  onChange={(e) => setFormData({...formData, name: e.target.value})}
+                  onChange={(e) => setFormData({ ...formData, name: e.target.value })}
                   className="input"
                   required
                 />
@@ -1885,16 +1888,16 @@ const MemberPage = () => {
                 <select
                   id="gender"
                   value={formData.gender}
-                  onChange={(e) => setFormData({...formData, gender: e.target.value})}
+                  onChange={(e) => setFormData({ ...formData, gender: e.target.value })}
                   className="input"
                   required
                 >
-                <option value="">Select Gender</option>
-                <option value="male">Male</option>
-                <option value="female">Female</option>
-                <option value="other">Other</option>
-                <option value="prefer_not_to_say">Prefer not to say</option>
-              </select>
+                  <option value="">Select Gender</option>
+                  <option value="male">Male</option>
+                  <option value="female">Female</option>
+                  <option value="other">Other</option>
+                  <option value="prefer_not_to_say">Prefer not to say</option>
+                </select>
               </div>
               <div className="form-group">
                 <label htmlFor="bloodGroup" className="form-label">
@@ -1903,7 +1906,7 @@ const MemberPage = () => {
                 <select
                   id="bloodGroup"
                   value={formData.bloodGroup}
-                  onChange={(e) => setFormData({...formData, bloodGroup: e.target.value})}
+                  onChange={(e) => setFormData({ ...formData, bloodGroup: e.target.value })}
                   className="input"
                 >
                   <option value="">Select Blood Group</option>
@@ -1926,7 +1929,7 @@ const MemberPage = () => {
                   type="tel"
                   placeholder="Enter mobile number"
                   value={formData.mobileNumber}
-                  onChange={(e) => setFormData({...formData, mobileNumber: e.target.value})}
+                  onChange={(e) => setFormData({ ...formData, mobileNumber: e.target.value })}
                   className="input"
                 />
               </div>
@@ -1939,7 +1942,7 @@ const MemberPage = () => {
                   type="email"
                   placeholder="Enter email address"
                   value={formData.email}
-                  onChange={(e) => setFormData({...formData, email: e.target.value})}
+                  onChange={(e) => setFormData({ ...formData, email: e.target.value })}
                   className="input"
                 />
 
@@ -1953,7 +1956,7 @@ const MemberPage = () => {
                   type="password"
                   placeholder="Leave blank to keep current password"
                   value={formData.password}
-                  onChange={(e) => setFormData({...formData, password: e.target.value})}
+                  onChange={(e) => setFormData({ ...formData, password: e.target.value })}
                   className="input"
                 />
                 <p className="form-help">
@@ -1967,7 +1970,7 @@ const MemberPage = () => {
                 <select
                   id="role"
                   value={formData.role}
-                  onChange={(e) => setFormData({...formData, role: e.target.value})}
+                  onChange={(e) => setFormData({ ...formData, role: e.target.value })}
                   className="input"
                   required
                 >
@@ -2007,14 +2010,13 @@ const MemberPage = () => {
 
 
             <div className="flex space-x-3">
-              <button 
-                type="submit" 
+              <button
+                type="submit"
                 disabled={isSubmittingMember}
-                className={`px-4 py-2 rounded-lg font-medium transition-colors duration-200 ${
-                  isSubmittingMember 
-                    ? 'bg-gray-400 cursor-not-allowed text-white' 
+                className={`px-4 py-2 rounded-lg font-medium transition-colors duration-200 ${isSubmittingMember
+                    ? 'bg-gray-400 cursor-not-allowed text-white'
                     : 'bg-teal-600 hover:bg-teal-700 text-white'
-                }`}
+                  }`}
               >
                 {isSubmittingMember ? 'Updating...' : 'Update Member'}
               </button>
@@ -2022,11 +2024,10 @@ const MemberPage = () => {
                 type="button"
                 disabled={isSubmittingMember}
                 onClick={handleCancel}
-                className={`px-4 py-2 rounded-lg font-medium transition-colors duration-200 ${
-                  isSubmittingMember 
-                    ? 'bg-gray-400 cursor-not-allowed text-white' 
+                className={`px-4 py-2 rounded-lg font-medium transition-colors duration-200 ${isSubmittingMember
+                    ? 'bg-gray-400 cursor-not-allowed text-white'
                     : 'bg-gray-500 hover:bg-gray-600 text-white'
-                }`}
+                  }`}
               >
                 Cancel
               </button>
@@ -2036,47 +2037,23 @@ const MemberPage = () => {
       )}
 
       {/* Main Content - Health Records and Vitals */}
-      <div className="bg-white shadow rounded-lg p-3 sm:p-4 md:p-6 w-full max-w-full">
-        {/* Tabs */}
-        <div className="border-b border-gray-200 mb-6">
-          <nav className="-mb-px flex space-x-8">
+      <div className="glass-panel p-3 sm:p-4 md:p-6 w-full max-w-full">
+        {/* Modern Glass Tabs */}
+        <div className="flex space-x-1 bg-gray-100/50 p-1 rounded-xl mb-6 backdrop-blur-sm">
+          {['vitals', 'reports', 'documents'].map((tab) => (
             <button
-              onClick={() => setActiveTab('vitals')}
-              data-tab={activeTab === 'vitals' ? 'active' : 'inactive'}
-              data-tab-name="vitals"
-              className={`py-2 px-1 border-b-2 font-medium text-sm ${
-                activeTab === 'vitals'
-                  ? 'border-teal-500 text-teal-600'
-                  : 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300'
-              }`}
+              key={tab}
+              onClick={() => setActiveTab(tab)}
+              data-tab={activeTab === tab ? 'active' : 'inactive'}
+              data-tab-name={tab}
+              className={`flex-1 py-2 px-3 rounded-lg text-sm font-medium transition-all duration-200 capitalize ${activeTab === tab
+                  ? 'bg-white text-primary-600 shadow-sm'
+                  : 'text-gray-500 hover:text-gray-700 hover:bg-white/50'
+                }`}
             >
-              Vitals
+              {tab}
             </button>
-            <button
-              onClick={() => setActiveTab('reports')}
-              data-tab={activeTab === 'reports' ? 'active' : 'inactive'}
-              data-tab-name="reports"
-              className={`py-2 px-1 border-b-2 font-medium text-sm ${
-                activeTab === 'reports'
-                  ? 'border-teal-500 text-teal-600'
-                  : 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300'
-              }`}
-            >
-              Reports
-            </button>
-            <button
-              onClick={() => setActiveTab('documents')}
-              data-tab={activeTab === 'documents' ? 'active' : 'inactive'}
-              data-tab-name="documents"
-              className={`py-2 px-1 border-b-2 font-medium text-sm ${
-                activeTab === 'documents'
-                  ? 'border-teal-500 text-teal-600'
-                  : 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300'
-              }`}
-            >
-              Documents
-            </button>
-          </nav>
+          ))}
         </div>
 
         {/* Tab Content */}
@@ -2094,7 +2071,7 @@ const MemberPage = () => {
                     const isExpanded = expandedVitalTypes.has('bmi');
                     const vitalStatus = getVitalStatus('bmi', latestBMI.value, member?.gender);
                     const vitalConfig = VITAL_TYPES['bmi'];
-                    
+
                     // Create gradient background based on status
                     const getBMIGradientClass = (status) => {
                       switch (status.level) {
@@ -2109,39 +2086,39 @@ const MemberPage = () => {
                           return 'bg-gradient-to-br from-gray-50 to-white';
                       }
                     };
-                    
+
                     return (
                       <div className={`rounded-lg border border-gray-200 shadow-sm hover:shadow-md transition-shadow flex flex-col card-consistent-height w-full max-w-full ${getBMIGradientClass(vitalStatus)}`}>
                         {/* BMI Card - Always Visible */}
-                        <div 
+                        <div
                           className="p-3 cursor-pointer card-content"
                           onClick={() => toggleVitalTypeExpansion('bmi')}
                         >
-                                                  <div className="flex justify-between items-center card-body">
-                          <div className="flex-1">
-                            <div className="flex items-center space-x-2 mb-1">
-                              <h4 className="text-lg font-semibold text-gray-900">BMI</h4>
-                              {vitalStatus.status && (
-                                <span className={`text-xs px-2 py-1 rounded-full ${vitalStatus.bgColor} ${vitalStatus.color}`}>
-                                  {vitalStatus.status}
+                          <div className="flex justify-between items-center card-body">
+                            <div className="flex-1">
+                              <div className="flex items-center space-x-2 mb-1">
+                                <h4 className="text-lg font-semibold text-gray-900">BMI</h4>
+                                {vitalStatus.status && (
+                                  <span className={`text-xs px-2 py-1 rounded-full ${vitalStatus.bgColor} ${vitalStatus.color}`}>
+                                    {vitalStatus.status}
+                                  </span>
+                                )}
+                                <span className={`text-xs px-2 py-1 rounded-full ${getAgeTagColor(vitalStatus)}`}>
+                                  {calculateRecordAge(latestBMI.recorded_at)}
                                 </span>
-                              )}
-                              <span className={`text-xs px-2 py-1 rounded-full ${getAgeTagColor(vitalStatus)}`}>
-                                {calculateRecordAge(latestBMI.recorded_at)}
-                              </span>
-                            </div>
-                            <div className="flex items-center space-x-2">
-                              <p className={`text-lg font-bold ${vitalStatus.color}`}>
-                                {latestBMI.value} {decodeHtmlEntities(latestBMI.unit)}
-                              </p>
-                              {vitalConfig.ranges && (
-                                <span className="text-xs bg-green-100 text-green-800 px-2 py-1 rounded-full">
-                                  {vitalConfig.ranges.display}
-                                </span>
-                              )}
+                              </div>
+                              <div className="flex items-center space-x-2">
+                                <p className={`text-lg font-bold ${vitalStatus.color}`}>
+                                  {latestBMI.value} {decodeHtmlEntities(latestBMI.unit)}
+                                </p>
+                                {vitalConfig.ranges && (
+                                  <span className="text-xs bg-green-100 text-green-800 px-2 py-1 rounded-full">
+                                    {vitalConfig.ranges.display}
+                                  </span>
+                                )}
+                              </div>
                             </div>
                           </div>
-                        </div>
                         </div>
 
                         {/* Expanded BMI Records */}
@@ -2185,139 +2162,139 @@ const MemberPage = () => {
                 {(() => {
                   const groupedVitals = groupVitalsByType(healthVitals);
                   const sortedVitalTypes = sortGroupedVitalsByStatus(groupedVitals);
-                  
+
                   return sortedVitalTypes.map(vitalType => {
                     const vitals = groupedVitals[vitalType];
-                  const vitalConfig = VITAL_TYPES[vitalType] || { label: vitalType.replace('_', ' ').toUpperCase() };
-                  const latestVital = vitals[0]; // First one is the latest due to sorting
-                  const isExpanded = expandedVitalTypes.has(vitalType);
-                  const vitalStatus = getVitalStatus(vitalType, latestVital.value, member?.gender);
-                  
-                  // Create gradient background based on status
-                  const getGradientClass = (status) => {
-                    switch (status.level) {
-                      case 'high':
-                      case 'low':
-                        return 'bg-gradient-to-br from-rose-50 to-white';
-                      case 'warning':
-                        return 'bg-gradient-to-br from-amber-50 to-white';
-                      case 'normal':
-                        return 'bg-gradient-to-br from-green-50 to-white';
-                      default:
-                        return 'bg-gradient-to-br from-gray-50 to-white';
-                    }
-                  };
-                  
-                  return (
-                    <div key={vitalType} className={`rounded-lg border border-gray-200 shadow-sm hover:shadow-md transition-shadow flex flex-col card-consistent-height w-full max-w-full ${getVitalGradientClass(vitalStatus)}`}>
-                      {/* Main Card - Always Visible */}
-                      <div 
-                        className="p-3 cursor-pointer card-content"
-                        onClick={() => toggleVitalTypeExpansion(vitalType)}
-                      >
-                        <div className="flex justify-between items-center card-body">
-                          <div className="flex-1">
-                            <div className="flex items-center space-x-2 mb-1">
-                              <h4 className="text-lg font-semibold text-gray-900">{vitalConfig.label}</h4>
-                              {vitalStatus.status && (
-                                <span className={`text-xs px-2 py-1 rounded-full ${vitalStatus.bgColor} ${vitalStatus.color}`}>
-                                  {vitalStatus.status}
+                    const vitalConfig = VITAL_TYPES[vitalType] || { label: vitalType.replace('_', ' ').toUpperCase() };
+                    const latestVital = vitals[0]; // First one is the latest due to sorting
+                    const isExpanded = expandedVitalTypes.has(vitalType);
+                    const vitalStatus = getVitalStatus(vitalType, latestVital.value, member?.gender);
+
+                    // Create gradient background based on status
+                    const getGradientClass = (status) => {
+                      switch (status.level) {
+                        case 'high':
+                        case 'low':
+                          return 'bg-gradient-to-br from-rose-50 to-white';
+                        case 'warning':
+                          return 'bg-gradient-to-br from-amber-50 to-white';
+                        case 'normal':
+                          return 'bg-gradient-to-br from-green-50 to-white';
+                        default:
+                          return 'bg-gradient-to-br from-gray-50 to-white';
+                      }
+                    };
+
+                    return (
+                      <div key={vitalType} className={`rounded-lg border border-gray-200 shadow-sm hover:shadow-md transition-shadow flex flex-col card-consistent-height w-full max-w-full ${getVitalGradientClass(vitalStatus)}`}>
+                        {/* Main Card - Always Visible */}
+                        <div
+                          className="p-3 cursor-pointer card-content"
+                          onClick={() => toggleVitalTypeExpansion(vitalType)}
+                        >
+                          <div className="flex justify-between items-center card-body">
+                            <div className="flex-1">
+                              <div className="flex items-center space-x-2 mb-1">
+                                <h4 className="text-lg font-semibold text-gray-900">{vitalConfig.label}</h4>
+                                {vitalStatus.status && (
+                                  <span className={`text-xs px-2 py-1 rounded-full ${vitalStatus.bgColor} ${vitalStatus.color}`}>
+                                    {vitalStatus.status}
+                                  </span>
+                                )}
+                                <span className={`text-xs px-2 py-1 rounded-full ${getAgeTagColor(vitalStatus)}`}>
+                                  {calculateRecordAge(latestVital.recorded_at)}
                                 </span>
-                              )}
-                              <span className={`text-xs px-2 py-1 rounded-full ${getAgeTagColor(vitalStatus)}`}>
-                                {calculateRecordAge(latestVital.recorded_at)}
-                              </span>
+                              </div>
+                              <div className="flex items-center space-x-2">
+                                <p className={`text-lg font-bold ${vitalStatus.color}`}>
+                                  {latestVital.value} {decodeHtmlEntities(latestVital.unit)}
+                                </p>
+                                {vitalConfig.ranges && (
+                                  <span className="text-xs bg-green-100 text-green-800 px-2 py-1 rounded-full">
+                                    {vitalConfig.ranges.display}
+                                  </span>
+                                )}
+                              </div>
                             </div>
                             <div className="flex items-center space-x-2">
-                              <p className={`text-lg font-bold ${vitalStatus.color}`}>
-                                {latestVital.value} {decodeHtmlEntities(latestVital.unit)}
-                              </p>
-                              {vitalConfig.ranges && (
-                                <span className="text-xs bg-green-100 text-green-800 px-2 py-1 rounded-full">
-                                  {vitalConfig.ranges.display}
-                                </span>
-                              )}
+                              {/* Add Vital inside this type */}
+                              <button
+                                onClick={(e) => { e.stopPropagation(); openAddVitalForType(vitalType); }}
+                                className="text-teal-600 hover:text-teal-800 p-2 bg-teal-50 hover:bg-teal-100 rounded-lg transition-colors"
+                                title={`Add ${vitalConfig.label}`}
+                              >
+                                <PlusIcon />
+                              </button>
                             </div>
-                          </div>
-                          <div className="flex items-center space-x-2">
-                            {/* Add Vital inside this type */}
-                            <button
-                              onClick={(e) => { e.stopPropagation(); openAddVitalForType(vitalType); }}
-                              className="text-teal-600 hover:text-teal-800 p-2 bg-teal-50 hover:bg-teal-100 rounded-lg transition-colors"
-                              title={`Add ${vitalConfig.label}`}
-                            >
-                              <PlusIcon />
-                            </button>
                           </div>
                         </div>
-                          </div>
 
-                          {/* Expanded Content - Show All Records */}
-                          {isExpanded && vitals.length > 0 && (
-                            <div className="mt-4 pt-4 border-t border-gray-200">
-                              <div className="p-2 rounded-lg">
-                            {vitals.map((vital, index) => {
-                              const latestCard = index === 0;
-                              const recordStatus = getVitalStatus(vitalType, vital.value, member?.gender);
-                              return (
-                              <div key={vital.id} className={`p-1.5 rounded-md shadow-sm mx-1 my-0.5 ${getSubCardGradientClass(recordStatus)} hover:shadow-md transition-shadow duration-200`}>
-                                <div className="flex justify-between items-start">
-                                  <div className="flex-1">
-                                    <div className="flex items-center space-x-2 mb-1">
-                                      <p className={`text-sm font-medium ${recordStatus.color}`}>
-                                      {vital.value} {decodeHtmlEntities(vital.unit)}
-                                    </p>
-                                      {recordStatus.status && (
-                                        <span className={`text-xs px-1.5 py-0.5 rounded-full ${recordStatus.bgColor} ${recordStatus.color}`}>
-                                          {recordStatus.status}
-                                        </span>
-                                      )}
+                        {/* Expanded Content - Show All Records */}
+                        {isExpanded && vitals.length > 0 && (
+                          <div className="mt-4 pt-4 border-t border-gray-200">
+                            <div className="p-2 rounded-lg">
+                              {vitals.map((vital, index) => {
+                                const latestCard = index === 0;
+                                const recordStatus = getVitalStatus(vitalType, vital.value, member?.gender);
+                                return (
+                                  <div key={vital.id} className={`p-1.5 rounded-md shadow-sm mx-1 my-0.5 ${getSubCardGradientClass(recordStatus)} hover:shadow-md transition-shadow duration-200`}>
+                                    <div className="flex justify-between items-start">
+                                      <div className="flex-1">
+                                        <div className="flex items-center space-x-2 mb-1">
+                                          <p className={`text-sm font-medium ${recordStatus.color}`}>
+                                            {vital.value} {decodeHtmlEntities(vital.unit)}
+                                          </p>
+                                          {recordStatus.status && (
+                                            <span className={`text-xs px-1.5 py-0.5 rounded-full ${recordStatus.bgColor} ${recordStatus.color}`}>
+                                              {recordStatus.status}
+                                            </span>
+                                          )}
+                                        </div>
+                                        <p className="text-xs text-gray-500 mt-1">
+                                          {formatDate(vital.recorded_at)}
+                                        </p>
+                                        {vital.notes && (
+                                          <p className="text-xs text-gray-600 mt-1 line-clamp-1">{vital.notes}</p>
+                                        )}
+                                      </div>
+                                      <div className="flex space-x-1 ml-2">
+                                        <button
+                                          onClick={(e) => {
+                                            e.stopPropagation();
+                                            handleEditVital(vital);
+                                          }}
+                                          className="text-green-600 hover:text-green-800 p-1.5 bg-green-50 hover:bg-green-100 rounded transition-colors"
+                                          title="Edit"
+                                        >
+                                          <EditIcon />
+                                        </button>
+                                        <button
+                                          onClick={(e) => {
+                                            e.stopPropagation();
+                                            if (isAdmin()) {
+                                              handleDeleteVital(vital);
+                                            }
+                                          }}
+                                          className={`p-1.5 rounded transition-colors ${isAdmin()
+                                              ? 'text-red-600 hover:text-red-800 bg-red-50 hover:bg-red-100'
+                                              : 'text-gray-400 bg-gray-50 cursor-not-allowed'
+                                            }`}
+                                          title={isAdmin() ? "Delete" : "Only admins can delete"}
+                                          disabled={!isAdmin()}
+                                        >
+                                          <DeleteIcon />
+                                        </button>
+                                      </div>
                                     </div>
-                                    <p className="text-xs text-gray-500 mt-1">
-                                      {formatDate(vital.recorded_at)}
-                                    </p>
-                                    {vital.notes && (
-                                      <p className="text-xs text-gray-600 mt-1 line-clamp-1">{vital.notes}</p>
-                                    )}
                                   </div>
-                                  <div className="flex space-x-1 ml-2">
-                                    <button 
-                                      onClick={(e) => {
-                                        e.stopPropagation();
-                                        handleEditVital(vital);
-                                      }}
-                                      className="text-green-600 hover:text-green-800 p-1.5 bg-green-50 hover:bg-green-100 rounded transition-colors"
-                                      title="Edit"
-                                    >
-                                      <EditIcon />
-                                    </button>
-                                    <button 
-                                      onClick={(e) => {
-                                        e.stopPropagation();
-                                        if (isAdmin()) {
-                                          handleDeleteVital(vital);
-                                        }
-                                      }}
-                                      className={`p-1.5 rounded transition-colors ${
-                                        isAdmin() 
-                                          ? 'text-red-600 hover:text-red-800 bg-red-50 hover:bg-red-100' 
-                                          : 'text-gray-400 bg-gray-50 cursor-not-allowed'
-                                      }`}
-                                      title={isAdmin() ? "Delete" : "Only admins can delete"}
-                                      disabled={!isAdmin()}
-                                    >
-                                      <DeleteIcon />
-                                    </button>
-                                  </div>
-                                </div>
-                              </div>
-                            );})}
-                              </div>
+                                );
+                              })}
                             </div>
-                          )}
-                    </div>
-                  );
-                });
+                          </div>
+                        )}
+                      </div>
+                    );
+                  });
                 })()}
               </div>
             ) : (
@@ -2328,7 +2305,7 @@ const MemberPage = () => {
                   </svg>
                 </div>
                 <p className="text-gray-500">No health vitals recorded yet</p>
-                <button 
+                <button
                   onClick={() => setShowAddVitalModal(true)}
                   className="mt-4 text-teal-600 hover:text-teal-800 font-medium"
                 >
@@ -2348,21 +2325,21 @@ const MemberPage = () => {
                 {Object.entries(groupReportsByType(medicalReports)).map(([reportKey, reports]) => {
                   const latestReport = reports[0]; // First one is the latest due to sorting
                   const isExpanded = expandedReportTypes.has(reportKey);
-                  
+
                   // Use report_type and report_sub_type from the latest report for headings
                   const reportConfig = REPORT_TYPES[latestReport.report_type] || { label: latestReport.report_type.replace(/_/g, ' ').toUpperCase() };
                   const subTypeValue = latestReport.report_sub_type || '';
                   const subTypeConfig = REPORT_TYPES[latestReport.report_type]?.subTypes?.find(st => st.value === subTypeValue);
                   const subTypeLabel = subTypeConfig?.label || (subTypeValue ? subTypeValue.replace(/_/g, ' ').toUpperCase() : '');
                   const groupSubTypeLabel = subTypeLabel;
-                  
+
                   // Get main card status based on latest report
                   const mainCardStatus = getMainCardStatus(reports, getReportStatus);
-                  
+
                   return (
                     <div key={reportKey} className={`rounded-lg border border-gray-200 shadow-sm hover:shadow-md transition-shadow flex flex-col card-consistent-height w-full max-w-full ${getGradientClass(mainCardStatus)}`}>
                       {/* Main Card - Always Visible */}
-                      <div 
+                      <div
                         className="p-3 cursor-pointer card-content"
                         onClick={() => toggleReportTypeExpansion(reportKey)}
                       >
@@ -2388,98 +2365,97 @@ const MemberPage = () => {
 
                           </div>
                           <div className="flex items-center space-x-2">
-								{/* Upload inside this report type */}
-								<button 
-									onClick={(e) => { e.stopPropagation(); openUploadForReportType(latestReport.report_type, latestReport.report_sub_type); }}
-									className="text-teal-600 hover:text-teal-800 p-2 bg-teal-50 hover:bg-teal-100 rounded-lg transition-colors"
-									title={`Upload ${reportConfig.label}`}
-								>
-									<UploadIcon />
-								</button>
+                            {/* Upload inside this report type */}
+                            <button
+                              onClick={(e) => { e.stopPropagation(); openUploadForReportType(latestReport.report_type, latestReport.report_sub_type); }}
+                              className="text-teal-600 hover:text-teal-800 p-2 bg-teal-50 hover:bg-teal-100 rounded-lg transition-colors"
+                              title={`Upload ${reportConfig.label}`}
+                            >
+                              <UploadIcon />
+                            </button>
 
-                            </div>
                           </div>
-                          </div>
+                        </div>
+                      </div>
 
-                          {/* Expanded Content - Show All Reports */}
-                          {isExpanded && reports.length > 0 && (
-                            <div className="mt-4 pt-4 border-t border-gray-200">
-                              <div className="p-2 rounded-lg">
-                              {reports.map((report, index) => {
-                                const isPdf = report.file_name?.toLowerCase().endsWith('.pdf');
-                                const subValue = report.report_sub_type || '';
-                                const subCfg = REPORT_TYPES[report.report_type]?.subTypes?.find(st => st.value === subValue);
-                                const derivedSub = subCfg?.label || (subValue ? subValue.replace(/_/g, ' ').toUpperCase() : '');
-                                // Prioritize showing actual sub-type value over falling back to report type
-                                const subLabel = derivedSub || (subValue ? subValue.replace(/_/g, ' ').toUpperCase() : '') || report.report_type?.replace(/_/g, ' ').toUpperCase() || 'Report';
-                                const latestCard = index === 0;
-                                const reportStatus = getReportStatus(report);
-                                return (
-                                  <div 
-                                    key={report.id} 
-                                    className={`p-1.5 rounded-md shadow-sm mx-1 my-0.5 ${getSubCardGradientClass(reportStatus)} hover:shadow-md transition-shadow duration-200 cursor-pointer`}
-                                    onClick={() => isPdf && handleViewReport(report)}
-                                  >
-                                    <div className="flex justify-between items-start">
-                                      <div className="flex-1">
-                                        <div className="flex items-center space-x-2 mb-1">
-                                          <h6 className="text-sm font-medium text-gray-900">{subLabel}</h6>
-                                          {reportStatus.status && (
-                                            <span className={`text-xs px-1.5 py-0.5 rounded-full ${reportStatus.bgColor} ${reportStatus.color}`}>
-                                              {reportStatus.status}
-                                            </span>
-                                          )}
-                                        </div>
-                                        <div className="mb-1">
-                                          <span className="text-xs text-gray-500">{formatDate(report.report_date)}</span>
-                                        </div>
-                                        {report.description && (
-                                          <p className="text-xs text-gray-600 mb-1 line-clamp-1">
-                                            {report.description}
-                                          </p>
+                      {/* Expanded Content - Show All Reports */}
+                      {isExpanded && reports.length > 0 && (
+                        <div className="mt-4 pt-4 border-t border-gray-200">
+                          <div className="p-2 rounded-lg">
+                            {reports.map((report, index) => {
+                              const isPdf = report.file_name?.toLowerCase().endsWith('.pdf');
+                              const subValue = report.report_sub_type || '';
+                              const subCfg = REPORT_TYPES[report.report_type]?.subTypes?.find(st => st.value === subValue);
+                              const derivedSub = subCfg?.label || (subValue ? subValue.replace(/_/g, ' ').toUpperCase() : '');
+                              // Prioritize showing actual sub-type value over falling back to report type
+                              const subLabel = derivedSub || (subValue ? subValue.replace(/_/g, ' ').toUpperCase() : '') || report.report_type?.replace(/_/g, ' ').toUpperCase() || 'Report';
+                              const latestCard = index === 0;
+                              const reportStatus = getReportStatus(report);
+                              return (
+                                <div
+                                  key={report.id}
+                                  className={`p-1.5 rounded-md shadow-sm mx-1 my-0.5 ${getSubCardGradientClass(reportStatus)} hover:shadow-md transition-shadow duration-200 cursor-pointer`}
+                                  onClick={() => isPdf && handleViewReport(report)}
+                                >
+                                  <div className="flex justify-between items-start">
+                                    <div className="flex-1">
+                                      <div className="flex items-center space-x-2 mb-1">
+                                        <h6 className="text-sm font-medium text-gray-900">{subLabel}</h6>
+                                        {reportStatus.status && (
+                                          <span className={`text-xs px-1.5 py-0.5 rounded-full ${reportStatus.bgColor} ${reportStatus.color}`}>
+                                            {reportStatus.status}
+                                          </span>
                                         )}
                                       </div>
-                                      <div className="flex flex-col items-end gap-1 ml-2">
-                                        <div className="flex space-x-1">
+                                      <div className="mb-1">
+                                        <span className="text-xs text-gray-500">{formatDate(report.report_date)}</span>
+                                      </div>
+                                      {report.description && (
+                                        <p className="text-xs text-gray-600 mb-1 line-clamp-1">
+                                          {report.description}
+                                        </p>
+                                      )}
+                                    </div>
+                                    <div className="flex flex-col items-end gap-1 ml-2">
+                                      <div className="flex space-x-1">
 
-                                          <button 
-                                            onClick={(e) => {
-                                              e.stopPropagation();
-                                              handleEditReport(report);
-                                            }}
-                                            className="text-green-600 hover:text-green-800 p-1.5 bg-green-50 hover:bg-green-100 rounded transition-colors"
-                                            title="Edit"
-                                          >
-                                            <EditIcon />
-                                          </button>
-                                          <button 
-                                            onClick={(e) => {
-                                              e.stopPropagation();
-                                              if (isAdmin()) {
-                                                handleDeleteReport(report);
-                                              }
-                                            }}
-                                            className={`p-1.5 rounded transition-colors ${
-                                              isAdmin() 
-                                                ? 'text-red-600 hover:text-red-800 bg-red-50 hover:bg-red-100' 
-                                                : 'text-gray-400 bg-gray-50 cursor-not-allowed'
+                                        <button
+                                          onClick={(e) => {
+                                            e.stopPropagation();
+                                            handleEditReport(report);
+                                          }}
+                                          className="text-green-600 hover:text-green-800 p-1.5 bg-green-50 hover:bg-green-100 rounded transition-colors"
+                                          title="Edit"
+                                        >
+                                          <EditIcon />
+                                        </button>
+                                        <button
+                                          onClick={(e) => {
+                                            e.stopPropagation();
+                                            if (isAdmin()) {
+                                              handleDeleteReport(report);
+                                            }
+                                          }}
+                                          className={`p-1.5 rounded transition-colors ${isAdmin()
+                                              ? 'text-red-600 hover:text-red-800 bg-red-50 hover:bg-red-100'
+                                              : 'text-gray-400 bg-gray-50 cursor-not-allowed'
                                             }`}
-                                            title={isAdmin() ? "Delete" : "Only admins can delete"}
-                                            disabled={!isAdmin()}
-                                          >
-                                            <DeleteIcon />
-                                          </button>
-                                        </div>
+                                          title={isAdmin() ? "Delete" : "Only admins can delete"}
+                                          disabled={!isAdmin()}
+                                        >
+                                          <DeleteIcon />
+                                        </button>
                                       </div>
                                     </div>
                                   </div>
-                                );
-                              })}
-                              </div>
-                            </div>
-                          )}
-                      </div>
-                    );
+                                </div>
+                              );
+                            })}
+                          </div>
+                        </div>
+                      )}
+                    </div>
+                  );
                 })}
               </div>
             ) : (
@@ -2490,7 +2466,7 @@ const MemberPage = () => {
                   </svg>
                 </div>
                 <p className="text-gray-500">No medical reports uploaded yet</p>
-                <button 
+                <button
                   onClick={() => setShowUploadReportModal(true)}
                   className="mt-4 text-teal-600 hover:text-teal-800 font-medium"
                 >
@@ -2502,15 +2478,15 @@ const MemberPage = () => {
         )}
 
         {activeTab === 'documents' && (
-            <div>
+          <div>
 
             {documents.length > 0 ? (
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 w-full max-w-full">
                 {documents.map((document) => {
                   const documentStatus = getDocumentStatus(document);
                   return (
-                    <div 
-                      key={document.id} 
+                    <div
+                      key={document.id}
                       className={`rounded-lg border border-gray-200 hover:shadow-md transition-shadow card-consistent-height flex flex-col w-full max-w-full ${getGradientClass(documentStatus)} cursor-pointer`}
                       onClick={(e) => {
                         // Prevent bubbling if user clicks buttons inside card!
@@ -2561,11 +2537,10 @@ const MemberPage = () => {
                                   handleDeleteDocument(document);
                                 }
                               }}
-                              className={`p-1.5 rounded transition-colors ${
-                                isAdmin() 
-                                  ? 'text-red-600 hover:text-red-800 bg-red-50 hover:bg-red-100' 
+                              className={`p-1.5 rounded transition-colors ${isAdmin()
+                                  ? 'text-red-600 hover:text-red-800 bg-red-50 hover:bg-red-100'
                                   : 'text-gray-400 bg-gray-50 cursor-not-allowed'
-                              }`}
+                                }`}
                               title={isAdmin() ? "Delete" : "Only admins can delete"}
                               disabled={!isAdmin()}
                             >
@@ -2582,8 +2557,8 @@ const MemberPage = () => {
                     </div>
                   );
                 })}
-                </div>
-              ) : (
+              </div>
+            ) : (
               <div className="text-center py-12">
                 <div className="text-gray-400 mb-4">
                   <svg className="mx-auto h-12 w-12" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -2591,16 +2566,16 @@ const MemberPage = () => {
                   </svg>
                 </div>
                 <p className="text-gray-500">No documents uploaded yet</p>
-                <button 
+                <button
                   onClick={() => setShowUploadDocumentModal(true)}
                   className="mt-4 text-teal-600 hover:text-teal-800 font-medium"
                 >
                   Upload your first document
                 </button>
               </div>
-              )}
-            </div>
-          )}
+            )}
+          </div>
+        )}
 
         {/* Add Vital Modal */}
         {showAddVitalModal && (
@@ -2628,7 +2603,7 @@ const MemberPage = () => {
                     type="number"
                     step="0.01"
                     value={vitalFormData.value}
-                    onChange={(e) => setVitalFormData({...vitalFormData, value: e.target.value})}
+                    onChange={(e) => setVitalFormData({ ...vitalFormData, value: e.target.value })}
                     className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-500"
                     placeholder={vitalFormData.vitalType ? VITAL_TYPES[vitalFormData.vitalType]?.placeholder : ''}
                     required
@@ -2639,7 +2614,7 @@ const MemberPage = () => {
                   <input
                     type="text"
                     value={vitalFormData.unit}
-                    onChange={(e) => setVitalFormData({...vitalFormData, unit: e.target.value})}
+                    onChange={(e) => setVitalFormData({ ...vitalFormData, unit: e.target.value })}
                     className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-500"
                     placeholder={vitalFormData.vitalType ? VITAL_TYPES[vitalFormData.vitalType]?.unit : ''}
                     required
@@ -2654,7 +2629,7 @@ const MemberPage = () => {
                         const newComponents = { ...vitalDateComponents, day: e.target.value };
                         setVitalDateComponents(newComponents);
                         const combinedDate = combineDateComponents(newComponents.day, newComponents.month, newComponents.year);
-                        setVitalFormData({...vitalFormData, recordedAt: combinedDate});
+                        setVitalFormData({ ...vitalFormData, recordedAt: combinedDate });
                       }}
                       className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-500 text-sm"
                       required
@@ -2662,14 +2637,14 @@ const MemberPage = () => {
                       <option value="">Day</option>
                       {generateDateOptions()}
                     </select>
-                    
+
                     <select
                       value={vitalDateComponents.month}
                       onChange={(e) => {
                         const newComponents = { ...vitalDateComponents, month: e.target.value };
                         setVitalDateComponents(newComponents);
                         const combinedDate = combineDateComponents(newComponents.day, newComponents.month, newComponents.year);
-                        setVitalFormData({...vitalFormData, recordedAt: combinedDate});
+                        setVitalFormData({ ...vitalFormData, recordedAt: combinedDate });
                       }}
                       className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-500 text-sm"
                       required
@@ -2677,14 +2652,14 @@ const MemberPage = () => {
                       <option value="">Month</option>
                       {generateMonthOptions()}
                     </select>
-                    
+
                     <select
                       value={vitalDateComponents.year}
                       onChange={(e) => {
                         const newComponents = { ...vitalDateComponents, year: e.target.value };
                         setVitalDateComponents(newComponents);
                         const combinedDate = combineDateComponents(newComponents.day, newComponents.month, newComponents.year);
-                        setVitalFormData({...vitalFormData, recordedAt: combinedDate});
+                        setVitalFormData({ ...vitalFormData, recordedAt: combinedDate });
                       }}
                       className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-500 text-sm"
                       required
@@ -2698,21 +2673,20 @@ const MemberPage = () => {
                   <label className="block text-sm font-medium text-gray-700 mb-1">Notes (Optional)</label>
                   <textarea
                     value={vitalFormData.notes}
-                    onChange={(e) => setVitalFormData({...vitalFormData, notes: e.target.value})}
+                    onChange={(e) => setVitalFormData({ ...vitalFormData, notes: e.target.value })}
                     className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-500"
                     rows="3"
                     placeholder="Any additional notes..."
                   />
                 </div>
                 <div className="flex space-x-3">
-                  <button 
-                    type="submit" 
+                  <button
+                    type="submit"
                     disabled={isSubmittingVital}
-                    className={`px-4 py-2 rounded-lg font-medium transition-colors duration-200 ${
-                      isSubmittingVital 
-                        ? 'bg-gray-400 cursor-not-allowed text-white' 
+                    className={`px-4 py-2 rounded-lg font-medium transition-colors duration-200 ${isSubmittingVital
+                        ? 'bg-gray-400 cursor-not-allowed text-white'
                         : 'bg-teal-600 hover:bg-teal-700 text-white'
-                    }`}
+                      }`}
                   >
                     {isSubmittingVital ? 'Adding Vital...' : 'Add Vital'}
                   </button>
@@ -2720,11 +2694,10 @@ const MemberPage = () => {
                     type="button"
                     disabled={isSubmittingVital}
                     onClick={() => setShowAddVitalModal(false)}
-                    className={`px-4 py-2 rounded-lg font-medium transition-colors duration-200 ${
-                      isSubmittingVital 
-                        ? 'bg-gray-400 cursor-not-allowed text-white' 
+                    className={`px-4 py-2 rounded-lg font-medium transition-colors duration-200 ${isSubmittingVital
+                        ? 'bg-gray-400 cursor-not-allowed text-white'
                         : 'bg-gray-500 hover:bg-gray-600 text-white'
-                    }`}
+                      }`}
                   >
                     Cancel
                   </button>
@@ -2767,7 +2740,7 @@ const MemberPage = () => {
                     type="number"
                     step="0.01"
                     value={editVitalFormData.value}
-                    onChange={(e) => setEditVitalFormData({...editVitalFormData, value: e.target.value})}
+                    onChange={(e) => setEditVitalFormData({ ...editVitalFormData, value: e.target.value })}
                     className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-500"
                     placeholder={editVitalFormData.vitalType ? VITAL_TYPES[editVitalFormData.vitalType]?.placeholder : ''}
                     required
@@ -2778,7 +2751,7 @@ const MemberPage = () => {
                   <input
                     type="text"
                     value={editVitalFormData.unit}
-                    onChange={(e) => setEditVitalFormData({...editVitalFormData, unit: e.target.value})}
+                    onChange={(e) => setEditVitalFormData({ ...editVitalFormData, unit: e.target.value })}
                     className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-500"
                     placeholder={editVitalFormData.vitalType ? VITAL_TYPES[editVitalFormData.vitalType]?.unit : ''}
                     required
@@ -2793,7 +2766,7 @@ const MemberPage = () => {
                         const newComponents = { ...editVitalDateComponents, day: e.target.value };
                         setEditVitalDateComponents(newComponents);
                         const combinedDate = combineDateComponents(newComponents.day, newComponents.month, newComponents.year);
-                        setEditVitalFormData({...editVitalFormData, recordedAt: combinedDate});
+                        setEditVitalFormData({ ...editVitalFormData, recordedAt: combinedDate });
                       }}
                       className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-500 text-sm"
                       required
@@ -2801,14 +2774,14 @@ const MemberPage = () => {
                       <option value="">Day</option>
                       {generateDateOptions()}
                     </select>
-                    
+
                     <select
                       value={editVitalDateComponents.month}
                       onChange={(e) => {
                         const newComponents = { ...editVitalDateComponents, month: e.target.value };
                         setEditVitalDateComponents(newComponents);
                         const combinedDate = combineDateComponents(newComponents.day, newComponents.month, newComponents.year);
-                        setEditVitalFormData({...editVitalFormData, recordedAt: combinedDate});
+                        setEditVitalFormData({ ...editVitalFormData, recordedAt: combinedDate });
                       }}
                       className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-500 text-sm"
                       required
@@ -2816,14 +2789,14 @@ const MemberPage = () => {
                       <option value="">Month</option>
                       {generateMonthOptions()}
                     </select>
-                    
+
                     <select
                       value={editVitalDateComponents.year}
                       onChange={(e) => {
                         const newComponents = { ...editVitalDateComponents, year: e.target.value };
                         setEditVitalDateComponents(newComponents);
                         const combinedDate = combineDateComponents(newComponents.day, newComponents.month, newComponents.year);
-                        setEditVitalFormData({...editVitalFormData, recordedAt: combinedDate});
+                        setEditVitalFormData({ ...editVitalFormData, recordedAt: combinedDate });
                       }}
                       className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-500 text-sm"
                       required
@@ -2837,7 +2810,7 @@ const MemberPage = () => {
                   <label className="block text-sm font-medium text-gray-700 mb-1">Notes (Optional)</label>
                   <textarea
                     value={editVitalFormData.notes}
-                    onChange={(e) => setEditVitalFormData({...editVitalFormData, notes: e.target.value})}
+                    onChange={(e) => setEditVitalFormData({ ...editVitalFormData, notes: e.target.value })}
                     className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-500"
                     rows="3"
                     placeholder="Any additional notes..."
@@ -2875,7 +2848,7 @@ const MemberPage = () => {
                     value={reportFormData.reportType}
                     onChange={(e) => {
                       setReportFormData({
-                        ...reportFormData, 
+                        ...reportFormData,
                         reportType: e.target.value,
                         reportSubType: ''
                       });
@@ -2893,7 +2866,7 @@ const MemberPage = () => {
                   <label className="block text-sm font-medium text-gray-700 mb-1">Report Sub-Type <span className="text-red-500">*</span></label>
                   <select
                     value={reportFormData.reportSubType}
-                    onChange={(e) => setReportFormData({...reportFormData, reportSubType: e.target.value})}
+                    onChange={(e) => setReportFormData({ ...reportFormData, reportSubType: e.target.value })}
                     className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-500"
                     required
                   >
@@ -2903,7 +2876,7 @@ const MemberPage = () => {
                         <option key={subType.value} value={subType.value}>{subType.label}</option>
                       ))
                     ) : (
-                      Object.values(REPORT_TYPES).flatMap(config => 
+                      Object.values(REPORT_TYPES).flatMap(config =>
                         config.subTypes ? config.subTypes.map((subType) => (
                           <option key={subType.value} value={subType.value}>{subType.label}</option>
                         )) : []
@@ -2916,7 +2889,7 @@ const MemberPage = () => {
                   <input
                     type="text"
                     value={reportFormData.title}
-                    onChange={(e) => setReportFormData({...reportFormData, title: e.target.value})}
+                    onChange={(e) => setReportFormData({ ...reportFormData, title: e.target.value })}
                     className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-500"
                     placeholder={reportFormData.file ? reportFormData.file.name.replace(/\.[^/.]+$/, '') : 'Enter file name'}
                     required
@@ -2932,7 +2905,7 @@ const MemberPage = () => {
                         const newComponents = { ...reportDateComponents, day: e.target.value };
                         setReportDateComponents(newComponents);
                         const combinedDate = combineDateComponents(newComponents.day, newComponents.month, newComponents.year);
-                        setReportFormData({...reportFormData, reportDate: combinedDate});
+                        setReportFormData({ ...reportFormData, reportDate: combinedDate });
                       }}
                       className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-500 text-sm"
                       required
@@ -2940,14 +2913,14 @@ const MemberPage = () => {
                       <option value="">Day</option>
                       {generateDateOptions()}
                     </select>
-                    
+
                     <select
                       value={reportDateComponents.month}
                       onChange={(e) => {
                         const newComponents = { ...reportDateComponents, month: e.target.value };
                         setReportDateComponents(newComponents);
                         const combinedDate = combineDateComponents(newComponents.day, newComponents.month, newComponents.year);
-                        setReportFormData({...reportFormData, reportDate: combinedDate});
+                        setReportFormData({ ...reportFormData, reportDate: combinedDate });
                       }}
                       className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-500 text-sm"
                       required
@@ -2955,14 +2928,14 @@ const MemberPage = () => {
                       <option value="">Month</option>
                       {generateMonthOptions()}
                     </select>
-                    
+
                     <select
                       value={reportDateComponents.year}
                       onChange={(e) => {
                         const newComponents = { ...reportDateComponents, year: e.target.value };
                         setReportDateComponents(newComponents);
                         const combinedDate = combineDateComponents(newComponents.day, newComponents.month, newComponents.year);
-                        setReportFormData({...reportFormData, reportDate: combinedDate});
+                        setReportFormData({ ...reportFormData, reportDate: combinedDate });
                       }}
                       className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-500 text-sm"
                       required
@@ -2984,19 +2957,18 @@ const MemberPage = () => {
                   <p className="text-xs text-gray-500 mt-1">Only PDF files are accepted (max 20MB)</p>
                 </div>
                 <div className="flex space-x-3">
-                  <button 
-                    type="submit" 
+                  <button
+                    type="submit"
                     disabled={isUploading || isSubmittingReport}
-                    className={`px-4 py-2 rounded-lg font-medium relative overflow-hidden transition-colors duration-200 ${
-                      (isUploading || isSubmittingReport) 
-                        ? 'bg-gray-400 cursor-not-allowed text-white' 
+                    className={`px-4 py-2 rounded-lg font-medium relative overflow-hidden transition-colors duration-200 ${(isUploading || isSubmittingReport)
+                        ? 'bg-gray-400 cursor-not-allowed text-white'
                         : 'bg-teal-600 hover:bg-teal-700 text-white'
-                    }`}
+                      }`}
                   >
                     {isUploading ? (
                       <>
                         <span className="relative z-10">Uploading {uploadProgress}%</span>
-                        <div 
+                        <div
                           className="absolute inset-0 bg-teal-400 transition-all duration-300"
                           style={{ width: `${uploadProgress}%` }}
                         ></div>
@@ -3011,11 +2983,10 @@ const MemberPage = () => {
                     type="button"
                     disabled={isUploading || isSubmittingReport}
                     onClick={() => setShowUploadReportModal(false)}
-                    className={`px-4 py-2 rounded-lg font-medium transition-colors duration-200 ${
-                      (isUploading || isSubmittingReport) 
-                        ? 'bg-gray-400 cursor-not-allowed text-white' 
+                    className={`px-4 py-2 rounded-lg font-medium transition-colors duration-200 ${(isUploading || isSubmittingReport)
+                        ? 'bg-gray-400 cursor-not-allowed text-white'
                         : 'bg-gray-500 hover:bg-gray-600 text-white'
-                    }`}
+                      }`}
                   >
                     {(isUploading || isSubmittingReport) ? 'Please wait...' : 'Cancel'}
                   </button>
@@ -3037,7 +3008,7 @@ const MemberPage = () => {
                     value={editReportFormData.reportType}
                     onChange={(e) => {
                       setEditReportFormData({
-                        ...editReportFormData, 
+                        ...editReportFormData,
                         reportType: e.target.value,
                         reportSubType: ''
                       });
@@ -3055,7 +3026,7 @@ const MemberPage = () => {
                     <label className="block text-sm font-medium text-gray-700 mb-1">Report Sub-Type</label>
                     <select
                       value={editReportFormData.reportSubType}
-                      onChange={(e) => setEditReportFormData({...editReportFormData, reportSubType: e.target.value})}
+                      onChange={(e) => setEditReportFormData({ ...editReportFormData, reportSubType: e.target.value })}
                       className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-500"
                     >
                       <option value="">Select Sub-Type</option>
@@ -3070,7 +3041,7 @@ const MemberPage = () => {
                   <input
                     type="text"
                     value={editReportFormData.title}
-                    onChange={(e) => setEditReportFormData({...editReportFormData, title: e.target.value})}
+                    onChange={(e) => setEditReportFormData({ ...editReportFormData, title: e.target.value })}
                     className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-500"
                     placeholder="File name (without extension)"
                     required
@@ -3086,7 +3057,7 @@ const MemberPage = () => {
                         const newComponents = { ...editReportDateComponents, day: e.target.value };
                         setEditReportDateComponents(newComponents);
                         const combinedDate = combineDateComponents(newComponents.day, newComponents.month, newComponents.year);
-                        setEditReportFormData({...editReportFormData, reportDate: combinedDate});
+                        setEditReportFormData({ ...editReportFormData, reportDate: combinedDate });
                       }}
                       className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-500 text-sm"
                       required
@@ -3094,14 +3065,14 @@ const MemberPage = () => {
                       <option value="">Day</option>
                       {generateDateOptions()}
                     </select>
-                    
+
                     <select
                       value={editReportDateComponents.month}
                       onChange={(e) => {
                         const newComponents = { ...editReportDateComponents, month: e.target.value };
                         setEditReportDateComponents(newComponents);
                         const combinedDate = combineDateComponents(newComponents.day, newComponents.month, newComponents.year);
-                        setEditReportFormData({...editReportFormData, reportDate: combinedDate});
+                        setEditReportFormData({ ...editReportFormData, reportDate: combinedDate });
                       }}
                       className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-500 text-sm"
                       required
@@ -3109,14 +3080,14 @@ const MemberPage = () => {
                       <option value="">Month</option>
                       {generateMonthOptions()}
                     </select>
-                    
+
                     <select
                       value={editReportDateComponents.year}
                       onChange={(e) => {
                         const newComponents = { ...editReportDateComponents, year: e.target.value };
                         setEditReportDateComponents(newComponents);
                         const combinedDate = combineDateComponents(newComponents.day, newComponents.month, newComponents.year);
-                        setEditReportFormData({...editReportFormData, reportDate: combinedDate});
+                        setEditReportFormData({ ...editReportFormData, reportDate: combinedDate });
                       }}
                       className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-500 text-sm"
                       required
@@ -3176,7 +3147,7 @@ const MemberPage = () => {
                   <input
                     type="text"
                     value={documentFormData.title}
-                    onChange={(e) => setDocumentFormData({...documentFormData, title: e.target.value})}
+                    onChange={(e) => setDocumentFormData({ ...documentFormData, title: e.target.value })}
                     className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-500"
                     placeholder="File name (without extension)"
                     required
@@ -3192,7 +3163,7 @@ const MemberPage = () => {
                         const newComponents = { ...documentDateComponents, day: e.target.value };
                         setDocumentDateComponents(newComponents);
                         const combinedDate = combineDateComponents(newComponents.day, newComponents.month, newComponents.year);
-                        setDocumentFormData({...documentFormData, uploadDate: combinedDate});
+                        setDocumentFormData({ ...documentFormData, uploadDate: combinedDate });
                       }}
                       className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-500 text-sm"
                       required
@@ -3200,14 +3171,14 @@ const MemberPage = () => {
                       <option value="">Day</option>
                       {generateDateOptions()}
                     </select>
-                    
+
                     <select
                       value={documentDateComponents.month}
                       onChange={(e) => {
                         const newComponents = { ...documentDateComponents, month: e.target.value };
                         setDocumentDateComponents(newComponents);
                         const combinedDate = combineDateComponents(newComponents.day, newComponents.month, newComponents.year);
-                        setDocumentFormData({...documentFormData, uploadDate: combinedDate});
+                        setDocumentFormData({ ...documentFormData, uploadDate: combinedDate });
                       }}
                       className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-500 text-sm"
                       required
@@ -3215,14 +3186,14 @@ const MemberPage = () => {
                       <option value="">Month</option>
                       {generateMonthOptions()}
                     </select>
-                    
+
                     <select
                       value={documentDateComponents.year}
                       onChange={(e) => {
                         const newComponents = { ...documentDateComponents, year: e.target.value };
                         setDocumentDateComponents(newComponents);
                         const combinedDate = combineDateComponents(newComponents.day, newComponents.month, newComponents.year);
-                        setDocumentFormData({...documentFormData, uploadDate: combinedDate});
+                        setDocumentFormData({ ...documentFormData, uploadDate: combinedDate });
                       }}
                       className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-500 text-sm"
                       required
@@ -3244,19 +3215,18 @@ const MemberPage = () => {
                   <p className="text-xs text-gray-500 mt-1">Only PDF files are accepted (max 20MB)</p>
                 </div>
                 <div className="flex space-x-3">
-                  <button 
-                    type="submit" 
+                  <button
+                    type="submit"
                     disabled={isUploading || isSubmittingDocument}
-                    className={`px-4 py-2 rounded-lg font-medium relative overflow-hidden transition-colors duration-200 ${
-                      (isUploading || isSubmittingDocument) 
-                        ? 'bg-gray-400 cursor-not-allowed text-white' 
+                    className={`px-4 py-2 rounded-lg font-medium relative overflow-hidden transition-colors duration-200 ${(isUploading || isSubmittingDocument)
+                        ? 'bg-gray-400 cursor-not-allowed text-white'
                         : 'bg-teal-600 hover:bg-teal-700 text-white'
-                    }`}
+                      }`}
                   >
                     {isUploading ? (
                       <>
                         <span className="relative z-10">Uploading {uploadProgress}%</span>
-                        <div 
+                        <div
                           className="absolute inset-0 bg-teal-400 transition-all duration-300"
                           style={{ width: `${uploadProgress}%` }}
                         ></div>
@@ -3271,11 +3241,10 @@ const MemberPage = () => {
                     type="button"
                     disabled={isUploading || isSubmittingDocument}
                     onClick={() => setShowUploadDocumentModal(false)}
-                    className={`px-4 py-2 rounded-lg font-medium transition-colors duration-200 ${
-                      (isUploading || isSubmittingDocument) 
-                        ? 'bg-gray-400 cursor-not-allowed text-white' 
+                    className={`px-4 py-2 rounded-lg font-medium transition-colors duration-200 ${(isUploading || isSubmittingDocument)
+                        ? 'bg-gray-400 cursor-not-allowed text-white'
                         : 'bg-gray-500 hover:bg-gray-600 text-white'
-                    }`}
+                      }`}
                   >
                     {(isUploading || isSubmittingDocument) ? 'Please wait...' : 'Cancel'}
                   </button>
@@ -3298,7 +3267,7 @@ const MemberPage = () => {
                   <input
                     type="text"
                     value={editDocumentFormData.title}
-                    onChange={(e) => setEditDocumentFormData({...editDocumentFormData, title: e.target.value})}
+                    onChange={(e) => setEditDocumentFormData({ ...editDocumentFormData, title: e.target.value })}
                     className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-500"
                     placeholder="File name (without extension)"
                     required
@@ -3314,7 +3283,7 @@ const MemberPage = () => {
                         const newComponents = { ...editDocumentDateComponents, day: e.target.value };
                         setEditDocumentDateComponents(newComponents);
                         const combinedDate = combineDateComponents(newComponents.day, newComponents.month, newComponents.year);
-                        setEditDocumentFormData({...editDocumentFormData, uploadDate: combinedDate});
+                        setEditDocumentFormData({ ...editDocumentFormData, uploadDate: combinedDate });
                       }}
                       className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-500 text-sm"
                       required
@@ -3322,14 +3291,14 @@ const MemberPage = () => {
                       <option value="">Day</option>
                       {generateDateOptions()}
                     </select>
-                    
+
                     <select
                       value={editDocumentDateComponents.month}
                       onChange={(e) => {
                         const newComponents = { ...editDocumentDateComponents, month: e.target.value };
                         setEditDocumentDateComponents(newComponents);
                         const combinedDate = combineDateComponents(newComponents.day, newComponents.month, newComponents.year);
-                        setEditDocumentFormData({...editDocumentFormData, uploadDate: combinedDate});
+                        setEditDocumentFormData({ ...editDocumentFormData, uploadDate: combinedDate });
                       }}
                       className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-500 text-sm"
                       required
@@ -3337,14 +3306,14 @@ const MemberPage = () => {
                       <option value="">Month</option>
                       {generateMonthOptions()}
                     </select>
-                    
+
                     <select
                       value={editDocumentDateComponents.year}
                       onChange={(e) => {
                         const newComponents = { ...editDocumentDateComponents, year: e.target.value };
                         setEditDocumentDateComponents(newComponents);
                         const combinedDate = combineDateComponents(newComponents.day, newComponents.month, newComponents.year);
-                        setEditDocumentFormData({...editDocumentFormData, uploadDate: combinedDate});
+                        setEditDocumentFormData({ ...editDocumentFormData, uploadDate: combinedDate });
                       }}
                       className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-500 text-sm"
                       required
@@ -3403,7 +3372,7 @@ const MemberPage = () => {
         )}
       </div>
     </div>
-    );
-  };
+  );
+};
 
 export default MemberPage;
