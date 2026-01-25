@@ -80,25 +80,17 @@ const Layout = () => {
                 </div>
               )}
             </div>
-
-            {/* Mobile Profile Icon (only if needed, otherwise MobileNav handles profile) */}
-            <div className="sm:hidden">
-              <div className="w-8 h-8 rounded-full bg-gradient-to-br from-primary-100 to-secondary-100 border border-white shadow-sm flex items-center justify-center text-primary-700 font-bold text-sm ring-2 ring-primary-500/10">
-                {user?.firstName ? user.firstName[0].toUpperCase() : 'U'}
-              </div>
-            </div>
           </div>
         </div>
-    </div>
-      </nav >
+      </nav>
 
-  {/* Main content */ }
-  < main className = "pt-20 pb-8 container-safe" >
-    <div className="animate-fade-in">
-      <Outlet />
+      {/* Main content */}
+      <main className="pt-20 pb-8 container-safe">
+        <div className="animate-fade-in">
+          <Outlet />
+        </div>
+      </main>
     </div>
-      </main >
-    </div >
   );
 };
 
