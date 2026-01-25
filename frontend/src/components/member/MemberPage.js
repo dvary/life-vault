@@ -2049,254 +2049,399 @@ const MemberPage = () => {
         </div>
       )}
 
-      {/* Main Content - Health Records and Vitals */}
-      <div className="glass-panel p-3 sm:p-4 md:p-6 w-full max-w-full">
-        {/* Modern Glass Tabs */}
-        <div className="flex space-x-1 bg-gray-100/50 p-1 rounded-xl mb-6 backdrop-blur-sm">
-          {['vitals', 'reports', 'documents'].map((tab) => (
-            <button
-              key={tab}
-              onClick={() => setActiveTab(tab)}
-              data-tab={activeTab === tab ? 'active' : 'inactive'}
-              data-tab-name={tab}
-              className={`flex-1 py-2 px-3 rounded-lg text-sm font-medium transition-all duration-200 capitalize ${activeTab === tab
-                ? 'bg-white text-primary-600 shadow-sm'
-                : 'text-gray-500 hover:text-gray-700 hover:bg-white/50'
-                }`}
-            >
-              {tab}
-            </button>
-          ))}
-        </div>
-
-        {/* Tab Content */}
-        {activeTab === 'vitals' && (
-          <div>
+      {/* Main Content - Content with Bottom Nav */}
+      <div className="pb-24">
+        <div className="glass-panel p-3 sm:p-4 md:p-6 w-full max-w-full">
+          {/* Content Switched by State */}
+          {activeTab === 'vitals' && (
+            <div>
 
 
-            {(healthVitals.length > 0 || getBMIRecords().length > 0) ? (
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 items-start w-full max-w-full">
-                {/* BMI Card - Always show if there are height and weight records */}
-                {getBMIRecords().length > 0 && (
-                  (() => {
-                    const bmiRecords = getBMIRecords();
-                    const latestBMI = bmiRecords[0];
-                    const isExpanded = expandedVitalTypes.has('bmi');
-                    const vitalStatus = getVitalStatus('bmi', latestBMI.value, member?.gender);
-                    const vitalConfig = VITAL_TYPES['bmi'];
+              {(healthVitals.length > 0 || getBMIRecords().length > 0) ? (
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 items-start w-full max-w-full">
+                  {/* BMI Card - Always show if there are height and weight records */}
+                  {getBMIRecords().length > 0 && (
+                    (() => {
+                      const bmiRecords = getBMIRecords();
+                      const latestBMI = bmiRecords[0];
+                      const isExpanded = expandedVitalTypes.has('bmi');
+                      const vitalStatus = getVitalStatus('bmi', latestBMI.value, member?.gender);
+                      const vitalConfig = VITAL_TYPES['bmi'];
 
-                    // Create gradient background based on status
-                    const getBMIGradientClass = (status) => {
-                      switch (status.level) {
-                        case 'high':
-                        case 'low':
-                          return 'bg-gradient-to-br from-rose-50 to-white';
-                        case 'warning':
-                          return 'bg-gradient-to-br from-amber-50 to-white';
-                        case 'normal':
-                          return 'bg-gradient-to-br from-green-50 to-white';
-                        default:
-                          return 'bg-gradient-to-br from-gray-50 to-white';
-                      }
-                    };
+                      // Create gradient background based on status
+                      const getBMIGradientClass = (status) => {
+                        switch (status.level) {
+                          case 'high':
+                          case 'low':
+                            return 'bg-gradient-to-br from-rose-50 to-white';
+                          case 'warning':
+                            return 'bg-gradient-to-br from-amber-50 to-white';
+                          case 'normal':
+                            return 'bg-gradient-to-br from-green-50 to-white';
+                          default:
+                            return 'bg-gradient-to-br from-gray-50 to-white';
+                        }
+                      };
 
-                    return (
-                      <div className={`rounded-lg border border-gray-200 shadow-sm hover:shadow-md transition-shadow flex flex-col card-consistent-height w-full max-w-full ${getBMIGradientClass(vitalStatus)}`}>
-                        {/* BMI Card - Always Visible */}
-                        <div
-                          className="p-3 cursor-pointer card-content"
-                          onClick={() => toggleVitalTypeExpansion('bmi')}
-                        >
-                          <div className="flex justify-between items-center card-body">
-                            <div className="flex-1">
-                              <div className="flex items-center space-x-2 mb-1">
-                                <h4 className="text-lg font-semibold text-gray-900">BMI</h4>
-                                {vitalStatus.status && (
-                                  <span className={`text-xs px-2 py-1 rounded-full ${vitalStatus.bgColor} ${vitalStatus.color}`}>
-                                    {vitalStatus.status}
+                      return (
+                        <div className={`rounded-lg border border-gray-200 shadow-sm hover:shadow-md transition-shadow flex flex-col card-consistent-height w-full max-w-full ${getBMIGradientClass(vitalStatus)}`}>
+                          {/* BMI Card - Always Visible */}
+                          <div
+                            className="p-3 cursor-pointer card-content"
+                            onClick={() => toggleVitalTypeExpansion('bmi')}
+                          >
+                            <div className="flex justify-between items-center card-body">
+                              <div className="flex-1">
+                                <div className="flex items-center space-x-2 mb-1">
+                                  <h4 className="text-lg font-semibold text-gray-900">BMI</h4>
+                                  {vitalStatus.status && (
+                                    <span className={`text-xs px-2 py-1 rounded-full ${vitalStatus.bgColor} ${vitalStatus.color}`}>
+                                      {vitalStatus.status}
+                                    </span>
+                                  )}
+                                  <span className={`text-xs px-2 py-1 rounded-full ${getAgeTagColor(vitalStatus)}`}>
+                                    {calculateRecordAge(latestBMI.recorded_at)}
                                   </span>
-                                )}
-                                <span className={`text-xs px-2 py-1 rounded-full ${getAgeTagColor(vitalStatus)}`}>
-                                  {calculateRecordAge(latestBMI.recorded_at)}
-                                </span>
-                              </div>
-                              <div className="flex items-center space-x-2">
-                                <p className={`text-lg font-bold ${vitalStatus.color}`}>
-                                  {latestBMI.value} {decodeHtmlEntities(latestBMI.unit)}
-                                </p>
-                                {vitalConfig.ranges && (
-                                  <span className="text-xs bg-green-100 text-green-800 px-2 py-1 rounded-full">
-                                    {vitalConfig.ranges.display}
-                                  </span>
-                                )}
+                                </div>
+                                <div className="flex items-center space-x-2">
+                                  <p className={`text-lg font-bold ${vitalStatus.color}`}>
+                                    {latestBMI.value} {decodeHtmlEntities(latestBMI.unit)}
+                                  </p>
+                                  {vitalConfig.ranges && (
+                                    <span className="text-xs bg-green-100 text-green-800 px-2 py-1 rounded-full">
+                                      {vitalConfig.ranges.display}
+                                    </span>
+                                  )}
+                                </div>
                               </div>
                             </div>
                           </div>
-                        </div>
 
-                        {/* Expanded BMI Records */}
-                        {isExpanded && bmiRecords.length > 1 && (
-                          <div className="border-t border-gray-100 bg-gray-50 p-4">
-                            <div className="space-y-3">
-                              {bmiRecords.map((bmiRecord, index) => {
-                                const recordStatus = getVitalStatus('bmi', bmiRecord.value, member?.gender);
-                                return (
-                                  <div key={bmiRecord.id} className="flex justify-between items-center p-3 bg-white rounded-lg border border-gray-200">
-                                    <div className="flex-1">
-                                      <div className="flex items-center space-x-2 mb-1">
-                                        <p className={`font-medium ${recordStatus.color}`}>
-                                          {bmiRecord.value} {decodeHtmlEntities(bmiRecord.unit)}
-                                        </p>
-                                        {recordStatus.status && (
-                                          <span className={`text-xs px-2 py-1 rounded-full ${recordStatus.bgColor} ${recordStatus.color}`}>
-                                            {recordStatus.status}
-                                          </span>
-                                        )}
-                                      </div>
-                                      <p className="text-sm text-gray-500">
-                                        {formatDate(bmiRecord.recorded_at)}
-                                      </p>
-                                      <p className="text-xs text-gray-400 mt-1">
-                                        {bmiRecord.notes}
-                                      </p>
-                                    </div>
-                                  </div>
-                                );
-                              })}
-                            </div>
-                          </div>
-                        )}
-                      </div>
-                    );
-                  })()
-                )}
-
-                {/* Regular Vital Cards */}
-                {(() => {
-                  const groupedVitals = groupVitalsByType(healthVitals);
-                  const sortedVitalTypes = sortGroupedVitalsByStatus(groupedVitals);
-
-                  return sortedVitalTypes.map(vitalType => {
-                    const vitals = groupedVitals[vitalType];
-                    const vitalConfig = VITAL_TYPES[vitalType] || { label: vitalType.replace('_', ' ').toUpperCase() };
-                    const latestVital = vitals[0]; // First one is the latest due to sorting
-                    const isExpanded = expandedVitalTypes.has(vitalType);
-                    const vitalStatus = getVitalStatus(vitalType, latestVital.value, member?.gender);
-
-                    // Create gradient background based on status
-                    const getGradientClass = (status) => {
-                      switch (status.level) {
-                        case 'high':
-                        case 'low':
-                          return 'bg-gradient-to-br from-rose-50 to-white';
-                        case 'warning':
-                          return 'bg-gradient-to-br from-amber-50 to-white';
-                        case 'normal':
-                          return 'bg-gradient-to-br from-green-50 to-white';
-                        default:
-                          return 'bg-gradient-to-br from-gray-50 to-white';
-                      }
-                    };
-
-                    return (
-                      <div key={vitalType} className={`rounded-lg border border-gray-200 shadow-sm hover:shadow-md transition-shadow flex flex-col card-consistent-height w-full max-w-full ${getVitalGradientClass(vitalStatus)}`}>
-                        {/* Main Card - Always Visible */}
-                        <div
-                          className="p-3 cursor-pointer card-content"
-                          onClick={() => toggleVitalTypeExpansion(vitalType)}
-                        >
-                          <div className="flex justify-between items-center card-body">
-                            <div className="flex-1">
-                              <div className="flex items-center space-x-2 mb-1">
-                                <h4 className="text-lg font-semibold text-gray-900">{vitalConfig.label}</h4>
-                                {vitalStatus.status && (
-                                  <span className={`text-xs px-2 py-1 rounded-full ${vitalStatus.bgColor} ${vitalStatus.color}`}>
-                                    {vitalStatus.status}
-                                  </span>
-                                )}
-                                <span className={`text-xs px-2 py-1 rounded-full ${getAgeTagColor(vitalStatus)}`}>
-                                  {calculateRecordAge(latestVital.recorded_at)}
-                                </span>
-                              </div>
-                              <div className="flex items-center space-x-2">
-                                <p className={`text-lg font-bold ${vitalStatus.color}`}>
-                                  {latestVital.value} {decodeHtmlEntities(latestVital.unit)}
-                                </p>
-                                {vitalConfig.ranges && (
-                                  <span className="text-xs bg-green-100 text-green-800 px-2 py-1 rounded-full">
-                                    {vitalConfig.ranges.display}
-                                  </span>
-                                )}
-                              </div>
-                            </div>
-                            <div className="flex items-center space-x-2">
-                              {/* Add Vital inside this type */}
-                              <button
-                                onClick={(e) => { e.stopPropagation(); openAddVitalForType(vitalType); }}
-                                className="text-teal-600 hover:text-teal-800 p-2 bg-teal-50 hover:bg-teal-100 rounded-lg transition-colors"
-                                title={`Add ${vitalConfig.label}`}
-                              >
-                                <PlusIcon />
-                              </button>
-                            </div>
-                          </div>
-                        </div>
-
-                        {/* Expanded Content - Show All Records */}
-                        {isExpanded && vitals.length > 0 && (
-                          <div className="mt-4 pt-4 border-t border-gray-200">
-                            <div className="p-2 rounded-lg">
-                              {vitals.map((vital, index) => {
-                                const latestCard = index === 0;
-                                const recordStatus = getVitalStatus(vitalType, vital.value, member?.gender);
-                                return (
-                                  <div key={vital.id} className={`p-1.5 rounded-md shadow-sm mx-1 my-0.5 ${getSubCardGradientClass(recordStatus)} hover:shadow-md transition-shadow duration-200`}>
-                                    <div className="flex justify-between items-start">
+                          {/* Expanded BMI Records */}
+                          {isExpanded && bmiRecords.length > 1 && (
+                            <div className="border-t border-gray-100 bg-gray-50 p-4">
+                              <div className="space-y-3">
+                                {bmiRecords.map((bmiRecord, index) => {
+                                  const recordStatus = getVitalStatus('bmi', bmiRecord.value, member?.gender);
+                                  return (
+                                    <div key={bmiRecord.id} className="flex justify-between items-center p-3 bg-white rounded-lg border border-gray-200">
                                       <div className="flex-1">
                                         <div className="flex items-center space-x-2 mb-1">
-                                          <p className={`text-sm font-medium ${recordStatus.color}`}>
-                                            {vital.value} {decodeHtmlEntities(vital.unit)}
+                                          <p className={`font-medium ${recordStatus.color}`}>
+                                            {bmiRecord.value} {decodeHtmlEntities(bmiRecord.unit)}
                                           </p>
                                           {recordStatus.status && (
-                                            <span className={`text-xs px-1.5 py-0.5 rounded-full ${recordStatus.bgColor} ${recordStatus.color}`}>
+                                            <span className={`text-xs px-2 py-1 rounded-full ${recordStatus.bgColor} ${recordStatus.color}`}>
                                               {recordStatus.status}
                                             </span>
                                           )}
                                         </div>
-                                        <p className="text-xs text-gray-500 mt-1">
-                                          {formatDate(vital.recorded_at)}
+                                        <p className="text-sm text-gray-500">
+                                          {formatDate(bmiRecord.recorded_at)}
                                         </p>
-                                        {vital.notes && (
-                                          <p className="text-xs text-gray-600 mt-1 line-clamp-1">{vital.notes}</p>
+                                        <p className="text-xs text-gray-400 mt-1">
+                                          {bmiRecord.notes}
+                                        </p>
+                                      </div>
+                                    </div>
+                                  );
+                                })}
+                              </div>
+                            </div>
+                          )}
+                        </div>
+                      );
+                    })()
+                  )}
+
+                  {/* Regular Vital Cards */}
+                  {(() => {
+                    const groupedVitals = groupVitalsByType(healthVitals);
+                    const sortedVitalTypes = sortGroupedVitalsByStatus(groupedVitals);
+
+                    return sortedVitalTypes.map(vitalType => {
+                      const vitals = groupedVitals[vitalType];
+                      const vitalConfig = VITAL_TYPES[vitalType] || { label: vitalType.replace('_', ' ').toUpperCase() };
+                      const latestVital = vitals[0]; // First one is the latest due to sorting
+                      const isExpanded = expandedVitalTypes.has(vitalType);
+                      const vitalStatus = getVitalStatus(vitalType, latestVital.value, member?.gender);
+
+                      // Create gradient background based on status
+                      const getGradientClass = (status) => {
+                        switch (status.level) {
+                          case 'high':
+                          case 'low':
+                            return 'bg-gradient-to-br from-rose-50 to-white';
+                          case 'warning':
+                            return 'bg-gradient-to-br from-amber-50 to-white';
+                          case 'normal':
+                            return 'bg-gradient-to-br from-green-50 to-white';
+                          default:
+                            return 'bg-gradient-to-br from-gray-50 to-white';
+                        }
+                      };
+
+                      return (
+                        <div key={vitalType} className={`rounded-lg border border-gray-200 shadow-sm hover:shadow-md transition-shadow flex flex-col card-consistent-height w-full max-w-full ${getVitalGradientClass(vitalStatus)}`}>
+                          {/* Main Card - Always Visible */}
+                          <div
+                            className="p-3 cursor-pointer card-content"
+                            onClick={() => toggleVitalTypeExpansion(vitalType)}
+                          >
+                            <div className="flex justify-between items-center card-body">
+                              <div className="flex-1">
+                                <div className="flex items-center space-x-2 mb-1">
+                                  <h4 className="text-lg font-semibold text-gray-900">{vitalConfig.label}</h4>
+                                  {vitalStatus.status && (
+                                    <span className={`text-xs px-2 py-1 rounded-full ${vitalStatus.bgColor} ${vitalStatus.color}`}>
+                                      {vitalStatus.status}
+                                    </span>
+                                  )}
+                                  <span className={`text-xs px-2 py-1 rounded-full ${getAgeTagColor(vitalStatus)}`}>
+                                    {calculateRecordAge(latestVital.recorded_at)}
+                                  </span>
+                                </div>
+                                <div className="flex items-center space-x-2">
+                                  <p className={`text-lg font-bold ${vitalStatus.color}`}>
+                                    {latestVital.value} {decodeHtmlEntities(latestVital.unit)}
+                                  </p>
+                                  {vitalConfig.ranges && (
+                                    <span className="text-xs bg-green-100 text-green-800 px-2 py-1 rounded-full">
+                                      {vitalConfig.ranges.display}
+                                    </span>
+                                  )}
+                                </div>
+                              </div>
+                              <div className="flex items-center space-x-2">
+                                {/* Add Vital inside this type */}
+                                <button
+                                  onClick={(e) => { e.stopPropagation(); openAddVitalForType(vitalType); }}
+                                  className="text-teal-600 hover:text-teal-800 p-2 bg-teal-50 hover:bg-teal-100 rounded-lg transition-colors"
+                                  title={`Add ${vitalConfig.label}`}
+                                >
+                                  <PlusIcon />
+                                </button>
+                              </div>
+                            </div>
+                          </div>
+
+                          {/* Expanded Content - Show All Records */}
+                          {isExpanded && vitals.length > 0 && (
+                            <div className="mt-4 pt-4 border-t border-gray-200">
+                              <div className="p-2 rounded-lg">
+                                {vitals.map((vital, index) => {
+                                  const latestCard = index === 0;
+                                  const recordStatus = getVitalStatus(vitalType, vital.value, member?.gender);
+                                  return (
+                                    <div key={vital.id} className={`p-1.5 rounded-md shadow-sm mx-1 my-0.5 ${getSubCardGradientClass(recordStatus)} hover:shadow-md transition-shadow duration-200`}>
+                                      <div className="flex justify-between items-start">
+                                        <div className="flex-1">
+                                          <div className="flex items-center space-x-2 mb-1">
+                                            <p className={`text-sm font-medium ${recordStatus.color}`}>
+                                              {vital.value} {decodeHtmlEntities(vital.unit)}
+                                            </p>
+                                            {recordStatus.status && (
+                                              <span className={`text-xs px-1.5 py-0.5 rounded-full ${recordStatus.bgColor} ${recordStatus.color}`}>
+                                                {recordStatus.status}
+                                              </span>
+                                            )}
+                                          </div>
+                                          <p className="text-xs text-gray-500 mt-1">
+                                            {formatDate(vital.recorded_at)}
+                                          </p>
+                                          {vital.notes && (
+                                            <p className="text-xs text-gray-600 mt-1 line-clamp-1">{vital.notes}</p>
+                                          )}
+                                        </div>
+                                        <div className="flex space-x-1 ml-2">
+                                          <button
+                                            onClick={(e) => {
+                                              e.stopPropagation();
+                                              handleEditVital(vital);
+                                            }}
+                                            className="text-green-600 hover:text-green-800 p-1.5 bg-green-50 hover:bg-green-100 rounded transition-colors"
+                                            title="Edit"
+                                          >
+                                            <EditIcon />
+                                          </button>
+                                          <button
+                                            onClick={(e) => {
+                                              e.stopPropagation();
+                                              if (isAdmin()) {
+                                                handleDeleteVital(vital);
+                                              }
+                                            }}
+                                            className={`p-1.5 rounded transition-colors ${isAdmin()
+                                              ? 'text-red-600 hover:text-red-800 bg-red-50 hover:bg-red-100'
+                                              : 'text-gray-400 bg-gray-50 cursor-not-allowed'
+                                              }`}
+                                            title={isAdmin() ? "Delete" : "Only admins can delete"}
+                                            disabled={!isAdmin()}
+                                          >
+                                            <DeleteIcon />
+                                          </button>
+                                        </div>
+                                      </div>
+                                    </div>
+                                  );
+                                })}
+                              </div>
+                            </div>
+                          )}
+                        </div>
+                      );
+                    });
+                  })()}
+                </div>
+              ) : (
+                <div className="text-center py-12">
+                  <div className="text-gray-400 mb-4">
+                    <svg className="mx-auto h-12 w-12" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
+                    </svg>
+                  </div>
+                  <p className="text-gray-500">No health vitals recorded yet</p>
+                  <button
+                    onClick={() => setShowAddVitalModal(true)}
+                    className="mt-4 text-teal-600 hover:text-teal-800 font-medium"
+                  >
+                    Add your first vital
+                  </button>
+                </div>
+              )}
+            </div>
+          )}
+
+          {activeTab === 'reports' && (
+            <div>
+
+
+              {medicalReports.length > 0 ? (
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 items-start w-full max-w-full">
+                  {Object.entries(groupReportsByType(medicalReports)).map(([reportKey, reports]) => {
+                    const latestReport = reports[0]; // First one is the latest due to sorting
+                    const isExpanded = expandedReportTypes.has(reportKey);
+
+                    // Use report_type and report_sub_type from the latest report for headings
+                    const reportConfig = REPORT_TYPES[latestReport.report_type] || { label: latestReport.report_type.replace(/_/g, ' ').toUpperCase() };
+                    const subTypeValue = latestReport.report_sub_type || '';
+                    const subTypeConfig = REPORT_TYPES[latestReport.report_type]?.subTypes?.find(st => st.value === subTypeValue);
+                    const subTypeLabel = subTypeConfig?.label || (subTypeValue ? subTypeValue.replace(/_/g, ' ').toUpperCase() : '');
+                    const groupSubTypeLabel = subTypeLabel;
+
+                    // Get main card status based on latest report
+                    const mainCardStatus = getMainCardStatus(reports, getReportStatus);
+
+                    return (
+                      <div key={reportKey} className={`rounded-lg border border-gray-200 shadow-sm hover:shadow-md transition-shadow flex flex-col card-consistent-height w-full max-w-full ${getGradientClass(mainCardStatus)}`}>
+                        {/* Main Card - Always Visible */}
+                        <div
+                          className="p-3 cursor-pointer card-content"
+                          onClick={() => toggleReportTypeExpansion(reportKey)}
+                        >
+                          <div className="flex justify-between items-start card-body">
+                            <div className="flex-1">
+                              <div className="flex items-center space-x-2 mb-2">
+                                <h4 className="text-lg font-semibold text-gray-900">
+                                  {reportConfig.label}
+                                </h4>
+                                {mainCardStatus.status && (
+                                  <span className={`text-xs px-2 py-1 rounded-full ${mainCardStatus.bgColor} ${mainCardStatus.color}`}>
+                                    {mainCardStatus.status}
+                                  </span>
+                                )}
+                              </div>
+
+
+                              {latestReport.description && (
+                                <p className="text-sm text-gray-600 mb-2 line-clamp-2">
+                                  {latestReport.description}
+                                </p>
+                              )}
+
+                            </div>
+                            <div className="flex items-center space-x-2">
+                              {/* Upload inside this report type */}
+                              <button
+                                onClick={(e) => { e.stopPropagation(); openUploadForReportType(latestReport.report_type, latestReport.report_sub_type); }}
+                                className="text-teal-600 hover:text-teal-800 p-2 bg-teal-50 hover:bg-teal-100 rounded-lg transition-colors"
+                                title={`Upload ${reportConfig.label}`}
+                              >
+                                <UploadIcon />
+                              </button>
+
+                            </div>
+                          </div>
+                        </div>
+
+                        {/* Expanded Content - Show All Reports */}
+                        {isExpanded && reports.length > 0 && (
+                          <div className="mt-4 pt-4 border-t border-gray-200">
+                            <div className="p-2 rounded-lg">
+                              {reports.map((report, index) => {
+                                const isPdf = report.file_name?.toLowerCase().endsWith('.pdf');
+                                const subValue = report.report_sub_type || '';
+                                const subCfg = REPORT_TYPES[report.report_type]?.subTypes?.find(st => st.value === subValue);
+                                const derivedSub = subCfg?.label || (subValue ? subValue.replace(/_/g, ' ').toUpperCase() : '');
+                                // Prioritize showing actual sub-type value over falling back to report type
+                                const subLabel = derivedSub || (subValue ? subValue.replace(/_/g, ' ').toUpperCase() : '') || report.report_type?.replace(/_/g, ' ').toUpperCase() || 'Report';
+                                const latestCard = index === 0;
+                                const reportStatus = getReportStatus(report);
+                                return (
+                                  <div
+                                    key={report.id}
+                                    className={`p-1.5 rounded-md shadow-sm mx-1 my-0.5 ${getSubCardGradientClass(reportStatus)} hover:shadow-md transition-shadow duration-200 cursor-pointer`}
+                                    onClick={() => isPdf && handleViewReport(report)}
+                                  >
+                                    <div className="flex justify-between items-start">
+                                      <div className="flex-1">
+                                        <div className="flex items-center space-x-2 mb-1">
+                                          <h6 className="text-sm font-medium text-gray-900">{subLabel}</h6>
+                                          {reportStatus.status && (
+                                            <span className={`text-xs px-1.5 py-0.5 rounded-full ${reportStatus.bgColor} ${reportStatus.color}`}>
+                                              {reportStatus.status}
+                                            </span>
+                                          )}
+                                        </div>
+                                        <div className="mb-1">
+                                          <span className="text-xs text-gray-500">{formatDate(report.report_date)}</span>
+                                        </div>
+                                        {report.description && (
+                                          <p className="text-xs text-gray-600 mb-1 line-clamp-1">
+                                            {report.description}
+                                          </p>
                                         )}
                                       </div>
-                                      <div className="flex space-x-1 ml-2">
-                                        <button
-                                          onClick={(e) => {
-                                            e.stopPropagation();
-                                            handleEditVital(vital);
-                                          }}
-                                          className="text-green-600 hover:text-green-800 p-1.5 bg-green-50 hover:bg-green-100 rounded transition-colors"
-                                          title="Edit"
-                                        >
-                                          <EditIcon />
-                                        </button>
-                                        <button
-                                          onClick={(e) => {
-                                            e.stopPropagation();
-                                            if (isAdmin()) {
-                                              handleDeleteVital(vital);
-                                            }
-                                          }}
-                                          className={`p-1.5 rounded transition-colors ${isAdmin()
-                                            ? 'text-red-600 hover:text-red-800 bg-red-50 hover:bg-red-100'
-                                            : 'text-gray-400 bg-gray-50 cursor-not-allowed'
-                                            }`}
-                                          title={isAdmin() ? "Delete" : "Only admins can delete"}
-                                          disabled={!isAdmin()}
-                                        >
-                                          <DeleteIcon />
-                                        </button>
+                                      <div className="flex flex-col items-end gap-1 ml-2">
+                                        <div className="flex space-x-1">
+
+                                          <button
+                                            onClick={(e) => {
+                                              e.stopPropagation();
+                                              handleEditReport(report);
+                                            }}
+                                            className="text-green-600 hover:text-green-800 p-1.5 bg-green-50 hover:bg-green-100 rounded transition-colors"
+                                            title="Edit"
+                                          >
+                                            <EditIcon />
+                                          </button>
+                                          <button
+                                            onClick={(e) => {
+                                              e.stopPropagation();
+                                              if (isAdmin()) {
+                                                handleDeleteReport(report);
+                                              }
+                                            }}
+                                            className={`p-1.5 rounded transition-colors ${isAdmin()
+                                              ? 'text-red-600 hover:text-red-800 bg-red-50 hover:bg-red-100'
+                                              : 'text-gray-400 bg-gray-50 cursor-not-allowed'
+                                              }`}
+                                            title={isAdmin() ? "Delete" : "Only admins can delete"}
+                                            disabled={!isAdmin()}
+                                          >
+                                            <DeleteIcon />
+                                          </button>
+                                        </div>
                                       </div>
                                     </div>
                                   </div>
@@ -2307,1084 +2452,963 @@ const MemberPage = () => {
                         )}
                       </div>
                     );
-                  });
-                })()}
-              </div>
-            ) : (
-              <div className="text-center py-12">
-                <div className="text-gray-400 mb-4">
-                  <svg className="mx-auto h-12 w-12" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
-                  </svg>
+                  })}
                 </div>
-                <p className="text-gray-500">No health vitals recorded yet</p>
-                <button
-                  onClick={() => setShowAddVitalModal(true)}
-                  className="mt-4 text-teal-600 hover:text-teal-800 font-medium"
-                >
-                  Add your first vital
-                </button>
-              </div>
-            )}
-          </div>
-        )}
+              ) : (
+                <div className="text-center py-12">
+                  <div className="text-gray-400 mb-4">
+                    <svg className="mx-auto h-12 w-12" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+                    </svg>
+                  </div>
+                  <p className="text-gray-500">No medical reports uploaded yet</p>
+                  <button
+                    onClick={() => setShowUploadReportModal(true)}
+                    className="mt-4 text-teal-600 hover:text-teal-800 font-medium"
+                  >
+                    Upload your first report
+                  </button>
+                </div>
+              )}
+            </div>
+          )}
 
-        {activeTab === 'reports' && (
-          <div>
+          {activeTab === 'documents' && (
+            <div>
 
-
-            {medicalReports.length > 0 ? (
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 items-start w-full max-w-full">
-                {Object.entries(groupReportsByType(medicalReports)).map(([reportKey, reports]) => {
-                  const latestReport = reports[0]; // First one is the latest due to sorting
-                  const isExpanded = expandedReportTypes.has(reportKey);
-
-                  // Use report_type and report_sub_type from the latest report for headings
-                  const reportConfig = REPORT_TYPES[latestReport.report_type] || { label: latestReport.report_type.replace(/_/g, ' ').toUpperCase() };
-                  const subTypeValue = latestReport.report_sub_type || '';
-                  const subTypeConfig = REPORT_TYPES[latestReport.report_type]?.subTypes?.find(st => st.value === subTypeValue);
-                  const subTypeLabel = subTypeConfig?.label || (subTypeValue ? subTypeValue.replace(/_/g, ' ').toUpperCase() : '');
-                  const groupSubTypeLabel = subTypeLabel;
-
-                  // Get main card status based on latest report
-                  const mainCardStatus = getMainCardStatus(reports, getReportStatus);
-
-                  return (
-                    <div key={reportKey} className={`rounded-lg border border-gray-200 shadow-sm hover:shadow-md transition-shadow flex flex-col card-consistent-height w-full max-w-full ${getGradientClass(mainCardStatus)}`}>
-                      {/* Main Card - Always Visible */}
+              {documents.length > 0 ? (
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 w-full max-w-full">
+                  {documents.map((document) => {
+                    const documentStatus = getDocumentStatus(document);
+                    return (
                       <div
-                        className="p-3 cursor-pointer card-content"
-                        onClick={() => toggleReportTypeExpansion(reportKey)}
+                        key={document.id}
+                        className={`rounded-lg border border-gray-200 hover:shadow-md transition-shadow card-consistent-height flex flex-col w-full max-w-full ${getGradientClass(documentStatus)} cursor-pointer`}
+                        onClick={(e) => {
+                          // Prevent bubbling if user clicks buttons inside card!
+                          if (
+                            e.target.closest("button") ||
+                            e.target.tagName === "BUTTON" ||
+                            e.target.closest("svg")
+                          ) {
+                            return;
+                          }
+                          try {
+                            handleViewDocument(document);
+                          } catch (err) {
+                            // Fallback for rendering errors, maybe to prevent e.createElement misuse
+                            // Optionally you can use a toast/alert here
+                            // alert("Error viewing document");
+                            // eslint-disable-next-line no-console
+                            console.error("Error viewing document:", err);
+                          }
+                        }}
                       >
-                        <div className="flex justify-between items-start card-body">
-                          <div className="flex-1">
-                            <div className="flex items-center space-x-2 mb-2">
-                              <h4 className="text-lg font-semibold text-gray-900">
-                                {reportConfig.label}
-                              </h4>
-                              {mainCardStatus.status && (
-                                <span className={`text-xs px-2 py-1 rounded-full ${mainCardStatus.bgColor} ${mainCardStatus.color}`}>
-                                  {mainCardStatus.status}
+                        <div className="p-3 card-content">
+                          <div className="flex items-center justify-between mb-2">
+                            <div className="flex items-center space-x-2">
+                              <h4 className="text-lg font-semibold text-gray-900">{document.title}</h4>
+                              {documentStatus.status && (
+                                <span className={`text-xs px-1.5 py-0.5 rounded-full ${documentStatus.bgColor} ${documentStatus.color}`}>
+                                  {documentStatus.status}
                                 </span>
                               )}
                             </div>
+                            <div className="flex space-x-1">
 
-
-                            {latestReport.description && (
-                              <p className="text-sm text-gray-600 mb-2 line-clamp-2">
-                                {latestReport.description}
-                              </p>
-                            )}
-
+                              <button
+                                onClick={(e) => {
+                                  e.stopPropagation();
+                                  handleEditDocument(document);
+                                }}
+                                className="text-green-600 hover:text-green-800 p-1.5 bg-green-50 hover:bg-green-100 rounded transition-colors"
+                                title="Edit"
+                              >
+                                <EditIcon />
+                              </button>
+                              <button
+                                onClick={(e) => {
+                                  e.stopPropagation();
+                                  if (isAdmin()) {
+                                    handleDeleteDocument(document);
+                                  }
+                                }}
+                                className={`p-1.5 rounded transition-colors ${isAdmin()
+                                  ? 'text-red-600 hover:text-red-800 bg-red-50 hover:bg-red-100'
+                                  : 'text-gray-400 bg-gray-50 cursor-not-allowed'
+                                  }`}
+                                title={isAdmin() ? "Delete" : "Only admins can delete"}
+                                disabled={!isAdmin()}
+                              >
+                                <DeleteIcon />
+                              </button>
+                            </div>
                           </div>
-                          <div className="flex items-center space-x-2">
-                            {/* Upload inside this report type */}
-                            <button
-                              onClick={(e) => { e.stopPropagation(); openUploadForReportType(latestReport.report_type, latestReport.report_sub_type); }}
-                              className="text-teal-600 hover:text-teal-800 p-2 bg-teal-50 hover:bg-teal-100 rounded-lg transition-colors"
-                              title={`Upload ${reportConfig.label}`}
-                            >
-                              <UploadIcon />
-                            </button>
-
+                          <div className="card-body">
+                            {document.description && (
+                              <p className="text-sm text-gray-600 line-clamp-3">{document.description}</p>
+                            )}
                           </div>
                         </div>
                       </div>
-
-                      {/* Expanded Content - Show All Reports */}
-                      {isExpanded && reports.length > 0 && (
-                        <div className="mt-4 pt-4 border-t border-gray-200">
-                          <div className="p-2 rounded-lg">
-                            {reports.map((report, index) => {
-                              const isPdf = report.file_name?.toLowerCase().endsWith('.pdf');
-                              const subValue = report.report_sub_type || '';
-                              const subCfg = REPORT_TYPES[report.report_type]?.subTypes?.find(st => st.value === subValue);
-                              const derivedSub = subCfg?.label || (subValue ? subValue.replace(/_/g, ' ').toUpperCase() : '');
-                              // Prioritize showing actual sub-type value over falling back to report type
-                              const subLabel = derivedSub || (subValue ? subValue.replace(/_/g, ' ').toUpperCase() : '') || report.report_type?.replace(/_/g, ' ').toUpperCase() || 'Report';
-                              const latestCard = index === 0;
-                              const reportStatus = getReportStatus(report);
-                              return (
-                                <div
-                                  key={report.id}
-                                  className={`p-1.5 rounded-md shadow-sm mx-1 my-0.5 ${getSubCardGradientClass(reportStatus)} hover:shadow-md transition-shadow duration-200 cursor-pointer`}
-                                  onClick={() => isPdf && handleViewReport(report)}
-                                >
-                                  <div className="flex justify-between items-start">
-                                    <div className="flex-1">
-                                      <div className="flex items-center space-x-2 mb-1">
-                                        <h6 className="text-sm font-medium text-gray-900">{subLabel}</h6>
-                                        {reportStatus.status && (
-                                          <span className={`text-xs px-1.5 py-0.5 rounded-full ${reportStatus.bgColor} ${reportStatus.color}`}>
-                                            {reportStatus.status}
-                                          </span>
-                                        )}
-                                      </div>
-                                      <div className="mb-1">
-                                        <span className="text-xs text-gray-500">{formatDate(report.report_date)}</span>
-                                      </div>
-                                      {report.description && (
-                                        <p className="text-xs text-gray-600 mb-1 line-clamp-1">
-                                          {report.description}
-                                        </p>
-                                      )}
-                                    </div>
-                                    <div className="flex flex-col items-end gap-1 ml-2">
-                                      <div className="flex space-x-1">
-
-                                        <button
-                                          onClick={(e) => {
-                                            e.stopPropagation();
-                                            handleEditReport(report);
-                                          }}
-                                          className="text-green-600 hover:text-green-800 p-1.5 bg-green-50 hover:bg-green-100 rounded transition-colors"
-                                          title="Edit"
-                                        >
-                                          <EditIcon />
-                                        </button>
-                                        <button
-                                          onClick={(e) => {
-                                            e.stopPropagation();
-                                            if (isAdmin()) {
-                                              handleDeleteReport(report);
-                                            }
-                                          }}
-                                          className={`p-1.5 rounded transition-colors ${isAdmin()
-                                            ? 'text-red-600 hover:text-red-800 bg-red-50 hover:bg-red-100'
-                                            : 'text-gray-400 bg-gray-50 cursor-not-allowed'
-                                            }`}
-                                          title={isAdmin() ? "Delete" : "Only admins can delete"}
-                                          disabled={!isAdmin()}
-                                        >
-                                          <DeleteIcon />
-                                        </button>
-                                      </div>
-                                    </div>
-                                  </div>
-                                </div>
-                              );
-                            })}
-                          </div>
-                        </div>
-                      )}
-                    </div>
-                  );
-                })}
-              </div>
-            ) : (
-              <div className="text-center py-12">
-                <div className="text-gray-400 mb-4">
-                  <svg className="mx-auto h-12 w-12" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
-                  </svg>
+                    );
+                  })}
                 </div>
-                <p className="text-gray-500">No medical reports uploaded yet</p>
-                <button
-                  onClick={() => setShowUploadReportModal(true)}
-                  className="mt-4 text-teal-600 hover:text-teal-800 font-medium"
-                >
-                  Upload your first report
-                </button>
-              </div>
-            )}
-          </div>
-        )}
-
-        {activeTab === 'documents' && (
-          <div>
-
-            {documents.length > 0 ? (
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 w-full max-w-full">
-                {documents.map((document) => {
-                  const documentStatus = getDocumentStatus(document);
-                  return (
-                    <div
-                      key={document.id}
-                      className={`rounded-lg border border-gray-200 hover:shadow-md transition-shadow card-consistent-height flex flex-col w-full max-w-full ${getGradientClass(documentStatus)} cursor-pointer`}
-                      onClick={(e) => {
-                        // Prevent bubbling if user clicks buttons inside card!
-                        if (
-                          e.target.closest("button") ||
-                          e.target.tagName === "BUTTON" ||
-                          e.target.closest("svg")
-                        ) {
-                          return;
-                        }
-                        try {
-                          handleViewDocument(document);
-                        } catch (err) {
-                          // Fallback for rendering errors, maybe to prevent e.createElement misuse
-                          // Optionally you can use a toast/alert here
-                          // alert("Error viewing document");
-                          // eslint-disable-next-line no-console
-                          console.error("Error viewing document:", err);
-                        }
-                      }}
-                    >
-                      <div className="p-3 card-content">
-                        <div className="flex items-center justify-between mb-2">
-                          <div className="flex items-center space-x-2">
-                            <h4 className="text-lg font-semibold text-gray-900">{document.title}</h4>
-                            {documentStatus.status && (
-                              <span className={`text-xs px-1.5 py-0.5 rounded-full ${documentStatus.bgColor} ${documentStatus.color}`}>
-                                {documentStatus.status}
-                              </span>
-                            )}
-                          </div>
-                          <div className="flex space-x-1">
-
-                            <button
-                              onClick={(e) => {
-                                e.stopPropagation();
-                                handleEditDocument(document);
-                              }}
-                              className="text-green-600 hover:text-green-800 p-1.5 bg-green-50 hover:bg-green-100 rounded transition-colors"
-                              title="Edit"
-                            >
-                              <EditIcon />
-                            </button>
-                            <button
-                              onClick={(e) => {
-                                e.stopPropagation();
-                                if (isAdmin()) {
-                                  handleDeleteDocument(document);
-                                }
-                              }}
-                              className={`p-1.5 rounded transition-colors ${isAdmin()
-                                ? 'text-red-600 hover:text-red-800 bg-red-50 hover:bg-red-100'
-                                : 'text-gray-400 bg-gray-50 cursor-not-allowed'
-                                }`}
-                              title={isAdmin() ? "Delete" : "Only admins can delete"}
-                              disabled={!isAdmin()}
-                            >
-                              <DeleteIcon />
-                            </button>
-                          </div>
-                        </div>
-                        <div className="card-body">
-                          {document.description && (
-                            <p className="text-sm text-gray-600 line-clamp-3">{document.description}</p>
-                          )}
-                        </div>
-                      </div>
-                    </div>
-                  );
-                })}
-              </div>
-            ) : (
-              <div className="text-center py-12">
-                <div className="text-gray-400 mb-4">
-                  <svg className="mx-auto h-12 w-12" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
-                  </svg>
-                </div>
-                <p className="text-gray-500">No documents uploaded yet</p>
-                <button
-                  onClick={() => setShowUploadDocumentModal(true)}
-                  className="mt-4 text-teal-600 hover:text-teal-800 font-medium"
-                >
-                  Upload your first document
-                </button>
-              </div>
-            )}
-          </div>
-        )}
-
-        {/* Add Vital Modal */}
-        {showAddVitalModal && (
-          <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-2 sm:p-4">
-            <div className="bg-white rounded-lg p-4 sm:p-6 w-full max-w-md max-h-[95vh] overflow-y-auto">
-              <h2 className="text-lg font-semibold mb-4">Add Health Vital</h2>
-              <form onSubmit={handleAddVital} className="space-y-4">
-                <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-1">Vital Type <span className="text-red-500">*</span></label>
-                  <select
-                    value={vitalFormData.vitalType}
-                    onChange={(e) => handleVitalTypeChange(e.target.value)}
-                    className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-500"
-                    required
-                  >
-                    <option value="">Select Vital Type</option>
-                    {Object.entries(VITAL_TYPES).map(([key, config]) => (
-                      <option key={key} value={key}>{config.label}</option>
-                    ))}
-                  </select>
-                </div>
-                <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-1">Value <span className="text-red-500">*</span></label>
-                  <input
-                    type="number"
-                    step="0.01"
-                    value={vitalFormData.value}
-                    onChange={(e) => setVitalFormData({ ...vitalFormData, value: e.target.value })}
-                    className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-500"
-                    placeholder={vitalFormData.vitalType ? VITAL_TYPES[vitalFormData.vitalType]?.placeholder : ''}
-                    required
-                  />
-                </div>
-                <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-1">Unit <span className="text-red-500">*</span></label>
-                  <input
-                    type="text"
-                    value={vitalFormData.unit}
-                    onChange={(e) => setVitalFormData({ ...vitalFormData, unit: e.target.value })}
-                    className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-500"
-                    placeholder={vitalFormData.vitalType ? VITAL_TYPES[vitalFormData.vitalType]?.unit : ''}
-                    required
-                  />
-                </div>
-                <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-1">Date Recorded <span className="text-red-500">*</span></label>
-                  <div className="grid grid-cols-3 gap-2 sm:flex sm:space-x-2">
-                    <select
-                      value={vitalDateComponents.day}
-                      onChange={(e) => {
-                        const newComponents = { ...vitalDateComponents, day: e.target.value };
-                        setVitalDateComponents(newComponents);
-                        const combinedDate = combineDateComponents(newComponents.day, newComponents.month, newComponents.year);
-                        setVitalFormData({ ...vitalFormData, recordedAt: combinedDate });
-                      }}
-                      className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-500 text-sm"
-                      required
-                    >
-                      <option value="">Day</option>
-                      {generateDateOptions()}
-                    </select>
-
-                    <select
-                      value={vitalDateComponents.month}
-                      onChange={(e) => {
-                        const newComponents = { ...vitalDateComponents, month: e.target.value };
-                        setVitalDateComponents(newComponents);
-                        const combinedDate = combineDateComponents(newComponents.day, newComponents.month, newComponents.year);
-                        setVitalFormData({ ...vitalFormData, recordedAt: combinedDate });
-                      }}
-                      className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-500 text-sm"
-                      required
-                    >
-                      <option value="">Month</option>
-                      {generateMonthOptions()}
-                    </select>
-
-                    <select
-                      value={vitalDateComponents.year}
-                      onChange={(e) => {
-                        const newComponents = { ...vitalDateComponents, year: e.target.value };
-                        setVitalDateComponents(newComponents);
-                        const combinedDate = combineDateComponents(newComponents.day, newComponents.month, newComponents.year);
-                        setVitalFormData({ ...vitalFormData, recordedAt: combinedDate });
-                      }}
-                      className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-500 text-sm"
-                      required
-                    >
-                      <option value="">Year</option>
-                      {generateYearOptions()}
-                    </select>
+              ) : (
+                <div className="text-center py-12">
+                  <div className="text-gray-400 mb-4">
+                    <svg className="mx-auto h-12 w-12" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+                    </svg>
                   </div>
-                </div>
-                <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-1">Notes (Optional)</label>
-                  <textarea
-                    value={vitalFormData.notes}
-                    onChange={(e) => setVitalFormData({ ...vitalFormData, notes: e.target.value })}
-                    className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-500"
-                    rows="3"
-                    placeholder="Any additional notes..."
-                  />
-                </div>
-                <div className="flex space-x-3">
+                  <p className="text-gray-500">No documents uploaded yet</p>
                   <button
-                    type="submit"
-                    disabled={isSubmittingVital}
-                    className={`px-4 py-2 rounded-lg font-medium transition-colors duration-200 ${isSubmittingVital
-                      ? 'bg-gray-400 cursor-not-allowed text-white'
-                      : 'bg-teal-600 hover:bg-teal-700 text-white'
-                      }`}
+                    onClick={() => setShowUploadDocumentModal(true)}
+                    className="mt-4 text-teal-600 hover:text-teal-800 font-medium"
                   >
-                    {isSubmittingVital ? 'Adding Vital...' : 'Add Vital'}
-                  </button>
-                  <button
-                    type="button"
-                    disabled={isSubmittingVital}
-                    onClick={() => setShowAddVitalModal(false)}
-                    className={`px-4 py-2 rounded-lg font-medium transition-colors duration-200 ${isSubmittingVital
-                      ? 'bg-gray-400 cursor-not-allowed text-white'
-                      : 'bg-gray-500 hover:bg-gray-600 text-white'
-                      }`}
-                  >
-                    Cancel
+                    Upload your first document
                   </button>
                 </div>
-              </form>
+              )}
             </div>
-          </div>
-        )}
+          )}
 
-        {/* Edit Vital Modal */}
-        {showEditVitalModal && (
-          <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-2 sm:p-4">
-            <div className="bg-white rounded-lg p-4 sm:p-6 w-full max-w-md max-h-[95vh] overflow-y-auto">
-              <h2 className="text-lg font-semibold mb-4">Edit Health Vital</h2>
-              <form onSubmit={handleUpdateVital} className="space-y-4">
-                <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-1">Vital Type</label>
-                  <select
-                    value={editVitalFormData.vitalType}
-                    onChange={(e) => {
-                      const vitalConfig = VITAL_TYPES[e.target.value];
-                      setEditVitalFormData({
-                        ...editVitalFormData,
-                        vitalType: e.target.value,
-                        unit: vitalConfig ? vitalConfig.unit : editVitalFormData.unit
-                      });
-                    }}
-                    className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-500"
-                    required
-                  >
-                    <option value="">Select Vital Type</option>
-                    {Object.entries(VITAL_TYPES).map(([key, config]) => (
-                      <option key={key} value={key}>{config.label}</option>
-                    ))}
-                  </select>
-                </div>
-                <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-1">Value</label>
-                  <input
-                    type="number"
-                    step="0.01"
-                    value={editVitalFormData.value}
-                    onChange={(e) => setEditVitalFormData({ ...editVitalFormData, value: e.target.value })}
-                    className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-500"
-                    placeholder={editVitalFormData.vitalType ? VITAL_TYPES[editVitalFormData.vitalType]?.placeholder : ''}
-                    required
-                  />
-                </div>
-                <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-1">Unit</label>
-                  <input
-                    type="text"
-                    value={editVitalFormData.unit}
-                    onChange={(e) => setEditVitalFormData({ ...editVitalFormData, unit: e.target.value })}
-                    className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-500"
-                    placeholder={editVitalFormData.vitalType ? VITAL_TYPES[editVitalFormData.vitalType]?.unit : ''}
-                    required
-                  />
-                </div>
-                <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-1">Date Recorded</label>
-                  <div className="grid grid-cols-3 gap-2 sm:flex sm:space-x-2">
-                    <select
-                      value={editVitalDateComponents.day}
-                      onChange={(e) => {
-                        const newComponents = { ...editVitalDateComponents, day: e.target.value };
-                        setEditVitalDateComponents(newComponents);
-                        const combinedDate = combineDateComponents(newComponents.day, newComponents.month, newComponents.year);
-                        setEditVitalFormData({ ...editVitalFormData, recordedAt: combinedDate });
-                      }}
-                      className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-500 text-sm"
-                      required
-                    >
-                      <option value="">Day</option>
-                      {generateDateOptions()}
-                    </select>
-
-                    <select
-                      value={editVitalDateComponents.month}
-                      onChange={(e) => {
-                        const newComponents = { ...editVitalDateComponents, month: e.target.value };
-                        setEditVitalDateComponents(newComponents);
-                        const combinedDate = combineDateComponents(newComponents.day, newComponents.month, newComponents.year);
-                        setEditVitalFormData({ ...editVitalFormData, recordedAt: combinedDate });
-                      }}
-                      className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-500 text-sm"
-                      required
-                    >
-                      <option value="">Month</option>
-                      {generateMonthOptions()}
-                    </select>
-
-                    <select
-                      value={editVitalDateComponents.year}
-                      onChange={(e) => {
-                        const newComponents = { ...editVitalDateComponents, year: e.target.value };
-                        setEditVitalDateComponents(newComponents);
-                        const combinedDate = combineDateComponents(newComponents.day, newComponents.month, newComponents.year);
-                        setEditVitalFormData({ ...editVitalFormData, recordedAt: combinedDate });
-                      }}
-                      className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-500 text-sm"
-                      required
-                    >
-                      <option value="">Year</option>
-                      {generateYearOptions()}
-                    </select>
-                  </div>
-                </div>
-                <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-1">Notes (Optional)</label>
-                  <textarea
-                    value={editVitalFormData.notes}
-                    onChange={(e) => setEditVitalFormData({ ...editVitalFormData, notes: e.target.value })}
-                    className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-500"
-                    rows="3"
-                    placeholder="Any additional notes..."
-                  />
-                </div>
-                <div className="flex space-x-3">
-                  <button type="submit" className="bg-teal-600 hover:bg-teal-700 text-white px-4 py-2 rounded-lg font-medium">
-                    Update Vital
-                  </button>
-                  <button
-                    type="button"
-                    onClick={() => {
-                      setShowEditVitalModal(false);
-                      setEditingVital(null);
-                    }}
-                    className="bg-gray-500 hover:bg-gray-600 text-white px-4 py-2 rounded-lg font-medium"
-                  >
-                    Cancel
-                  </button>
-                </div>
-              </form>
-            </div>
-          </div>
-        )}
-
-        {/* Upload Report Modal */}
-        {showUploadReportModal && (
-          <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-2 sm:p-4">
-            <div className="bg-white rounded-lg p-4 sm:p-6 w-full max-w-md max-h-[95vh] overflow-y-auto">
-              <h2 className="text-lg font-semibold mb-4">Upload Medical Report</h2>
-              <form onSubmit={handleUploadReport} className="space-y-4">
-                <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-1">Report Type <span className="text-red-500">*</span></label>
-                  <select
-                    value={reportFormData.reportType}
-                    onChange={(e) => {
-                      setReportFormData({
-                        ...reportFormData,
-                        reportType: e.target.value,
-                        reportSubType: ''
-                      });
-                    }}
-                    className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-500"
-                    required
-                  >
-                    <option value="">Select Report Type</option>
-                    {Object.entries(REPORT_TYPES).map(([key, config]) => (
-                      <option key={key} value={key}>{config.label}</option>
-                    ))}
-                  </select>
-                </div>
-                <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-1">Report Sub-Type <span className="text-red-500">*</span></label>
-                  <select
-                    value={reportFormData.reportSubType}
-                    onChange={(e) => setReportFormData({ ...reportFormData, reportSubType: e.target.value })}
-                    className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-500"
-                    required
-                  >
-                    <option value="">Select Sub-Type</option>
-                    {reportFormData.reportType && REPORT_TYPES[reportFormData.reportType]?.subTypes ? (
-                      REPORT_TYPES[reportFormData.reportType].subTypes.map((subType) => (
-                        <option key={subType.value} value={subType.value}>{subType.label}</option>
-                      ))
-                    ) : (
-                      Object.values(REPORT_TYPES).flatMap(config =>
-                        config.subTypes ? config.subTypes.map((subType) => (
-                          <option key={subType.value} value={subType.value}>{subType.label}</option>
-                        )) : []
-                      )
-                    )}
-                  </select>
-                </div>
-                <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-1">File Name <span className="text-red-500">*</span></label>
-                  <input
-                    type="text"
-                    value={reportFormData.title}
-                    onChange={(e) => setReportFormData({ ...reportFormData, title: e.target.value })}
-                    className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-500"
-                    placeholder={reportFormData.file ? reportFormData.file.name.replace(/\.[^/.]+$/, '') : 'Enter file name'}
-                    required
-                  />
-                  <p className="text-xs text-gray-500 mt-1">Name for this report (without extension)</p>
-                </div>
-                <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-1">Report Date <span className="text-red-500">*</span></label>
-                  <div className="grid grid-cols-3 gap-2 sm:flex sm:space-x-2">
-                    <select
-                      value={reportDateComponents.day}
-                      onChange={(e) => {
-                        const newComponents = { ...reportDateComponents, day: e.target.value };
-                        setReportDateComponents(newComponents);
-                        const combinedDate = combineDateComponents(newComponents.day, newComponents.month, newComponents.year);
-                        setReportFormData({ ...reportFormData, reportDate: combinedDate });
-                      }}
-                      className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-500 text-sm"
-                      required
-                    >
-                      <option value="">Day</option>
-                      {generateDateOptions()}
-                    </select>
-
-                    <select
-                      value={reportDateComponents.month}
-                      onChange={(e) => {
-                        const newComponents = { ...reportDateComponents, month: e.target.value };
-                        setReportDateComponents(newComponents);
-                        const combinedDate = combineDateComponents(newComponents.day, newComponents.month, newComponents.year);
-                        setReportFormData({ ...reportFormData, reportDate: combinedDate });
-                      }}
-                      className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-500 text-sm"
-                      required
-                    >
-                      <option value="">Month</option>
-                      {generateMonthOptions()}
-                    </select>
-
-                    <select
-                      value={reportDateComponents.year}
-                      onChange={(e) => {
-                        const newComponents = { ...reportDateComponents, year: e.target.value };
-                        setReportDateComponents(newComponents);
-                        const combinedDate = combineDateComponents(newComponents.day, newComponents.month, newComponents.year);
-                        setReportFormData({ ...reportFormData, reportDate: combinedDate });
-                      }}
-                      className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-500 text-sm"
-                      required
-                    >
-                      <option value="">Year</option>
-                      {generateYearOptions()}
-                    </select>
-                  </div>
-                </div>
-                <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-1">File <span className="text-red-500">*</span></label>
-                  <input
-                    type="file"
-                    onChange={handleFileChange}
-                    className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-500"
-                    accept=".pdf"
-                    required
-                  />
-                  <p className="text-xs text-gray-500 mt-1">Only PDF files are accepted (max 20MB)</p>
-                </div>
-                <div className="flex space-x-3">
-                  <button
-                    type="submit"
-                    disabled={isUploading || isSubmittingReport}
-                    className={`px-4 py-2 rounded-lg font-medium relative overflow-hidden transition-colors duration-200 ${(isUploading || isSubmittingReport)
-                      ? 'bg-gray-400 cursor-not-allowed text-white'
-                      : 'bg-teal-600 hover:bg-teal-700 text-white'
-                      }`}
-                  >
-                    {isUploading ? (
-                      <>
-                        <span className="relative z-10">Uploading {uploadProgress}%</span>
-                        <div
-                          className="absolute inset-0 bg-teal-400 transition-all duration-300"
-                          style={{ width: `${uploadProgress}%` }}
-                        ></div>
-                      </>
-                    ) : isSubmittingReport ? (
-                      'Uploading...'
-                    ) : (
-                      'Upload Report'
-                    )}
-                  </button>
-                  <button
-                    type="button"
-                    disabled={isUploading || isSubmittingReport}
-                    onClick={() => setShowUploadReportModal(false)}
-                    className={`px-4 py-2 rounded-lg font-medium transition-colors duration-200 ${(isUploading || isSubmittingReport)
-                      ? 'bg-gray-400 cursor-not-allowed text-white'
-                      : 'bg-gray-500 hover:bg-gray-600 text-white'
-                      }`}
-                  >
-                    {(isUploading || isSubmittingReport) ? 'Please wait...' : 'Cancel'}
-                  </button>
-                </div>
-              </form>
-            </div>
-          </div>
-        )}
-
-        {/* Edit Report Modal */}
-        {showEditReportModal && (
-          <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-2 sm:p-4">
-            <div className="bg-white rounded-lg p-4 sm:p-6 w-full max-w-md max-h-[95vh] overflow-y-auto">
-              <h2 className="text-lg font-semibold mb-4">Edit Medical Report</h2>
-              <form onSubmit={handleUpdateReport} className="space-y-4">
-                <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-1">Report Type</label>
-                  <select
-                    value={editReportFormData.reportType}
-                    onChange={(e) => {
-                      setEditReportFormData({
-                        ...editReportFormData,
-                        reportType: e.target.value,
-                        reportSubType: ''
-                      });
-                    }}
-                    className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-500"
-                  >
-                    <option value="">Select Report Type</option>
-                    {Object.entries(REPORT_TYPES).map(([key, config]) => (
-                      <option key={key} value={key}>{config.label}</option>
-                    ))}
-                  </select>
-                </div>
-                {editReportFormData.reportType && REPORT_TYPES[editReportFormData.reportType]?.subTypes && (
+          {/* Add Vital Modal */}
+          {showAddVitalModal && (
+            <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-2 sm:p-4">
+              <div className="bg-white rounded-lg p-4 sm:p-6 w-full max-w-md max-h-[95vh] overflow-y-auto">
+                <h2 className="text-lg font-semibold mb-4">Add Health Vital</h2>
+                <form onSubmit={handleAddVital} className="space-y-4">
                   <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-1">Report Sub-Type</label>
+                    <label className="block text-sm font-medium text-gray-700 mb-1">Vital Type <span className="text-red-500">*</span></label>
                     <select
-                      value={editReportFormData.reportSubType}
-                      onChange={(e) => setEditReportFormData({ ...editReportFormData, reportSubType: e.target.value })}
+                      value={vitalFormData.vitalType}
+                      onChange={(e) => handleVitalTypeChange(e.target.value)}
                       className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-500"
+                      required
                     >
-                      <option value="">Select Sub-Type</option>
-                      {REPORT_TYPES[editReportFormData.reportType].subTypes.map((subType) => (
-                        <option key={subType.value} value={subType.value}>{subType.label}</option>
+                      <option value="">Select Vital Type</option>
+                      {Object.entries(VITAL_TYPES).map(([key, config]) => (
+                        <option key={key} value={key}>{config.label}</option>
                       ))}
                     </select>
                   </div>
-                )}
-                <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-1">File Name <span className="text-red-500">*</span></label>
-                  <input
-                    type="text"
-                    value={editReportFormData.title}
-                    onChange={(e) => setEditReportFormData({ ...editReportFormData, title: e.target.value })}
-                    className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-500"
-                    placeholder="File name (without extension)"
-                    required
-                  />
-                  <p className="text-xs text-gray-500 mt-1">Name for this report (without extension)</p>
-                </div>
-                <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-1">Report Date</label>
-                  <div className="grid grid-cols-3 gap-2 sm:flex sm:space-x-2">
-                    <select
-                      value={editReportDateComponents.day}
-                      onChange={(e) => {
-                        const newComponents = { ...editReportDateComponents, day: e.target.value };
-                        setEditReportDateComponents(newComponents);
-                        const combinedDate = combineDateComponents(newComponents.day, newComponents.month, newComponents.year);
-                        setEditReportFormData({ ...editReportFormData, reportDate: combinedDate });
-                      }}
-                      className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-500 text-sm"
+                  <div>
+                    <label className="block text-sm font-medium text-gray-700 mb-1">Value <span className="text-red-500">*</span></label>
+                    <input
+                      type="number"
+                      step="0.01"
+                      value={vitalFormData.value}
+                      onChange={(e) => setVitalFormData({ ...vitalFormData, value: e.target.value })}
+                      className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-500"
+                      placeholder={vitalFormData.vitalType ? VITAL_TYPES[vitalFormData.vitalType]?.placeholder : ''}
                       required
-                    >
-                      <option value="">Day</option>
-                      {generateDateOptions()}
-                    </select>
+                    />
+                  </div>
+                  <div>
+                    <label className="block text-sm font-medium text-gray-700 mb-1">Unit <span className="text-red-500">*</span></label>
+                    <input
+                      type="text"
+                      value={vitalFormData.unit}
+                      onChange={(e) => setVitalFormData({ ...vitalFormData, unit: e.target.value })}
+                      className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-500"
+                      placeholder={vitalFormData.vitalType ? VITAL_TYPES[vitalFormData.vitalType]?.unit : ''}
+                      required
+                    />
+                  </div>
+                  <div>
+                    <label className="block text-sm font-medium text-gray-700 mb-1">Date Recorded <span className="text-red-500">*</span></label>
+                    <div className="grid grid-cols-3 gap-2 sm:flex sm:space-x-2">
+                      <select
+                        value={vitalDateComponents.day}
+                        onChange={(e) => {
+                          const newComponents = { ...vitalDateComponents, day: e.target.value };
+                          setVitalDateComponents(newComponents);
+                          const combinedDate = combineDateComponents(newComponents.day, newComponents.month, newComponents.year);
+                          setVitalFormData({ ...vitalFormData, recordedAt: combinedDate });
+                        }}
+                        className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-500 text-sm"
+                        required
+                      >
+                        <option value="">Day</option>
+                        {generateDateOptions()}
+                      </select>
 
-                    <select
-                      value={editReportDateComponents.month}
-                      onChange={(e) => {
-                        const newComponents = { ...editReportDateComponents, month: e.target.value };
-                        setEditReportDateComponents(newComponents);
-                        const combinedDate = combineDateComponents(newComponents.day, newComponents.month, newComponents.year);
-                        setEditReportFormData({ ...editReportFormData, reportDate: combinedDate });
-                      }}
-                      className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-500 text-sm"
-                      required
-                    >
-                      <option value="">Month</option>
-                      {generateMonthOptions()}
-                    </select>
+                      <select
+                        value={vitalDateComponents.month}
+                        onChange={(e) => {
+                          const newComponents = { ...vitalDateComponents, month: e.target.value };
+                          setVitalDateComponents(newComponents);
+                          const combinedDate = combineDateComponents(newComponents.day, newComponents.month, newComponents.year);
+                          setVitalFormData({ ...vitalFormData, recordedAt: combinedDate });
+                        }}
+                        className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-500 text-sm"
+                        required
+                      >
+                        <option value="">Month</option>
+                        {generateMonthOptions()}
+                      </select>
 
+                      <select
+                        value={vitalDateComponents.year}
+                        onChange={(e) => {
+                          const newComponents = { ...vitalDateComponents, year: e.target.value };
+                          setVitalDateComponents(newComponents);
+                          const combinedDate = combineDateComponents(newComponents.day, newComponents.month, newComponents.year);
+                          setVitalFormData({ ...vitalFormData, recordedAt: combinedDate });
+                        }}
+                        className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-500 text-sm"
+                        required
+                      >
+                        <option value="">Year</option>
+                        {generateYearOptions()}
+                      </select>
+                    </div>
+                  </div>
+                  <div>
+                    <label className="block text-sm font-medium text-gray-700 mb-1">Notes (Optional)</label>
+                    <textarea
+                      value={vitalFormData.notes}
+                      onChange={(e) => setVitalFormData({ ...vitalFormData, notes: e.target.value })}
+                      className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-500"
+                      rows="3"
+                      placeholder="Any additional notes..."
+                    />
+                  </div>
+                  <div className="flex space-x-3">
+                    <button
+                      type="submit"
+                      disabled={isSubmittingVital}
+                      className={`px-4 py-2 rounded-lg font-medium transition-colors duration-200 ${isSubmittingVital
+                        ? 'bg-gray-400 cursor-not-allowed text-white'
+                        : 'bg-teal-600 hover:bg-teal-700 text-white'
+                        }`}
+                    >
+                      {isSubmittingVital ? 'Adding Vital...' : 'Add Vital'}
+                    </button>
+                    <button
+                      type="button"
+                      disabled={isSubmittingVital}
+                      onClick={() => setShowAddVitalModal(false)}
+                      className={`px-4 py-2 rounded-lg font-medium transition-colors duration-200 ${isSubmittingVital
+                        ? 'bg-gray-400 cursor-not-allowed text-white'
+                        : 'bg-gray-500 hover:bg-gray-600 text-white'
+                        }`}
+                    >
+                      Cancel
+                    </button>
+                  </div>
+                </form>
+              </div>
+            </div>
+          )}
+
+          {/* Edit Vital Modal */}
+          {showEditVitalModal && (
+            <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-2 sm:p-4">
+              <div className="bg-white rounded-lg p-4 sm:p-6 w-full max-w-md max-h-[95vh] overflow-y-auto">
+                <h2 className="text-lg font-semibold mb-4">Edit Health Vital</h2>
+                <form onSubmit={handleUpdateVital} className="space-y-4">
+                  <div>
+                    <label className="block text-sm font-medium text-gray-700 mb-1">Vital Type</label>
                     <select
-                      value={editReportDateComponents.year}
+                      value={editVitalFormData.vitalType}
                       onChange={(e) => {
-                        const newComponents = { ...editReportDateComponents, year: e.target.value };
-                        setEditReportDateComponents(newComponents);
-                        const combinedDate = combineDateComponents(newComponents.day, newComponents.month, newComponents.year);
-                        setEditReportFormData({ ...editReportFormData, reportDate: combinedDate });
+                        const vitalConfig = VITAL_TYPES[e.target.value];
+                        setEditVitalFormData({
+                          ...editVitalFormData,
+                          vitalType: e.target.value,
+                          unit: vitalConfig ? vitalConfig.unit : editVitalFormData.unit
+                        });
                       }}
-                      className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-500 text-sm"
+                      className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-500"
                       required
                     >
-                      <option value="">Year</option>
-                      {generateYearOptions()}
+                      <option value="">Select Vital Type</option>
+                      {Object.entries(VITAL_TYPES).map(([key, config]) => (
+                        <option key={key} value={key}>{config.label}</option>
+                      ))}
                     </select>
                   </div>
-                </div>
-                <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-1">File (Optional - leave empty to keep current file)</label>
-                  <input
-                    type="file"
-                    onChange={handleEditFileChange}
-                    className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-500"
-                    accept=".pdf"
-                  />
-                  <p className="text-xs text-gray-500 mt-1">Current file: {editingReport?.file_name}</p>
-                  <p className="text-xs text-gray-500">Only PDF files are accepted (max 20MB)</p>
-                </div>
-                <div className="flex space-x-3">
-                  <button type="submit" className="bg-teal-600 hover:bg-teal-700 text-white px-4 py-2 rounded-lg font-medium">
-                    Update Report
-                  </button>
-                  <button
-                    type="button"
-                    onClick={() => {
-                      setShowEditReportModal(false);
-                      setEditingReport(null);
-                      setEditReportFormData({
-                        reportType: '',
-                        reportSubType: '',
-                        title: '',
-                        description: '',
-                        reportDate: new Date().toISOString().split('T')[0],
-                        file: null
-                      });
-                    }}
-                    className="bg-gray-500 hover:bg-gray-600 text-white px-4 py-2 rounded-lg font-medium"
-                  >
-                    Cancel
-                  </button>
-                </div>
-              </form>
+                  <div>
+                    <label className="block text-sm font-medium text-gray-700 mb-1">Value</label>
+                    <input
+                      type="number"
+                      step="0.01"
+                      value={editVitalFormData.value}
+                      onChange={(e) => setEditVitalFormData({ ...editVitalFormData, value: e.target.value })}
+                      className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-500"
+                      placeholder={editVitalFormData.vitalType ? VITAL_TYPES[editVitalFormData.vitalType]?.placeholder : ''}
+                      required
+                    />
+                  </div>
+                  <div>
+                    <label className="block text-sm font-medium text-gray-700 mb-1">Unit</label>
+                    <input
+                      type="text"
+                      value={editVitalFormData.unit}
+                      onChange={(e) => setEditVitalFormData({ ...editVitalFormData, unit: e.target.value })}
+                      className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-500"
+                      placeholder={editVitalFormData.vitalType ? VITAL_TYPES[editVitalFormData.vitalType]?.unit : ''}
+                      required
+                    />
+                  </div>
+                  <div>
+                    <label className="block text-sm font-medium text-gray-700 mb-1">Date Recorded</label>
+                    <div className="grid grid-cols-3 gap-2 sm:flex sm:space-x-2">
+                      <select
+                        value={editVitalDateComponents.day}
+                        onChange={(e) => {
+                          const newComponents = { ...editVitalDateComponents, day: e.target.value };
+                          setEditVitalDateComponents(newComponents);
+                          const combinedDate = combineDateComponents(newComponents.day, newComponents.month, newComponents.year);
+                          setEditVitalFormData({ ...editVitalFormData, recordedAt: combinedDate });
+                        }}
+                        className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-500 text-sm"
+                        required
+                      >
+                        <option value="">Day</option>
+                        {generateDateOptions()}
+                      </select>
+
+                      <select
+                        value={editVitalDateComponents.month}
+                        onChange={(e) => {
+                          const newComponents = { ...editVitalDateComponents, month: e.target.value };
+                          setEditVitalDateComponents(newComponents);
+                          const combinedDate = combineDateComponents(newComponents.day, newComponents.month, newComponents.year);
+                          setEditVitalFormData({ ...editVitalFormData, recordedAt: combinedDate });
+                        }}
+                        className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-500 text-sm"
+                        required
+                      >
+                        <option value="">Month</option>
+                        {generateMonthOptions()}
+                      </select>
+
+                      <select
+                        value={editVitalDateComponents.year}
+                        onChange={(e) => {
+                          const newComponents = { ...editVitalDateComponents, year: e.target.value };
+                          setEditVitalDateComponents(newComponents);
+                          const combinedDate = combineDateComponents(newComponents.day, newComponents.month, newComponents.year);
+                          setEditVitalFormData({ ...editVitalFormData, recordedAt: combinedDate });
+                        }}
+                        className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-500 text-sm"
+                        required
+                      >
+                        <option value="">Year</option>
+                        {generateYearOptions()}
+                      </select>
+                    </div>
+                  </div>
+                  <div>
+                    <label className="block text-sm font-medium text-gray-700 mb-1">Notes (Optional)</label>
+                    <textarea
+                      value={editVitalFormData.notes}
+                      onChange={(e) => setEditVitalFormData({ ...editVitalFormData, notes: e.target.value })}
+                      className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-500"
+                      rows="3"
+                      placeholder="Any additional notes..."
+                    />
+                  </div>
+                  <div className="flex space-x-3">
+                    <button type="submit" className="bg-teal-600 hover:bg-teal-700 text-white px-4 py-2 rounded-lg font-medium">
+                      Update Vital
+                    </button>
+                    <button
+                      type="button"
+                      onClick={() => {
+                        setShowEditVitalModal(false);
+                        setEditingVital(null);
+                      }}
+                      className="bg-gray-500 hover:bg-gray-600 text-white px-4 py-2 rounded-lg font-medium"
+                    >
+                      Cancel
+                    </button>
+                  </div>
+                </form>
+              </div>
             </div>
-          </div>
-        )}
+          )}
 
-        {/* Upload Document Modal */}
-        {showUploadDocumentModal && (
-          <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-2 sm:p-4">
-            <div className="bg-white rounded-lg p-4 sm:p-6 w-full max-w-md max-h-[95vh] overflow-y-auto">
-              <h2 className="text-lg font-semibold mb-4">Upload Document</h2>
-              <form onSubmit={handleUploadDocument} className="space-y-4">
-                <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-1">File Name <span className="text-red-500">*</span></label>
-                  <input
-                    type="text"
-                    value={documentFormData.title}
-                    onChange={(e) => setDocumentFormData({ ...documentFormData, title: e.target.value })}
-                    className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-500"
-                    placeholder="File name (without extension)"
-                    required
-                  />
-                  <p className="text-xs text-gray-500 mt-1">Name for this document (without extension)</p>
-                </div>
-                <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-1">Upload Date <span className="text-red-500">*</span></label>
-                  <div className="grid grid-cols-3 gap-2 sm:flex sm:space-x-2">
+          {/* Upload Report Modal */}
+          {showUploadReportModal && (
+            <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-2 sm:p-4">
+              <div className="bg-white rounded-lg p-4 sm:p-6 w-full max-w-md max-h-[95vh] overflow-y-auto">
+                <h2 className="text-lg font-semibold mb-4">Upload Medical Report</h2>
+                <form onSubmit={handleUploadReport} className="space-y-4">
+                  <div>
+                    <label className="block text-sm font-medium text-gray-700 mb-1">Report Type <span className="text-red-500">*</span></label>
                     <select
-                      value={documentDateComponents.day}
+                      value={reportFormData.reportType}
                       onChange={(e) => {
-                        const newComponents = { ...documentDateComponents, day: e.target.value };
-                        setDocumentDateComponents(newComponents);
-                        const combinedDate = combineDateComponents(newComponents.day, newComponents.month, newComponents.year);
-                        setDocumentFormData({ ...documentFormData, uploadDate: combinedDate });
+                        setReportFormData({
+                          ...reportFormData,
+                          reportType: e.target.value,
+                          reportSubType: ''
+                        });
                       }}
-                      className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-500 text-sm"
+                      className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-500"
                       required
                     >
-                      <option value="">Day</option>
-                      {generateDateOptions()}
-                    </select>
-
-                    <select
-                      value={documentDateComponents.month}
-                      onChange={(e) => {
-                        const newComponents = { ...documentDateComponents, month: e.target.value };
-                        setDocumentDateComponents(newComponents);
-                        const combinedDate = combineDateComponents(newComponents.day, newComponents.month, newComponents.year);
-                        setDocumentFormData({ ...documentFormData, uploadDate: combinedDate });
-                      }}
-                      className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-500 text-sm"
-                      required
-                    >
-                      <option value="">Month</option>
-                      {generateMonthOptions()}
-                    </select>
-
-                    <select
-                      value={documentDateComponents.year}
-                      onChange={(e) => {
-                        const newComponents = { ...documentDateComponents, year: e.target.value };
-                        setDocumentDateComponents(newComponents);
-                        const combinedDate = combineDateComponents(newComponents.day, newComponents.month, newComponents.year);
-                        setDocumentFormData({ ...documentFormData, uploadDate: combinedDate });
-                      }}
-                      className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-500 text-sm"
-                      required
-                    >
-                      <option value="">Year</option>
-                      {generateYearOptions()}
+                      <option value="">Select Report Type</option>
+                      {Object.entries(REPORT_TYPES).map(([key, config]) => (
+                        <option key={key} value={key}>{config.label}</option>
+                      ))}
                     </select>
                   </div>
-                </div>
-                <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-1">File <span className="text-red-500">*</span></label>
-                  <input
-                    type="file"
-                    onChange={handleDocumentFileChange}
-                    className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-500"
-                    accept=".pdf"
-                    required
-                  />
-                  <p className="text-xs text-gray-500 mt-1">Only PDF files are accepted (max 20MB)</p>
-                </div>
-                <div className="flex space-x-3">
-                  <button
-                    type="submit"
-                    disabled={isUploading || isSubmittingDocument}
-                    className={`px-4 py-2 rounded-lg font-medium relative overflow-hidden transition-colors duration-200 ${(isUploading || isSubmittingDocument)
-                      ? 'bg-gray-400 cursor-not-allowed text-white'
-                      : 'bg-teal-600 hover:bg-teal-700 text-white'
-                      }`}
-                  >
-                    {isUploading ? (
-                      <>
-                        <span className="relative z-10">Uploading {uploadProgress}%</span>
-                        <div
-                          className="absolute inset-0 bg-teal-400 transition-all duration-300"
-                          style={{ width: `${uploadProgress}%` }}
-                        ></div>
-                      </>
-                    ) : isSubmittingDocument ? (
-                      'Uploading...'
-                    ) : (
-                      'Upload Document'
-                    )}
-                  </button>
-                  <button
-                    type="button"
-                    disabled={isUploading || isSubmittingDocument}
-                    onClick={() => setShowUploadDocumentModal(false)}
-                    className={`px-4 py-2 rounded-lg font-medium transition-colors duration-200 ${(isUploading || isSubmittingDocument)
-                      ? 'bg-gray-400 cursor-not-allowed text-white'
-                      : 'bg-gray-500 hover:bg-gray-600 text-white'
-                      }`}
-                  >
-                    {(isUploading || isSubmittingDocument) ? 'Please wait...' : 'Cancel'}
-                  </button>
-                </div>
-              </form>
-            </div>
-          </div>
-        )}
-
-
-
-        {/* Edit Document Modal */}
-        {showEditDocumentModal && (
-          <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-2 sm:p-4">
-            <div className="bg-white rounded-lg p-4 sm:p-6 w-full max-w-md max-h-[95vh] overflow-y-auto">
-              <h2 className="text-lg font-semibold mb-4">Edit Document</h2>
-              <form onSubmit={handleUpdateDocument} className="space-y-4">
-                <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-1">File Name <span className="text-red-500">*</span></label>
-                  <input
-                    type="text"
-                    value={editDocumentFormData.title}
-                    onChange={(e) => setEditDocumentFormData({ ...editDocumentFormData, title: e.target.value })}
-                    className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-500"
-                    placeholder="File name (without extension)"
-                    required
-                  />
-                  <p className="text-xs text-gray-500 mt-1">Name for this document (without extension)</p>
-                </div>
-                <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-1">Upload Date</label>
-                  <div className="grid grid-cols-3 gap-2 sm:flex sm:space-x-2">
+                  <div>
+                    <label className="block text-sm font-medium text-gray-700 mb-1">Report Sub-Type <span className="text-red-500">*</span></label>
                     <select
-                      value={editDocumentDateComponents.day}
-                      onChange={(e) => {
-                        const newComponents = { ...editDocumentDateComponents, day: e.target.value };
-                        setEditDocumentDateComponents(newComponents);
-                        const combinedDate = combineDateComponents(newComponents.day, newComponents.month, newComponents.year);
-                        setEditDocumentFormData({ ...editDocumentFormData, uploadDate: combinedDate });
-                      }}
-                      className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-500 text-sm"
+                      value={reportFormData.reportSubType}
+                      onChange={(e) => setReportFormData({ ...reportFormData, reportSubType: e.target.value })}
+                      className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-500"
                       required
                     >
-                      <option value="">Day</option>
-                      {generateDateOptions()}
-                    </select>
-
-                    <select
-                      value={editDocumentDateComponents.month}
-                      onChange={(e) => {
-                        const newComponents = { ...editDocumentDateComponents, month: e.target.value };
-                        setEditDocumentDateComponents(newComponents);
-                        const combinedDate = combineDateComponents(newComponents.day, newComponents.month, newComponents.year);
-                        setEditDocumentFormData({ ...editDocumentFormData, uploadDate: combinedDate });
-                      }}
-                      className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-500 text-sm"
-                      required
-                    >
-                      <option value="">Month</option>
-                      {generateMonthOptions()}
-                    </select>
-
-                    <select
-                      value={editDocumentDateComponents.year}
-                      onChange={(e) => {
-                        const newComponents = { ...editDocumentDateComponents, year: e.target.value };
-                        setEditDocumentDateComponents(newComponents);
-                        const combinedDate = combineDateComponents(newComponents.day, newComponents.month, newComponents.year);
-                        setEditDocumentFormData({ ...editDocumentFormData, uploadDate: combinedDate });
-                      }}
-                      className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-500 text-sm"
-                      required
-                    >
-                      <option value="">Year</option>
-                      {generateYearOptions()}
+                      <option value="">Select Sub-Type</option>
+                      {reportFormData.reportType && REPORT_TYPES[reportFormData.reportType]?.subTypes ? (
+                        REPORT_TYPES[reportFormData.reportType].subTypes.map((subType) => (
+                          <option key={subType.value} value={subType.value}>{subType.label}</option>
+                        ))
+                      ) : (
+                        Object.values(REPORT_TYPES).flatMap(config =>
+                          config.subTypes ? config.subTypes.map((subType) => (
+                            <option key={subType.value} value={subType.value}>{subType.label}</option>
+                          )) : []
+                        )
+                      )}
                     </select>
                   </div>
-                </div>
-                <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-1">File (Optional - leave empty to keep current file)</label>
-                  <input
-                    type="file"
-                    onChange={handleEditDocumentFileChange}
-                    className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-500"
-                    accept=".pdf"
-                  />
-                  <p className="text-xs text-gray-500 mt-1">Current file: {editingDocument?.file_name}</p>
-                  <p className="text-xs text-gray-500">Only PDF files are accepted (max 20MB)</p>
-                </div>
-                <div className="flex space-x-3">
-                  <button type="submit" className="bg-teal-600 hover:bg-teal-700 text-white px-4 py-2 rounded-lg font-medium">
-                    Update Document
-                  </button>
-                  <button
-                    type="button"
-                    onClick={() => {
-                      setShowEditDocumentModal(false);
-                      setEditingDocument(null);
-                      setEditDocumentFormData({
-                        title: '',
-                        description: '',
-                        uploadDate: new Date().toISOString().split('T')[0],
-                        file: null
-                      });
-                    }}
-                    className="bg-gray-500 hover:bg-gray-600 text-white px-4 py-2 rounded-lg font-medium"
-                  >
-                    Cancel
-                  </button>
-                </div>
-              </form>
+                  <div>
+                    <label className="block text-sm font-medium text-gray-700 mb-1">File Name <span className="text-red-500">*</span></label>
+                    <input
+                      type="text"
+                      value={reportFormData.title}
+                      onChange={(e) => setReportFormData({ ...reportFormData, title: e.target.value })}
+                      className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-500"
+                      placeholder={reportFormData.file ? reportFormData.file.name.replace(/\.[^/.]+$/, '') : 'Enter file name'}
+                      required
+                    />
+                    <p className="text-xs text-gray-500 mt-1">Name for this report (without extension)</p>
+                  </div>
+                  <div>
+                    <label className="block text-sm font-medium text-gray-700 mb-1">Report Date <span className="text-red-500">*</span></label>
+                    <div className="grid grid-cols-3 gap-2 sm:flex sm:space-x-2">
+                      <select
+                        value={reportDateComponents.day}
+                        onChange={(e) => {
+                          const newComponents = { ...reportDateComponents, day: e.target.value };
+                          setReportDateComponents(newComponents);
+                          const combinedDate = combineDateComponents(newComponents.day, newComponents.month, newComponents.year);
+                          setReportFormData({ ...reportFormData, reportDate: combinedDate });
+                        }}
+                        className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-500 text-sm"
+                        required
+                      >
+                        <option value="">Day</option>
+                        {generateDateOptions()}
+                      </select>
+
+                      <select
+                        value={reportDateComponents.month}
+                        onChange={(e) => {
+                          const newComponents = { ...reportDateComponents, month: e.target.value };
+                          setReportDateComponents(newComponents);
+                          const combinedDate = combineDateComponents(newComponents.day, newComponents.month, newComponents.year);
+                          setReportFormData({ ...reportFormData, reportDate: combinedDate });
+                        }}
+                        className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-500 text-sm"
+                        required
+                      >
+                        <option value="">Month</option>
+                        {generateMonthOptions()}
+                      </select>
+
+                      <select
+                        value={reportDateComponents.year}
+                        onChange={(e) => {
+                          const newComponents = { ...reportDateComponents, year: e.target.value };
+                          setReportDateComponents(newComponents);
+                          const combinedDate = combineDateComponents(newComponents.day, newComponents.month, newComponents.year);
+                          setReportFormData({ ...reportFormData, reportDate: combinedDate });
+                        }}
+                        className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-500 text-sm"
+                        required
+                      >
+                        <option value="">Year</option>
+                        {generateYearOptions()}
+                      </select>
+                    </div>
+                  </div>
+                  <div>
+                    <label className="block text-sm font-medium text-gray-700 mb-1">File <span className="text-red-500">*</span></label>
+                    <input
+                      type="file"
+                      onChange={handleFileChange}
+                      className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-500"
+                      accept=".pdf"
+                      required
+                    />
+                    <p className="text-xs text-gray-500 mt-1">Only PDF files are accepted (max 20MB)</p>
+                  </div>
+                  <div className="flex space-x-3">
+                    <button
+                      type="submit"
+                      disabled={isUploading || isSubmittingReport}
+                      className={`px-4 py-2 rounded-lg font-medium relative overflow-hidden transition-colors duration-200 ${(isUploading || isSubmittingReport)
+                        ? 'bg-gray-400 cursor-not-allowed text-white'
+                        : 'bg-teal-600 hover:bg-teal-700 text-white'
+                        }`}
+                    >
+                      {isUploading ? (
+                        <>
+                          <span className="relative z-10">Uploading {uploadProgress}%</span>
+                          <div
+                            className="absolute inset-0 bg-teal-400 transition-all duration-300"
+                            style={{ width: `${uploadProgress}%` }}
+                          ></div>
+                        </>
+                      ) : isSubmittingReport ? (
+                        'Uploading...'
+                      ) : (
+                        'Upload Report'
+                      )}
+                    </button>
+                    <button
+                      type="button"
+                      disabled={isUploading || isSubmittingReport}
+                      onClick={() => setShowUploadReportModal(false)}
+                      className={`px-4 py-2 rounded-lg font-medium transition-colors duration-200 ${(isUploading || isSubmittingReport)
+                        ? 'bg-gray-400 cursor-not-allowed text-white'
+                        : 'bg-gray-500 hover:bg-gray-600 text-white'
+                        }`}
+                    >
+                      {(isUploading || isSubmittingReport) ? 'Please wait...' : 'Cancel'}
+                    </button>
+                  </div>
+                </form>
+              </div>
             </div>
-          </div>
+          )}
+
+          {/* Edit Report Modal */}
+          {showEditReportModal && (
+            <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-2 sm:p-4">
+              <div className="bg-white rounded-lg p-4 sm:p-6 w-full max-w-md max-h-[95vh] overflow-y-auto">
+                <h2 className="text-lg font-semibold mb-4">Edit Medical Report</h2>
+                <form onSubmit={handleUpdateReport} className="space-y-4">
+                  <div>
+                    <label className="block text-sm font-medium text-gray-700 mb-1">Report Type</label>
+                    <select
+                      value={editReportFormData.reportType}
+                      onChange={(e) => {
+                        setEditReportFormData({
+                          ...editReportFormData,
+                          reportType: e.target.value,
+                          reportSubType: ''
+                        });
+                      }}
+                      className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-500"
+                    >
+                      <option value="">Select Report Type</option>
+                      {Object.entries(REPORT_TYPES).map(([key, config]) => (
+                        <option key={key} value={key}>{config.label}</option>
+                      ))}
+                    </select>
+                  </div>
+                  {editReportFormData.reportType && REPORT_TYPES[editReportFormData.reportType]?.subTypes && (
+                    <div>
+                      <label className="block text-sm font-medium text-gray-700 mb-1">Report Sub-Type</label>
+                      <select
+                        value={editReportFormData.reportSubType}
+                        onChange={(e) => setEditReportFormData({ ...editReportFormData, reportSubType: e.target.value })}
+                        className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-500"
+                      >
+                        <option value="">Select Sub-Type</option>
+                        {REPORT_TYPES[editReportFormData.reportType].subTypes.map((subType) => (
+                          <option key={subType.value} value={subType.value}>{subType.label}</option>
+                        ))}
+                      </select>
+                    </div>
+                  )}
+                  <div>
+                    <label className="block text-sm font-medium text-gray-700 mb-1">File Name <span className="text-red-500">*</span></label>
+                    <input
+                      type="text"
+                      value={editReportFormData.title}
+                      onChange={(e) => setEditReportFormData({ ...editReportFormData, title: e.target.value })}
+                      className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-500"
+                      placeholder="File name (without extension)"
+                      required
+                    />
+                    <p className="text-xs text-gray-500 mt-1">Name for this report (without extension)</p>
+                  </div>
+                  <div>
+                    <label className="block text-sm font-medium text-gray-700 mb-1">Report Date</label>
+                    <div className="grid grid-cols-3 gap-2 sm:flex sm:space-x-2">
+                      <select
+                        value={editReportDateComponents.day}
+                        onChange={(e) => {
+                          const newComponents = { ...editReportDateComponents, day: e.target.value };
+                          setEditReportDateComponents(newComponents);
+                          const combinedDate = combineDateComponents(newComponents.day, newComponents.month, newComponents.year);
+                          setEditReportFormData({ ...editReportFormData, reportDate: combinedDate });
+                        }}
+                        className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-500 text-sm"
+                        required
+                      >
+                        <option value="">Day</option>
+                        {generateDateOptions()}
+                      </select>
+
+                      <select
+                        value={editReportDateComponents.month}
+                        onChange={(e) => {
+                          const newComponents = { ...editReportDateComponents, month: e.target.value };
+                          setEditReportDateComponents(newComponents);
+                          const combinedDate = combineDateComponents(newComponents.day, newComponents.month, newComponents.year);
+                          setEditReportFormData({ ...editReportFormData, reportDate: combinedDate });
+                        }}
+                        className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-500 text-sm"
+                        required
+                      >
+                        <option value="">Month</option>
+                        {generateMonthOptions()}
+                      </select>
+
+                      <select
+                        value={editReportDateComponents.year}
+                        onChange={(e) => {
+                          const newComponents = { ...editReportDateComponents, year: e.target.value };
+                          setEditReportDateComponents(newComponents);
+                          const combinedDate = combineDateComponents(newComponents.day, newComponents.month, newComponents.year);
+                          setEditReportFormData({ ...editReportFormData, reportDate: combinedDate });
+                        }}
+                        className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-500 text-sm"
+                        required
+                      >
+                        <option value="">Year</option>
+                        {generateYearOptions()}
+                      </select>
+                    </div>
+                  </div>
+                  <div>
+                    <label className="block text-sm font-medium text-gray-700 mb-1">File (Optional - leave empty to keep current file)</label>
+                    <input
+                      type="file"
+                      onChange={handleEditFileChange}
+                      className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-500"
+                      accept=".pdf"
+                    />
+                    <p className="text-xs text-gray-500 mt-1">Current file: {editingReport?.file_name}</p>
+                    <p className="text-xs text-gray-500">Only PDF files are accepted (max 20MB)</p>
+                  </div>
+                  <div className="flex space-x-3">
+                    <button type="submit" className="bg-teal-600 hover:bg-teal-700 text-white px-4 py-2 rounded-lg font-medium">
+                      Update Report
+                    </button>
+                    <button
+                      type="button"
+                      onClick={() => {
+                        setShowEditReportModal(false);
+                        setEditingReport(null);
+                        setEditReportFormData({
+                          reportType: '',
+                          reportSubType: '',
+                          title: '',
+                          description: '',
+                          reportDate: new Date().toISOString().split('T')[0],
+                          file: null
+                        });
+                      }}
+                      className="bg-gray-500 hover:bg-gray-600 text-white px-4 py-2 rounded-lg font-medium"
+                    >
+                      Cancel
+                    </button>
+                  </div>
+                </form>
+              </div>
+            </div>
+          )}
+
+          {/* Upload Document Modal */}
+          {showUploadDocumentModal && (
+            <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-2 sm:p-4">
+              <div className="bg-white rounded-lg p-4 sm:p-6 w-full max-w-md max-h-[95vh] overflow-y-auto">
+                <h2 className="text-lg font-semibold mb-4">Upload Document</h2>
+                <form onSubmit={handleUploadDocument} className="space-y-4">
+                  <div>
+                    <label className="block text-sm font-medium text-gray-700 mb-1">File Name <span className="text-red-500">*</span></label>
+                    <input
+                      type="text"
+                      value={documentFormData.title}
+                      onChange={(e) => setDocumentFormData({ ...documentFormData, title: e.target.value })}
+                      className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-500"
+                      placeholder="File name (without extension)"
+                      required
+                    />
+                    <p className="text-xs text-gray-500 mt-1">Name for this document (without extension)</p>
+                  </div>
+                  <div>
+                    <label className="block text-sm font-medium text-gray-700 mb-1">Upload Date <span className="text-red-500">*</span></label>
+                    <div className="grid grid-cols-3 gap-2 sm:flex sm:space-x-2">
+                      <select
+                        value={documentDateComponents.day}
+                        onChange={(e) => {
+                          const newComponents = { ...documentDateComponents, day: e.target.value };
+                          setDocumentDateComponents(newComponents);
+                          const combinedDate = combineDateComponents(newComponents.day, newComponents.month, newComponents.year);
+                          setDocumentFormData({ ...documentFormData, uploadDate: combinedDate });
+                        }}
+                        className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-500 text-sm"
+                        required
+                      >
+                        <option value="">Day</option>
+                        {generateDateOptions()}
+                      </select>
+
+                      <select
+                        value={documentDateComponents.month}
+                        onChange={(e) => {
+                          const newComponents = { ...documentDateComponents, month: e.target.value };
+                          setDocumentDateComponents(newComponents);
+                          const combinedDate = combineDateComponents(newComponents.day, newComponents.month, newComponents.year);
+                          setDocumentFormData({ ...documentFormData, uploadDate: combinedDate });
+                        }}
+                        className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-500 text-sm"
+                        required
+                      >
+                        <option value="">Month</option>
+                        {generateMonthOptions()}
+                      </select>
+
+                      <select
+                        value={documentDateComponents.year}
+                        onChange={(e) => {
+                          const newComponents = { ...documentDateComponents, year: e.target.value };
+                          setDocumentDateComponents(newComponents);
+                          const combinedDate = combineDateComponents(newComponents.day, newComponents.month, newComponents.year);
+                          setDocumentFormData({ ...documentFormData, uploadDate: combinedDate });
+                        }}
+                        className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-500 text-sm"
+                        required
+                      >
+                        <option value="">Year</option>
+                        {generateYearOptions()}
+                      </select>
+                    </div>
+                  </div>
+                  <div>
+                    <label className="block text-sm font-medium text-gray-700 mb-1">File <span className="text-red-500">*</span></label>
+                    <input
+                      type="file"
+                      onChange={handleDocumentFileChange}
+                      className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-500"
+                      accept=".pdf"
+                      required
+                    />
+                    <p className="text-xs text-gray-500 mt-1">Only PDF files are accepted (max 20MB)</p>
+                  </div>
+                  <div className="flex space-x-3">
+                    <button
+                      type="submit"
+                      disabled={isUploading || isSubmittingDocument}
+                      className={`px-4 py-2 rounded-lg font-medium relative overflow-hidden transition-colors duration-200 ${(isUploading || isSubmittingDocument)
+                        ? 'bg-gray-400 cursor-not-allowed text-white'
+                        : 'bg-teal-600 hover:bg-teal-700 text-white'
+                        }`}
+                    >
+                      {isUploading ? (
+                        <>
+                          <span className="relative z-10">Uploading {uploadProgress}%</span>
+                          <div
+                            className="absolute inset-0 bg-teal-400 transition-all duration-300"
+                            style={{ width: `${uploadProgress}%` }}
+                          ></div>
+                        </>
+                      ) : isSubmittingDocument ? (
+                        'Uploading...'
+                      ) : (
+                        'Upload Document'
+                      )}
+                    </button>
+                    <button
+                      type="button"
+                      disabled={isUploading || isSubmittingDocument}
+                      onClick={() => setShowUploadDocumentModal(false)}
+                      className={`px-4 py-2 rounded-lg font-medium transition-colors duration-200 ${(isUploading || isSubmittingDocument)
+                        ? 'bg-gray-400 cursor-not-allowed text-white'
+                        : 'bg-gray-500 hover:bg-gray-600 text-white'
+                        }`}
+                    >
+                      {(isUploading || isSubmittingDocument) ? 'Please wait...' : 'Cancel'}
+                    </button>
+                  </div>
+                </form>
+              </div>
+            </div>
+          )}
+
+
+
+          {/* Edit Document Modal */}
+          {showEditDocumentModal && (
+            <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-2 sm:p-4">
+              <div className="bg-white rounded-lg p-4 sm:p-6 w-full max-w-md max-h-[95vh] overflow-y-auto">
+                <h2 className="text-lg font-semibold mb-4">Edit Document</h2>
+                <form onSubmit={handleUpdateDocument} className="space-y-4">
+                  <div>
+                    <label className="block text-sm font-medium text-gray-700 mb-1">File Name <span className="text-red-500">*</span></label>
+                    <input
+                      type="text"
+                      value={editDocumentFormData.title}
+                      onChange={(e) => setEditDocumentFormData({ ...editDocumentFormData, title: e.target.value })}
+                      className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-500"
+                      placeholder="File name (without extension)"
+                      required
+                    />
+                    <p className="text-xs text-gray-500 mt-1">Name for this document (without extension)</p>
+                  </div>
+                  <div>
+                    <label className="block text-sm font-medium text-gray-700 mb-1">Upload Date</label>
+                    <div className="grid grid-cols-3 gap-2 sm:flex sm:space-x-2">
+                      <select
+                        value={editDocumentDateComponents.day}
+                        onChange={(e) => {
+                          const newComponents = { ...editDocumentDateComponents, day: e.target.value };
+                          setEditDocumentDateComponents(newComponents);
+                          const combinedDate = combineDateComponents(newComponents.day, newComponents.month, newComponents.year);
+                          setEditDocumentFormData({ ...editDocumentFormData, uploadDate: combinedDate });
+                        }}
+                        className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-500 text-sm"
+                        required
+                      >
+                        <option value="">Day</option>
+                        {generateDateOptions()}
+                      </select>
+
+                      <select
+                        value={editDocumentDateComponents.month}
+                        onChange={(e) => {
+                          const newComponents = { ...editDocumentDateComponents, month: e.target.value };
+                          setEditDocumentDateComponents(newComponents);
+                          const combinedDate = combineDateComponents(newComponents.day, newComponents.month, newComponents.year);
+                          setEditDocumentFormData({ ...editDocumentFormData, uploadDate: combinedDate });
+                        }}
+                        className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-500 text-sm"
+                        required
+                      >
+                        <option value="">Month</option>
+                        {generateMonthOptions()}
+                      </select>
+
+                      <select
+                        value={editDocumentDateComponents.year}
+                        onChange={(e) => {
+                          const newComponents = { ...editDocumentDateComponents, year: e.target.value };
+                          setEditDocumentDateComponents(newComponents);
+                          const combinedDate = combineDateComponents(newComponents.day, newComponents.month, newComponents.year);
+                          setEditDocumentFormData({ ...editDocumentFormData, uploadDate: combinedDate });
+                        }}
+                        className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-500 text-sm"
+                        required
+                      >
+                        <option value="">Year</option>
+                        {generateYearOptions()}
+                      </select>
+                    </div>
+                  </div>
+                  <div>
+                    <label className="block text-sm font-medium text-gray-700 mb-1">File (Optional - leave empty to keep current file)</label>
+                    <input
+                      type="file"
+                      onChange={handleEditDocumentFileChange}
+                      className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-500"
+                      accept=".pdf"
+                    />
+                    <p className="text-xs text-gray-500 mt-1">Current file: {editingDocument?.file_name}</p>
+                    <p className="text-xs text-gray-500">Only PDF files are accepted (max 20MB)</p>
+                  </div>
+                  <div className="flex space-x-3">
+                    <button type="submit" className="bg-teal-600 hover:bg-teal-700 text-white px-4 py-2 rounded-lg font-medium">
+                      Update Document
+                    </button>
+                    <button
+                      type="button"
+                      onClick={() => {
+                        setShowEditDocumentModal(false);
+                        setEditingDocument(null);
+                        setEditDocumentFormData({
+                          title: '',
+                          description: '',
+                          uploadDate: new Date().toISOString().split('T')[0],
+                          file: null
+                        });
+                      }}
+                      className="bg-gray-500 hover:bg-gray-600 text-white px-4 py-2 rounded-lg font-medium"
+                    >
+                      Cancel
+                    </button>
+                  </div>
+                </form>
+              </div>
+            </div>
+          )}
+
+
+
+          {/* Profile Picture Upload Modal */}
+          {showProfileUploadModal && member && (
+            <ProfilePictureUpload
+              member={member}
+              onUploadSuccess={handleProfileUploadSuccess}
+              onClose={() => setShowProfileUploadModal(false)}
+            />
+          )}
         )}
-
-
-
-        {/* Profile Picture Upload Modal */}
-        {showProfileUploadModal && member && (
-          <ProfilePictureUpload
-            member={member}
-            onUploadSuccess={handleProfileUploadSuccess}
-            onClose={() => setShowProfileUploadModal(false)}
-          />
-        )}
+        </div>
       </div>
     </div>
+
+       {/* Fixed Bottom Navigation */ }
+  <div className="fixed bottom-0 left-0 right-0 bg-white/80 backdrop-blur-md border-t border-gray-200 shadow-lg z-50 pb-safe">
+    <div className="flex justify-around items-center h-16 max-w-lg mx-auto">
+      <button
+        onClick={() => setActiveTab('vitals')}
+        className={`flex flex-col items-center justify-center w-full h-full space-y-1 ${activeTab === 'vitals' ? 'text-primary-600' : 'text-gray-400 hover:text-gray-600'}`}
+      >
+        <div className="p-1 rounded-full">
+          <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
+          </svg>
+        </div>
+        <span className="text-xs font-medium">Vitals</span>
+      </button>
+      <button
+        onClick={() => setActiveTab('reports')}
+        className={`flex flex-col items-center justify-center w-full h-full space-y-1 ${activeTab === 'reports' ? 'text-primary-600' : 'text-gray-400 hover:text-gray-600'}`}
+      >
+        <div className="p-1 rounded-full">
+          <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+          </svg>
+        </div>
+        <span className="text-xs font-medium">Reports</span>
+      </button>
+      <button
+        onClick={() => setActiveTab('documents')}
+        className={`flex flex-col items-center justify-center w-full h-full space-y-1 ${activeTab === 'documents' ? 'text-primary-600' : 'text-gray-400 hover:text-gray-600'}`}
+      >
+        <div className="p-1 rounded-full">
+          <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M7 21h10a2 2 0 002-2V9.414a1 1 0 00-.293-.707l-5.414-5.414A1 1 0 0012.586 3H7a2 2 0 00-2 2v14a2 2 0 002 2z" />
+          </svg>
+        </div>
+        <span className="text-xs font-medium">Documents</span>
+      </button>
+    </div>
+  </div>
   );
 };
 
