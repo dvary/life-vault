@@ -1408,6 +1408,7 @@ const MemberPage = () => {
 
     setIsSubmittingDocument(true);
 
+
     try {
       setIsUploading(true);
       setUploadProgress(0);
@@ -1448,6 +1449,14 @@ const MemberPage = () => {
       setIsSubmittingDocument(false);
     }
   };
+
+  const handleTabChange = (tab) => {
+    setActiveTab(tab);
+    setShowAddVitalModal(false);
+    setShowUploadReportModal(false);
+    setShowUploadDocumentModal(false);
+  };
+
 
   const fetchDocuments = async () => {
     try {
@@ -2566,7 +2575,7 @@ const MemberPage = () => {
 
           {/* Add Vital Modal */}
           {showAddVitalModal && (
-            <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-2 sm:p-4">
+            <div className="fixed inset-0 bg-black/50 backdrop-blur-sm flex items-center justify-center z-50 p-2 sm:p-4">
               <div className="bg-white rounded-lg p-4 sm:p-6 w-full max-w-md max-h-[95vh] overflow-y-auto">
                 <h2 className="text-lg font-semibold mb-4">Add Health Vital</h2>
                 <form onSubmit={handleAddVital} className="space-y-4">
@@ -2825,7 +2834,7 @@ const MemberPage = () => {
 
           {/* Upload Report Modal */}
           {showUploadReportModal && (
-            <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-2 sm:p-4">
+            <div className="fixed inset-0 bg-black/50 backdrop-blur-sm flex items-center justify-center z-50 p-2 sm:p-4">
               <div className="bg-white rounded-lg p-4 sm:p-6 w-full max-w-md max-h-[95vh] overflow-y-auto">
                 <h2 className="text-lg font-semibold mb-4">Upload Medical Report</h2>
                 <form onSubmit={handleUploadReport} className="space-y-4">
@@ -3125,7 +3134,7 @@ const MemberPage = () => {
 
           {/* Upload Document Modal */}
           {showUploadDocumentModal && (
-            <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-2 sm:p-4">
+            <div className="fixed inset-0 bg-black/50 backdrop-blur-sm flex items-center justify-center z-50 p-2 sm:p-4">
               <div className="bg-white rounded-lg p-4 sm:p-6 w-full max-w-md max-h-[95vh] overflow-y-auto">
                 <h2 className="text-lg font-semibold mb-4">Upload Document</h2>
                 <form onSubmit={handleUploadDocument} className="space-y-4">
@@ -3375,7 +3384,7 @@ const MemberPage = () => {
             <span className="text-xs font-medium">Home</span>
           </Link>
           <button
-            onClick={() => setActiveTab('vitals')}
+            onClick={() => handleTabChange('vitals')}
             className={`flex flex-col items-center justify-center w-full h-full space-y-1 ${activeTab === 'vitals' ? 'text-primary-600' : 'text-gray-400 hover:text-gray-600'}`}
           >
             <div className="p-1 rounded-full">
@@ -3386,7 +3395,7 @@ const MemberPage = () => {
             <span className="text-xs font-medium">Vitals</span>
           </button>
           <button
-            onClick={() => setActiveTab('reports')}
+            onClick={() => handleTabChange('reports')}
             className={`flex flex-col items-center justify-center w-full h-full space-y-1 ${activeTab === 'reports' ? 'text-primary-600' : 'text-gray-400 hover:text-gray-600'}`}
           >
             <div className="p-1 rounded-full">
@@ -3397,7 +3406,7 @@ const MemberPage = () => {
             <span className="text-xs font-medium">Reports</span>
           </button>
           <button
-            onClick={() => setActiveTab('documents')}
+            onClick={() => handleTabChange('documents')}
             className={`flex flex-col items-center justify-center w-full h-full space-y-1 ${activeTab === 'documents' ? 'text-primary-600' : 'text-gray-400 hover:text-gray-600'}`}
           >
             <div className="p-1 rounded-full">
