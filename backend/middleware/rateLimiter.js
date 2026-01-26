@@ -65,13 +65,13 @@ const rateLimit = (options = {}) => {
 // Specific rate limiters for different endpoints
 const authRateLimit = rateLimit({
   windowMs: 15 * 60 * 1000, // 15 minutes
-  max: 10, // limit each IP to 10 requests per windowMs
+  max: 100, // limit each IP to 100 requests per windowMs
   message: 'Too many authentication attempts, please try again later.'
 });
 
 const uploadRateLimit = rateLimit({
   windowMs: 60 * 1000, // 1 minute
-  max: 10, // limit each IP to 10 uploads per minute
+  max: 50, // limit each IP to 50 uploads per minute
   message: 'Too many file uploads, please try again later.'
 });
 
