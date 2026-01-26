@@ -437,10 +437,11 @@ const MemberPage = () => {
   const formatDate = (dateString) => {
     if (!dateString) return '';
     const date = new Date(dateString);
-    const day = date.getDate().toString().padStart(2, '0');
-    const month = (date.getMonth() + 1).toString().padStart(2, '0');
-    const year = date.getFullYear();
-    return `${day}-${month}-${year}`;
+    return date.toLocaleDateString('en-GB', {
+      day: '2-digit',
+      month: 'short',
+      year: 'numeric'
+    }).replace(/ /g, '-');
   };
 
   // Format date for HTML date input (yyyy-mm-dd)
@@ -836,6 +837,7 @@ const MemberPage = () => {
   };
 
   // Age calculation with months for < 1 year
+  // Age calculation with years and months
   const calculateAge = (dateOfBirth) => {
     if (!dateOfBirth) return null;
     const today = new Date();
@@ -844,17 +846,19 @@ const MemberPage = () => {
       (today.getMonth() - birthDate.getMonth());
 
     if (ageInMonths < 12) {
-      return `${ageInMonths} Month${ageInMonths !== 1 ? 's' : ''}`;
+      return `${ageInMonths} mo${ageInMonths !== 1 ? 's' : ''}`;
     } else {
       const years = Math.floor(ageInMonths / 12);
       const remainingMonths = ageInMonths % 12;
       if (remainingMonths === 0) {
-        return `${years} Year${years !== 1 ? 's' : ''}`;
+        return `${years} yrs`;
       } else {
-        return `${years} Year${years !== 1 ? 's' : ''} ${remainingMonths} Month${remainingMonths !== 1 ? 's' : ''}`;
+        return `${years} yrs ${remainingMonths} mos`;
       }
     }
   };
+
+
 
   // Calculate age of a record (how old the record is)
   const calculateRecordAge = (recordDate) => {
@@ -1795,10 +1799,17 @@ const MemberPage = () => {
 
             {/* Compact Info Grid */}
             <div className="flex flex-wrap items-center gap-x-4 gap-y-1 mt-1 text-sm">
-              <span className="inline-flex items-center px-2 py-0.5 rounded-md bg-gray-100/80 text-gray-700 border border-gray-200/50 backdrop-blur-sm">
-                <span className="mr-1.5 opacity-70">🎂</span>
-                {age ? age.display : 'N/A'}
+              <span className="inline-flex items-center px-2 py-0.5 rounded-md bg-indigo-50/80 text-indigo-700 border border-indigo-100/50 backdrop-blur-sm">
+                <span className="mr-1.5 opacity-70">👤</span>
+                {age || 'N/A'}
               </span>
+
+              {member.date_of_birth && (
+                <span className="inline-flex items-center px-2 py-0.5 rounded-md bg-orange-50/80 text-orange-700 border border-orange-100/50 backdrop-blur-sm">
+                  <span className="mr-1.5 opacity-70">🎂</span>
+                  {formatDate(member.date_of_birth)}
+                </span>
+              )}
 
               {member.blood_group && (
                 <span className="inline-flex items-center px-2 py-0.5 rounded-md bg-red-50/80 text-red-700 border border-red-100/50 backdrop-blur-sm">
