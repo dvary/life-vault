@@ -1755,7 +1755,7 @@ const MemberPage = () => {
       </div>
 
       {/* Floating Action Button for Desktop */}
-      <div className="fixed bottom-8 right-8 z-40 hidden sm:block">
+      <div className="fixed bottom-20 right-8 z-[60] hidden sm:block">
         <button
           onClick={handleQuickAddAction}
           className="bg-teal-600 hover:bg-teal-700 text-white px-4 py-3 rounded-full shadow-lg flex items-center gap-2 transition-all duration-200 transform hover:-translate-y-0.5"
