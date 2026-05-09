@@ -1462,6 +1462,20 @@ const MemberPage = () => {
     setShowUploadDocumentModal(false);
   };
 
+  const handleQuickAddAction = () => {
+    switch (activeTab) {
+      case 'reports':
+        setShowUploadReportModal(true);
+        break;
+      case 'documents':
+        setShowUploadDocumentModal(true);
+        break;
+      case 'vitals':
+      default:
+        setShowAddVitalModal(true);
+    }
+  };
+
 
   const fetchDocuments = async () => {
     try {
@@ -1731,25 +1745,31 @@ const MemberPage = () => {
               <div className="absolute inset-0 rounded-full bg-teal-400 animate-ping opacity-20"></div>
             )}
           <button
-            onClick={() => {
-              switch (activeTab) {
-                case 'reports':
-                  setShowUploadReportModal(true);
-                  break;
-                case 'documents':
-                  setShowUploadDocumentModal(true);
-                  break;
-                case 'vitals':
-                default:
-                  setShowAddVitalModal(true);
-              }
-            }}
+            onClick={handleQuickAddAction}
             className="bg-teal-600 hover:bg-teal-700 text-white w-14 h-14 rounded-full shadow-lg flex items-center justify-center transition-all duration-200 transform hover:scale-110 relative z-10"
             title="Quick Add"
           >
             <PlusIcon />
           </button>
         </div>
+      </div>
+
+      {/* Floating Action Button for Desktop */}
+      <div className="fixed bottom-8 right-8 z-40 hidden sm:block">
+        <button
+          onClick={handleQuickAddAction}
+          className="bg-teal-600 hover:bg-teal-700 text-white px-4 py-3 rounded-full shadow-lg flex items-center gap-2 transition-all duration-200 transform hover:-translate-y-0.5"
+          title="Quick Add"
+        >
+          <PlusIcon />
+          <span className="text-sm font-medium">
+            {activeTab === 'reports'
+              ? 'Upload Report'
+              : activeTab === 'documents'
+                ? 'Upload Document'
+                : 'Add Vital'}
+          </span>
+        </button>
       </div>
       {/* Compact Glassmorphic Header */}
       <div className="glass-panel p-4 w-full max-w-full relative overflow-hidden">
