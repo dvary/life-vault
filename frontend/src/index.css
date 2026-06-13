@@ -135,9 +135,56 @@
     @apply w-10 h-10 rounded-full flex items-center justify-center transition-colors;
   }
 
+  /* --- Liquid Glass Floating Tab Bar (iOS-style) --- */
+
+  .liquid-glass-tab-bar-wrapper {
+    @apply fixed bottom-0 left-0 right-0 z-50 pointer-events-none px-4;
+    padding-bottom: max(0.75rem, env(safe-area-inset-bottom));
+  }
+
+  .liquid-glass-tab-bar {
+    @apply pointer-events-auto relative flex items-center justify-around mx-auto max-w-sm px-1.5 py-1.5 rounded-[28px] border border-white/70;
+    background: rgba(255, 255, 255, 0.42);
+    backdrop-filter: blur(40px) saturate(180%);
+    -webkit-backdrop-filter: blur(40px) saturate(180%);
+    box-shadow:
+      0 8px 32px rgba(31, 38, 135, 0.12),
+      0 2px 8px rgba(0, 0, 0, 0.06),
+      inset 0 1px 0 rgba(255, 255, 255, 0.85),
+      inset 0 -0.5px 0 rgba(255, 255, 255, 0.35);
+  }
+
+  .liquid-glass-tab-bar::before {
+    content: '';
+    @apply absolute inset-x-4 top-0 h-px pointer-events-none;
+    background: linear-gradient(
+      90deg,
+      transparent,
+      rgba(255, 255, 255, 0.9) 20%,
+      rgba(255, 255, 255, 0.9) 80%,
+      transparent
+    );
+  }
+
+  .liquid-glass-tab-item {
+    @apply flex flex-1 flex-col items-center justify-center gap-0.5 min-w-0 py-2 px-1 rounded-[20px] text-neutral-500 transition-all duration-300 ease-out;
+  }
+
+  .liquid-glass-tab-item:hover {
+    @apply text-neutral-700;
+  }
+
+  .liquid-glass-tab-item.active {
+    @apply text-primary-600;
+    background: rgba(255, 255, 255, 0.62);
+    box-shadow:
+      inset 0 1px 0 rgba(255, 255, 255, 0.95),
+      0 1px 6px rgba(99, 102, 241, 0.12);
+  }
+
   /* --- Mobile Bottom Nav Safe Area --- */
   .pb-safe-nav {
-    padding-bottom: calc(4rem + env(safe-area-inset-bottom));
+    padding-bottom: calc(5.75rem + env(safe-area-inset-bottom));
   }
 }
 
