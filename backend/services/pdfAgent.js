@@ -1,30 +1,35 @@
 const fs = require('fs');
 const path = require('path');
+const crypto = require('crypto');
 const pdfParse = require('pdf-parse');
 const { query } = require('../config/database');
 
+const pendingAnalyses = new Map();
+const PENDING_TTL_MS = 30 * 60 * 1000;
+
 const VITAL_PATTERNS = [
-  { type: 'hemoglobin', labels: ['hemoglobin', 'haemoglobin', 'hb'], unit: 'g/dL', regex: /(?:hemoglobin|haemoglobin|\bhb\b)[:\s]*(\d+\.?\d*)/i },
-  { type: 'cholesterol', labels: ['total cholesterol', 'cholesterol total'], unit: 'mg/dL', regex: /(?:total\s*cholesterol|cholesterol\s*\(total\))[:\s]*(\d+\.?\d*)/i },
-  { type: 'sgpt', labels: ['sgpt', 'alt'], unit: 'U/L', regex: /(?:sgpt|\balt\b)[:\s]*(\d+\.?\d*)/i },
-  { type: 'sgot', labels: ['sgot', 'ast'], unit: 'U/L', regex: /(?:sgot|\bast\b)[:\s]*(\d+\.?\d*)/i },
-  { type: 'vitamin_d', labels: ['vitamin d', '25(oh)'], unit: 'ng/mL', regex: /(?:vitamin\s*d|25\s*\(?oh\)?)[:\s]*(\d+\.?\d*)/i },
-  { type: 'thyroid_tsh', labels: ['tsh'], unit: 'μIU/mL', regex: /(?:\btsh\b|thyroid stimulating hormone)[:\s]*(\d+\.?\d*)/i },
-  { type: 'thyroid_t3', labels: ['t3'], unit: 'ng/dL', regex: /(?:\bt3\b|triiodothyronine)[:\s]*(\d+\.?\d*)/i },
-  { type: 'thyroid_t4', labels: ['t4'], unit: 'μg/dL', regex: /(?:\bt4\b|thyroxine)[:\s]*(\d+\.?\d*)/i },
-  { type: 'vitamin_b12', labels: ['vitamin b12', 'b12'], unit: 'pg/mL', regex: /(?:vitamin\s*b\s*12|\bb12\b)[:\s]*(\d+\.?\d*)/i },
-  { type: 'calcium', labels: ['calcium'], unit: 'mg/dL', regex: /(?:\bcalcium\b)[:\s]*(\d+\.?\d*)/i },
-  { type: 'hba1c', labels: ['hba1c', 'hb a1c'], unit: '%', regex: /(?:hba1c|hb\s*a1c|glycated hemoglobin)[:\s]*(\d+\.?\d*)/i },
-  { type: 'urea', labels: ['urea', 'blood urea'], unit: 'mg/dL', regex: /(?:blood\s*urea|\burea\b)[:\s]*(\d+\.?\d*)/i },
-  { type: 'fasting_blood_glucose', labels: ['fasting glucose', 'fbs', 'fbg'], unit: 'mg/dL', regex: /(?:fasting\s*(?:blood\s*)?glucose|\bfbs\b|\bfbg\b)[:\s]*(\d+\.?\d*)/i },
-  { type: 'creatinine', labels: ['creatinine'], unit: 'mg/dL', regex: /(?:\bcreatinine\b|serum creatinine)[:\s]*(\d+\.?\d*)/i },
+  { type: 'hemoglobin', unit: 'g/dL', regex: /(?:hemoglobin|haemoglobin|\bhb\b)(?:[\s:(]*|.*?\n.*?){0,3}?(\d+\.?\d*)\s*(?:g\/dl|gm\/dl|g\/dL)?/i },
+  { type: 'cholesterol', unit: 'mg/dL', regex: /(?:total\s*cholesterol|cholesterol\s*\(total\)|serum\s*cholesterol)(?:[\s:(]*|.*?\n.*?){0,3}?(\d+\.?\d*)/i },
+  { type: 'sgpt', unit: 'U/L', regex: /(?:sgpt|\balt\b|alanine)(?:[\s:(]*|.*?\n.*?){0,3}?(\d+\.?\d*)/i },
+  { type: 'sgot', unit: 'U/L', regex: /(?:sgot|\bast\b|aspartate)(?:[\s:(]*|.*?\n.*?){0,3}?(\d+\.?\d*)/i },
+  { type: 'vitamin_d', unit: 'ng/mL', regex: /(?:vitamin\s*d|25[\s-]*\(oh\))(?:[\s:(]*|.*?\n.*?){0,3}?(\d+\.?\d*)/i },
+  { type: 'thyroid_tsh', unit: 'μIU/mL', regex: /(?:\btsh\b|thyroid stimulating)(?:[\s:(]*|.*?\n.*?){0,3}?(\d+\.?\d*)/i },
+  { type: 'thyroid_t3', unit: 'ng/dL', regex: /(?:\bt3\b|triiodothyronine)(?:[\s:(]*|.*?\n.*?){0,3}?(\d+\.?\d*)/i },
+  { type: 'thyroid_t4', unit: 'μg/dL', regex: /(?:\bt4\b|thyroxine)(?:[\s:(]*|.*?\n.*?){0,3}?(\d+\.?\d*)/i },
+  { type: 'vitamin_b12', unit: 'pg/mL', regex: /(?:vitamin\s*b[\s-]*12|\bb12\b)(?:[\s:(]*|.*?\n.*?){0,3}?(\d+\.?\d*)/i },
+  { type: 'calcium', unit: 'mg/dL', regex: /(?:\bcalcium\b|serum calcium)(?:[\s:(]*|.*?\n.*?){0,3}?(\d+\.?\d*)/i },
+  { type: 'hba1c', unit: '%', regex: /(?:hba1c|hb\s*a1c|glycated)(?:[\s:(]*|.*?\n.*?){0,3}?(\d+\.?\d*)/i },
+  { type: 'urea', unit: 'mg/dL', regex: /(?:blood\s*urea|\burea\b|bun)(?:[\s:(]*|.*?\n.*?){0,3}?(\d+\.?\d*)/i },
+  { type: 'fasting_blood_glucose', unit: 'mg/dL', regex: /(?:fasting\s*(?:blood\s*)?glucose|\bfbs\b|\bfbg\b|blood sugar)(?:[\s:(]*|.*?\n.*?){0,3}?(\d+\.?\d*)/i },
+  { type: 'creatinine', unit: 'mg/dL', regex: /(?:\bcreatinine\b|serum creatinine)(?:[\s:(]*|.*?\n.*?){0,3}?(\d+\.?\d*)/i },
 ];
 
 const REPORT_KEYWORDS = [
   'lab report', 'pathology', 'biochemistry', 'hematology', 'blood test',
   'lipid profile', 'cbc', 'complete blood count', 'thyroid profile', 'hba1c',
   'diagnostic', 'reference range', 'test result', 'investigation', 'laboratory',
-  'serum', 'plasma', 'mg/dl', 'g/dl', 'u/l', 'patient name', 'sample collected'
+  'serum', 'plasma', 'mg/dl', 'g/dl', 'u/l', 'patient name', 'sample collected',
+  'haemoglobin', 'hemoglobin', 'glucose', 'cholesterol'
 ];
 
 const DOCUMENT_KEYWORDS = [
@@ -33,38 +38,54 @@ const DOCUMENT_KEYWORDS = [
   'identity card', 'terms and conditions', 'agreement between'
 ];
 
+const VITAL_LABELS = {
+  hemoglobin: 'Hemoglobin', cholesterol: 'Cholesterol', sgpt: 'SGPT', sgot: 'SGOT',
+  vitamin_d: 'Vitamin D', thyroid_tsh: 'TSH', thyroid_t3: 'T3', thyroid_t4: 'T4',
+  vitamin_b12: 'Vitamin B12', calcium: 'Calcium', hba1c: 'HbA1c', urea: 'Urea',
+  fasting_blood_glucose: 'Fasting Glucose', creatinine: 'Creatinine',
+};
+
 const delay = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
 
 const emit = async (onStep, step) => {
   onStep(step);
-  await delay(120);
+  await delay(100);
 };
 
-const normalizeText = (text) => text.replace(/\s+/g, ' ').trim();
+const extractPdfText = async (buffer, filename) => {
+  const pdfData = await pdfParse(buffer, { max: 0 });
+  const rawText = (pdfData.text || '').replace(/\r/g, '\n');
+  const metaParts = [pdfData.info?.Title, pdfData.info?.Author, pdfData.info?.Subject].filter(Boolean);
+  const filenameHint = filename.replace(/\.pdf$/i, '').replace(/[_\-.]+/g, ' ');
+  const combined = [rawText, ...metaParts, filenameHint].join('\n').trim();
+
+  return {
+    text: combined,
+    rawText,
+    pageCount: pdfData.numpages || 0,
+    charCount: combined.length,
+    fromMetadata: metaParts.length > 0,
+  };
+};
 
 const identifyMember = (text, members) => {
-  const header = text.slice(0, 4000).toLowerCase();
+  const searchArea = text.slice(0, 6000).toLowerCase();
   let best = null;
   let bestScore = 0;
 
   for (const member of members) {
     const fullName = member.name.toLowerCase();
-    const parts = fullName.split(/\s+/).filter(Boolean);
+    const parts = fullName.split(/\s+/).filter((p) => p.length > 2);
     let score = 0;
 
-    if (header.includes(fullName)) {
-      score += 10;
-    }
-
+    if (searchArea.includes(fullName)) score += 10;
     for (const part of parts) {
-      if (part.length > 2 && header.includes(part)) {
-        score += 3;
-      }
+      if (searchArea.includes(part)) score += 3;
     }
 
     if (score > bestScore) {
       bestScore = score;
-      best = member;
+      best = { member, score, confidence: score >= 10 ? 'high' : score >= 6 ? 'medium' : 'low' };
     }
   }
 
@@ -73,7 +94,7 @@ const identifyMember = (text, members) => {
 
 const extractReportDate = (text) => {
   const patterns = [
-    /(?:report\s*date|sample\s*(?:collected|collection)\s*(?:on|date)|collected\s*on|date\s*of\s*report|dated)[:\s]*(\d{1,2})[\/\-.](\d{1,2})[\/\-.](\d{2,4})/i,
+    /(?:report\s*date|sample\s*(?:collected|collection)\s*(?:on|date)|collected\s*on|date\s*of\s*report|dated|visit\s*date)[:\s]*(\d{1,2})[\/\-.](\d{1,2})[\/\-.](\d{2,4})/i,
     /(\d{1,2})[\/\-.](\d{1,2})[\/\-.](\d{4})/,
     /(\d{4})[\/\-.](\d{1,2})[\/\-.](\d{1,2})/,
   ];
@@ -113,7 +134,7 @@ const classifyContent = (text) => {
     if (lower.includes(keyword)) documentScore += 2;
   }
 
-  if (reportScore >= 2 && reportScore >= documentScore) {
+  if (reportScore >= 1 && reportScore >= documentScore) {
     let reportType = 'lab_report';
     let reportSubType = 'general_lab';
 
@@ -147,20 +168,27 @@ const classifyContent = (text) => {
 const extractVitals = (text, reportDate) => {
   const vitals = [];
   const seen = new Set();
+  const searchTexts = [text, text.replace(/\n/g, ' ')];
 
   for (const pattern of VITAL_PATTERNS) {
-    const match = text.match(pattern.regex);
-    if (match && !seen.has(pattern.type)) {
-      const value = parseFloat(match[1]);
-      if (!Number.isNaN(value) && value > 0) {
-        seen.add(pattern.type);
-        vitals.push({
-          vitalType: pattern.type,
-          value,
-          unit: pattern.unit,
-          recordedAt: reportDate,
-          notes: 'Auto-extracted from uploaded PDF by Life Vault agent',
-        });
+    if (seen.has(pattern.type)) continue;
+
+    for (const searchText of searchTexts) {
+      const match = searchText.match(pattern.regex);
+      if (match) {
+        const value = parseFloat(match[1]);
+        if (!Number.isNaN(value) && value > 0 && value < 10000) {
+          seen.add(pattern.type);
+          vitals.push({
+            vitalType: pattern.type,
+            label: VITAL_LABELS[pattern.type] || pattern.type,
+            value,
+            unit: pattern.unit,
+            recordedAt: reportDate,
+            notes: 'Auto-extracted from uploaded PDF by Life Vault agent',
+          });
+          break;
+        }
       }
     }
   }
@@ -168,8 +196,28 @@ const extractVitals = (text, reportDate) => {
   return vitals;
 };
 
-const processPdfAgent = async ({ file, user, onStep }) => {
+const storePending = (analysisId, data) => {
+  pendingAnalyses.set(analysisId, { ...data, createdAt: Date.now() });
+  for (const [id, entry] of pendingAnalyses) {
+    if (Date.now() - entry.createdAt > PENDING_TTL_MS) {
+      pendingAnalyses.delete(id);
+    }
+  }
+};
+
+const getPending = (analysisId, familyId) => {
+  const entry = pendingAnalyses.get(analysisId);
+  if (!entry || entry.familyId !== familyId) return null;
+  if (Date.now() - entry.createdAt > PENDING_TTL_MS) {
+    pendingAnalyses.delete(analysisId);
+    return null;
+  }
+  return entry;
+};
+
+const analyzePdfAgent = async ({ file, user, onStep }) => {
   const uploadDir = process.env.UPLOAD_PATH || '/app/uploads';
+  const analysisId = crypto.randomUUID();
 
   await emit(onStep, {
     id: 'upload',
@@ -182,29 +230,32 @@ const processPdfAgent = async ({ file, user, onStep }) => {
     id: 'extract',
     status: 'running',
     title: 'Extracting Text',
-    message: 'Reading PDF content...',
+    message: 'Reading PDF content and metadata...',
   });
 
   const filePath = path.join(uploadDir, file.filename);
   const buffer = fs.readFileSync(filePath);
-  const pdfData = await pdfParse(buffer);
-  const text = normalizeText(pdfData.text || '');
+  const extraction = await extractPdfText(buffer, file.originalname);
 
-  if (!text || text.length < 20) {
+  if (extraction.charCount < 8) {
     await emit(onStep, {
       id: 'extract',
       status: 'error',
       title: 'Extracting Text',
-      message: 'Could not extract readable text from this PDF. Try a text-based PDF.',
+      message: 'This PDF appears to be a scanned image. Please use a digital/text-based PDF export from your lab.',
     });
     throw new Error('Could not extract text from PDF');
   }
+
+  const extractNote = extraction.pageCount
+    ? `${extraction.charCount.toLocaleString()} chars from ${extraction.pageCount} page(s)${extraction.fromMetadata ? ' + metadata' : ''}`
+    : `${extraction.charCount.toLocaleString()} characters extracted`;
 
   await emit(onStep, {
     id: 'extract',
     status: 'done',
     title: 'Extracting Text',
-    message: `Extracted ${text.length.toLocaleString()} characters`,
+    message: extractNote,
   });
 
   await emit(onStep, {
@@ -230,24 +281,17 @@ const processPdfAgent = async ({ file, user, onStep }) => {
     throw new Error('No family members found');
   }
 
-  const member = identifyMember(text, members);
-
-  if (!member) {
-    await emit(onStep, {
-      id: 'members',
-      status: 'error',
-      title: 'Identifying Member',
-      message: `Could not match PDF to any member. Family: ${members.map((m) => m.name).join(', ')}`,
-    });
-    throw new Error('Could not identify family member from PDF');
-  }
+  const memberMatch = identifyMember(extraction.text, members);
+  const defaultMember = memberMatch?.member || members[0];
 
   await emit(onStep, {
     id: 'members',
     status: 'done',
     title: 'Identifying Member',
-    message: `Matched to ${member.name}`,
-    data: { memberId: member.id, memberName: member.name },
+    message: memberMatch
+      ? `Best match: ${memberMatch.member.name} (${memberMatch.confidence} confidence)`
+      : `Could not auto-match — defaulting to ${defaultMember.name}. Please review.`,
+    data: { memberId: defaultMember.id, memberName: defaultMember.name },
   });
 
   await emit(onStep, {
@@ -257,29 +301,106 @@ const processPdfAgent = async ({ file, user, onStep }) => {
     message: 'Determining if this is a medical report or general document...',
   });
 
-  const classification = classifyContent(text);
-  const reportDate = extractReportDate(text);
+  const classification = classifyContent(extraction.text);
+  const reportDate = extractReportDate(extraction.text);
   const title = file.originalname.replace(/\.[^/.]+$/, '');
+  const vitals = classification.category === 'report' ? extractVitals(extraction.text, reportDate) : [];
 
   await emit(onStep, {
     id: 'classify',
     status: 'done',
     title: 'Classifying Document',
     message: classification.category === 'report'
-      ? `Medical report (${classification.reportType.replace(/_/g, ' ')})`
+      ? `Medical report — ${classification.reportType.replace(/_/g, ' ')}`
       : 'General document',
     data: { ...classification, reportDate },
   });
 
+  if (classification.category === 'report') {
+    await emit(onStep, {
+      id: 'vitals',
+      status: 'done',
+      title: 'Extracting Vitals',
+      message: vitals.length
+        ? `Found ${vitals.length} lab value${vitals.length === 1 ? '' : 's'} to import`
+        : 'No lab values detected — report will still be saved',
+      data: { vitals },
+    });
+  } else {
+    await emit(onStep, {
+      id: 'vitals',
+      status: 'skipped',
+      title: 'Extracting Vitals',
+      message: 'Not applicable for general documents',
+    });
+  }
+
+  const proposal = {
+    analysisId,
+    memberId: defaultMember.id,
+    memberName: defaultMember.name,
+    memberConfidence: memberMatch?.confidence || 'manual',
+    category: classification.category,
+    reportType: classification.reportType,
+    reportSubType: classification.reportSubType,
+    reportDate,
+    title,
+    vitals,
+    fileName: file.originalname,
+  };
+
+  storePending(analysisId, {
+    familyId: user.family_id,
+    file,
+    proposal,
+    text: extraction.text,
+  });
+
+  await emit(onStep, {
+    id: 'review',
+    status: 'waiting',
+    title: 'Review Required',
+    message: 'Please confirm details before saving',
+  });
+
+  return {
+    analysisId,
+    proposal,
+    members: members.map((m) => ({ id: m.id, name: m.name })),
+  };
+};
+
+const confirmPdfAgent = async ({ analysisId, user, overrides = {}, onStep }) => {
+  const pending = getPending(analysisId, user.family_id);
+  if (!pending) {
+    throw new Error('Analysis expired or not found. Please upload again.');
+  }
+
+  const { file, proposal } = pending;
+  const memberId = overrides.memberId || proposal.memberId;
+  const category = overrides.category || proposal.category;
+  const reportDate = overrides.reportDate || proposal.reportDate;
+  const vitals = overrides.vitals || proposal.vitals;
+  const title = overrides.title || proposal.title;
+
+  const memberCheck = await query(
+    'SELECT id, name FROM family_members WHERE id = $1 AND family_id = $2',
+    [memberId, user.family_id]
+  );
+  if (memberCheck.rows.length === 0) {
+    throw new Error('Invalid member selected');
+  }
+  const member = memberCheck.rows[0];
+
   let savedRecord = null;
   const vitalsSaved = [];
 
-  if (classification.category === 'report') {
+  if (category === 'report') {
     await emit(onStep, {
       id: 'save',
       status: 'running',
       title: 'Saving Report',
-      message: `Saving as medical report for ${member.name}...`,
+      message: `Saving medical report for ${member.name}...`,
     });
 
     const result = await query(
@@ -289,10 +410,10 @@ const processPdfAgent = async ({ file, user, onStep }) => {
        RETURNING id, member_id, report_type, report_sub_type, title, report_date`,
       [
         member.id,
-        classification.reportType,
-        classification.reportSubType,
+        proposal.reportType || 'lab_report',
+        proposal.reportSubType || 'general_lab',
         title,
-        'Auto-uploaded and classified by Life Vault agent',
+        'Uploaded via Life Vault AI agent',
         file.filename,
         file.originalname,
         file.size,
@@ -305,43 +426,33 @@ const processPdfAgent = async ({ file, user, onStep }) => {
       id: 'save',
       status: 'done',
       title: 'Saving Report',
-      message: `Report saved with date ${reportDate}`,
+      message: `Report saved — dated ${reportDate}`,
       data: savedRecord,
     });
 
-    await emit(onStep, {
-      id: 'vitals',
-      status: 'running',
-      title: 'Extracting Vitals',
-      message: 'Scanning report for lab values...',
-    });
-
-    const vitals = extractVitals(text, reportDate);
-
-    if (vitals.length === 0) {
+    if (vitals.length > 0) {
       await emit(onStep, {
-        id: 'vitals',
-        status: 'done',
-        title: 'Extracting Vitals',
-        message: 'No recognizable lab values found in this report',
-        data: { vitals: [] },
+        id: 'vitals_save',
+        status: 'running',
+        title: 'Saving Vitals',
+        message: `Adding ${vitals.length} vital reading(s)...`,
       });
-    } else {
+
       for (const vital of vitals) {
         const vitalResult = await query(
           `INSERT INTO health_vitals (member_id, vital_type, value, unit, notes, recorded_at)
            VALUES ($1, $2, $3, $4, $5, $6)
            RETURNING id, vital_type, value, unit, recorded_at`,
-          [member.id, vital.vitalType, vital.value, vital.unit, vital.notes, vital.recordedAt]
+          [member.id, vital.vitalType, vital.value, vital.unit, vital.notes, reportDate]
         );
-        vitalsSaved.push(vitalResult.rows[0]);
+        vitalsSaved.push({ ...vitalResult.rows[0], label: vital.label });
       }
 
       await emit(onStep, {
-        id: 'vitals',
+        id: 'vitals_save',
         status: 'done',
-        title: 'Extracting Vitals',
-        message: `Added ${vitalsSaved.length} vital reading${vitalsSaved.length === 1 ? '' : 's'} dated ${reportDate}`,
+        title: 'Saving Vitals',
+        message: `Added ${vitalsSaved.length} vital reading(s)`,
         data: { vitals: vitalsSaved },
       });
     }
@@ -350,7 +461,7 @@ const processPdfAgent = async ({ file, user, onStep }) => {
       id: 'save',
       status: 'running',
       title: 'Saving Document',
-      message: `Saving as document for ${member.name}...`,
+      message: `Saving document for ${member.name}...`,
     });
 
     const result = await query(
@@ -361,7 +472,7 @@ const processPdfAgent = async ({ file, user, onStep }) => {
       [
         member.id,
         title,
-        'Auto-uploaded and classified by Life Vault agent',
+        'Uploaded via Life Vault AI agent',
         file.filename,
         file.originalname,
         file.size,
@@ -374,25 +485,20 @@ const processPdfAgent = async ({ file, user, onStep }) => {
       id: 'save',
       status: 'done',
       title: 'Saving Document',
-      message: `Document saved with date ${reportDate}`,
+      message: `Document saved — dated ${reportDate}`,
       data: savedRecord,
-    });
-
-    await emit(onStep, {
-      id: 'vitals',
-      status: 'skipped',
-      title: 'Extracting Vitals',
-      message: 'Skipped — not a lab report',
     });
   }
 
+  pendingAnalyses.delete(analysisId);
+
   return {
     member: { id: member.id, name: member.name },
-    classification,
+    classification: { category, reportType: proposal.reportType },
     reportDate,
     savedRecord,
     vitalsSaved,
   };
 };
 
-module.exports = { processPdfAgent };
+module.exports = { analyzePdfAgent, confirmPdfAgent };

@@ -1107,58 +1107,71 @@ router.delete('/documents/:documentId', [
   }
 });
 
-// PDF Agent - smart upload with streaming progress
-router.post('/agent/process', authenticateToken, upload.single('file'), async (req, res) => {
+// PDF Agent - analyze (stream) then confirm (save after review)
+router.post('/agent/analyze', authenticateToken, upload.single('file'), async (req, res) => {
   res.setHeader('Content-Type', 'application/x-ndjson');
   res.setHeader('Cache-Control', 'no-cache');
   res.setHeader('Connection', 'keep-alive');
   res.flushHeaders?.();
 
-  const writeStep = (step) => {
-    res.write(`${JSON.stringify({ type: 'step', ...step })}\n`);
-  };
+  const writeEvent = (payload) => res.write(`${JSON.stringify(payload)}\n`);
 
   try {
     if (!req.file) {
-      writeStep({
-        id: 'upload',
-        status: 'error',
-        title: 'PDF Received',
-        message: 'Please upload a PDF file',
-      });
+      writeEvent({ type: 'step', id: 'upload', status: 'error', title: 'PDF Received', message: 'Please upload a PDF file' });
       return res.end();
     }
-
     if (!req.user?.family_id) {
-      writeStep({
-        id: 'upload',
-        status: 'error',
-        title: 'PDF Received',
-        message: 'User family not found',
-      });
+      writeEvent({ type: 'step', id: 'upload', status: 'error', title: 'PDF Received', message: 'User family not found' });
       return res.end();
     }
 
-    const result = await require('../services/pdfAgent').processPdfAgent({
+    const result = await require('../services/pdfAgent').analyzePdfAgent({
       file: req.file,
       user: req.user,
-      onStep: writeStep,
+      onStep: (step) => writeEvent({ type: 'step', ...step }),
     });
 
-    res.write(`${JSON.stringify({ type: 'complete', result })}\n`);
+    writeEvent({ type: 'review', ...result });
   } catch (error) {
-    console.error('PDF agent error:', error);
-    res.write(`${JSON.stringify({ type: 'error', message: error.message || 'Agent processing failed' })}\n`);
-
+    console.error('PDF agent analyze error:', error);
+    writeEvent({ type: 'error', message: error.message || 'Analysis failed' });
     if (req.file?.filename) {
       const uploadDir = process.env.UPLOAD_PATH || '/app/uploads';
       const filePath = path.join(uploadDir, req.file.filename);
-      if (fs.existsSync(filePath)) {
-        fs.unlinkSync(filePath);
-      }
+      if (fs.existsSync(filePath)) fs.unlinkSync(filePath);
     }
   }
+  res.end();
+});
 
+router.post('/agent/confirm', authenticateToken, async (req, res) => {
+  res.setHeader('Content-Type', 'application/x-ndjson');
+  res.setHeader('Cache-Control', 'no-cache');
+  res.setHeader('Connection', 'keep-alive');
+  res.flushHeaders?.();
+
+  const writeEvent = (payload) => res.write(`${JSON.stringify(payload)}\n`);
+
+  try {
+    const { analysisId, memberId, category, reportDate, vitals, title } = req.body;
+    if (!analysisId) {
+      writeEvent({ type: 'error', message: 'Missing analysis ID' });
+      return res.end();
+    }
+
+    const result = await require('../services/pdfAgent').confirmPdfAgent({
+      analysisId,
+      user: req.user,
+      overrides: { memberId, category, reportDate, vitals, title },
+      onStep: (step) => writeEvent({ type: 'step', ...step }),
+    });
+
+    writeEvent({ type: 'complete', result });
+  } catch (error) {
+    console.error('PDF agent confirm error:', error);
+    writeEvent({ type: 'error', message: error.message || 'Save failed' });
+  }
   res.end();
 });
 

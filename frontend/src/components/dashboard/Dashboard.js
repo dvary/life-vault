@@ -936,7 +936,7 @@ const Dashboard = () => {
             </div>
 
             <div className="flex flex-wrap items-center gap-2">
-              <PdfAgentUpload onComplete={() => fetchMembers()} />
+              <PdfAgentUpload onComplete={() => fetchMembers()} members={members} />
               {isAdmin() && (
                 <button
                   onClick={() => setShowAddForm(true)}
