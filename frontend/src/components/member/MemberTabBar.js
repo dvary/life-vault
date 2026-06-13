@@ -1,4 +1,5 @@
 import React from 'react';
+import ReactDOM from 'react-dom';
 import { Link } from 'react-router-dom';
 
 const HomeIcon = () => (
@@ -38,9 +39,8 @@ const TabItem = ({ tab, isActive, onTabChange }) => {
 
   if (tab.type === 'link') {
     return (
-      <Link to={tab.to} className={className} aria-label={label}>
+      <Link to={tab.to} className={className} aria-label={label} title={label}>
         <Icon />
-        <span className="text-[10px] font-semibold tracking-wide">{label}</span>
       </Link>
     );
   }
@@ -51,27 +51,29 @@ const TabItem = ({ tab, isActive, onTabChange }) => {
       onClick={() => onTabChange(tab.id)}
       className={className}
       aria-label={label}
+      title={label}
       aria-current={isActive ? 'page' : undefined}
     >
       <Icon />
-      <span className="text-[10px] font-semibold tracking-wide">{label}</span>
     </button>
   );
 };
 
-const MemberTabBar = ({ activeTab, onTabChange }) => (
-  <div className="liquid-glass-tab-bar-wrapper">
-    <nav className="liquid-glass-tab-bar" aria-label="Member navigation">
-      {tabs.map((tab) => (
-        <TabItem
-          key={tab.id}
-          tab={tab}
-          isActive={tab.type === 'tab' && activeTab === tab.id}
-          onTabChange={onTabChange}
-        />
-      ))}
-    </nav>
-  </div>
-);
+const MemberTabBar = ({ activeTab, onTabChange }) =>
+  ReactDOM.createPortal(
+    <div className="liquid-glass-tab-bar-wrapper">
+      <nav className="liquid-glass-tab-bar" aria-label="Member navigation">
+        {tabs.map((tab) => (
+          <TabItem
+            key={tab.id}
+            tab={tab}
+            isActive={tab.type === 'tab' && activeTab === tab.id}
+            onTabChange={onTabChange}
+          />
+        ))}
+      </nav>
+    </div>,
+    document.body
+  );
 
 export default MemberTabBar;

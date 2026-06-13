@@ -1737,7 +1737,7 @@ const MemberPage = () => {
       )}
 
       {/* Floating Action Button for Mobile */}
-      <div className="fixed bottom-[5.75rem] right-6 z-40 sm:hidden" style={{ paddingBottom: 'env(safe-area-inset-bottom)' }}>
+      <div className="fixed bottom-[4.25rem] right-6 z-40 sm:hidden" style={{ paddingBottom: 'env(safe-area-inset-bottom)' }}>
         <div className="relative group">
           {/* Pulse ring effect for empty states */}
           {((activeTab === 'vitals' && healthVitals.length === 0) ||

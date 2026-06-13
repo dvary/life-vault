@@ -180,12 +180,19 @@
   /* --- Floating Tab Bar --- */
 
   .liquid-glass-tab-bar-wrapper {
-    @apply fixed bottom-0 left-0 right-0 z-50 pointer-events-none px-4;
-    padding-bottom: max(0.75rem, env(safe-area-inset-bottom));
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: 50;
+    pointer-events: none;
+    padding-left: 1rem;
+    padding-right: 1rem;
+    padding-bottom: max(0.5rem, env(safe-area-inset-bottom));
   }
 
   .liquid-glass-tab-bar {
-    @apply pointer-events-auto relative flex items-center justify-around mx-auto max-w-sm px-1.5 py-1.5 rounded-[28px];
+    @apply pointer-events-auto relative flex items-center justify-around mx-auto max-w-xs px-1 py-1 rounded-full;
     background: rgba(255, 255, 255, 0.42);
     backdrop-filter: blur(40px) saturate(180%);
     -webkit-backdrop-filter: blur(40px) saturate(180%);
@@ -204,7 +211,7 @@
   }
 
   .liquid-glass-tab-item {
-    @apply flex flex-1 flex-col items-center justify-center gap-0.5 min-w-0 py-2 px-1 rounded-[20px] text-neutral-500 transition-all duration-300 ease-out;
+    @apply flex flex-1 items-center justify-center min-w-0 p-2.5 rounded-full text-neutral-500 transition-all duration-300 ease-out;
   }
 
   .liquid-glass-tab-item:hover { @apply text-neutral-700; }
@@ -307,7 +314,7 @@
   .page-transition { @apply animate-fade-in; }
 
   .pb-safe-nav {
-    padding-bottom: calc(5.75rem + env(safe-area-inset-bottom));
+    padding-bottom: calc(4.25rem + env(safe-area-inset-bottom));
   }
 
   /* --- Vital Cards --- */
