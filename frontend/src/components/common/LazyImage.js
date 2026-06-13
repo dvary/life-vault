@@ -32,7 +32,7 @@ const LazyImage = ({ src, alt, className, placeholder, ...props }) => {
       {isInView && (
         <>
           {!isLoaded && placeholder && (
-            <div className="absolute inset-0 flex items-center justify-center bg-gray-200">
+            <div className="absolute inset-0 flex items-center justify-center liquid-glass-subtle">
               {placeholder}
             </div>
           )}

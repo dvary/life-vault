@@ -1,6 +1,5 @@
 import React from 'react';
 import { Routes, Route } from 'react-router-dom';
-import { Toaster } from 'react-hot-toast';
 import { AuthProvider } from './contexts/AuthContext';
 import ErrorBoundary from './components/common/ErrorBoundary';
 import ProtectedRoute from './components/auth/ProtectedRoute';
@@ -15,7 +14,6 @@ function App() {
   return (
     <ErrorBoundary>
       <AuthProvider>
-        <Toaster position="top-right" />
         <Routes>
           <Route path="/" element={<PublicRoute />}>
             <Route index element={<Login />} />

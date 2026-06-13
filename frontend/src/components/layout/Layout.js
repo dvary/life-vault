@@ -1,11 +1,9 @@
 import React, { useState } from 'react';
-import { Outlet, Link, useLocation } from 'react-router-dom';
+import { Outlet, Link } from 'react-router-dom';
 import { useAuth } from '../../contexts/AuthContext';
-
 
 const Layout = () => {
   const { user, logout } = useAuth();
-  const location = useLocation();
   const [showMenu, setShowMenu] = useState(false);
 
   const handleLogout = () => {
@@ -14,12 +12,10 @@ const Layout = () => {
   };
 
   return (
-    <div className="min-h-screen bg-background-primary transition-all duration-300">
-      {/* Top Navigation - Glassmorphic */}
-      <nav className="fixed top-0 left-0 right-0 z-40 bg-white/70 backdrop-blur-md border-b border-white/40 shadow-sm transition-all duration-300">
-        <div className="container-safe">
-          <div className="flex justify-between items-center h-16">
-            {/* Logo Section */}
+    <div className="min-h-screen transition-all duration-300">
+      <div className="liquid-glass-nav-wrapper">
+        <nav className="liquid-glass-nav">
+          <div className="flex justify-between items-center h-14 sm:h-16">
             <div className="flex items-center space-x-3">
               <Link
                 to="/dashboard"
@@ -37,7 +33,6 @@ const Layout = () => {
               </Link>
             </div>
 
-            {/* User Menu & Desktop Navigation */}
             <div className="relative">
               <button
                 onClick={() => setShowMenu(!showMenu)}
@@ -45,32 +40,28 @@ const Layout = () => {
                 title="User Menu"
               >
                 <div className="hidden sm:block text-right">
-                  <p className="text-sm font-medium text-neutral-900">
-                    Welcome Back
-                  </p>
+                  <p className="text-sm font-medium text-neutral-900">Welcome Back</p>
                   <p className="text-xs text-neutral-500 font-medium">
                     {user?.firstName && user?.lastName
                       ? `${user.firstName} ${user.lastName}`
-                      : user?.email
-                    }
+                      : user?.email}
                   </p>
                 </div>
-                <div className="w-8 h-8 rounded-full bg-gradient-to-br from-primary-100 to-secondary-100 border border-white shadow-sm flex items-center justify-center text-primary-700 font-bold text-xs ring-2 ring-primary-500/10 hover:ring-primary-500/30 transition-all">
+                <div className="w-8 h-8 rounded-full liquid-glass-subtle flex items-center justify-center text-primary-700 font-bold text-xs">
                   {user?.firstName ? user.firstName[0].toUpperCase() : 'U'}
                 </div>
               </button>
 
-              {/* Dropdown Menu */}
               {showMenu && (
-                <div className="absolute right-0 mt-2 w-48 bg-white rounded-xl shadow-lg border border-gray-100 py-1 z-50 animate-scale-in">
-                  <div className="px-4 py-2 border-b border-gray-100 sm:hidden">
-                    <p className="text-sm font-medium text-gray-900 truncate">
+                <div className="absolute right-0 mt-2 w-48 glass-dropdown z-50">
+                  <div className="px-4 py-2 border-b border-white/40 sm:hidden">
+                    <p className="text-sm font-medium text-neutral-900 truncate">
                       {user?.firstName ? `${user.firstName} ${user.lastName}` : user?.email}
                     </p>
                   </div>
                   <button
                     onClick={handleLogout}
-                    className="w-full text-left px-4 py-2 text-sm text-red-600 hover:bg-red-50 flex items-center space-x-2"
+                    className="w-full text-left px-4 py-2.5 text-sm text-red-600 hover:bg-white/40 flex items-center space-x-2 rounded-xl mx-1 my-1"
                   >
                     <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1" />
@@ -81,11 +72,10 @@ const Layout = () => {
               )}
             </div>
           </div>
-        </div>
-      </nav>
+        </nav>
+      </div>
 
-      {/* Main content */}
-      <main className="pt-20 pb-8 container-safe">
+      <main className="pt-24 pb-8 container-safe">
         <div className="animate-fade-in">
           <Outlet />
         </div>

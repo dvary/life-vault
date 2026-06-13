@@ -1177,7 +1177,7 @@ const Dashboard = () => {
                       <button
                         type="button"
                         onClick={() => handleProfilePictureUpload(editingMember)}
-                        className="bg-teal-600 hover:bg-teal-700 text-white px-4 py-2 rounded-lg font-medium text-sm"
+                        className="btn-primary btn-sm"
                       >
                         Upload New Picture
                       </button>
@@ -1338,8 +1338,8 @@ const Dashboard = () => {
 
         {/* Add Vital Modal */}
         {showAddVitalModal && selectedMember && (
-          <div className="fixed inset-0 bg-black/50 backdrop-blur-sm flex items-center justify-center z-50 p-4">
-            <div className="glass-panel p-6 w-full max-w-md">
+          <div className="modal-overlay z-50">
+            <div className="modal-content">
               <h2 className="text-lg font-semibold mb-4">Add Health Vital for {selectedMember.name}</h2>
               <form onSubmit={handleAddVital} className="space-y-4">
                 <div>
@@ -1347,7 +1347,7 @@ const Dashboard = () => {
                   <select
                     value={vitalFormData.vitalType}
                     onChange={(e) => handleVitalTypeChange(e.target.value)}
-                    className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-500"
+                    className="glass-input w-full"
                     required
                   >
                     <option value="">Select Vital Type</option>
@@ -1363,7 +1363,7 @@ const Dashboard = () => {
                     step="0.01"
                     value={vitalFormData.value}
                     onChange={(e) => setVitalFormData({ ...vitalFormData, value: e.target.value })}
-                    className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-500"
+                    className="glass-input w-full"
                     placeholder={vitalFormData.vitalType ? VITAL_TYPES[vitalFormData.vitalType]?.placeholder : ''}
                     required
                   />
@@ -1374,7 +1374,7 @@ const Dashboard = () => {
                     type="text"
                     value={vitalFormData.unit}
                     onChange={(e) => setVitalFormData({ ...vitalFormData, unit: e.target.value })}
-                    className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-500"
+                    className="glass-input w-full"
                     placeholder={vitalFormData.vitalType ? VITAL_TYPES[vitalFormData.vitalType]?.unit : ''}
                     required
                   />
@@ -1391,7 +1391,7 @@ const Dashboard = () => {
                         setVitalFormData({ ...vitalFormData, recordedAt: parseDateFromDisplay(value) });
                       }
                     }}
-                    className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-500"
+                    className="glass-input w-full"
                     required
                   />
                   <p className="text-xs text-gray-500 mt-1">Format: dd-mm-yyyy</p>
@@ -1401,7 +1401,7 @@ const Dashboard = () => {
                   <textarea
                     value={vitalFormData.notes}
                     onChange={(e) => setVitalFormData({ ...vitalFormData, notes: e.target.value })}
-                    className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-500"
+                    className="glass-input w-full"
                     rows="3"
                     placeholder="Any additional notes..."
                   />
@@ -1410,10 +1410,7 @@ const Dashboard = () => {
                   <button
                     type="submit"
                     disabled={isSubmittingVital}
-                    className={`px-4 py-2 rounded-lg font-medium transition-colors duration-200 ${isSubmittingVital
-                      ? 'bg-gray-400 cursor-not-allowed text-white'
-                      : 'bg-teal-600 hover:bg-teal-700 text-white'
-                      }`}
+                    className={`btn-primary ${isSubmittingVital ? 'opacity-50 cursor-not-allowed' : ''}`}
                   >
                     {isSubmittingVital ? 'Adding Vital...' : 'Add Vital'}
                   </button>
@@ -1431,10 +1428,7 @@ const Dashboard = () => {
                         recordedAt: new Date().toISOString().split('T')[0]
                       });
                     }}
-                    className={`px-4 py-2 rounded-lg font-medium transition-colors duration-200 ${isSubmittingVital
-                      ? 'bg-gray-400 cursor-not-allowed text-white'
-                      : 'bg-gray-500 hover:bg-gray-600 text-white'
-                      }`}
+                    className={`btn-secondary ${isSubmittingVital ? 'opacity-50 cursor-not-allowed' : ''}`}
                   >
                     Cancel
                   </button>
@@ -1446,8 +1440,8 @@ const Dashboard = () => {
 
         {/* Upload Report Modal */}
         {showUploadReportModal && selectedMember && (
-          <div className="fixed inset-0 bg-black/50 backdrop-blur-sm flex items-center justify-center z-50 p-4">
-            <div className="glass-panel p-6 w-full max-w-md max-h-[90vh] overflow-y-auto">
+          <div className="modal-overlay z-50">
+            <div className="modal-content">
               <h2 className="text-lg font-semibold mb-4">Upload Medical Report for {selectedMember.name}</h2>
               <form onSubmit={handleUploadReport} className="space-y-4">
                 <div>
@@ -1461,7 +1455,7 @@ const Dashboard = () => {
                         reportSubType: ''
                       });
                     }}
-                    className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-500"
+                    className="glass-input w-full"
                     required
                   >
                     <option value="">Select Report Type</option>
@@ -1475,7 +1469,7 @@ const Dashboard = () => {
                   <select
                     value={reportFormData.reportSubType}
                     onChange={(e) => setReportFormData({ ...reportFormData, reportSubType: e.target.value })}
-                    className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-500"
+                    className="glass-input w-full"
                     required
                   >
                     <option value="">Select Sub-Type</option>
@@ -1498,7 +1492,7 @@ const Dashboard = () => {
                     type="text"
                     value={reportFormData.title}
                     onChange={(e) => setReportFormData({ ...reportFormData, title: e.target.value })}
-                    className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-500"
+                    className="glass-input w-full"
                     placeholder={reportFormData.file ? reportFormData.file.name.replace(/\.[^/.]+$/, '') : 'Enter file name'}
                     required
                   />
@@ -1516,7 +1510,7 @@ const Dashboard = () => {
                         setReportFormData({ ...reportFormData, reportDate: parseDateFromDisplay(value) });
                       }
                     }}
-                    className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-500"
+                    className="glass-input w-full"
                     required
                   />
                   <p className="text-xs text-gray-500 mt-1">Format: dd-mm-yyyy</p>
@@ -1526,7 +1520,7 @@ const Dashboard = () => {
                   <input
                     type="file"
                     onChange={handleFileChange}
-                    className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-500"
+                    className="glass-input w-full"
                     accept=".pdf,.doc,.docx,.jpg,.jpeg,.png,.gif"
                     required
                   />
@@ -1536,10 +1530,7 @@ const Dashboard = () => {
                   <button
                     type="submit"
                     disabled={isSubmittingReport}
-                    className={`px-4 py-2 rounded-lg font-medium transition-colors duration-200 ${isSubmittingReport
-                      ? 'bg-gray-400 cursor-not-allowed text-white'
-                      : 'bg-teal-600 hover:bg-teal-700 text-white'
-                      }`}
+                    className={`btn-primary ${isSubmittingReport ? 'opacity-50 cursor-not-allowed' : ''}`}
                   >
                     {isSubmittingReport ? 'Uploading...' : 'Upload Report'}
                   </button>
@@ -1557,10 +1548,7 @@ const Dashboard = () => {
                         file: null
                       });
                     }}
-                    className={`px-4 py-2 rounded-lg font-medium transition-colors duration-200 ${isSubmittingReport
-                      ? 'bg-gray-400 cursor-not-allowed text-white'
-                      : 'bg-gray-500 hover:bg-gray-600 text-white'
-                      }`}
+                    className={`btn-secondary ${isSubmittingReport ? 'opacity-50 cursor-not-allowed' : ''}`}
                   >
                     Cancel
                   </button>
@@ -1572,8 +1560,8 @@ const Dashboard = () => {
 
         {/* Upload Document Modal */}
         {showUploadDocumentModal && selectedMember && (
-          <div className="fixed inset-0 bg-black/50 backdrop-blur-sm flex items-center justify-center z-50 p-4">
-            <div className="glass-panel p-6 w-full max-w-md">
+          <div className="modal-overlay z-50">
+            <div className="modal-content">
               <h2 className="text-lg font-semibold mb-4">Upload Document for {selectedMember.name}</h2>
               <form onSubmit={handleUploadDocument} className="space-y-4">
                 <div>
@@ -1582,7 +1570,7 @@ const Dashboard = () => {
                     type="text"
                     value={documentFormData.title}
                     onChange={(e) => setDocumentFormData({ ...documentFormData, title: e.target.value })}
-                    className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-500"
+                    className="glass-input w-full"
                     placeholder="File name (without extension)"
                     required
                   />
@@ -1600,7 +1588,7 @@ const Dashboard = () => {
                         setDocumentFormData({ ...documentFormData, uploadDate: parseDateFromDisplay(value) });
                       }
                     }}
-                    className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-500"
+                    className="glass-input w-full"
                     required
                   />
                   <p className="text-xs text-gray-500 mt-1">Format: dd-mm-yyyy</p>
@@ -1610,7 +1598,7 @@ const Dashboard = () => {
                   <input
                     type="file"
                     onChange={(e) => setDocumentFormData({ ...documentFormData, file: e.target.files[0] })}
-                    className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-500"
+                    className="glass-input w-full"
                     accept=".pdf"
                     required
                   />
@@ -1620,10 +1608,7 @@ const Dashboard = () => {
                   <button
                     type="submit"
                     disabled={isSubmittingDocument}
-                    className={`px-4 py-2 rounded-lg font-medium transition-colors duration-200 ${isSubmittingDocument
-                      ? 'bg-gray-400 cursor-not-allowed text-white'
-                      : 'bg-teal-600 hover:bg-teal-700 text-white'
-                      }`}
+                    className={`btn-primary ${isSubmittingDocument ? 'opacity-50 cursor-not-allowed' : ''}`}
                   >
                     {isSubmittingDocument ? 'Uploading...' : 'Upload Document'}
                   </button>
@@ -1640,10 +1625,7 @@ const Dashboard = () => {
                         file: null
                       });
                     }}
-                    className={`px-4 py-2 rounded-lg font-medium transition-colors duration-200 ${isSubmittingDocument
-                      ? 'bg-gray-400 cursor-not-allowed text-white'
-                      : 'bg-gray-500 hover:bg-gray-600 text-white'
-                      }`}
+                    className={`btn-secondary ${isSubmittingDocument ? 'opacity-50 cursor-not-allowed' : ''}`}
                   >
                     Cancel
                   </button>

@@ -713,13 +713,13 @@ const MemberPage = () => {
     switch (status.level) {
       case 'high':
       case 'low':
-        return 'bg-gradient-to-br from-rose-50 to-white';
+        return 'glass-tint-rose';
       case 'warning':
-        return 'bg-gradient-to-br from-amber-50 to-white';
+        return 'glass-tint-amber';
       case 'normal':
-        return 'bg-gradient-to-br from-green-50 to-white';
+        return 'glass-tint-green';
       default:
-        return 'bg-gradient-to-br from-gray-50 to-white';
+        return 'glass-tint-gray';
     }
   };
 
@@ -743,20 +743,20 @@ const MemberPage = () => {
     switch (status.level) {
       case 'high':
       case 'low':
-        return 'bg-gradient-to-br from-orange-50 to-white';
+        return 'glass-tint-orange';
       case 'warning':
-        return 'bg-gradient-to-br from-orange-50 to-white';
+        return 'glass-tint-orange';
       case 'normal':
-        return 'bg-gradient-to-br from-orange-50 to-white';
+        return 'glass-tint-orange';
       default:
-        return 'bg-gradient-to-br from-gray-50 to-white';
+        return 'glass-tint-gray';
     }
   };
 
   // Get sub-card gradient class based on status level
   const getSubCardGradientClass = (status) => {
     // Return neutral styling for sub-cards (no gradients)
-    return 'bg-white border border-gray-200';
+    return 'liquid-glass-subtle border border-white/50';
   };
 
   // Get main card status based on latest record
@@ -1710,7 +1710,7 @@ const MemberPage = () => {
     return (
       <div className="text-center py-8">
         <h3 className="text-lg font-medium text-gray-900 mb-2">Member not found</h3>
-        <button onClick={() => navigate('/dashboard')} className="bg-teal-600 hover:bg-teal-700 text-white px-4 py-2 rounded-lg">
+        <button onClick={() => navigate('/dashboard')} className="btn-primary">
           Back to Dashboard
         </button>
       </div>
@@ -1747,7 +1747,7 @@ const MemberPage = () => {
             )}
           <button
             onClick={handleQuickAddAction}
-            className="bg-teal-600 hover:bg-teal-700 text-white w-14 h-14 rounded-full shadow-lg flex items-center justify-center transition-all duration-200 transform hover:scale-110 relative z-10"
+            className="glass-fab-primary w-14 h-14 rounded-full shadow-lg flex items-center justify-center relative z-10"
             title="Quick Add"
           >
             <PlusIcon />
@@ -1759,7 +1759,7 @@ const MemberPage = () => {
       <div className="fixed bottom-20 right-8 z-[60] hidden sm:block">
         <button
           onClick={handleQuickAddAction}
-          className="bg-teal-600 hover:bg-teal-700 text-white px-4 py-3 rounded-full shadow-lg flex items-center gap-2 transition-all duration-200 transform hover:-translate-y-0.5"
+          className="glass-fab-primary px-4 py-3 rounded-full shadow-lg flex items-center gap-2"
           title="Quick Add"
         >
           <PlusIcon />
@@ -1846,7 +1846,7 @@ const MemberPage = () => {
                 </span>
               )}
 
-              <span className="inline-flex items-center px-2 py-0.5 rounded-md bg-gray-50/80 text-gray-600 border border-gray-200/50 backdrop-blur-sm capitalize">
+              <span className="inline-flex items-center px-2 py-0.5 rounded-md liquid-glass-subtle text-neutral-600 border border-white/50 capitalize">
                 <span className="mr-1.5 opacity-70">{getGenderIcon(member.gender)}</span>
                 {member.gender || 'Unknown'}
               </span>
@@ -1857,7 +1857,7 @@ const MemberPage = () => {
 
       {/* Edit Form */}
       {showEditForm && (
-        <div className="bg-white shadow rounded-lg p-3 sm:p-4 md:p-6 w-full max-w-full">
+        <div className="glass-panel p-3 sm:p-4 md:p-6 w-full max-w-full">
           <h2 className="text-lg font-semibold mb-4">Edit Family Member</h2>
           <form onSubmit={handleSubmit} className="space-y-4">
             <div className="grid grid-cols-1 gap-4">
@@ -1890,7 +1890,7 @@ const MemberPage = () => {
                         dateOfBirth: combineDateComponents(newComponents.day, newComponents.month, newComponents.year)
                       });
                     }}
-                    className="flex-1 px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-500"
+                    className="glass-input flex-1"
                   >
                     <option value="">Day</option>
                     {generateDateOptions()}
@@ -1905,7 +1905,7 @@ const MemberPage = () => {
                         dateOfBirth: combineDateComponents(newComponents.day, newComponents.month, newComponents.year)
                       });
                     }}
-                    className="flex-1 px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-500"
+                    className="glass-input flex-1"
                   >
                     <option value="">Month</option>
                     {generateMonthOptions()}
@@ -1920,7 +1920,7 @@ const MemberPage = () => {
                         dateOfBirth: combineDateComponents(newComponents.day, newComponents.month, newComponents.year)
                       });
                     }}
-                    className="flex-1 px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-500"
+                    className="glass-input flex-1"
                   >
                     <option value="">Year</option>
                     {generateYearOptions()}
@@ -2042,7 +2042,7 @@ const MemberPage = () => {
                   <button
                     type="button"
                     onClick={handleProfilePictureUpload}
-                    className="bg-teal-600 hover:bg-teal-700 text-white px-4 py-2 rounded-lg font-medium text-sm"
+                    className="btn-primary btn-sm"
                   >
                     Upload New Picture
                   </button>
@@ -2061,7 +2061,7 @@ const MemberPage = () => {
                 disabled={isSubmittingMember}
                 className={`px-4 py-2 rounded-lg font-medium transition-colors duration-200 ${isSubmittingMember
                   ? 'bg-gray-400 cursor-not-allowed text-white'
-                  : 'bg-teal-600 hover:bg-teal-700 text-white'
+                  : 'btn-primary'
                   }`}
               >
                 {isSubmittingMember ? 'Updating...' : 'Update Member'}
@@ -2072,7 +2072,7 @@ const MemberPage = () => {
                 onClick={handleCancel}
                 className={`px-4 py-2 rounded-lg font-medium transition-colors duration-200 ${isSubmittingMember
                   ? 'bg-gray-400 cursor-not-allowed text-white'
-                  : 'bg-gray-500 hover:bg-gray-600 text-white'
+                  : 'btn-secondary'
                   }`}
               >
                 Cancel
@@ -2106,18 +2106,18 @@ const MemberPage = () => {
                         switch (status.level) {
                           case 'high':
                           case 'low':
-                            return 'bg-gradient-to-br from-rose-50 to-white';
+                            return 'glass-tint-rose';
                           case 'warning':
-                            return 'bg-gradient-to-br from-amber-50 to-white';
+                            return 'glass-tint-amber';
                           case 'normal':
-                            return 'bg-gradient-to-br from-green-50 to-white';
+                            return 'glass-tint-green';
                           default:
-                            return 'bg-gradient-to-br from-gray-50 to-white';
+                            return 'glass-tint-gray';
                         }
                       };
 
                       return (
-                        <div className={`rounded-lg border border-gray-200 shadow-sm hover:shadow-md transition-shadow flex flex-col card-consistent-height w-full max-w-full ${getBMIGradientClass(vitalStatus)}`}>
+                        <div className={`glass-card flex flex-col card-consistent-height w-full max-w-full ${getBMIGradientClass(vitalStatus)}`}>
                           {/* BMI Card - Always Visible */}
                           <div
                             className="p-3 cursor-pointer card-content"
@@ -2152,12 +2152,12 @@ const MemberPage = () => {
 
                           {/* Expanded BMI Records */}
                           {isExpanded && bmiRecords.length > 1 && (
-                            <div className="border-t border-gray-100 bg-gray-50 p-4">
+                            <div className="border-t border-white/40 liquid-glass-subtle p-4">
                               <div className="space-y-3">
                                 {bmiRecords.map((bmiRecord, index) => {
                                   const recordStatus = getVitalStatus('bmi', bmiRecord.value, member?.gender);
                                   return (
-                                    <div key={bmiRecord.id} className="flex justify-between items-center p-3 bg-white rounded-lg border border-gray-200">
+                                    <div key={bmiRecord.id} className="flex justify-between items-center p-3 liquid-glass-subtle rounded-xl border border-white/50">
                                       <div className="flex-1">
                                         <div className="flex items-center space-x-2 mb-1">
                                           <p className={`font-medium ${recordStatus.color}`}>
@@ -2204,18 +2204,18 @@ const MemberPage = () => {
                         switch (status.level) {
                           case 'high':
                           case 'low':
-                            return 'bg-gradient-to-br from-rose-50 to-white';
+                            return 'glass-tint-rose';
                           case 'warning':
-                            return 'bg-gradient-to-br from-amber-50 to-white';
+                            return 'glass-tint-amber';
                           case 'normal':
-                            return 'bg-gradient-to-br from-green-50 to-white';
+                            return 'glass-tint-green';
                           default:
-                            return 'bg-gradient-to-br from-gray-50 to-white';
+                            return 'glass-tint-gray';
                         }
                       };
 
                       return (
-                        <div key={vitalType} className={`rounded-lg border border-gray-200 shadow-sm hover:shadow-md transition-shadow flex flex-col card-consistent-height w-full max-w-full ${getVitalGradientClass(vitalStatus)}`}>
+                        <div key={vitalType} className={`glass-card flex flex-col card-consistent-height w-full max-w-full ${getVitalGradientClass(vitalStatus)}`}>
                           {/* Main Card - Always Visible */}
                           <div
                             className="p-3 cursor-pointer card-content"
@@ -2249,7 +2249,7 @@ const MemberPage = () => {
                                 {/* Add Vital inside this type */}
                                 <button
                                   onClick={(e) => { e.stopPropagation(); openAddVitalForType(vitalType); }}
-                                  className="text-teal-600 hover:text-teal-800 p-2 bg-teal-50 hover:bg-teal-100 rounded-lg transition-colors"
+                                  className="text-primary-600 hover:text-primary-800 p-2 liquid-glass-subtle rounded-xl transition-colors"
                                   title={`Add ${vitalConfig.label}`}
                                 >
                                   <PlusIcon />
@@ -2336,7 +2336,7 @@ const MemberPage = () => {
                   <p className="text-gray-500">No health vitals recorded yet</p>
                   <button
                     onClick={() => setShowAddVitalModal(true)}
-                    className="mt-4 text-teal-600 hover:text-teal-800 font-medium"
+                    className="mt-4 text-primary-600 hover:text-primary-800 font-medium"
                   >
                     Add your first vital
                   </button>
@@ -2366,7 +2366,7 @@ const MemberPage = () => {
                     const mainCardStatus = getMainCardStatus(reports, getReportStatus);
 
                     return (
-                      <div key={reportKey} className={`rounded-lg border border-gray-200 shadow-sm hover:shadow-md transition-shadow flex flex-col card-consistent-height w-full max-w-full ${getGradientClass(mainCardStatus)}`}>
+                      <div key={reportKey} className={`glass-card flex flex-col card-consistent-height w-full max-w-full ${getGradientClass(mainCardStatus)}`}>
                         {/* Main Card - Always Visible */}
                         <div
                           className="p-3 cursor-pointer card-content"
@@ -2397,7 +2397,7 @@ const MemberPage = () => {
                               {/* Upload inside this report type */}
                               <button
                                 onClick={(e) => { e.stopPropagation(); openUploadForReportType(latestReport.report_type, latestReport.report_sub_type); }}
-                                className="text-teal-600 hover:text-teal-800 p-2 bg-teal-50 hover:bg-teal-100 rounded-lg transition-colors"
+                                className="text-primary-600 hover:text-primary-800 p-2 liquid-glass-subtle rounded-xl transition-colors"
                                 title={`Upload ${reportConfig.label}`}
                               >
                                 <UploadIcon />
@@ -2497,7 +2497,7 @@ const MemberPage = () => {
                   <p className="text-gray-500">No medical reports uploaded yet</p>
                   <button
                     onClick={() => setShowUploadReportModal(true)}
-                    className="mt-4 text-teal-600 hover:text-teal-800 font-medium"
+                    className="mt-4 text-primary-600 hover:text-primary-800 font-medium"
                   >
                     Upload your first report
                   </button>
@@ -2516,7 +2516,7 @@ const MemberPage = () => {
                     return (
                       <div
                         key={document.id}
-                        className={`rounded-lg border border-gray-200 hover:shadow-md transition-shadow card-consistent-height flex flex-col w-full max-w-full ${getGradientClass(documentStatus)} cursor-pointer`}
+                        className={`glass-card card-consistent-height flex flex-col w-full max-w-full ${getGradientClass(documentStatus)} cursor-pointer`}
                         onClick={(e) => {
                           // Prevent bubbling if user clicks buttons inside card!
                           if (
@@ -2597,7 +2597,7 @@ const MemberPage = () => {
                   <p className="text-gray-500">No documents uploaded yet</p>
                   <button
                     onClick={() => setShowUploadDocumentModal(true)}
-                    className="mt-4 text-teal-600 hover:text-teal-800 font-medium"
+                    className="mt-4 text-primary-600 hover:text-primary-800 font-medium"
                   >
                     Upload your first document
                   </button>
@@ -2608,8 +2608,8 @@ const MemberPage = () => {
 
           {/* Add Vital Modal */}
           {showAddVitalModal && ReactDOM.createPortal(
-            <div className="fixed inset-0 bg-black/50 backdrop-blur-sm flex items-center justify-center z-[100] p-2 sm:p-4">
-              <div className="bg-white rounded-lg p-4 sm:p-6 w-full max-w-md max-h-[95vh] overflow-y-auto">
+            <div className="modal-overlay">
+              <div className="modal-content">
                 <h2 className="text-lg font-semibold mb-4">Add Health Vital</h2>
                 <form onSubmit={handleAddVital} className="space-y-4">
                   <div>
@@ -2617,7 +2617,7 @@ const MemberPage = () => {
                     <select
                       value={vitalFormData.vitalType}
                       onChange={(e) => handleVitalTypeChange(e.target.value)}
-                      className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-500"
+                      className="glass-input w-full"
                       required
                     >
                       <option value="">Select Vital Type</option>
@@ -2633,7 +2633,7 @@ const MemberPage = () => {
                       step="0.01"
                       value={vitalFormData.value}
                       onChange={(e) => setVitalFormData({ ...vitalFormData, value: e.target.value })}
-                      className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-500"
+                      className="glass-input w-full"
                       placeholder={vitalFormData.vitalType ? VITAL_TYPES[vitalFormData.vitalType]?.placeholder : ''}
                       required
                     />
@@ -2644,7 +2644,7 @@ const MemberPage = () => {
                       type="text"
                       value={vitalFormData.unit}
                       onChange={(e) => setVitalFormData({ ...vitalFormData, unit: e.target.value })}
-                      className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-500"
+                      className="glass-input w-full"
                       placeholder={vitalFormData.vitalType ? VITAL_TYPES[vitalFormData.vitalType]?.unit : ''}
                       required
                     />
@@ -2660,7 +2660,7 @@ const MemberPage = () => {
                           const combinedDate = combineDateComponents(newComponents.day, newComponents.month, newComponents.year);
                           setVitalFormData({ ...vitalFormData, recordedAt: combinedDate });
                         }}
-                        className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-500 text-sm"
+                        className="glass-input w-full"
                         required
                       >
                         <option value="">Day</option>
@@ -2675,7 +2675,7 @@ const MemberPage = () => {
                           const combinedDate = combineDateComponents(newComponents.day, newComponents.month, newComponents.year);
                           setVitalFormData({ ...vitalFormData, recordedAt: combinedDate });
                         }}
-                        className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-500 text-sm"
+                        className="glass-input w-full"
                         required
                       >
                         <option value="">Month</option>
@@ -2690,7 +2690,7 @@ const MemberPage = () => {
                           const combinedDate = combineDateComponents(newComponents.day, newComponents.month, newComponents.year);
                           setVitalFormData({ ...vitalFormData, recordedAt: combinedDate });
                         }}
-                        className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-500 text-sm"
+                        className="glass-input w-full"
                         required
                       >
                         <option value="">Year</option>
@@ -2703,7 +2703,7 @@ const MemberPage = () => {
                     <textarea
                       value={vitalFormData.notes}
                       onChange={(e) => setVitalFormData({ ...vitalFormData, notes: e.target.value })}
-                      className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-500"
+                      className="glass-input w-full"
                       rows="3"
                       placeholder="Any additional notes..."
                     />
@@ -2714,7 +2714,7 @@ const MemberPage = () => {
                       disabled={isSubmittingVital}
                       className={`px-4 py-2 rounded-lg font-medium transition-colors duration-200 ${isSubmittingVital
                         ? 'bg-gray-400 cursor-not-allowed text-white'
-                        : 'bg-teal-600 hover:bg-teal-700 text-white'
+                        : 'btn-primary'
                         }`}
                     >
                       {isSubmittingVital ? 'Adding Vital...' : 'Add Vital'}
@@ -2725,7 +2725,7 @@ const MemberPage = () => {
                       onClick={() => setShowAddVitalModal(false)}
                       className={`px-4 py-2 rounded-lg font-medium transition-colors duration-200 ${isSubmittingVital
                         ? 'bg-gray-400 cursor-not-allowed text-white'
-                        : 'bg-gray-500 hover:bg-gray-600 text-white'
+                        : 'btn-secondary'
                         }`}
                     >
                       Cancel
@@ -2738,8 +2738,8 @@ const MemberPage = () => {
 
           {/* Edit Vital Modal */}
           {showEditVitalModal && ReactDOM.createPortal(
-            <div className="fixed inset-0 bg-black/50 backdrop-blur-sm flex items-center justify-center z-[100] p-2 sm:p-4">
-              <div className="bg-white rounded-lg p-4 sm:p-6 w-full max-w-md max-h-[95vh] overflow-y-auto">
+            <div className="modal-overlay">
+              <div className="modal-content">
                 <h2 className="text-lg font-semibold mb-4">Edit Health Vital</h2>
                 <form onSubmit={handleUpdateVital} className="space-y-4">
                   <div>
@@ -2754,7 +2754,7 @@ const MemberPage = () => {
                           unit: vitalConfig ? vitalConfig.unit : editVitalFormData.unit
                         });
                       }}
-                      className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-500"
+                      className="glass-input w-full"
                       required
                     >
                       <option value="">Select Vital Type</option>
@@ -2770,7 +2770,7 @@ const MemberPage = () => {
                       step="0.01"
                       value={editVitalFormData.value}
                       onChange={(e) => setEditVitalFormData({ ...editVitalFormData, value: e.target.value })}
-                      className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-500"
+                      className="glass-input w-full"
                       placeholder={editVitalFormData.vitalType ? VITAL_TYPES[editVitalFormData.vitalType]?.placeholder : ''}
                       required
                     />
@@ -2781,7 +2781,7 @@ const MemberPage = () => {
                       type="text"
                       value={editVitalFormData.unit}
                       onChange={(e) => setEditVitalFormData({ ...editVitalFormData, unit: e.target.value })}
-                      className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-500"
+                      className="glass-input w-full"
                       placeholder={editVitalFormData.vitalType ? VITAL_TYPES[editVitalFormData.vitalType]?.unit : ''}
                       required
                     />
@@ -2797,7 +2797,7 @@ const MemberPage = () => {
                           const combinedDate = combineDateComponents(newComponents.day, newComponents.month, newComponents.year);
                           setEditVitalFormData({ ...editVitalFormData, recordedAt: combinedDate });
                         }}
-                        className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-500 text-sm"
+                        className="glass-input w-full"
                         required
                       >
                         <option value="">Day</option>
@@ -2812,7 +2812,7 @@ const MemberPage = () => {
                           const combinedDate = combineDateComponents(newComponents.day, newComponents.month, newComponents.year);
                           setEditVitalFormData({ ...editVitalFormData, recordedAt: combinedDate });
                         }}
-                        className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-500 text-sm"
+                        className="glass-input w-full"
                         required
                       >
                         <option value="">Month</option>
@@ -2827,7 +2827,7 @@ const MemberPage = () => {
                           const combinedDate = combineDateComponents(newComponents.day, newComponents.month, newComponents.year);
                           setEditVitalFormData({ ...editVitalFormData, recordedAt: combinedDate });
                         }}
-                        className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-500 text-sm"
+                        className="glass-input w-full"
                         required
                       >
                         <option value="">Year</option>
@@ -2840,13 +2840,13 @@ const MemberPage = () => {
                     <textarea
                       value={editVitalFormData.notes}
                       onChange={(e) => setEditVitalFormData({ ...editVitalFormData, notes: e.target.value })}
-                      className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-500"
+                      className="glass-input w-full"
                       rows="3"
                       placeholder="Any additional notes..."
                     />
                   </div>
                   <div className="flex space-x-3">
-                    <button type="submit" className="bg-teal-600 hover:bg-teal-700 text-white px-4 py-2 rounded-lg font-medium">
+                    <button type="submit" className="btn-primary">
                       Update Vital
                     </button>
                     <button
@@ -2855,7 +2855,7 @@ const MemberPage = () => {
                         setShowEditVitalModal(false);
                         setEditingVital(null);
                       }}
-                      className="bg-gray-500 hover:bg-gray-600 text-white px-4 py-2 rounded-lg font-medium"
+                      className="btn-secondary"
                     >
                       Cancel
                     </button>
@@ -2867,8 +2867,8 @@ const MemberPage = () => {
 
           {/* Upload Report Modal */}
           {showUploadReportModal && ReactDOM.createPortal(
-            <div className="fixed inset-0 bg-black/50 backdrop-blur-sm flex items-center justify-center z-[100] p-2 sm:p-4">
-              <div className="bg-white rounded-lg p-4 sm:p-6 w-full max-w-md max-h-[95vh] overflow-y-auto">
+            <div className="modal-overlay">
+              <div className="modal-content">
                 <h2 className="text-lg font-semibold mb-4">Upload Medical Report</h2>
                 <form onSubmit={handleUploadReport} className="space-y-4">
                   <div>
@@ -2882,7 +2882,7 @@ const MemberPage = () => {
                           reportSubType: ''
                         });
                       }}
-                      className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-500"
+                      className="glass-input w-full"
                       required
                     >
                       <option value="">Select Report Type</option>
@@ -2896,7 +2896,7 @@ const MemberPage = () => {
                     <select
                       value={reportFormData.reportSubType}
                       onChange={(e) => setReportFormData({ ...reportFormData, reportSubType: e.target.value })}
-                      className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-500"
+                      className="glass-input w-full"
                       required
                     >
                       <option value="">Select Sub-Type</option>
@@ -2919,7 +2919,7 @@ const MemberPage = () => {
                       type="text"
                       value={reportFormData.title}
                       onChange={(e) => setReportFormData({ ...reportFormData, title: e.target.value })}
-                      className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-500"
+                      className="glass-input w-full"
                       placeholder={reportFormData.file ? reportFormData.file.name.replace(/\.[^/.]+$/, '') : 'Enter file name'}
                       required
                     />
@@ -2936,7 +2936,7 @@ const MemberPage = () => {
                           const combinedDate = combineDateComponents(newComponents.day, newComponents.month, newComponents.year);
                           setReportFormData({ ...reportFormData, reportDate: combinedDate });
                         }}
-                        className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-500 text-sm"
+                        className="glass-input w-full"
                         required
                       >
                         <option value="">Day</option>
@@ -2951,7 +2951,7 @@ const MemberPage = () => {
                           const combinedDate = combineDateComponents(newComponents.day, newComponents.month, newComponents.year);
                           setReportFormData({ ...reportFormData, reportDate: combinedDate });
                         }}
-                        className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-500 text-sm"
+                        className="glass-input w-full"
                         required
                       >
                         <option value="">Month</option>
@@ -2966,7 +2966,7 @@ const MemberPage = () => {
                           const combinedDate = combineDateComponents(newComponents.day, newComponents.month, newComponents.year);
                           setReportFormData({ ...reportFormData, reportDate: combinedDate });
                         }}
-                        className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-500 text-sm"
+                        className="glass-input w-full"
                         required
                       >
                         <option value="">Year</option>
@@ -2979,7 +2979,7 @@ const MemberPage = () => {
                     <input
                       type="file"
                       onChange={handleFileChange}
-                      className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-500"
+                      className="glass-input w-full"
                       accept=".pdf"
                       required
                     />
@@ -2991,7 +2991,7 @@ const MemberPage = () => {
                       disabled={isUploading || isSubmittingReport}
                       className={`px-4 py-2 rounded-lg font-medium relative overflow-hidden transition-colors duration-200 ${(isUploading || isSubmittingReport)
                         ? 'bg-gray-400 cursor-not-allowed text-white'
-                        : 'bg-teal-600 hover:bg-teal-700 text-white'
+                        : 'btn-primary'
                         }`}
                     >
                       {isUploading ? (
@@ -3014,7 +3014,7 @@ const MemberPage = () => {
                       onClick={() => setShowUploadReportModal(false)}
                       className={`px-4 py-2 rounded-lg font-medium transition-colors duration-200 ${(isUploading || isSubmittingReport)
                         ? 'bg-gray-400 cursor-not-allowed text-white'
-                        : 'bg-gray-500 hover:bg-gray-600 text-white'
+                        : 'btn-secondary'
                         }`}
                     >
                       {(isUploading || isSubmittingReport) ? 'Please wait...' : 'Cancel'}
@@ -3027,8 +3027,8 @@ const MemberPage = () => {
 
           {/* Edit Report Modal */}
           {showEditReportModal && ReactDOM.createPortal(
-            <div className="fixed inset-0 bg-black/50 backdrop-blur-sm flex items-center justify-center z-[100] p-2 sm:p-4">
-              <div className="bg-white rounded-lg p-4 sm:p-6 w-full max-w-md max-h-[95vh] overflow-y-auto">
+            <div className="modal-overlay">
+              <div className="modal-content">
                 <h2 className="text-lg font-semibold mb-4">Edit Medical Report</h2>
                 <form onSubmit={handleUpdateReport} className="space-y-4">
                   <div>
@@ -3042,7 +3042,7 @@ const MemberPage = () => {
                           reportSubType: ''
                         });
                       }}
-                      className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-500"
+                      className="glass-input w-full"
                     >
                       <option value="">Select Report Type</option>
                       {Object.entries(REPORT_TYPES).map(([key, config]) => (
@@ -3056,7 +3056,7 @@ const MemberPage = () => {
                       <select
                         value={editReportFormData.reportSubType}
                         onChange={(e) => setEditReportFormData({ ...editReportFormData, reportSubType: e.target.value })}
-                        className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-500"
+                        className="glass-input w-full"
                       >
                         <option value="">Select Sub-Type</option>
                         {REPORT_TYPES[editReportFormData.reportType].subTypes.map((subType) => (
@@ -3071,7 +3071,7 @@ const MemberPage = () => {
                       type="text"
                       value={editReportFormData.title}
                       onChange={(e) => setEditReportFormData({ ...editReportFormData, title: e.target.value })}
-                      className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-500"
+                      className="glass-input w-full"
                       placeholder="File name (without extension)"
                       required
                     />
@@ -3088,7 +3088,7 @@ const MemberPage = () => {
                           const combinedDate = combineDateComponents(newComponents.day, newComponents.month, newComponents.year);
                           setEditReportFormData({ ...editReportFormData, reportDate: combinedDate });
                         }}
-                        className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-500 text-sm"
+                        className="glass-input w-full"
                         required
                       >
                         <option value="">Day</option>
@@ -3103,7 +3103,7 @@ const MemberPage = () => {
                           const combinedDate = combineDateComponents(newComponents.day, newComponents.month, newComponents.year);
                           setEditReportFormData({ ...editReportFormData, reportDate: combinedDate });
                         }}
-                        className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-500 text-sm"
+                        className="glass-input w-full"
                         required
                       >
                         <option value="">Month</option>
@@ -3118,7 +3118,7 @@ const MemberPage = () => {
                           const combinedDate = combineDateComponents(newComponents.day, newComponents.month, newComponents.year);
                           setEditReportFormData({ ...editReportFormData, reportDate: combinedDate });
                         }}
-                        className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-500 text-sm"
+                        className="glass-input w-full"
                         required
                       >
                         <option value="">Year</option>
@@ -3131,14 +3131,14 @@ const MemberPage = () => {
                     <input
                       type="file"
                       onChange={handleEditFileChange}
-                      className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-500"
+                      className="glass-input w-full"
                       accept=".pdf"
                     />
                     <p className="text-xs text-gray-500 mt-1">Current file: {editingReport?.file_name}</p>
                     <p className="text-xs text-gray-500">Only PDF files are accepted (max 20MB)</p>
                   </div>
                   <div className="flex space-x-3">
-                    <button type="submit" className="bg-teal-600 hover:bg-teal-700 text-white px-4 py-2 rounded-lg font-medium">
+                    <button type="submit" className="btn-primary">
                       Update Report
                     </button>
                     <button
@@ -3155,7 +3155,7 @@ const MemberPage = () => {
                           file: null
                         });
                       }}
-                      className="bg-gray-500 hover:bg-gray-600 text-white px-4 py-2 rounded-lg font-medium"
+                      className="btn-secondary"
                     >
                       Cancel
                     </button>
@@ -3167,8 +3167,8 @@ const MemberPage = () => {
 
           {/* Upload Document Modal */}
           {showUploadDocumentModal && ReactDOM.createPortal(
-            <div className="fixed inset-0 bg-black/50 backdrop-blur-sm flex items-center justify-center z-[100] p-2 sm:p-4">
-              <div className="bg-white rounded-lg p-4 sm:p-6 w-full max-w-md max-h-[95vh] overflow-y-auto">
+            <div className="modal-overlay">
+              <div className="modal-content">
                 <h2 className="text-lg font-semibold mb-4">Upload Document</h2>
                 <form onSubmit={handleUploadDocument} className="space-y-4">
                   <div>
@@ -3177,7 +3177,7 @@ const MemberPage = () => {
                       type="text"
                       value={documentFormData.title}
                       onChange={(e) => setDocumentFormData({ ...documentFormData, title: e.target.value })}
-                      className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-500"
+                      className="glass-input w-full"
                       placeholder="File name (without extension)"
                       required
                     />
@@ -3194,7 +3194,7 @@ const MemberPage = () => {
                           const combinedDate = combineDateComponents(newComponents.day, newComponents.month, newComponents.year);
                           setDocumentFormData({ ...documentFormData, uploadDate: combinedDate });
                         }}
-                        className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-500 text-sm"
+                        className="glass-input w-full"
                         required
                       >
                         <option value="">Day</option>
@@ -3209,7 +3209,7 @@ const MemberPage = () => {
                           const combinedDate = combineDateComponents(newComponents.day, newComponents.month, newComponents.year);
                           setDocumentFormData({ ...documentFormData, uploadDate: combinedDate });
                         }}
-                        className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-500 text-sm"
+                        className="glass-input w-full"
                         required
                       >
                         <option value="">Month</option>
@@ -3224,7 +3224,7 @@ const MemberPage = () => {
                           const combinedDate = combineDateComponents(newComponents.day, newComponents.month, newComponents.year);
                           setDocumentFormData({ ...documentFormData, uploadDate: combinedDate });
                         }}
-                        className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-500 text-sm"
+                        className="glass-input w-full"
                         required
                       >
                         <option value="">Year</option>
@@ -3237,7 +3237,7 @@ const MemberPage = () => {
                     <input
                       type="file"
                       onChange={handleDocumentFileChange}
-                      className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-500"
+                      className="glass-input w-full"
                       accept=".pdf"
                       required
                     />
@@ -3249,7 +3249,7 @@ const MemberPage = () => {
                       disabled={isUploading || isSubmittingDocument}
                       className={`px-4 py-2 rounded-lg font-medium relative overflow-hidden transition-colors duration-200 ${(isUploading || isSubmittingDocument)
                         ? 'bg-gray-400 cursor-not-allowed text-white'
-                        : 'bg-teal-600 hover:bg-teal-700 text-white'
+                        : 'btn-primary'
                         }`}
                     >
                       {isUploading ? (
@@ -3272,7 +3272,7 @@ const MemberPage = () => {
                       onClick={() => setShowUploadDocumentModal(false)}
                       className={`px-4 py-2 rounded-lg font-medium transition-colors duration-200 ${(isUploading || isSubmittingDocument)
                         ? 'bg-gray-400 cursor-not-allowed text-white'
-                        : 'bg-gray-500 hover:bg-gray-600 text-white'
+                        : 'btn-secondary'
                         }`}
                     >
                       {(isUploading || isSubmittingDocument) ? 'Please wait...' : 'Cancel'}
@@ -3287,8 +3287,8 @@ const MemberPage = () => {
 
           {/* Edit Document Modal */}
           {showEditDocumentModal && ReactDOM.createPortal(
-            <div className="fixed inset-0 bg-black/50 backdrop-blur-sm flex items-center justify-center z-[100] p-2 sm:p-4">
-              <div className="bg-white rounded-lg p-4 sm:p-6 w-full max-w-md max-h-[95vh] overflow-y-auto">
+            <div className="modal-overlay">
+              <div className="modal-content">
                 <h2 className="text-lg font-semibold mb-4">Edit Document</h2>
                 <form onSubmit={handleUpdateDocument} className="space-y-4">
                   <div>
@@ -3297,7 +3297,7 @@ const MemberPage = () => {
                       type="text"
                       value={editDocumentFormData.title}
                       onChange={(e) => setEditDocumentFormData({ ...editDocumentFormData, title: e.target.value })}
-                      className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-500"
+                      className="glass-input w-full"
                       placeholder="File name (without extension)"
                       required
                     />
@@ -3314,7 +3314,7 @@ const MemberPage = () => {
                           const combinedDate = combineDateComponents(newComponents.day, newComponents.month, newComponents.year);
                           setEditDocumentFormData({ ...editDocumentFormData, uploadDate: combinedDate });
                         }}
-                        className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-500 text-sm"
+                        className="glass-input w-full"
                         required
                       >
                         <option value="">Day</option>
@@ -3329,7 +3329,7 @@ const MemberPage = () => {
                           const combinedDate = combineDateComponents(newComponents.day, newComponents.month, newComponents.year);
                           setEditDocumentFormData({ ...editDocumentFormData, uploadDate: combinedDate });
                         }}
-                        className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-500 text-sm"
+                        className="glass-input w-full"
                         required
                       >
                         <option value="">Month</option>
@@ -3344,7 +3344,7 @@ const MemberPage = () => {
                           const combinedDate = combineDateComponents(newComponents.day, newComponents.month, newComponents.year);
                           setEditDocumentFormData({ ...editDocumentFormData, uploadDate: combinedDate });
                         }}
-                        className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-500 text-sm"
+                        className="glass-input w-full"
                         required
                       >
                         <option value="">Year</option>
@@ -3357,14 +3357,14 @@ const MemberPage = () => {
                     <input
                       type="file"
                       onChange={handleEditDocumentFileChange}
-                      className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-500"
+                      className="glass-input w-full"
                       accept=".pdf"
                     />
                     <p className="text-xs text-gray-500 mt-1">Current file: {editingDocument?.file_name}</p>
                     <p className="text-xs text-gray-500">Only PDF files are accepted (max 20MB)</p>
                   </div>
                   <div className="flex space-x-3">
-                    <button type="submit" className="bg-teal-600 hover:bg-teal-700 text-white px-4 py-2 rounded-lg font-medium">
+                    <button type="submit" className="btn-primary">
                       Update Document
                     </button>
                     <button
@@ -3379,7 +3379,7 @@ const MemberPage = () => {
                           file: null
                         });
                       }}
-                      className="bg-gray-500 hover:bg-gray-600 text-white px-4 py-2 rounded-lg font-medium"
+                      className="btn-secondary"
                     >
                       Cancel
                     </button>
