@@ -1107,4 +1107,59 @@ router.delete('/documents/:documentId', [
   }
 });
 
+// PDF Agent - smart upload with streaming progress
+router.post('/agent/process', authenticateToken, upload.single('file'), async (req, res) => {
+  res.setHeader('Content-Type', 'application/x-ndjson');
+  res.setHeader('Cache-Control', 'no-cache');
+  res.setHeader('Connection', 'keep-alive');
+  res.flushHeaders?.();
+
+  const writeStep = (step) => {
+    res.write(`${JSON.stringify({ type: 'step', ...step })}\n`);
+  };
+
+  try {
+    if (!req.file) {
+      writeStep({
+        id: 'upload',
+        status: 'error',
+        title: 'PDF Received',
+        message: 'Please upload a PDF file',
+      });
+      return res.end();
+    }
+
+    if (!req.user?.family_id) {
+      writeStep({
+        id: 'upload',
+        status: 'error',
+        title: 'PDF Received',
+        message: 'User family not found',
+      });
+      return res.end();
+    }
+
+    const result = await require('../services/pdfAgent').processPdfAgent({
+      file: req.file,
+      user: req.user,
+      onStep: writeStep,
+    });
+
+    res.write(`${JSON.stringify({ type: 'complete', result })}\n`);
+  } catch (error) {
+    console.error('PDF agent error:', error);
+    res.write(`${JSON.stringify({ type: 'error', message: error.message || 'Agent processing failed' })}\n`);
+
+    if (req.file?.filename) {
+      const uploadDir = process.env.UPLOAD_PATH || '/app/uploads';
+      const filePath = path.join(uploadDir, req.file.filename);
+      if (fs.existsSync(filePath)) {
+        fs.unlinkSync(filePath);
+      }
+    }
+  }
+
+  res.end();
+});
+
 module.exports = router;

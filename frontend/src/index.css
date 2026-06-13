@@ -96,19 +96,25 @@
   }
 
   .glass-card {
-    @apply liquid-glass relative overflow-hidden rounded-2xl transition-all duration-300 hover:-translate-y-0.5;
+    @apply liquid-glass relative overflow-hidden rounded-2xl transition-all duration-300;
     box-shadow:
       0 8px 32px rgba(31, 38, 135, 0.12),
       0 2px 8px rgba(0, 0, 0, 0.06),
       inset 0 1px 0 rgba(255, 255, 255, 0.85);
   }
 
-  .glass-card:hover {
-    background: rgba(255, 255, 255, 0.52);
-    box-shadow:
-      0 12px 40px rgba(31, 38, 135, 0.16),
-      0 4px 12px rgba(0, 0, 0, 0.08),
-      inset 0 1px 0 rgba(255, 255, 255, 0.9);
+  @media (hover: hover) {
+    .glass-card:hover {
+      box-shadow:
+        0 12px 40px rgba(31, 38, 135, 0.16),
+        0 4px 12px rgba(0, 0, 0, 0.08),
+        inset 0 1px 0 rgba(255, 255, 255, 0.9);
+      transform: translateY(-2px);
+    }
+  }
+
+  .glass-card:active {
+    transform: scale(0.995);
   }
 
   .glass-input {
@@ -159,6 +165,36 @@
   }
 
   .glass-tint-orange {
+    background: linear-gradient(135deg, rgba(249, 115, 22, 0.1), rgba(255, 255, 255, 0.38));
+  }
+
+  .glass-card.glass-tint-rose,
+  .glass-card.glass-tint-rose:hover,
+  .glass-card.glass-tint-rose:active {
+    background: linear-gradient(135deg, rgba(244, 63, 94, 0.1), rgba(255, 255, 255, 0.38));
+  }
+
+  .glass-card.glass-tint-amber,
+  .glass-card.glass-tint-amber:hover,
+  .glass-card.glass-tint-amber:active {
+    background: linear-gradient(135deg, rgba(245, 158, 11, 0.1), rgba(255, 255, 255, 0.38));
+  }
+
+  .glass-card.glass-tint-green,
+  .glass-card.glass-tint-green:hover,
+  .glass-card.glass-tint-green:active {
+    background: linear-gradient(135deg, rgba(16, 185, 129, 0.1), rgba(255, 255, 255, 0.38));
+  }
+
+  .glass-card.glass-tint-gray,
+  .glass-card.glass-tint-gray:hover,
+  .glass-card.glass-tint-gray:active {
+    background: linear-gradient(135deg, rgba(100, 116, 139, 0.08), rgba(255, 255, 255, 0.38));
+  }
+
+  .glass-card.glass-tint-orange,
+  .glass-card.glass-tint-orange:hover,
+  .glass-card.glass-tint-orange:active {
     background: linear-gradient(135deg, rgba(249, 115, 22, 0.1), rgba(255, 255, 255, 0.38));
   }
 

@@ -5,6 +5,7 @@ import toast from 'react-hot-toast';
 import { useAuth } from '../../contexts/AuthContext';
 import ProfilePicture from '../common/ProfilePicture';
 import ProfilePictureUpload from '../common/ProfilePictureUpload';
+import PdfAgentUpload from './PdfAgentUpload';
 
 // Vital types configuration with units and reference ranges
 const VITAL_TYPES = {
@@ -934,17 +935,20 @@ const Dashboard = () => {
               </h1>
             </div>
 
-            {isAdmin() && (
-              <button
-                onClick={() => setShowAddForm(true)}
-                className="btn-primary flex items-center space-x-2 shadow-lg hover:shadow-primary-500/30 transform hover:-translate-y-0.5 transition-all"
-              >
-                <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 4v16m8-8H4" />
-                </svg>
-                <span>Add Family Member</span>
-              </button>
-            )}
+            <div className="flex flex-wrap items-center gap-2">
+              <PdfAgentUpload onComplete={() => fetchMembers()} />
+              {isAdmin() && (
+                <button
+                  onClick={() => setShowAddForm(true)}
+                  className="btn-primary flex items-center space-x-2 shadow-lg hover:shadow-primary-500/30 transform hover:-translate-y-0.5 transition-all"
+                >
+                  <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 4v16m8-8H4" />
+                  </svg>
+                  <span>Add Family Member</span>
+                </button>
+              )}
+            </div>
           </div>
         </div>
 
